@@ -6,7 +6,7 @@ import { getCorsHeaders, isDisallowedOrigin } from './_cors.js';
 import { jsonResponse } from './_json-response.js';
 import { isCallerPremium } from '../server/_shared/premium-check';
 import { isBlockedResolvedAddress } from '../server/_shared/ip-address-classification';
-import { ENDPOINT_RATE_POLICIES, checkScopedRateLimit } from '../server/_shared/rate-limit';
+import { ENDPOINT_RATE_POLICIES, checkScopedRateLimit, getClientIp } from '../server/_shared/rate-limit';
 
 export const config = { runtime: 'edge' };
 
@@ -35,17 +35,6 @@ if (!RATE_LIMIT_POLICY) {
 const RATE_LIMIT_MAX = RATE_LIMIT_POLICY.limit;
 const RATE_LIMIT_WINDOW = RATE_LIMIT_POLICY.window;
 const RATE_LIMIT_ERROR_CODE = -32029; // JSON-RPC code mirrored from api/mcp.ts
-
-function getClientIp(req: Request): string {
-  // cf-connecting-ip is the only header that survives Cloudflare → Vercel
-  // unforged. x-forwarded-for is client-settable and must NOT be trusted
-  // for rate limiting — see api/_rate-limit.js notes (#3721).
-  return (
-    req.headers.get('cf-connecting-ip') ||
-    req.headers.get('x-real-ip') ||
-    '0.0.0.0'
-  );
-}
 
 function logProxyCall(entry: {
   ip: string;
