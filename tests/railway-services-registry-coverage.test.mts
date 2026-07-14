@@ -34,7 +34,10 @@ interface RailwayServiceEntry {
   deployMode: 'nixpacks-root-scripts' | 'nixpacks-root-repo' | 'dockerfile';
   dockerfile?: string;
   service: string;
+  startCommand?: string;
   requiredEnv?: string[];
+  watchPatterns?: string[];
+  cronSchedule?: string | null;
   documentedAt: string;
 }
 
@@ -49,8 +52,9 @@ const dockerfileMap = new Map(
     .map((r) => [r.dockerfile!, r.entry]),
 );
 
-// Match `CMD ["node", "scripts/<file>"]`. Captures the script path.
-const DOCKERFILE_CMD_RE = /^\s*CMD\s+\[\s*"node"\s*,\s*"(scripts\/[^"]+)"\s*\]/m;
+// Match `CMD ["node", "scripts/<file>", ...]`. Captures the script path and
+// permits fixed script arguments such as the publisher's required `--loop`.
+const DOCKERFILE_CMD_RE = /^\s*CMD\s+\[\s*"node"\s*,\s*"(scripts\/[^"]+)"(?:\s*,\s*"[^"]*")*\s*\]/m;
 
 // Match runbook lines like `| **Start command** | \`node scripts/foo.mjs\` |`
 // (table-cell shape — multiple spaces, backtick quoting around the command).
@@ -67,6 +71,39 @@ const RUNBOOK_SERVICE_ROW_RE = /^\|\s*seed-[a-z0-9-]+\s*\|\s*`node\s+(scripts\/[
 const SCRIPT_HEADER_SERVICE_RE = /^\s*\/\/\s*-\s*Service name:\s*([a-z0-9-]+)\s*$/m;
 
 describe('Railway service registry coverage', () => {
+  it('pins the bootstrap publisher deployment contract', () => {
+    const publisher = registry.find(
+      (entry) => entry.entry === 'scripts/publish-bootstrap-tiers.mjs',
+    );
+
+    assert.ok(publisher, 'bootstrap publisher must be registered as a Railway service');
+    assert.equal(publisher.deployMode, 'dockerfile');
+    assert.equal(publisher.dockerfile, 'Dockerfile.publish-bootstrap-tiers');
+    const publisherDockerfile = readFileSync(
+      resolve(repoRoot, publisher.dockerfile),
+      'utf8',
+    );
+    assert.match(publisherDockerfile, /^COPY scripts\/ \.\/scripts\/$/m);
+    assert.match(publisherDockerfile, /^COPY shared\/ \.\/shared\/$/m);
+    assert.match(
+      publisherDockerfile,
+      /^CMD \["node", "scripts\/publish-bootstrap-tiers\.mjs", "--loop"\]$/m,
+    );
+    assert.equal(publisher.service, 'publish-bootstrap-tiers');
+    assert.equal(publisher.startCommand, 'node scripts/publish-bootstrap-tiers.mjs --loop');
+    assert.deepEqual(publisher.requiredEnv, [
+      'UPSTASH_REDIS_REST_URL',
+      'UPSTASH_REDIS_REST_TOKEN',
+      'IRAN_EVENTS_ENABLED',
+      'R2_ACCOUNT_ID',
+      'R2_BOOTSTRAP_BUCKET',
+      'R2_BOOTSTRAP_ACCESS_KEY_ID',
+      'R2_BOOTSTRAP_SECRET_ACCESS_KEY',
+    ]);
+    assert.deepEqual(publisher.watchPatterns, ['scripts/**', 'shared/**']);
+    assert.equal(publisher.cronSchedule, null, 'publisher must be always-on, never a Railway cron');
+  });
+
   it('required environment declarations use canonical unique variable names', () => {
     for (const entry of registry) {
       if (entry.requiredEnv == null) continue;
@@ -195,6 +232,13 @@ describe('Railway service registry coverage', () => {
     const m = sample.match(DOCKERFILE_CMD_RE);
     assert.ok(m, 'DOCKERFILE_CMD_RE failed to match canonical CMD shape');
     assert.equal(m![1], 'scripts/seed-fake.mjs');
+  });
+
+  it('DOCKERFILE_CMD_RE accepts fixed script arguments', () => {
+    const sample = 'CMD ["node", "scripts/publish-bootstrap-tiers.mjs", "--loop"]\n';
+    const m = sample.match(DOCKERFILE_CMD_RE);
+    assert.ok(m, 'DOCKERFILE_CMD_RE failed to match CMD with a fixed argument');
+    assert.equal(m![1], 'scripts/publish-bootstrap-tiers.mjs');
   });
 
   it('RUNBOOK_START_RE matches the documented runbook Start command shape', () => {
