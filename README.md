@@ -45,15 +45,17 @@
 
 ## What It Does
 
-- **500+ curated intelligence feeds** across finance, geopolitics, energy, tech, and 15+ categories — AI-synthesized into actionable briefs
-- **Dual map engine** — 3D globe (globe.gl) and WebGL flat map (deck.gl) with 56 map layer types for geographic risk visualization
-- **Cross-stream correlation** — military, economic, disaster, and escalation signal convergence for predictive market analysis
-- **Country Instability Index (CII)** — server-authoritative CII v8 stress scoring for 31 Tier-1 countries, powering risk-adjusted investment decisions
-- **Finance radar** — 29 stock exchanges, commodities, crypto, and 7-signal market composite with real-time alerting
-- **Local AI** — run everything with Ollama, no API keys required — full data sovereignty
-- **6 site variants** from a single codebase (market, tech, finance, commodity, energy, risk)
-- **Native desktop app** (Tauri 2) for macOS, Windows, and Linux
-- **25 languages** with native-language feeds and RTL support
+MegaBrain Market transforms situational awareness into competitive business advantage. While traditional monitors focus heavily on geopolitical conflict—which represents just one operational disruption among many—MegaBrain Market expands your visibility into proactive market intelligence, trade corridors, commodities, and renewable energy opportunities:
+
+- **Proactive Market & Business Signal** — 500+ curated intelligence feeds across finance, commodities, energy transition, tech, and geopolitics, AI-synthesized into actionable business briefs
+- **Regional Energy Corridors & Green Hydrogen** — specialized tracking of clean energy megaprojects, wind/solar clusters, and industrial port complexes (including deep coverage of Brazil's Ceará Green Hydrogen hub & NE renewable corridor)
+- **Supply Chain & Trade Route Monitoring** — real-time tracking of 30+ top container ports, oil/LNG terminals, and strategic chokepoints to safeguard enterprise operations and logistics
+- **Dual Map Visualization Engine** — 3D globe (globe.gl) and WebGL flat map (deck.gl) with 56 layer types for geographic economic activity and risk visualization
+- **Finance & Commodity Radar** — 29 stock exchanges, agricultural & energy commodities, crypto, and 7-signal market composite with real-time alerting
+- **Cross-Stream Correlation** — economic indicators, trade policy shifts, infrastructure developments, and environmental signals converged for predictive market analysis
+- **Local & Sovereign AI** — run everything with Ollama, no API keys required — full data sovereignty and privacy
+- **6 Specialized Site Variants** from a single codebase (`market.`, `tech.`, `finance.`, `commodity.`, `energy.`, `risk.`)
+- **Native Desktop App** (Tauri 2) for macOS, Windows, and Linux across 25 languages
 
 For the full feature list, architecture, data sources, and algorithms, see the **[documentation](https://megabrain.market/docs/documentation)**.
 
@@ -165,13 +167,16 @@ npm run build:full       # Production build
 
 See [LICENSE](LICENSE) for the full code license and [docs/license.mdx](docs/license.mdx) for a plain-language summary.
 
-Based on [World Monitor](https://github.com/koala73/worldmonitor) by Elie Habib, licensed under AGPL-3.0-only.
-
 ---
 
-## Author
+## Authors & Credits
 
-**vinidias** — [GitHub](https://github.com/vinidias)
+MegaBrain Market is a specialized business, commodity, and clean energy intelligence fork based on the open-source situational awareness engine **[World Monitor](https://github.com/koala73/worldmonitor)**.
+
+- **MegaBrain Market Fork & Business Transformation**: **vinidias** — [GitHub](https://github.com/vinidias)
+- **Original World Monitor Creator**: **Elie Habib (koala73)** — [GitHub](https://github.com/koala73)
+
+We express our sincere gratitude and full credit to Elie Habib and the World Monitor contributors for architecting the powerful situational awareness foundation, licensed under AGPL-3.0-only.
 
 ## Contributors
 

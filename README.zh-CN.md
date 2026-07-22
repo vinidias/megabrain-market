@@ -41,17 +41,19 @@
 
 ---
 
-## 功能概览
+## 主要功能
 
-- **500+ 精选情报源** 覆盖金融、地缘政治、能源、科技等15+类别 — 由AI合成为可操作的简报
-- **双地图引擎** — 3D地球仪（globe.gl）和WebGL平面地图（deck.gl），支持56种地图图层类型，用于地理风险可视化
-- **跨流关联** — 军事、经济、灾害和升级信号的融合，用于市场预测分析
-- **国家不稳定指数（CII）** — 服务器权威的CII v8压力评分，覆盖31个一级国家，支持风险调整后的投资决策
-- **金融雷达** — 29个证券交易所、大宗商品、加密货币和7信号市场综合指数，支持实时预警
-- **本地AI** — 使用Ollama运行一切，无需API密钥 — 完全的数据主权
-- **6个站点变体** 基于单一代码库（市场、科技、金融、大宗商品、能源、风险）
-- **原生桌面应用** （Tauri 2）支持macOS、Windows和Linux
-- **25种语言** 支持母语源和RTL布局
+MegaBrain Market 将全球态势感知转化为企业的商业竞争优势。传统监控平台往往过度聚焦地缘政治冲突（这只是众多企业运营风险中的一种），而 MegaBrain Market 将视野拓展至前瞻性市场情报、贸易走廊、大宗商品以及清洁能源商业机遇：
+
+- **前瞻性商业与市场情报** — 500+ 个涵盖金融、大宗商品、能源转型、科技和地缘政治的精选情报源，由 AI 自动合成为决策级别的商业简报
+- **区域能源走廊与绿氢追踪** — 专门监测清洁能源超级工程、风光储产业集群及工业港口走廊（深度覆盖巴西塞阿拉州 Ceará 绿氢枢纽与东北部可再生能源带）
+- **供应链与全球航道监控** — 实时追踪全球 30+ 大集装箱港口、石油/液化天然气 (LNG) 码头及战略海峡咽喉，全方位保障企业物流运营连续性
+- **双地图可视化引擎** — 3D 地球仪（globe.gl）和 WebGL 平面地图（deck.gl），支持 56 种图层，实现经济活动与地理商业风险的可视化
+- **金融与大宗商品雷达** — 监控 29 个证券交易所、农业与能源大宗商品、加密资产，并提供 7 信号复合市场实时预警
+- **跨维度数据流关联** — 融合宏观经济指标、贸易政策变动、基建工程与环境信号，进行市场趋势与动向预测
+- **本地与主权 AI 运行** — 使用 Ollama 本地运行所有 AI 模型，无需外部 API 密钥 — 完全的数据主权与隐私保护
+- **6 个专业化业务站点** 基于单一代码库无缝切换（`market.` 市场、`tech.` 科技、`finance.` 金融、`commodity.` 大宗商品、`energy.` 能源、`risk.` 风险）
+- **原生多平台桌面应用** （Tauri 2）支持 macOS、Windows 和 Linux，内置 25 种语言支持
 
 完整功能列表、架构、数据源和算法请参阅 **[文档](https://megabrain.market/docs/documentation)**。
 
@@ -161,15 +163,18 @@ npm run build:full       # 生产构建
 | 商业使用 / SaaS | 是，遵循AGPL义务时允许 |
 | 闭源私有使用或官方品牌权利 | 需要单独的商业或商标许可 |
 
-查看 [LICENSE](LICENSE) 获取完整代码许可证，[docs/license.mdx](docs/license.mdx) 获取通俗易懂的摘要。
-
-基于 [World Monitor](https://github.com/koala73/worldmonitor)（作者：Elie Habib），采用AGPL-3.0-only许可。
+查看请参阅 [LICENSE](LICENSE) 了解完整代码许可，或查看 [docs/license.mdx](docs/license.mdx) 了解简要说明。
 
 ---
 
-## 作者
+## 作者与鸣谢
 
-**vinidias** — [GitHub](https://github.com/vinidias)
+MegaBrain Market 是一个专注于商业情报、大宗商品分析与清洁能源走廊追踪的专业分支项目，基于开源全球态势感知引擎 **[World Monitor](https://github.com/koala73/worldmonitor)** 构建。
+
+- **MegaBrain Market 分支项目与商业化转型**：**vinidias** — [GitHub](https://github.com/vinidias)
+- **World Monitor 原始项目创建者**：**Elie Habib (koala73)** — [GitHub](https://github.com/koala73)
+
+我们向 Elie Habib 及其 World Monitor 贡献者团队表达诚挚的感谢与崇敬，感谢他们打造了如此卓越且基于 AGPL-3.0-only 开源许可的态势感知技术基石。
 
 ## 贡献者
 

@@ -43,15 +43,17 @@
 
 ## O Que Faz
 
-- **500+ feeds de inteligência curados** em finanças, geopolítica, energia, tecnologia e 15+ categorias — sintetizados por IA em briefings acionáveis
-- **Motor de mapa duplo** — globo 3D (globe.gl) e mapa plano WebGL (deck.gl) com 56 tipos de camadas para visualização geográfica de risco
-- **Correlação entre fluxos** — convergência de sinais militares, econômicos, de desastres e de escalação para análise preditiva de mercado
-- **Índice de Instabilidade de País (CII)** — pontuação de estresse CII v8 autoritativa pelo servidor para 31 países Tier-1, potencializando decisões de investimento ajustadas ao risco
-- **Radar financeiro** — 29 bolsas de valores, commodities, cripto e composto de mercado de 7 sinais com alertas em tempo real
-- **IA local** — rode tudo com Ollama, sem necessidade de chaves de API — total soberania sobre seus dados
-- **6 variantes de site** a partir de uma única base de código (mercado, tech, finanças, commodities, energia, risco)
-- **App desktop nativo** (Tauri 2) para macOS, Windows e Linux
-- **25 idiomas** com feeds em idioma nativo e suporte RTL
+O MegaBrain Market transforma consciência situacional global em vantagem competitiva de negócios. Enquanto monitores tradicionais focam pesadamente em conflitos geopolíticos — que representam apenas uma das muitas perturbações operacionais — o MegaBrain Market expande sua visibilidade para inteligência preditiva de mercado, corredores comerciais, commodities e transição energética:
+
+- **Sinal de Mercado e Negócios Proativo** — 500+ feeds de inteligência curados em finanças, commodities, transição energética, tecnologia e geopolítica, sintetizados por IA em briefings executivos acionáveis
+- **Corredores de Energia Regional e Hidrogênio Verde** — rastreamento especializado de megaprojetos de energia limpa, complexos eólicos/solares e polos portuários industriais (incluindo cobertura profunda do hub de Hidrogênio Verde no Ceará e corredor renovável do Nordeste brasileiro)
+- **Monitoramento de Cadeia de Suprimentos e Rotas Comerciais** — rastreamento em tempo real dos 30+ maiores portos de contêineres, terminais de petróleo/GNL e gargalos estratégicos para blindar operações e logística empresarial
+- **Motor de Visualização de Mapa Duplo** — globo 3D (globe.gl) e mapa plano WebGL (deck.gl) com 56 tipos de camadas para visualização geográfica de atividade econômica e riscos
+- **Radar Financeiro e de Commodities** — 29 bolsas de valores, commodities agrícolas e energéticas, cripto e índice composto de mercado de 7 sinais com alertas em tempo real
+- **Correlação entre Fluxos** — convergência de indicadores econômicos, mudanças de política comercial, infraestrutura e sinais ambientais para análise preditiva de mercado
+- **IA Local e Soberana** — rode tudo no seu ambiente com Ollama, sem necessidade de chaves de API externas — total privacidade e soberania sobre seus dados
+- **6 Variantes de Site Especializadas** a partir de uma única base de código (`market.`, `tech.`, `finance.`, `commodity.`, `energy.`, `risk.`)
+- **App Desktop Nativo** (Tauri 2) para macOS, Windows e Linux, com suporte a 25 idiomas
 
 Para a lista completa de funcionalidades, arquitetura, fontes de dados e algoritmos, veja a **[documentação](https://megabrain.market/docs/documentation)**.
 
@@ -161,15 +163,18 @@ npm run build:full       # Build de produção
 | Uso comercial / SaaS | Sim, sob AGPL-3.0-only quando cumprir com as obrigações AGPL |
 | Uso proprietário de código fechado ou direitos oficiais de marca | Necessária permissão comercial ou de marca registrada separada |
 
-Veja [LICENSE](LICENSE) para a licença completa do código e [docs/license.mdx](docs/license.mdx) para um resumo em linguagem simples.
-
-Baseado no [World Monitor](https://github.com/koala73/worldmonitor) por Elie Habib, licenciado sob AGPL-3.0-only.
+Veja [LICENSE](LICENSE) para a licença completa de código e [docs/license.mdx](docs/license.mdx) para um resumo em linguagem simples.
 
 ---
 
-## Autor
+## Autores e Créditos
 
-**vinidias** — [GitHub](https://github.com/vinidias)
+O MegaBrain Market é um fork especializado em inteligência de negócios, commodities e energia limpa, baseado no motor open-source de consciência situacional **[World Monitor](https://github.com/koala73/worldmonitor)**.
+
+- **Fork MegaBrain Market & Transformação para Negócios**: **vinidias** — [GitHub](https://github.com/vinidias)
+- **Criador Original do World Monitor**: **Elie Habib (koala73)** — [GitHub](https://github.com/koala73)
+
+Expressamos nossa sincera gratidão e total crédito a Elie Habib e aos contribuidores do World Monitor por arquitetarem a poderosa base de consciência situacional global, licenciada sob AGPL-3.0-only.
 
 ## Contribuidores
 
