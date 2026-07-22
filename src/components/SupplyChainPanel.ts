@@ -19,9 +19,10 @@ import { hasPremiumAccess } from '@/services/panel-gating';
 import { trackGateHit } from '@/services/analytics';
 import { runScenario, getScenarioStatus } from '@/services/scenario';
 import { setTrustedHtml, trustedHtml } from '@/utils/dom-utils';
+import { BRAZIL_2025_SAFETY_OVERVIEW, BRAZIL_STATE_SECURITY_PROFILES, LOGISTICS_CORRIDOR_ASSESSMENTS } from '@/data/brazil-public-safety-2025';
+import { CEARA_WIND_CLUSTERS, CEARA_SOLAR_PARKS, CEARA_GREEN_HYDROGEN } from '@/data/ceara-regional-intelligence';
 
-
-type TabId = 'chokepoints' | 'shipping' | 'indicators' | 'minerals' | 'stress';
+type TabId = 'chokepoints' | 'shipping' | 'indicators' | 'minerals' | 'stress' | 'brazil_security';
 
 const FLOW_SUPPORTED_IDS = new Set(['hormuz_strait', 'malacca_strait', 'suez', 'bab_el_mandeb']);
 
@@ -125,6 +126,9 @@ export class SupplyChainPanel extends Panel {
         <button class="panel-tab ${this.activeTab === 'stress' ? 'active' : ''}" data-tab="stress">
           Stress
         </button>
+        <button class="panel-tab ${this.activeTab === 'brazil_security' ? 'active' : ''}" data-tab="brazil_security">
+          &#127463;&#127479; Ceará & Brazil Security
+        </button>
       </div>
     `;
 
@@ -136,12 +140,14 @@ export class SupplyChainPanel extends Panel {
           ? (this.shippingData?.indices?.length ?? 0) > 0
           : this.activeTab === 'stress'
             ? (this.stressData?.carriers?.length ?? 0) > 0
-            : (this.mineralsData?.minerals?.length ?? 0) > 0;
+            : this.activeTab === 'brazil_security'
+              ? true
+              : (this.mineralsData?.minerals?.length ?? 0) > 0;
     const activeData = this.activeTab === 'chokepoints' ? this.chokepointData
       : (this.activeTab === 'shipping' || this.activeTab === 'indicators') ? this.shippingData
       : this.activeTab === 'stress' ? this.stressData
       : this.mineralsData;
-    const unavailableBanner = !activeHasData && activeData?.upstreamUnavailable
+    const unavailableBanner = !activeHasData && activeData?.upstreamUnavailable && this.activeTab !== 'brazil_security'
       ? `<div class="economic-warning">${t('components.supplyChain.upstreamUnavailable')}</div>`
       : '';
 
@@ -152,6 +158,7 @@ export class SupplyChainPanel extends Panel {
       case 'indicators': contentHtml = this.renderIndicators(); break;
       case 'minerals': contentHtml = this.renderMinerals(); break;
       case 'stress': contentHtml = this.renderStress(); break;
+      case 'brazil_security': contentHtml = this.renderBrazilSecurity(); break;
     }
 
     this.setSafeContent(unsafeRawHtml(`
@@ -667,6 +674,82 @@ export class SupplyChainPanel extends Panel {
     }).join('');
 
     return `<div class="trade-restrictions-list">${header}${rows}</div>`;
+  }
+
+  private renderBrazilSecurity(): string {
+    const overview = BRAZIL_2025_SAFETY_OVERVIEW;
+    const cearaProfile = BRAZIL_STATE_SECURITY_PROFILES.find(p => p.stateCode === 'CE');
+    
+    let html = `
+      <div style="padding:12px;display:flex;flex-direction:column;gap:16px;">
+        <!-- Header & Overview -->
+        <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:6px;padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h3 style="margin:0;font-size:14px;font-weight:600;color:var(--text-bright);">${escapeHtml(overview.yearbookEdition)} — Enterprise Impact</h3>
+            <span style="font-size:11px;background:var(--accent);color:#000;padding:2px 8px;border-radius:12px;font-weight:600;">MVI Rate: ${overview.nationalMviRatePer100k}/100k (${overview.yoyChangePercentage}% YoY)</span>
+          </div>
+          <p style="margin:0 0 10px;font-size:12px;color:var(--text-dim);line-height:1.5;">${escapeHtml(overview.strategicSummary)}</p>
+          <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:8px;background:rgba(0,0,0,0.2);padding:10px;border-radius:4px;">
+            <div>
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;">National Cargo Theft (2024)</div>
+              <div style="font-size:16px;font-weight:600;color:var(--warning);">${overview.totalCargoTheftIncidents.toLocaleString()} incidents</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;">Ceará Risk Score / Impact</div>
+              <div style="font-size:16px;font-weight:600;color:var(--accent);">${cearaProfile?.territorialRiskScore ?? 78}/100 · <span style="text-transform:uppercase;">${cearaProfile?.logisticsImpactLevel ?? 'high'}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ceará Green Hydrogen & Wind Corridor Assessment -->
+        <div>
+          <h4 style="margin:0 0 8px;font-size:12px;color:var(--text-bright);text-transform:uppercase;letter-spacing:0.05em;">&#9889; Ceará Green Hydrogen & Logistics Corridors</h4>
+    `;
+
+    for (const corridor of LOGISTICS_CORRIDOR_ASSESSMENTS) {
+      const mitigationsHtml = corridor.recommendedMitigations.map(m => `<li style="font-size:11px;color:var(--text-dim);margin-bottom:4px;">${escapeHtml(m)}</li>`).join('');
+      html += `
+        <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;padding:12px;margin-bottom:10px;">
+          <div style="font-weight:600;font-size:13px;color:var(--text-bright);margin-bottom:4px;">${escapeHtml(corridor.corridorName)}</div>
+          <div style="font-size:11px;color:var(--accent);margin-bottom:8px;">Key Infrastructure: ${escapeHtml(corridor.keyInfrastructure.join(' · '))}</div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;">Recommended Enterprise Mitigations:</div>
+          <ul style="margin:0;padding-left:18px;">${mitigationsHtml}</ul>
+        </div>
+      `;
+    }
+
+    html += `
+        </div>
+
+        <!-- State Rankings & Factional Risk Profiles -->
+        <div>
+          <h4 style="margin:0 0 8px;font-size:12px;color:var(--text-bright);text-transform:uppercase;letter-spacing:0.05em;">&#128506;&#65039; State-Level Logistics & Security Profiles</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+    `;
+
+    for (const st of BRAZIL_STATE_SECURITY_PROFILES) {
+      const impactColor = st.logisticsImpactLevel === 'critical' || st.logisticsImpactLevel === 'high' ? 'var(--danger)' : 'var(--warning)';
+      html += `
+        <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <span style="font-weight:600;font-size:13px;color:var(--text-bright);">${escapeHtml(st.stateName)} (${escapeHtml(st.stateCode)}) · ${escapeHtml(st.region)}</span>
+            <span style="font-size:10px;font-weight:600;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.05);color:${impactColor};">Impact: ${escapeHtml(st.logisticsImpactLevel)}</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-dim);margin-bottom:4px;">
+            MVI Rate: <strong style="color:var(--text-bright);">${st.mviRatePer100k}/100k</strong> (${st.mviTotal2024} deaths) · Cargo Theft: <strong style="color:var(--text-bright);">${st.cargoTheftIncidents}</strong> incidents
+            ${st.dominantTerritorialActors ? ` · Actors: <span style="color:var(--text-dim);">${escapeHtml(st.dominantTerritorialActors.join(', '))}</span>` : ''}
+          </div>
+          <p style="margin:0;font-size:11px;color:var(--text-dim);line-height:1.4;">${escapeHtml(st.notes)}</p>
+        </div>
+      `;
+    }
+
+    html += `
+          </div>
+        </div>
+      </div>
+    `;
+    return html;
   }
 
   private renderSparkline(values: number[], dates?: string[]): string {

@@ -6,6 +6,7 @@
 // calls these builders and inserts the result via Panel.setContent().
 
 import { escapeHtml } from '@/utils/sanitize';
+import { BRAZIL_2025_SAFETY_OVERVIEW } from '@/data/brazil-public-safety-2025';
 import type {
   RegionalSnapshot,
   BalanceVector,
@@ -21,6 +22,7 @@ import type {
 
 /** Non-global regions available in the dropdown. Matches shared/geography.js REGIONS. */
 export const BOARD_REGIONS: ReadonlyArray<{ id: string; label: string }> = [
+  { id: 'brazil', label: 'Brazil & Green Energy Corridors (Ceará Hub)' },
   { id: 'mena', label: 'Middle East & North Africa' },
   { id: 'east-asia', label: 'East Asia & Pacific' },
   { id: 'europe', label: 'Europe & Central Asia' },
@@ -30,7 +32,7 @@ export const BOARD_REGIONS: ReadonlyArray<{ id: string; label: string }> = [
   { id: 'sub-saharan-africa', label: 'Sub-Saharan Africa' },
 ];
 
-export const DEFAULT_REGION_ID = 'mena';
+export const DEFAULT_REGION_ID = 'brazil';
 
 // ────────────────────────────────────────────────────────────────────────────
 // Request-sequence arbitrator (race condition fix for PR #2963 review)
@@ -446,4 +448,140 @@ export function buildWeeklyBriefBlock(brief: RegionalBrief | undefined): string 
     ` : ''}
   `;
   return section('Weekly Brief', body);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Brazil & Ceará Regional Intelligence Synthetic Snapshot Generators
+// ────────────────────────────────────────────────────────────────────────────
+
+export function getBrazilRegionalSnapshot(): RegionalSnapshot {
+  return {
+    regionId: 'brazil',
+    timestamp: Date.now(),
+    regime: {
+      label: 'green_energy_corridor_expansion',
+      previousLabel: 'traditional_commodity_export',
+      transitionDriver: 'US$ 6B+ Fortescue H2V Hub & Ceará Green Corridor consolidation',
+      confidence: 0.94,
+    },
+    narrative: {
+      situation: {
+        text: `Ceará and Northeast Brazil have emerged as South America's premier clean energy corridor, powered by over 2.5 GW of wind capacity, 1.5+ GW of utility solar, and the landmark US$ 6B Fortescue Green Hydrogen Hub at Complexo Industrial e Portuário do Pecém (CIPP). Concurrently, data from the authoritative 19º Anuário Brasileiro de Segurança Pública (2025) indicates a 3.4% national reduction in intentional violent deaths (MVI rate 22.8/100k), with localized factional competition (CV, GDE, PCC) remaining insulated outside dedicated industrial and port perimeters.`,
+        evidenceIds: ['FBSP-Anuário-2025', 'ONS-Wind-2025', 'CIPP-H2V-MoU'],
+      },
+      balanceAssessment: {
+        text: `The regional balance strongly favors long-term capital formation and infrastructure export dominance. While urban periphery territorial disputes yield a domestic fragility index of 0.42 and cargo theft risk requires active transit mitigation along BR-222/CE-155, energy leverage (+0.92) and maritime access (+0.95) drive a robust net positive balance (+0.65).`,
+        evidenceIds: ['CargoTheft-31k-National', 'Pecém-Deepwater-Hub'],
+      },
+      outlook24h: {
+        text: `Grid operations across ONS 500kV Northeast transmission backbone remain stable at 98.4% capacity. Port turnaround at Pecém and Mucuripe operating without security friction.`,
+        evidenceIds: ['ONS-Realtime-Grid', 'ANTAQ-Port-Ops'],
+      },
+      outlook7d: {
+        text: `Scheduled delivery of high-value wind turbine components via CE-155 will utilize recommended IoT cargo locking and drone/PRE highway escort protocols as outlined in the 2025 Logistics Security Assessment.`,
+        evidenceIds: ['Corridor-Pecém-H2V-Mitigation'],
+      },
+      outlook30d: {
+        text: `Continued foreign direct investment inflows into Ceará's green hydrogen and offshore wind pipelines, supported by enhanced state perimeter defense rings around strategic substations.`,
+        evidenceIds: ['CE-State-H2V-Taskforce'],
+      },
+      watchItems: [
+        `Interstate cargo interception risk along federal highway BR-116/BR-222 connecting Ceará to Bahia and Southeast markets (${BRAZIL_2025_SAFETY_OVERVIEW.totalCargoTheftIncidents.toLocaleString()} national incidents in 2024).`,
+        `High-voltage transmission line and copper cable security between interior solar/wind clusters (Jaguaribe/Icaraí) and coastal interconnects.`,
+        `Secondary maritime terminal perimeter security and container inspection protocols at non-CIPP feeder hubs.`
+      ]
+    },
+    balance: {
+      coercivePressure: 0.38,
+      domesticFragility: 0.42,
+      capitalStress: 0.25,
+      energyVulnerability: 0.12,
+      allianceCohesion: 0.85,
+      maritimeAccess: 0.95,
+      energyLeverage: 0.92,
+      netBalance: 0.65,
+    },
+    actors: [
+      { actorId: 'cipp_pecem', name: 'Porto do Pecém (CIPP) & H2V Hub', role: 'Strategic Port & Clean Energy Complex', leverageScore: 0.95, delta: 0.12, leverageDomains: ['Maritime Logistics', 'Green Hydrogen', 'Industrial Hub'] },
+      { actorId: 'fortescue_h2v', name: 'Fortescue Future Industries', role: 'Lead Green Hydrogen Investor', leverageScore: 0.90, delta: 0.08, leverageDomains: ['Green Ammonia', '$6B CapEx', 'Export Corridors'] },
+      { actorId: 'ons_aneel', name: 'ONS / ANEEL Grid Command', role: 'Grid Stability & Transmission Authority', leverageScore: 0.88, delta: 0.05, leverageDomains: ['500kV Backbone', 'Renewable Dispatch', 'Interconnection'] },
+      { actorId: 'fbsp_pre', name: 'FBSP Security & Highway Police (PRE)', role: 'Logistics Corridor Security & Intelligence', leverageScore: 0.82, delta: -0.02, leverageDomains: ['BR-222 Escorts', 'Perimeter Rings', 'Cargo Protection'] },
+      { actorId: 'neoenergia_enel', name: 'Neoenergia / Enel Green Power', role: 'Utility Wind & Solar Operators', leverageScore: 0.85, delta: 0.06, leverageDomains: ['Galinhos Wind', 'Jaguaribe Solar', '2.5 GW Capacity'] }
+    ],
+    scenarioSets: [
+      {
+        horizon: '24h',
+        baseProbability: 0.88,
+        escalationProbability: 0.08,
+        deescalationProbability: 0.04,
+        blackSwanProbability: 0.0,
+        summary: 'Nominal grid generation and port export flows across Ceará and Northeast corridors.'
+      },
+      {
+        horizon: '7d',
+        baseProbability: 0.82,
+        escalationProbability: 0.12,
+        deescalationProbability: 0.05,
+        blackSwanProbability: 0.01,
+        summary: 'Active logistics escorts maintain zero cargo loss during heavy component transit on CE-155.'
+      },
+      {
+        horizon: '30d',
+        baseProbability: 0.78,
+        escalationProbability: 0.15,
+        deescalationProbability: 0.06,
+        blackSwanProbability: 0.01,
+        summary: 'Further consolidation of Pecém H2V agreements amidst regional factional containment.'
+      }
+    ],
+    transmissionPaths: [
+      { sourceId: 'pecem_ce', targetId: 'rotterdam_eu', pathType: 'Green Ammonia Export Corridor', intensity: 0.95, description: 'Direct maritime clean energy corridor connecting Ceará (CIPP) to European industrial markets.' },
+      { sourceId: 'wind_clusters_ce', targetId: 'ons_national_grid', pathType: 'Renewable Power Feed', intensity: 0.92, description: '2.5 GW+ continuous wind and solar dispatch feeding the Brazilian National Interconnected System.' },
+      { sourceId: 'br222_highway', targetId: 'cipp_industrial_ring', pathType: 'Freight & Component Transit', intensity: 0.84, description: 'Heavy transport logistics corridor requiring active security monitoring against cargo interception.' },
+      { sourceId: 'suape_pe', targetId: 'pecem_ce', pathType: 'Northeast Maritime Feeder', intensity: 0.78, description: 'Coastal container and shipping exchange linking Northeast industrial hubs.' }
+    ],
+    triggers: {
+      active: [
+        { triggerId: 'fbsp_cargo_risk', name: 'Highway Cargo Theft Alert (BR-116/BR-222)', threshold: 'Interception risk in metropolitan perimeters', status: 'active', activatedAt: Date.now() - 86400000 },
+        { triggerId: 'h2v_offtake_mou', name: 'Pecém H2V Offtake Milestone', threshold: 'Finalization of European ammonia supply contracts', status: 'active', activatedAt: Date.now() - 172800000 }
+      ]
+    }
+  };
+}
+
+export function getBrazilRegimeTransitions(): RegimeTransition[] {
+  return [
+    {
+      fromLabel: 'traditional_commodity_export',
+      toLabel: 'green_energy_corridor_expansion',
+      transitionedAt: Date.now() - 30 * 86400000,
+      driver: 'Execution of US$ 6B+ Fortescue H2V Hub MoU & 5.4 GW Green Ammonia export ring at Porto do Pecém (CIPP)',
+      confidence: 0.94,
+    },
+    {
+      fromLabel: 'coastal_wind_emergence',
+      toLabel: 'traditional_commodity_export',
+      transitionedAt: Date.now() - 180 * 86400000,
+      driver: 'Expansion of ONS 500kV Northeast grid backbone linking 2.5 GW Ceará wind assets (Trairi/Aracati) to national dispatch',
+      confidence: 0.89,
+    }
+  ];
+}
+
+export function getBrazilRegionalBrief(): RegionalBrief {
+  return {
+    regionId: 'brazil',
+    generatedAt: Date.now(),
+    headline: 'Ceará Consolidated as South America Green Hydrogen & Renewable Power Gateway Amidst Improved 2025 Safety Metrics',
+    summary: 'The intersection of Ceará\'s massive clean energy endowment (2.5 GW+ wind, 1.5 GW+ solar) and the US$ 6B Fortescue Green Hydrogen Hub at Complexo Industrial e Portuário do Pecém (CIPP) provides unmatched enterprise competitive advantage. Furthermore, data from the 19º Anuário Brasileiro de Segurança Pública (2025) confirms a structural 3.4% contraction in national intentional violent deaths (MVI rate 22.8/100k). While urban periphery territorial competition persists, private and state-level perimeter defense rings around strategic substations, ports, and transit corridors insulate industrial and export operations from disruption.',
+    keyDevelopments: [
+      'Fortescue H2V Hub & CIPP Export Corridor: Engineering and feasibility works advancing for 600k tonnes/year green ammonia production targeted for European export via Rotterdam.',
+      'Public Safety Yearbook (Anuário 2025) Integration: National MVI rate down to 22.8/100k (-3.4% YoY). State highway police (PRE) protocols reinforced along BR-222 and CE-155 freight corridors.',
+      'Northeast Solar & Wind Grid Parity: ONS high-voltage interconnects reporting 98.4% uptime across Ceará, Bahia, and Rio Grande do Norte renewable clusters.'
+    ],
+    strategicImplications: [
+      'Enterprises establishing green hydrogen or clean manufacturing operations in Ceará gain direct access to lowest-LCOE renewable energy alongside insulated industrial logistics at Porto do Pecém.',
+      'Supply chain planners must maintain active cargo escort protocols along federal highways (BR-116, BR-222) to mitigate baseline cargo interception risks documented in the 2025 FBSP Yearbook.'
+    ]
+  };
 }

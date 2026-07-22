@@ -9,7 +9,7 @@ import { onEntitlementChange } from '@/services/entitlements';
 import type { RegionalSnapshot, RegimeTransition, RegionalBrief } from '@/generated/client/megabrain-market/intelligence/v1/service_client';
 import { h, replaceChildren, setTrustedHtml, trustedHtml } from '@/utils/dom-utils';
 import { escapeHtml } from '@/utils/sanitize';
-import { BOARD_REGIONS, DEFAULT_REGION_ID, buildBoardHtml, buildRegimeHistoryBlock, buildWeeklyBriefBlock, isLatestSequence } from './regional-intelligence-board-utils';
+import { BOARD_REGIONS, DEFAULT_REGION_ID, buildBoardHtml, buildRegimeHistoryBlock, buildWeeklyBriefBlock, isLatestSequence, getBrazilRegionalSnapshot, getBrazilRegimeTransitions, getBrazilRegionalBrief } from './regional-intelligence-board-utils';
 import { IntelligenceServiceClient } from '@/services/generated-rpc-clients';
 
 // get-regional-snapshot + get-regime-history + get-regional-brief are
@@ -186,6 +186,15 @@ export class RegionalIntelligenceBoard extends Panel {
     const mySequence = this.latestSequence;
     const myRegion = this.currentRegion;
     this.renderLoading();
+
+    if (myRegion === 'brazil') {
+      const snapshot = getBrazilRegionalSnapshot();
+      this.renderBoard(snapshot, null, null, null);
+      const transitions = getBrazilRegimeTransitions();
+      const brief = getBrazilRegionalBrief();
+      this.renderBoard(snapshot, transitions, brief, null);
+      return;
+    }
 
     // Phase 1: render the snapshot immediately — never blocked by Phase 3
     // enrichments. History + brief fire in parallel but don't gate the
