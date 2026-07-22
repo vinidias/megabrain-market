@@ -61,6 +61,14 @@ export const SOURCE_TYPES: Record<string, SourceType> = {
   // Brazilian Addition
   'Brasil Paralelo': 'mainstream',
 
+  // Brazilian Energy & Market Sources
+  'ONS Brasil': 'gov', 'ANEEL': 'gov', 'CCEE': 'market',
+  'EPE Brasil': 'gov', 'ABEEólica': 'market', 'ABSOLAR': 'market',
+  'Portal Hidrogênio Verde': 'market', 'Canal Energia': 'market',
+  'InfoMoney': 'market', 'Valor Econômico': 'market',
+  'Folha de S.Paulo': 'mainstream', 'Estadão': 'mainstream',
+  'Agência Brasil': 'gov', 'Diário do Nordeste': 'mainstream',
+
   // Market/Finance
   'CNBC': 'market', 'MarketWatch': 'market', 'Yahoo Finance': 'market',
   'Financial Times': 'market',
