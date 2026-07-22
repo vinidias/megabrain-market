@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.forecast.v1;
+package megabrain-market.forecast.v1;
 
 import "sebuf/http/annotations.proto";
 

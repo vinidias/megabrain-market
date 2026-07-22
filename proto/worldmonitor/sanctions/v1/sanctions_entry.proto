@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.sanctions.v1;
+package megabrain-market.sanctions.v1;
 
 // SanctionsEntityType classifies the designated party.
 enum SanctionsEntityType {

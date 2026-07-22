@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.aviation.v1;
+package megabrain-market.aviation.v1;
 
 // Carrier represents an airline or aircraft operator.
 message Carrier {

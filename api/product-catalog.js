@@ -56,7 +56,7 @@ const TIER_CONFIG = {
     description: 'Get started with the essentials',
     features: ['Core dashboard panels', 'Global news feed', 'Earthquake & weather alerts', 'Basic map view'],
     cta: 'Get Started',
-    href: 'https://worldmonitor.app/dashboard',
+    href: 'https://megabrain.market/dashboard',
     highlighted: false,
   },
   pro: {
@@ -86,7 +86,7 @@ const TIER_CONFIG = {
     description: 'Custom solutions for organizations',
     features: ['Everything in Pro + API', 'Unlimited API requests', 'Dedicated support', 'Custom integrations', 'SLA guarantee', 'On-premise option'],
     cta: 'Contact Sales',
-    href: 'mailto:enterprise@worldmonitor.app',
+    href: 'mailto:enterprise@megabrain.market',
     highlighted: false,
   },
 };

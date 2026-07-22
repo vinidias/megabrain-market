@@ -25,8 +25,8 @@
 
 ## Checklist
 
-- [ ] Tested on [worldmonitor.app](https://worldmonitor.app) variant
-- [ ] Tested on [tech.worldmonitor.app](https://tech.worldmonitor.app) variant (if applicable)
+- [ ] Tested on [megabrain.market](https://megabrain.market) variant
+- [ ] Tested on [tech.megabrain.market](https://tech.megabrain.market) variant (if applicable)
 - [ ] New RSS feed domains added to `api/rss-proxy.js` allowlist (if adding feeds)
 - [ ] No API keys or secrets committed
 - [ ] TypeScript compiles without errors (`npm run typecheck`)

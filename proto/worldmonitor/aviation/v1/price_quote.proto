@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.aviation.v1;
+package megabrain-market.aviation.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/aviation/v1/carrier.proto";
+import "megabrain-market/aviation/v1/carrier.proto";
 
 // CabinClass represents the travel class for a flight ticket.
 enum CabinClass {

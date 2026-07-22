@@ -6,7 +6,7 @@ import type {
   ServerContext,
   GetTradeFlowsRequest,
   GetTradeFlowsResponse,
-} from '../../../../src/generated/server/worldmonitor/trade/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/trade/v1/service_server';
 import { getCachedJson } from '../../../_shared/redis';
 
 const SEED_KEY_PREFIX = 'trade:flows:v1';

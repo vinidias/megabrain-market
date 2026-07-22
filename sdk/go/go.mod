@@ -1,3 +1,3 @@
-module github.com/koala73/worldmonitor/sdk/go
+module github.com/vinidias/megabrain-market/sdk/go
 
 go 1.22

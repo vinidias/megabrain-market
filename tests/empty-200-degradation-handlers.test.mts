@@ -1,17 +1,17 @@
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import { listClimateNews } from '../server/worldmonitor/climate/v1/list-climate-news.ts';
-import { getDisplacementSummary } from '../server/worldmonitor/displacement/v1/get-displacement-summary.ts';
-import { getGivingSummary } from '../server/worldmonitor/giving/v1/get-giving-summary.ts';
-import { getVesselSnapshot } from '../server/worldmonitor/maritime/v1/get-vessel-snapshot.ts';
-import { listNaturalEvents } from '../server/worldmonitor/natural/v1/list-natural-events.ts';
-import { listPredictionMarkets } from '../server/worldmonitor/prediction/v1/list-prediction-markets.ts';
-import { listRadiationObservations } from '../server/worldmonitor/radiation/v1/list-radiation-observations.ts';
-import { routeIntelligence } from '../server/worldmonitor/shipping/v2/route-intelligence.ts';
-import { getChokepointStatus } from '../server/worldmonitor/supply-chain/v1/get-chokepoint-status.ts';
-import { listThermalEscalations } from '../server/worldmonitor/thermal/v1/list-thermal-escalations.ts';
-import { listFireDetections } from '../server/worldmonitor/wildfire/v1/list-fire-detections.ts';
+import { listClimateNews } from '../server/megabrain-market/climate/v1/list-climate-news.ts';
+import { getDisplacementSummary } from '../server/megabrain-market/displacement/v1/get-displacement-summary.ts';
+import { getGivingSummary } from '../server/megabrain-market/giving/v1/get-giving-summary.ts';
+import { getVesselSnapshot } from '../server/megabrain-market/maritime/v1/get-vessel-snapshot.ts';
+import { listNaturalEvents } from '../server/megabrain-market/natural/v1/list-natural-events.ts';
+import { listPredictionMarkets } from '../server/megabrain-market/prediction/v1/list-prediction-markets.ts';
+import { listRadiationObservations } from '../server/megabrain-market/radiation/v1/list-radiation-observations.ts';
+import { routeIntelligence } from '../server/megabrain-market/shipping/v2/route-intelligence.ts';
+import { getChokepointStatus } from '../server/megabrain-market/supply-chain/v1/get-chokepoint-status.ts';
+import { listThermalEscalations } from '../server/megabrain-market/thermal/v1/list-thermal-escalations.ts';
+import { listFireDetections } from '../server/megabrain-market/wildfire/v1/list-fire-detections.ts';
 
 const CLEARED_ENV_KEYS = [
   'LOCAL_API_MODE',
@@ -20,7 +20,7 @@ const CLEARED_ENV_KEYS = [
   'WS_RELAY_URL',
   'RELAY_SHARED_SECRET',
   'RELAY_AUTH_HEADER',
-  'WORLDMONITOR_VALID_KEYS',
+  'MEGABRAIN_MARKET_VALID_KEYS',
 ] as const;
 
 const originalEnv = new Map<string, string | undefined>();
@@ -127,11 +127,11 @@ describe('empty 200 degraded handler responses', () => {
   });
 
   it('ties ShippingV2 route freshness to the chokepoint status snapshot, not static routes', async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = 'pro-test-key';
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = 'pro-test-key';
 
     const ctx = {
-      request: new Request('https://worldmonitor.app/api/v2/shipping/route-intelligence', {
-        headers: { 'X-WorldMonitor-Key': 'pro-test-key' },
+      request: new Request('https://megabrain.market/api/v2/shipping/route-intelligence', {
+        headers: { 'X-MegaBrainMarket-Key': 'pro-test-key' },
       }),
       pathParams: {},
       headers: {},

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.core.v1;
+package megabrain-market.core.v1;
 
 // SeverityLevel represents a three-tier severity classification used across domains.
 // Maps to existing TS unions: 'low' | 'medium' | 'high'.

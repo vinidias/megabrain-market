@@ -10,8 +10,8 @@ import { SITE_VARIANT } from '@/config/variant';
 import { isLayerExecutable, sanitizeLayersForVariant } from '@/config/map-layer-definitions';
 import type { MapRenderer, MapVariant } from '@/config/map-layer-definitions';
 
-export const MISSION_PRESET_STORAGE_KEY = 'worldmonitor-mission-preset-v1';
-export const MISSION_PRESET_DISMISSED_KEY = 'worldmonitor-mission-preset-dismissed-v1';
+export const MISSION_PRESET_STORAGE_KEY = 'megabrain-market-mission-preset-v1';
+export const MISSION_PRESET_DISMISSED_KEY = 'megabrain-market-mission-preset-dismissed-v1';
 
 export type MissionPresetId =
   | 'crisis-desk'

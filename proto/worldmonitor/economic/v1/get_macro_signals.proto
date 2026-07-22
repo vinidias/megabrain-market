@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.economic.v1;
+package megabrain-market.economic.v1;
 
 import "buf/validate/validate.proto";
 

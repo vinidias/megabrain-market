@@ -1,24 +1,24 @@
-// Package worldmonitor is the official Go SDK for the World Monitor
-// global-intelligence API (https://worldmonitor.app) — country briefs, risk
+// Package megabrain-market is the official Go SDK for the MegaBrain Market
+// global-intelligence API (https://megabrain.market) — country briefs, risk
 // scores, conflict/cyber/market/news feeds, and MCP tools without writing an
 // HTTP integration.
 //
 // Stdlib-only (zero dependencies), MCP-first — the same design as the
-// worldmonitor npm CLI this mirrors (cli/ in the main repository). The MCP
-// server (https://worldmonitor.app/mcp) is the live, documented agent
+// megabrain-market npm CLI this mirrors (cli/ in the main repository). The MCP
+// server (https://megabrain.market/mcp) is the live, documented agent
 // surface: tools/list is public, and tools/call (used by the curated
 // helpers) authenticates with a user API key. A small REST escape hatch
 // (Get/Health) rounds it out for host-relative and self-hosted use.
 //
-//	client := worldmonitor.New("wm_...") // or "" to read WORLDMONITOR_API_KEY
+//	client := megabrain-market.New("wm_...") // or "" to read MEGABRAIN_MARKET_API_KEY
 //	risk, err := client.CountryRisk(ctx, "IR", nil)
-//	quotes, err := client.CallTool(ctx, "get_market_data", worldmonitor.Args{"asset_class": "crypto"})
+//	quotes, err := client.CallTool(ctx, "get_market_data", megabrain-market.Args{"asset_class": "crypto"})
 //	health, err := client.Get(ctx, "/api/health", nil)
 //
 // Every tool accepts an optional "jmespath" argument for server-side
 // projection (typically an 80-95% response-size cut), e.g.
 // Args{"jmespath": "hotspots[].name"}.
-package worldmonitor
+package megabrain-market
 
 import (
 	"bytes"
@@ -40,21 +40,21 @@ const Version = "0.1.1"
 // UserAgent identifies the SDK on every request. Cloudflare's WAF challenges
 // generic library User-Agents (Go-http-client, curl, empty) on the API edge,
 // so we always identify ourselves.
-const UserAgent = "worldmonitor-go/" + Version + " (+https://worldmonitor.app)"
+const UserAgent = "megabrain-market-go/" + Version + " (+https://megabrain.market)"
 
 const (
-	DefaultBaseURL = "https://api.worldmonitor.app"
-	DefaultMCPURL  = "https://worldmonitor.app/mcp"
+	DefaultBaseURL = "https://api.megabrain.market"
+	DefaultMCPURL  = "https://megabrain.market/mcp"
 
 	// APIKeyHeader is the header the API accepts for a user-issued key
 	// (alias: X-Api-Key).
-	APIKeyHeader = "X-WorldMonitor-Key"
+	APIKeyHeader = "X-MegaBrainMarket-Key"
 
 	// MCPAuthErrorCode is the JSON-RPC error code the MCP server returns
 	// when a call needs authentication.
 	MCPAuthErrorCode = -32001
 
-	authHint = "hint: this call needs a key - pass an API key to New or set WORLDMONITOR_API_KEY (get one at https://worldmonitor.app/pro)"
+	authHint = "hint: this call needs a key - pass an API key to New or set MEGABRAIN_MARKET_API_KEY (get one at https://megabrain.market/pro)"
 
 	defaultTimeout = 30 * time.Second
 )
@@ -69,7 +69,7 @@ type APIError struct {
 }
 
 func (e *APIError) Error() string {
-	msg := fmt.Sprintf("worldmonitor: HTTP %d: %s", e.Status, truncate(string(e.Body)))
+	msg := fmt.Sprintf("megabrain-market: HTTP %d: %s", e.Status, truncate(string(e.Body)))
 	if e.Status == http.StatusUnauthorized {
 		msg += " (" + authHint + ")"
 	}
@@ -84,41 +84,41 @@ type MCPError struct {
 }
 
 func (e *MCPError) Error() string {
-	msg := fmt.Sprintf("worldmonitor: MCP error %d: %s", e.Code, e.Message)
+	msg := fmt.Sprintf("megabrain-market: MCP error %d: %s", e.Code, e.Message)
 	if e.Code == MCPAuthErrorCode {
 		msg += " (" + authHint + ")"
 	}
 	return msg
 }
 
-// Client is a thin client for the World Monitor MCP server and REST API.
+// Client is a thin client for the MegaBrain Market MCP server and REST API.
 // The zero value is not usable; construct it with New.
 type Client struct {
-	// APIKey is the user API key sent as X-WorldMonitor-Key.
+	// APIKey is the user API key sent as X-MegaBrainMarket-Key.
 	APIKey string
-	// BaseURL is the REST base (default https://api.worldmonitor.app).
+	// BaseURL is the REST base (default https://api.megabrain.market).
 	BaseURL string
-	// MCPURL is the MCP endpoint (default https://worldmonitor.app/mcp).
+	// MCPURL is the MCP endpoint (default https://megabrain.market/mcp).
 	MCPURL string
 	// HTTPClient performs requests; override its Transport in tests.
 	HTTPClient *http.Client
 }
 
 // New returns a Client. An empty apiKey falls back to the
-// WORLDMONITOR_API_KEY (or WM_API_KEY) environment variable; the REST and
-// MCP endpoints honour WORLDMONITOR_BASE_URL and WORLDMONITOR_MCP_URL.
+// MEGABRAIN_MARKET_API_KEY (or WM_API_KEY) environment variable; the REST and
+// MCP endpoints honour MEGABRAIN_MARKET_BASE_URL and MEGABRAIN_MARKET_MCP_URL.
 func New(apiKey string) *Client {
 	if apiKey == "" {
-		apiKey = os.Getenv("WORLDMONITOR_API_KEY")
+		apiKey = os.Getenv("MEGABRAIN_MARKET_API_KEY")
 	}
 	if apiKey == "" {
 		apiKey = os.Getenv("WM_API_KEY")
 	}
-	baseURL := os.Getenv("WORLDMONITOR_BASE_URL")
+	baseURL := os.Getenv("MEGABRAIN_MARKET_BASE_URL")
 	if baseURL == "" {
 		baseURL = DefaultBaseURL
 	}
-	mcpURL := os.Getenv("WORLDMONITOR_MCP_URL")
+	mcpURL := os.Getenv("MEGABRAIN_MARKET_MCP_URL")
 	if mcpURL == "" {
 		mcpURL = DefaultMCPURL
 	}
@@ -160,7 +160,7 @@ func (c *Client) ListResources(ctx context.Context) (json.RawMessage, error) {
 // "/api/health") with optional query parameters.
 func (c *Client) Get(ctx context.Context, path string, params Args) (json.RawMessage, error) {
 	if !strings.HasPrefix(path, "/") {
-		return nil, fmt.Errorf("worldmonitor: Get needs a host-relative API path starting with %q", "/")
+		return nil, fmt.Errorf("megabrain-market: Get needs a host-relative API path starting with %q", "/")
 	}
 	u := c.BaseURL + path
 	if len(params) > 0 {

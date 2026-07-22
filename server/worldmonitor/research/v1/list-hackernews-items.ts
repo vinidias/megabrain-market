@@ -7,7 +7,7 @@ import type {
   ServerContext,
   ListHackernewsItemsRequest,
   ListHackernewsItemsResponse,
-} from '../../../../src/generated/server/worldmonitor/research/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/research/v1/service_server';
 
 import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
 import { clampInt } from '../../../_shared/constants';

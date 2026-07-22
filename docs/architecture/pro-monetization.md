@@ -17,7 +17,7 @@ Factual snapshot of how authentication, payments, entitlements, and billing mana
 
 ## Tier model
 
-Products are Dodo `productId`s stored client-side in `pro-test/src/generated/tiers.json` and served at runtime from `https://api.worldmonitor.app/api/product-catalog`:
+Products are Dodo `productId`s stored client-side in `pro-test/src/generated/tiers.json` and served at runtime from `https://api.megabrain.market/api/product-catalog`:
 
 - **Free** — `price: 0`, no productId, card links to dashboard.
 - **Pro Monthly** — `pdt_0Nbtt71uObulf7fGXhQup` ($39.99/mo).
@@ -25,7 +25,7 @@ Products are Dodo `productId`s stored client-side in `pro-test/src/generated/tie
 - **API Starter** — `pdt_0NbttVmG1SERrxhygbbUq` ($99.99/mo, 1k req/day).
 - **API Annual** — `pdt_0Nbu2lawHYE3dv2THgSEV` ($999/yr).
 - **API Business** — `pdt_0Nbttg7NuOJrhbyBGCius` ($249.99/mo, 10k req/day; monthly-only, published in #4945; Starter→Business upgrades ride the Dodo collection/portal path).
-- **Enterprise** — `mailto:enterprise@worldmonitor.app` (contact sales).
+- **Enterprise** — `mailto:enterprise@megabrain.market` (contact sales).
 
 ## Auth — Clerk
 
@@ -47,7 +47,7 @@ Two Convex actions at `convex/payments/checkout.ts`:
 
 Both share `_createCheckoutSession()` which:
 
-1. Validates `returnUrl` against an allow-listed set of worldmonitor.app origins.
+1. Validates `returnUrl` against an allow-listed set of megabrain.market origins.
 2. Builds metadata: `wm_user_id` (HMAC-signed via `convex/lib/identitySigning.ts`) + optional `affonso_referral`.
 3. Calls `checkout()` from `convex/lib/dodo.ts`.
 4. Returns `{ checkout_url }` for overlay open or full-page redirect.
@@ -59,7 +59,7 @@ Before creating a session, `getCheckoutBlockingSubscription` checks for active/o
 ### Overlay vs full-page flow
 
 - **Overlay** (main app): `src/services/checkout.ts:openCheckout()` uses `DodoPayments.Checkout.open()` with `manualRedirect: true`. On success, a sessionStorage flag (`wm-post-checkout`) is set and the page reloads. Post-reload, `consumePostCheckoutFlag()` + entitlement transition detector show the success banner and unlock panels.
-- **Full-page return** (fallback / `/pro` path): Dodo redirects to `worldmonitor.app/?subscription_id=...&status=active`. `src/services/checkout-return.ts:handleCheckoutReturn()` reads params, cleans the URL, returns success boolean.
+- **Full-page return** (fallback / `/pro` path): Dodo redirects to `megabrain.market/?subscription_id=...&status=active`. `src/services/checkout-return.ts:handleCheckoutReturn()` reads params, cleans the URL, returns success boolean.
 
 ### Webhook → subscription lifecycle
 
@@ -83,7 +83,7 @@ Before creating a session, `getCheckoutBlockingSubscription` checks for active/o
 ## Referral attribution
 
 - **Code generation**: `/api/referral/me.ts` (edge, Clerk-auth'd) returns `{ code, shareUrl }` where `code` is a deterministic 8-char HMAC of the Clerk userId using `BRIEF_URL_SIGNING_SECRET`. Background binding into Convex via `ctx.waitUntil` — non-blocking on purpose (see module docstring for rationale).
-- **Share link**: `https://worldmonitor.app/pro?ref=<code>`.
+- **Share link**: `https://megabrain.market/pro?ref=<code>`.
 - **Attribution point**: recipient's checkout metadata carries `affonso_referral: <code>` (vendor contract — Dodo → Affonso referral tool; **do not rename**). On first `subscription.active` webhook, `subscriptionHelpers.ts:299` looks up the code in `userReferralCodes` and inserts a `userReferralCredits` row crediting the sharer.
 - **Known gap**: referral code propagation from the dashboard-origin checkout path is incomplete.
 
@@ -92,7 +92,7 @@ Before creating a session, `getCheckoutBlockingSubscription` checks for active/o
 - **Edge endpoints** that accept Clerk JWTs must go through `validateBearerToken` (`server/auth-session.ts`). Applies to `/api/create-checkout`, `/api/customer-portal`, `/api/referral/me`.
 - **Middleware UA guard** (`middleware.ts`): short-UA guard 403s non-browser fetches by default. New API endpoints called from Railway cron must be added to `PUBLIC_API_PATHS`.
 - **Gateway premium check** (`server/gateway.ts`): accepts either Clerk `publicMetadata.plan === 'pro'` role OR Convex `entitlements.tier >= 1 && validUntil >= now`. Both signals must agree for a request to be treated as paid.
-- **CORS**: Cloudflare Worker `api-cors-preflight` is the source of truth for `api.worldmonitor.app`. Overrides `api/_cors.js` + `vercel.json`. Worker source lives at [`workers/api-cors-preflight/`](https://github.com/koala73/worldmonitor/tree/main/workers/api-cors-preflight); it short-circuits OPTIONS preflight at the edge (skipping Vercel) and stamps CORS headers onto non-OPTIONS responses on the way back. Unit-tested in `workers/api-cors-preflight/index.test.mjs`, smoke-tested live in `tests/cors-preflight-live.test.mjs` (gated by `LIVE_SMOKE=1`), and deployed by `.github/workflows/deploy-worker.yml` on changes under `workers/api-cors-preflight/`. The Worker's allowlist + Allow-Headers list MUST stay a superset of `api/_cors.js#getCorsHeaders`; drift breaks credentialed CORS site-wide (2026-05-27 outage post-mortem).
+- **CORS**: Cloudflare Worker `api-cors-preflight` is the source of truth for `api.megabrain.market`. Overrides `api/_cors.js` + `vercel.json`. Worker source lives at [`workers/api-cors-preflight/`](https://github.com/vinidias/megabrain-market/tree/main/workers/api-cors-preflight); it short-circuits OPTIONS preflight at the edge (skipping Vercel) and stamps CORS headers onto non-OPTIONS responses on the way back. Unit-tested in `workers/api-cors-preflight/index.test.mjs`, smoke-tested live in `tests/cors-preflight-live.test.mjs` (gated by `LIVE_SMOKE=1`), and deployed by `.github/workflows/deploy-worker.yml` on changes under `workers/api-cors-preflight/`. The Worker's allowlist + Allow-Headers list MUST stay a superset of `api/_cors.js#getCorsHeaders`; drift breaks credentialed CORS site-wide (2026-05-27 outage post-mortem).
 - **HMAC identity bridge**: Dodo metadata `wm_user_id` is signed with a server-side key (`convex/lib/identitySigning.ts`) so webhooks can trust the user association without an additional lookup.
 
 ## Scope

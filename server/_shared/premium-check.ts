@@ -74,11 +74,11 @@ export async function resolvePremiumCallerIdentity(request: Request): Promise<Pr
   // Browser tester keys — validateApiKey returns required:false for trusted origins
   // even when a valid key is present, so we check the header directly first.
   const wmKey =
-    request.headers.get('X-WorldMonitor-Key') ??
+    request.headers.get('X-MegaBrainMarket-Key') ??
     request.headers.get('X-Api-Key') ??
     '';
   if (wmKey) {
-    const validKeys = (process.env.WORLDMONITOR_VALID_KEYS ?? '')
+    const validKeys = (process.env.MEGABRAIN_MARKET_VALID_KEYS ?? '')
       .split(',').map((k) => k.trim()).filter(Boolean);
     if (await timingSafeIncludes(wmKey, validKeys)) {
       return { isPremium: true, userId: null, kind: 'enterprise', quotaExempt: true };

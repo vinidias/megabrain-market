@@ -32,7 +32,7 @@ const STYLES = `
 const BODY = `
   <div class="head">
     <div class="title">Conflict Events</div>
-    <div class="badge">WorldMonitor Conflict</div>
+    <div class="badge">MegaBrainMarket Conflict</div>
   </div>
   <div class="empty" id="empty">Waiting for conflict data…</div>
   <div id="card" style="display:none">
@@ -97,8 +97,8 @@ const RENDER = `
 `;
 
 export const CONFLICT_EVENTS_APP_HTML = buildAppHtml({
-  title: 'Conflict Events — WorldMonitor',
-  appName: 'worldmonitor-conflict-events',
+  title: 'Conflict Events — MegaBrainMarket',
+  appName: 'megabrain-market-conflict-events',
   styles: STYLES,
   body: BODY,
   renderBody: RENDER,

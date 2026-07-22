@@ -109,15 +109,15 @@ function installDebugBearHarness(hostname: string, existingScript: FakeDebugBear
 
 describe('DebugBear RUM loader', () => {
   it('enables only first-party production dashboard hosts', () => {
-    assert.equal(shouldEnableDebugBearRum('www.worldmonitor.app'), true);
-    assert.equal(shouldEnableDebugBearRum('happy.worldmonitor.app'), true);
+    assert.equal(shouldEnableDebugBearRum('www.megabrain.market'), true);
+    assert.equal(shouldEnableDebugBearRum('happy.megabrain.market'), true);
     assert.equal(shouldEnableDebugBearRum('localhost'), false);
-    assert.equal(shouldEnableDebugBearRum('worldmonitor-git-codex-preview-eliewm.vercel.app'), false);
-    assert.equal(shouldEnableDebugBearRum('evilworldmonitor.app'), false);
+    assert.equal(shouldEnableDebugBearRum('megabrain-market-git-codex-preview-eliewm.vercel.app'), false);
+    assert.equal(shouldEnableDebugBearRum('evilmegabrain.market'), false);
   });
 
   it('installs DebugBear RUM with presampling and pre-script error buffering', () => {
-    const h = installDebugBearHarness('www.worldmonitor.app');
+    const h = installDebugBearHarness('www.megabrain.market');
     try {
       initDebugBearRum();
 
@@ -144,7 +144,7 @@ describe('DebugBear RUM loader', () => {
   });
 
   it('queues only numeric U3a durations and closed low-cardinality tags', () => {
-    const h = installDebugBearHarness('www.worldmonitor.app');
+    const h = installDebugBearHarness('www.megabrain.market');
     try {
       initDebugBearRum();
       reportBootstrapR2Rum({
@@ -186,7 +186,7 @@ describe('DebugBear RUM loader', () => {
 
   it('does not append a duplicate script when one already exists', () => {
     const existing = { async: true, src: DEBUGBEAR_RUM_SCRIPT_SRC };
-    const h = installDebugBearHarness('worldmonitor.app', existing);
+    const h = installDebugBearHarness('megabrain.market', existing);
     try {
       initDebugBearRum();
 
@@ -206,16 +206,16 @@ describe('DebugBear RUM marketing loader', () => {
 
   it('uses the same production-host gate as the dashboard loader', () => {
     for (const host of [
-      'worldmonitor.app',
-      'www.worldmonitor.app',
-      'tech.worldmonitor.app',
-      'finance.worldmonitor.app',
-      'commodity.worldmonitor.app',
-      'happy.worldmonitor.app',
-      'energy.worldmonitor.app',
+      'megabrain.market',
+      'www.megabrain.market',
+      'tech.megabrain.market',
+      'finance.megabrain.market',
+      'commodity.megabrain.market',
+      'happy.megabrain.market',
+      'energy.megabrain.market',
       'localhost',
-      'worldmonitor-git-codex-preview-eliewm.vercel.app',
-      'evilworldmonitor.app',
+      'megabrain-market-git-codex-preview-eliewm.vercel.app',
+      'evilmegabrain.market',
     ]) {
       assert.equal(
         shouldEnableMarketingDebugBearRum(host),
@@ -226,7 +226,7 @@ describe('DebugBear RUM marketing loader', () => {
   });
 
   it('installs DebugBear RUM on marketing pages', () => {
-    const h = installDebugBearHarness('www.worldmonitor.app');
+    const h = installDebugBearHarness('www.megabrain.market');
     try {
       initMarketingDebugBearRum();
 

@@ -36,7 +36,7 @@ test('desktop settings give blocked users an exact help path', () => {
 
   assert.equal(fullCopy.apiKey.title, 'License / API Key');
   assert.match(fullCopy.apiKey.description, /Settings → API Keys/);
-  assert.match(fullCopy.register.description, /worldmonitor\.app\/docs\/api-keys/);
+  assert.match(fullCopy.register.description, /megabrain-market\.app\/docs\/api-keys/);
   assert.equal(fullCopy.register.submitBtn, 'View API plans');
   assert.deepEqual(shellCopy, fullCopy);
 });
@@ -54,7 +54,7 @@ test('every locale describes the launched API-key flow instead of a waitlist', (
     assert.match(copy.apiKey.description, /API Business/, `${file}: key description must name API Business`);
     assert.match(copy.apiKey.description, /Settings → API Keys/, `${file}: key description must give the exact dashboard path`);
     assert.match(copy.register.title, /API/, `${file}: help title must identify the API key`);
-    assert.match(copy.register.description, /worldmonitor\.app\/docs\/api-keys/, `${file}: help copy must link the guide`);
+    assert.match(copy.register.description, /megabrain-market\.app\/docs\/api-keys/, `${file}: help copy must link the guide`);
     assert.match(copy.register.description, /API Starter/, `${file}: help copy must name API Starter`);
     assert.match(copy.register.description, /API Business/, `${file}: help copy must name API Business`);
     assert.match(copy.register.submitBtn, /API/, `${file}: CTA must point to API plans`);

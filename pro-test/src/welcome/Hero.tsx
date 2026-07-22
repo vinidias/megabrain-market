@@ -59,7 +59,7 @@ const ConsoleFrame = () => (
           <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
         </div>
-        <span className="hidden sm:block">worldmonitor.app — global operations</span>
+        <span className="hidden sm:block">megabrain.market — global operations</span>
         <span className="inline-flex min-w-0 items-center gap-1.5 text-wm-green">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-wm-green opacity-60" />
@@ -148,7 +148,7 @@ export const Hero = () => (
         <span>{t('welcome.hero.trustUsers')}</span>
         <span aria-hidden="true" className="text-wm-border">|</span>
         <a
-          href="https://github.com/koala73/worldmonitor"
+          href="https://github.com/vinidias/megabrain-market"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 hover:text-wm-text transition-colors"

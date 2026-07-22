@@ -17,11 +17,11 @@ import type {
   BatchOperationBody,
   BatchOperationResult,
   FieldViolation,
-} from '../../../../src/generated/server/worldmonitor/batch/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/batch/v1/service_server';
 import {
   ApiError,
   ValidationError,
-} from '../../../../src/generated/server/worldmonitor/batch/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/batch/v1/service_server';
 
 export const MAX_BATCH_OPERATIONS = 20;
 export const MAX_OPERATION_ID_LENGTH = 64;
@@ -37,7 +37,7 @@ export const BATCH_MARKER_HEADER = 'x-wm-batch';
 // Only credentials + content negotiation cross into sub-requests. Everything
 // else (cookies, tracing, internal trust markers) is dropped by allowlist —
 // the gateway re-derives what it needs per sub-request.
-const FORWARDED_HEADERS = ['authorization', 'x-worldmonitor-key', 'x-api-key', 'accept-language'] as const;
+const FORWARDED_HEADERS = ['authorization', 'x-megabrain-market-key', 'x-api-key', 'accept-language'] as const;
 
 // A batched path must name a documented RPC: /api/<domain>/v<N>/<rpc> (proto
 // domains) or /api/v2/<domain>/<rpc> (partner v2). Query strings are allowed
@@ -45,10 +45,10 @@ const FORWARDED_HEADERS = ['authorization', 'x-worldmonitor-key', 'x-api-key', '
 const RPC_PATH_RE = /^\/api\/[a-z][a-z0-9-]*\/v\d+\/[a-z][a-z0-9-]*$/;
 const V2_PATH_RE = /^\/api\/v2\/[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*$/;
 
-// The Cloudflare WAF in front of api.worldmonitor.app rejects generic
+// The Cloudflare WAF in front of api.megabrain.market rejects generic
 // user agents, so sub-requests always carry a descriptive one.
 const DEFAULT_SUB_REQUEST_USER_AGENT =
-  'WorldMonitor-Batch/1.0 (+https://www.worldmonitor.app/openapi.json)';
+  'MegaBrainMarket-Batch/1.0 (+https://www.megabrain.market/openapi.json)';
 
 export type FetchLike = (input: string, init?: RequestInit) => Promise<Response>;
 

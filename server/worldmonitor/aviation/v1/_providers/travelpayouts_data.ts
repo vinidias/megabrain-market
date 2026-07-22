@@ -9,7 +9,7 @@
  *   v3/prices_for_dates        — specific date range (day-precision, one-way/return)
  */
 
-import type { PriceQuote, CabinClass, Carrier } from '../../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+import type { PriceQuote, CabinClass, Carrier } from '../../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { cachedFetchJson } from '../../../../_shared/redis';
 import { CHROME_UA } from '../../../../_shared/constants';
 

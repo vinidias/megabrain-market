@@ -39,11 +39,11 @@ import { STARTUP_HUBS, ACCELERATORS, TECH_HQS, CLOUD_REGIONS } from '@/config/te
 import { AI_DATA_CENTERS } from '@/config/ai-datacenters';
 import { worldTopologyUrl, UNDERSEA_CABLES, NUCLEAR_FACILITIES, SANCTIONED_COUNTRIES, ECONOMIC_CENTERS, SPACEPORTS, CRITICAL_MINERALS } from '@/config/geo-map';
 import { pinWebcam, isPinned } from '@/services/webcams/pinned-store';
-import type { WebcamEntry, WebcamCluster } from '@/generated/client/worldmonitor/webcam/v1/service_client';
+import type { WebcamEntry, WebcamCluster } from '@/generated/client/megabrain-market/webcam/v1/service_client';
 import { tokenizeForMatch, matchKeyword, findMatchingKeywords } from '@/utils/keyword-match';
 import { MapPopup } from './MapPopup';
 import type { GetChokepointStatusResponse } from '@/services/supply-chain';
-import type { AcledConflictEvent } from '@/generated/client/worldmonitor/conflict/v1/service_client';
+import type { AcledConflictEvent } from '@/generated/client/megabrain-market/conflict/v1/service_client';
 import {
   updateHotspotEscalation,
   getHotspotEscalation,

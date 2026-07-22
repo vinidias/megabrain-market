@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.military.v1;
+package megabrain-market.military.v1;
 
 // GetWingbitsStatusRequest checks whether the Wingbits enrichment API is configured.
 message GetWingbitsStatusRequest {}

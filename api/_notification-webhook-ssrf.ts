@@ -189,7 +189,7 @@ async function resolveDnsJson(hostname: string, recordType: 'A' | 'AAAA'): Promi
   const response = await fetch(url, {
     headers: {
       Accept: 'application/dns-json',
-      'User-Agent': 'WorldMonitor-Notification-Webhooks/1.0',
+      'User-Agent': 'MegaBrainMarket-Notification-Webhooks/1.0',
     },
     signal: AbortSignal.timeout(DNS_RESOLUTION_TIMEOUT_MS),
   });

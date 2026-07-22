@@ -1,10 +1,10 @@
 ---
 title: "桌面版发布打包指南（本地、可复现）"
-description: "本指南提供两种桌面变体：full（World Monitor）和 tech（Tech Monitor）的可复现本地打包步骤，涵盖构建脚本、代码签名、公证、图标与安装包生成，帮助维护者与贡献者在 macOS、Windows 与 Linux 上产出与官方发布一致的桌面二进制，并对每一步进行确定性校验。"
+description: "本指南提供两种桌面变体：full（MegaBrain Market）和 tech（Tech Monitor）的可复现本地打包步骤，涵盖构建脚本、代码签名、公证、图标与安装包生成，帮助维护者与贡献者在 macOS、Windows 与 Linux 上产出与官方发布一致的桌面二进制，并对每一步进行确定性校验。"
 ---
 本指南为两种桌面变体提供可复现的本地打包步骤：
 
-- **full** → `World Monitor`
+- **full** → `MegaBrain Market`
 - **tech** → `Tech Monitor`
 
 变体标识由 Tauri 配置控制：
@@ -184,12 +184,12 @@ npm run desktop:package:windows:full:sign
 
 ## 区分变体的输出（名称/图标）
 
-- Full 变体：`World Monitor` / `world-monitor`
+- Full 变体：`MegaBrain Market` / `megabrain-market`
 - Tech 变体：`Tech Monitor` / `tech-monitor`
 
 不同的名称在 Tauri 中配置：
 
-- `src-tauri/tauri.conf.json` → `World Monitor` / `world-monitor`
+- `src-tauri/tauri.conf.json` → `MegaBrain Market` / `megabrain-market`
 - `src-tauri/tauri.tech.conf.json` → `Tech Monitor` / `tech-monitor`
 
 如果需要变体特定的图标，请分别在每个配置中设置 `bundle.icon`，并将每个变体指向专用的图标资源。

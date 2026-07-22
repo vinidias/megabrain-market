@@ -159,7 +159,7 @@ async function _createCheckoutSession(
   user: UserInfo,
 ) {
   // Validate returnUrl to prevent open-redirect attacks.
-  const siteUrl = process.env.SITE_URL ?? "https://worldmonitor.app";
+  const siteUrl = process.env.SITE_URL ?? "https://megabrain.market";
   let returnUrl = siteUrl;
   if (args.returnUrl) {
     let parsedReturnUrl: URL;
@@ -170,19 +170,19 @@ async function _createCheckoutSession(
     }
 
     const allowedOrigins = new Set([
-      "https://worldmonitor.app",
-      "https://www.worldmonitor.app",
-      "https://app.worldmonitor.app",
-      "https://tech.worldmonitor.app",
-      "https://finance.worldmonitor.app",
-      "https://commodity.worldmonitor.app",
-      "https://happy.worldmonitor.app",
-      "https://energy.worldmonitor.app",
+      "https://megabrain.market",
+      "https://www.megabrain.market",
+      "https://app.megabrain.market",
+      "https://tech.megabrain.market",
+      "https://finance.megabrain.market",
+      "https://commodity.megabrain.market",
+      "https://happy.megabrain.market",
+      "https://energy.megabrain.market",
       new URL(siteUrl).origin,
     ]);
     if (!allowedOrigins.has(parsedReturnUrl.origin)) {
       throw new ConvexError(
-        "Invalid returnUrl: must use a trusted worldmonitor.app origin",
+        "Invalid returnUrl: must use a trusted megabrain.market origin",
       );
     }
     returnUrl = parsedReturnUrl.toString();

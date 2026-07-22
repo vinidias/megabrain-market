@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.positive_events.v1;
+package megabrain-market.positive_events.v1;
 
 import "sebuf/http/annotations.proto";
 

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.resilience.v1;
+package megabrain-market.resilience.v1;
 
 message GetResilienceRuntimeManifestRequest {}
 

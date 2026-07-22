@@ -8,7 +8,7 @@
 //   - OPTIONS preflight returns 204 + Access-Control-Allow-Credentials: true
 //     (the load-bearing assertion — the 2026-05-27 outage was a missing ACAC).
 //   - Allowed origins are echoed verbatim into ACAO.
-//   - Disallowed origins fall back to the canonical https://worldmonitor.app
+//   - Disallowed origins fall back to the canonical https://megabrain.market
 //     (so browsers reject the request rather than the Worker serving an open
 //     wildcard).
 //   - Non-/api/ paths pass through to fetch() unmodified.
@@ -28,10 +28,10 @@ function makeRequest(method, url, headers = {}) {
   return new Request(url, { method, headers });
 }
 
-const CANONICAL_FALLBACK = 'https://worldmonitor.app';
-const KNOWN_GOOD = 'https://www.worldmonitor.app';
-const ACAH_EXPECTED = 'Content-Type, Authorization, X-WorldMonitor-Key, X-Api-Key, X-Widget-Key, X-Pro-Key, X-WorldMonitor-Desktop-Timestamp, X-WorldMonitor-Desktop-Signature, Idempotency-Key, Mcp-Session-Id, MCP-Protocol-Version, Last-Event-ID';
-const ACEH_EXPECTED = 'Mcp-Session-Id, WWW-Authenticate, Retry-After, Idempotency-Key, Idempotent-Replayed, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-WorldMonitor-Bbox, X-WorldMonitor-Bbox-Missing, X-WorldMonitor-Bbox-Invalid, X-Military-Bbox';
+const CANONICAL_FALLBACK = 'https://megabrain.market';
+const KNOWN_GOOD = 'https://www.megabrain.market';
+const ACAH_EXPECTED = 'Content-Type, Authorization, X-MegaBrainMarket-Key, X-Api-Key, X-Widget-Key, X-Pro-Key, X-MegaBrainMarket-Desktop-Timestamp, X-MegaBrainMarket-Desktop-Signature, Idempotency-Key, Mcp-Session-Id, MCP-Protocol-Version, Last-Event-ID';
+const ACEH_EXPECTED = 'Mcp-Session-Id, WWW-Authenticate, Retry-After, Idempotency-Key, Idempotent-Replayed, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-MegaBrainMarket-Bbox, X-MegaBrainMarket-Bbox-Missing, X-MegaBrainMarket-Bbox-Invalid, X-Military-Bbox';
 // Must be a superset of every method any api/* route advertises. Notably
 // includes DELETE for api/product-catalog.js — pinning this prevents the
 // regression that PR review caught (Worker omitted DELETE → product-catalog
@@ -40,27 +40,27 @@ const ACAM_EXPECTED = 'GET, POST, DELETE, HEAD, OPTIONS';
 
 // --- allowlist coverage ---------------------------------------------------
 
-test('isAllowedOrigin accepts apex worldmonitor.app and subdomains', () => {
-  assert.equal(isAllowedOrigin('https://worldmonitor.app'), true);
-  assert.equal(isAllowedOrigin('https://www.worldmonitor.app'), true);
-  assert.equal(isAllowedOrigin('https://tech.worldmonitor.app'), true);
-  assert.equal(isAllowedOrigin('https://commodity.worldmonitor.app'), true);
+test('isAllowedOrigin accepts apex megabrain.market and subdomains', () => {
+  assert.equal(isAllowedOrigin('https://megabrain.market'), true);
+  assert.equal(isAllowedOrigin('https://www.megabrain.market'), true);
+  assert.equal(isAllowedOrigin('https://tech.megabrain.market'), true);
+  assert.equal(isAllowedOrigin('https://commodity.megabrain.market'), true);
 });
 
 test('isAllowedOrigin accepts Vercel preview deploys under the eliewm team scope (mirrors api/_cors.js)', () => {
   // The project deploys previews under the "eliewm" Vercel team scope, so URLs
   // end in `-eliewm.vercel.app` (git-branch alias AND hash deployment forms).
   // The Worker MUST mirror api/_cors.js exactly — if it stays narrower, eliewm
-  // preview preflights echo the canonical worldmonitor.app fallback and the
+  // preview preflights echo the canonical megabrain.market fallback and the
   // browser blocks them before the request ever reaches Vercel.
-  assert.equal(isAllowedOrigin('https://worldmonitor-git-feat-x-eliewm.vercel.app'), true);
-  assert.equal(isAllowedOrigin('https://worldmonitor-r6q9o-eliewm.vercel.app'), true);
-  // Tight allowlist: a foreign team scope, a non-worldmonitor app, and the
-  // retired personal scope (worldmonitor-*-elie-<hash>, migration complete)
+  assert.equal(isAllowedOrigin('https://megabrain-market-git-feat-x-eliewm.vercel.app'), true);
+  assert.equal(isAllowedOrigin('https://megabrain-market-r6q9o-eliewm.vercel.app'), true);
+  // Tight allowlist: a foreign team scope, a non-megabrain-market app, and the
+  // retired personal scope (megabrain-market-*-elie-<hash>, migration complete)
   // must all stay rejected. Never a bare *.vercel.app.
-  assert.equal(isAllowedOrigin('https://worldmonitor-feat-x-attacker.vercel.app'), false);
+  assert.equal(isAllowedOrigin('https://megabrain-market-feat-x-attacker.vercel.app'), false);
   assert.equal(isAllowedOrigin('https://some-other-app-eliewm.vercel.app'), false);
-  assert.equal(isAllowedOrigin('https://worldmonitor-abc-elie-habib.vercel.app'), false);
+  assert.equal(isAllowedOrigin('https://megabrain-market-abc-elie-habib.vercel.app'), false);
 });
 
 test('isAllowedOrigin accepts Tauri desktop runtime origins', () => {
@@ -73,8 +73,8 @@ test('isAllowedOrigin accepts Tauri desktop runtime origins', () => {
 
 test('isAllowedOrigin rejects unrelated origins', () => {
   assert.equal(isAllowedOrigin('https://evil.com'), false);
-  assert.equal(isAllowedOrigin('https://worldmonitor.app.evil.com'), false);
-  assert.equal(isAllowedOrigin('https://notworldmonitor.app'), false);
+  assert.equal(isAllowedOrigin('https://megabrain.market.evil.com'), false);
+  assert.equal(isAllowedOrigin('https://notmegabrain.market'), false);
   assert.equal(isAllowedOrigin(''), false);
 });
 
@@ -109,7 +109,7 @@ test('buildCorsHeaders Access-Control-Expose-Headers matches api/_cors.js', () =
 // --- preflight short-circuit (the load-bearing branch) --------------------
 
 test('OPTIONS preflight returns 204 with Access-Control-Allow-Credentials: true', async () => {
-  const req = makeRequest('OPTIONS', 'https://api.worldmonitor.app/api/bootstrap?tier=fast', {
+  const req = makeRequest('OPTIONS', 'https://api.megabrain.market/api/bootstrap?tier=fast', {
     Origin: KNOWN_GOOD,
     'Access-Control-Request-Method': 'GET',
     'Access-Control-Request-Headers': 'content-type',
@@ -130,7 +130,7 @@ test('OPTIONS preflight advertises DELETE (regression — api/product-catalog pu
   // circuits the preflight before Vercel sees it, the Worker's Allow-Methods
   // MUST be a superset — if it isn't, the browser rejects the preflight and
   // the authenticated DELETE never reaches the function. Pin the invariant.
-  const req = makeRequest('OPTIONS', 'https://api.worldmonitor.app/api/product-catalog', {
+  const req = makeRequest('OPTIONS', 'https://api.megabrain.market/api/product-catalog', {
     Origin: KNOWN_GOOD,
     'Access-Control-Request-Method': 'DELETE',
   });
@@ -141,7 +141,7 @@ test('OPTIONS preflight advertises DELETE (regression — api/product-catalog pu
 });
 
 test('OPTIONS preflight from disallowed origin still sets ACAC but echoes fallback origin', async () => {
-  const req = makeRequest('OPTIONS', 'https://api.worldmonitor.app/api/bootstrap', {
+  const req = makeRequest('OPTIONS', 'https://api.megabrain.market/api/bootstrap', {
     Origin: 'https://evil.com',
   });
   const resp = await worker.fetch(req);
@@ -165,7 +165,7 @@ test('non-/api/ paths bypass CORS injection and call fetch directly', async () =
     return new Response('ok', { status: 200 });
   };
   try {
-    const req = makeRequest('GET', 'https://api.worldmonitor.app/health-check', {
+    const req = makeRequest('GET', 'https://api.megabrain.market/health-check', {
       Origin: KNOWN_GOOD,
     });
     const resp = await worker.fetch(req);
@@ -194,7 +194,7 @@ test('GET response from origin has CORS headers stamped by the Worker', async ()
     },
   });
   try {
-    const req = makeRequest('GET', 'https://api.worldmonitor.app/api/health', {
+    const req = makeRequest('GET', 'https://api.megabrain.market/api/health', {
       Origin: KNOWN_GOOD,
     });
     const resp = await worker.fetch(req);
@@ -216,7 +216,7 @@ test('GET response preserves function-specific exposed headers (bootstrap U3a re
       'Content-Type': 'application/json',
       'Access-Control-Expose-Headers': [
         'Server-Timing',
-        'X-WorldMonitor-Bootstrap-Redis-Duration',
+        'X-MegaBrainMarket-Bootstrap-Redis-Duration',
         'Age',
         'X-Vercel-Cache',
         'CF-Cache-Status',
@@ -226,13 +226,13 @@ test('GET response preserves function-specific exposed headers (bootstrap U3a re
     },
   });
   try {
-    const req = makeRequest('GET', 'https://api.worldmonitor.app/api/bootstrap?tier=slow&public=1', {
+    const req = makeRequest('GET', 'https://api.megabrain.market/api/bootstrap?tier=slow&public=1', {
       Origin: KNOWN_GOOD,
     });
     const resp = await worker.fetch(req);
     assert.equal(
       resp.headers.get('access-control-expose-headers'),
-      `${ACEH_EXPECTED}, Server-Timing, X-WorldMonitor-Bootstrap-Redis-Duration, Age, X-Vercel-Cache, CF-Cache-Status`,
+      `${ACEH_EXPECTED}, Server-Timing, X-MegaBrainMarket-Bootstrap-Redis-Duration, Age, X-Vercel-Cache, CF-Cache-Status`,
     );
   } finally {
     globalThis.fetch = original;
@@ -249,7 +249,7 @@ test('GET response does not preserve function-specific exposed headers outside b
     },
   });
   try {
-    const req = makeRequest('GET', 'https://api.worldmonitor.app/api/health', {
+    const req = makeRequest('GET', 'https://api.megabrain.market/api/health', {
       Origin: KNOWN_GOOD,
     });
     const resp = await worker.fetch(req);
@@ -293,7 +293,7 @@ test('hasPublicCorsPolicy: rejects WM-app routes (so credentialed flow keeps Wor
 
 test('OPTIONS preflight to /api/mcp from https://claude.ai passes through to Vercel (Worker does NOT short-circuit)', async () => {
   // Regression: PR review caught that the Worker was short-circuiting MCP
-  // preflights with the canonical worldmonitor.app fallback origin echo,
+  // preflights with the canonical megabrain.market fallback origin echo,
   // which blocked claude.ai / claude.com MCP clients. Pin the bypass.
   const original = globalThis.fetch;
   let received;
@@ -305,18 +305,18 @@ test('OPTIONS preflight to /api/mcp from https://claude.ai passes through to Ver
         // Simulate Vercel function returning ACAO: * (getPublicCorsHeaders).
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-WorldMonitor-Key',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-MegaBrainMarket-Key',
       },
     });
   };
   try {
-    const req = makeRequest('OPTIONS', 'https://api.worldmonitor.app/api/mcp', {
+    const req = makeRequest('OPTIONS', 'https://api.megabrain.market/api/mcp', {
       Origin: 'https://claude.ai',
       'Access-Control-Request-Method': 'POST',
     });
     const resp = await worker.fetch(req);
     assert.ok(received instanceof Request, 'request should have been forwarded to fetch()');
-    assert.equal(received.url, 'https://api.worldmonitor.app/api/mcp');
+    assert.equal(received.url, 'https://api.megabrain.market/api/mcp');
     assert.equal(resp.status, 204);
     // Vercel's ACAO: * passes through unchanged (Worker did NOT stamp).
     assert.equal(resp.headers.get('access-control-allow-origin'), '*');
@@ -338,7 +338,7 @@ test('OPTIONS preflight to /api/oauth/register from https://claude.com passes th
     });
   };
   try {
-    const req = makeRequest('OPTIONS', 'https://api.worldmonitor.app/api/oauth/register', {
+    const req = makeRequest('OPTIONS', 'https://api.megabrain.market/api/oauth/register', {
       Origin: 'https://claude.com',
       'Access-Control-Request-Method': 'POST',
     });
@@ -362,7 +362,7 @@ test('GET to /api/oauth/token from https://claude.ai passes Vercel headers throu
     },
   });
   try {
-    const req = makeRequest('POST', 'https://api.worldmonitor.app/api/oauth/token', {
+    const req = makeRequest('POST', 'https://api.megabrain.market/api/oauth/token', {
       Origin: 'https://claude.ai',
       'Content-Type': 'application/json',
     });
@@ -381,7 +381,7 @@ test('502 fallback when origin throws still includes CORS headers', async () => 
   const original = globalThis.fetch;
   globalThis.fetch = async () => { throw new Error('origin down'); };
   try {
-    const req = makeRequest('GET', 'https://api.worldmonitor.app/api/health', {
+    const req = makeRequest('GET', 'https://api.megabrain.market/api/health', {
       Origin: KNOWN_GOOD,
     });
     const resp = await worker.fetch(req);

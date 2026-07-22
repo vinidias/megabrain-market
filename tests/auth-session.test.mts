@@ -233,7 +233,7 @@ describe('validateBearerToken (with JWKS)', () => {
     const token = await new SignJWT({
       sub: 'user_prefill',
       plan: 'pro',
-      email: 'elie@worldmonitor.app',
+      email: 'elie@megabrain.market',
       given_name: 'Elie',
       family_name: 'Habib',
     })
@@ -247,7 +247,7 @@ describe('validateBearerToken (with JWKS)', () => {
 
     const result = await validateBearerToken(token);
     assert.equal(result.valid, true);
-    assert.equal(result.email, 'elie@worldmonitor.app');
+    assert.equal(result.email, 'elie@megabrain.market');
     assert.equal(result.name, 'Elie Habib');
   });
 
@@ -329,17 +329,17 @@ describe('CORS origin matching (convex/http.ts)', () => {
   }
 
   const TRUSTED = [
-    'https://worldmonitor.app',
-    '*.worldmonitor.app',
+    'https://megabrain.market',
+    '*.megabrain.market',
     'http://localhost:3000',
   ];
 
   it('allows exact match', () => {
-    assert.equal(allowedOrigin('https://worldmonitor.app', TRUSTED), 'https://worldmonitor.app');
+    assert.equal(allowedOrigin('https://megabrain.market', TRUSTED), 'https://megabrain.market');
   });
 
   it('allows wildcard subdomain', () => {
-    const origin = 'https://preview-xyz.worldmonitor.app';
+    const origin = 'https://preview-xyz.megabrain.market';
     assert.equal(allowedOrigin(origin, TRUSTED), origin);
   });
 
@@ -352,7 +352,7 @@ describe('CORS origin matching (convex/http.ts)', () => {
   });
 
   it('blocks partial domain match', () => {
-    assert.equal(allowedOrigin('https://attackerworldmonitor.app', TRUSTED), null);
+    assert.equal(allowedOrigin('https://attackermegabrain.market', TRUSTED), null);
   });
 
   it('returns null for null origin -- no ACAO header emitted', () => {

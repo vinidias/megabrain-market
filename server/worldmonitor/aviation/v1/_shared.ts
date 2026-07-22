@@ -5,7 +5,7 @@ import type {
   FlightDelaySeverity,
   FlightDelaySource,
   AirportRegion,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import type { MonitoredAirport } from '../../../../src/types';
 import {
   MONITORED_AIRPORTS,

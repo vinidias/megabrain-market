@@ -1,25 +1,25 @@
 ---
-title: "Build a Supply Chain Early Warning Dashboard with WorldMonitor's API"
+title: "Build a Supply Chain Early Warning Dashboard with MegaBrainMarket's API"
 description: "A practical blueprint for monitoring chokepoints, port activity, energy disruption, trade policy, and commodity signals before procurement surprises."
-metaTitle: "Supply Chain Early Warning Dashboard | WorldMonitor API"
+metaTitle: "Supply Chain Early Warning Dashboard | MegaBrainMarket API"
 keywords: "supply chain early warning dashboard, supply chain risk API, chokepoint monitoring API, geopolitical supply chain risk, port disruption monitoring"
 audience: "Supply chain teams, logistics analysts, procurement leaders, data engineers"
-heroImage: "/blog/og/supply-chain-early-warning-dashboard-worldmonitor-api.png"
+heroImage: "/blog/og/supply-chain-early-warning-dashboard-megabrain-market-api.png"
 pubDate: "2026-06-10"
 modifiedDate: "2026-06-13"
 ---
 
 A supply chain early warning dashboard should answer one question before the weekly operations meeting: which routes, commodities, suppliers, or countries need attention now?
 
-WorldMonitor is useful here because it does not treat supply chain risk as a single feed. It connects maritime chokepoints, port activity, fuel shortages, energy disruptions, customs flows, commodity prices, trade policy, natural disasters, conflict events, and country risk into one API surface.
+MegaBrainMarket is useful here because it does not treat supply chain risk as a single feed. It connects maritime chokepoints, port activity, fuel shortages, energy disruptions, customs flows, commodity prices, trade policy, natural disasters, conflict events, and country risk into one API surface.
 
-This guide gives you a practical dashboard design you can build with the [WorldMonitor API](https://www.worldmonitor.app/docs/api-reference) or the [WorldMonitor MCP server](https://www.worldmonitor.app/docs/mcp-overview). For a narrower implementation path, see the tutorial on how to [build a supply-chain early-warning system](/blog/posts/build-supply-chain-early-warning-system-api/), then add alert delivery with the [Slack and Teams alert workflow](/blog/posts/geopolitical-risk-alerts-slack-teams-worldmonitor-api/).
+This guide gives you a practical dashboard design you can build with the [MegaBrainMarket API](https://www.megabrain.market/docs/api-reference) or the [MegaBrainMarket MCP server](https://www.megabrain.market/docs/mcp-overview). For a narrower implementation path, see the tutorial on how to [build a supply-chain early-warning system](/blog/posts/build-supply-chain-early-warning-system-api/), then add alert delivery with the [Slack and Teams alert workflow](/blog/posts/geopolitical-risk-alerts-slack-teams-megabrain-market-api/).
 
 ## The dashboard shape
 
 The most useful supply chain dashboard has five panels:
 
-| Panel | Question it answers | WorldMonitor surface |
+| Panel | Question it answers | MegaBrainMarket surface |
 |---|---|---|
 | Route stress | Are major chokepoints moving normally? | `get_chokepoint_status`, Supply Chain API |
 | Country exposure | Are supplier or transit countries deteriorating? | `get_country_risk`, conflict and unrest APIs |
@@ -45,13 +45,13 @@ Before writing code, define a compact watchlist:
 }
 ```
 
-This turns WorldMonitor's broad data surface into a dashboard that matches your actual exposure.
+This turns MegaBrainMarket's broad data surface into a dashboard that matches your actual exposure.
 
 ## Pull the right indicators
 
 ### 1. Chokepoint status
 
-Use chokepoint data for direct route stress. WorldMonitor tracks major corridors such as Hormuz, Suez, Malacca, Bab-el-Mandeb, Panama, and others.
+Use chokepoint data for direct route stress. MegaBrainMarket tracks major corridors such as Hormuz, Suez, Malacca, Bab-el-Mandeb, Panama, and others.
 
 MCP path:
 
@@ -64,7 +64,7 @@ MCP path:
 }
 ```
 
-REST path: start from the [API reference](https://www.worldmonitor.app/docs/api-reference) or the [MCP-to-REST mapping](https://www.worldmonitor.app/docs/mcp-overview#api-coverage) and use the supply-chain and intelligence endpoints behind chokepoint and port activity.
+REST path: start from the [API reference](https://www.megabrain.market/docs/api-reference) or the [MCP-to-REST mapping](https://www.megabrain.market/docs/mcp-overview#api-coverage) and use the supply-chain and intelligence endpoints behind chokepoint and port activity.
 
 ### 2. Country risk
 
@@ -160,7 +160,7 @@ The archive is not bureaucracy. It lets you explain why an alert fired two weeks
 
 ## Use the scenarios API for what-if checks
 
-For severe route exposure, pair live monitoring with scenario analysis. WorldMonitor's [Scenarios API](https://www.worldmonitor.app/docs/api-scenarios) can run predefined supply-chain disruption scenarios such as Hormuz tanker blockade, Taiwan Strait closure, Suez and Bab-el-Mandeb simultaneous disruption, Panama drought, Baltic grain disruption, and tariff escalation.
+For severe route exposure, pair live monitoring with scenario analysis. MegaBrainMarket's [Scenarios API](https://www.megabrain.market/docs/api-scenarios) can run predefined supply-chain disruption scenarios such as Hormuz tanker blockade, Taiwan Strait closure, Suez and Bab-el-Mandeb simultaneous disruption, Panama drought, Baltic grain disruption, and tariff escalation.
 
 Use scenarios when the question shifts from "what is happening?" to "what happens to our exposure if this closes?"
 
@@ -180,7 +180,7 @@ Before shipping the dashboard internally, check:
 **What is a supply chain early warning dashboard?**
 A supply chain early warning dashboard monitors route, country, energy, commodity, and news signals so teams can see disruption risk before it appears as a missed shipment or surprise price increase.
 
-**Which WorldMonitor APIs matter most for supply chain risk?**
+**Which MegaBrainMarket APIs matter most for supply chain risk?**
 Start with chokepoint status, country risk, energy intelligence, market data, conflict events, and news intelligence. Add scenarios when you need what-if analysis.
 
 **Should I use REST or MCP for this dashboard?**

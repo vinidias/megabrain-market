@@ -1,8 +1,8 @@
 import { VARIANT_META, type VariantMeta } from './variant-meta';
 
-// Variants that are served from their own worldmonitor.app subdomain by the
+// Variants that are served from their own megabrain.market subdomain by the
 // single web deployment (vercel.json host-based rewrites map
-// <variant>.worldmonitor.app/dashboard → /dashboard-<variant>.html).
+// <variant>.megabrain.market/dashboard → /dashboard-<variant>.html).
 // Desktop/self-host variant builds are NOT in scope — they run
 // htmlVariantPlugin at build time with VITE_VARIANT set.
 export const WEB_DASHBOARD_VARIANTS = ['tech', 'finance', 'commodity', 'happy', 'energy'] as const;
@@ -63,7 +63,7 @@ const TWO: CountBounds = { min: 2, max: 2 };
 // keywords/subject/classification metas, canonical + hreflang cluster,
 // og/twitter cards, the WebApplication JSON-LD block, and the visually
 // hidden <h1>. The Organization/WebSite JSON-LD blocks intentionally keep
-// the World Monitor identity (each variant isPartOf World Monitor — same
+// the MegaBrain Market identity (each variant isPartOf MegaBrain Market — same
 // modelling as the middleware.ts crawler stub).
 export function renderVariantDashboardHtml(fullDashboardHtml: string, variant: string): string {
   const meta: VariantMeta | undefined = VARIANT_META[variant];
@@ -108,7 +108,7 @@ export function renderVariantDashboardHtml(fullDashboardHtml: string, variant: s
   // preserve the ?lang= suffix per entry.
   html = replaceCounted(
     html,
-    /(<link rel="alternate" hreflang="[^"]+" href=")https:\/\/www\.worldmonitor\.app\/dashboard((?:\?[^"]*)?" \/>)/g,
+    /(<link rel="alternate" hreflang="[^"]+" href=")https:\/\/www\.megabrain-market\.app\/dashboard((?:\?[^"]*)?" \/>)/g,
     (_m, a, b) => `${a}${escHtml(meta.url)}${b}`,
     { min: 1, max: 80 },
     'hreflang alternates',

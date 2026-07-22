@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.aviation.v1;
+package megabrain-market.aviation.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/aviation/v1/position_sample.proto";
+import "megabrain-market/aviation/v1/position_sample.proto";
 
 // TrackAircraftRequest specifies an aircraft to track.
 message TrackAircraftRequest {

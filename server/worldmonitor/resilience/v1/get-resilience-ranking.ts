@@ -5,7 +5,7 @@ import {
   type GetResilienceRankingRequest,
   type GetResilienceRankingResponse,
   type ResilienceRankingItem,
-} from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/resilience/v1/service_server';
 
 import { compareAndDeleteRedisKey, getCachedJson, runRedisPipeline } from '../../../_shared/redis';
 import { unwrapEnvelope } from '../../../_shared/seed-envelope';
@@ -60,9 +60,9 @@ function isRefreshRequested(ctx: ServerContext): boolean {
 }
 
 async function isSeedRefreshAuthorized(ctx: ServerContext): Promise<boolean> {
-  const expected = process.env.WORLDMONITOR_SEED_REFRESH_KEY?.trim() ?? '';
+  const expected = process.env.MEGABRAIN_MARKET_SEED_REFRESH_KEY?.trim() ?? '';
   if (!expected) return false;
-  const candidate = ctx.request.headers.get('X-WorldMonitor-Key') ?? '';
+  const candidate = ctx.request.headers.get('X-MegaBrainMarket-Key') ?? '';
   return timingSafeEqual(candidate, expected);
 }
 
@@ -279,7 +279,7 @@ export const getResilienceRanking: ResilienceServiceHandler['getResilienceRankin
   // ?refresh=1 forces a full recompute-and-publish instead of returning the
   // existing cache. It is seed-service-only: a full warm is expensive (~222
   // score computations + chunked pipeline SETs). Normal premium credentials
-  // (Pro bearer, WORLDMONITOR_VALID_KEYS, WORLDMONITOR_API_KEY) must keep the
+  // (Pro bearer, MEGABRAIN_MARKET_VALID_KEYS, MEGABRAIN_MARKET_API_KEY) must keep the
   // standard cache-first read path. Only the dedicated seed refresh secret is
   // accepted, and a short Redis slot bounds rapid/concurrent refresh attempts.
   const refreshRequested = isRefreshRequested(ctx);

@@ -48,8 +48,8 @@ import { getWindColor } from '@/config/wind-colors';
 import { CII_LEVEL_COLORS, type CiiLevel } from '@/config/cii-colors';
 import type { GpsJamHex } from '@/services/gps-interference';
 import { fetchImageryScenes } from '@/services/imagery';
-import type { ImageryScene } from '@/generated/server/worldmonitor/imagery/v1/service_server';
-import type { TrafficAnomaly as ProtoTrafficAnomaly, DdosLocationHit } from '@/generated/client/worldmonitor/infrastructure/v1/service_client';
+import type { ImageryScene } from '@/generated/server/megabrain-market/imagery/v1/service_server';
+import type { TrafficAnomaly as ProtoTrafficAnomaly, DdosLocationHit } from '@/generated/client/megabrain-market/infrastructure/v1/service_client';
 import type { DisplacementFlow } from '@/services/displacement';
 import type { Earthquake } from '@/services/earthquakes';
 import type { ClimateAnomaly } from '@/services/climate';
@@ -156,7 +156,7 @@ import { formatResilienceServerLevel } from './resilience-widget-utils';
 
 import { isAllowedPreviewUrl } from '@/utils/imagery-preview';
 import { pinWebcam, isPinned } from '@/services/webcams/pinned-store';
-import type { WebcamEntry, WebcamCluster } from '@/generated/client/worldmonitor/webcam/v1/service_client';
+import type { WebcamEntry, WebcamCluster } from '@/generated/client/megabrain-market/webcam/v1/service_client';
 import { fetchWebcamImage } from '@/services/webcams';
 import { setTrustedHtml, trustedHtml } from '@/utils/dom-utils';
 import { summarizeRenderTiming, formatRenderTiming } from '@/components/map/render-timing';
@@ -944,7 +944,7 @@ export class DeckGLMap {
         // Guard against the source existing in the style registry while
         // its underlying texture is mid-load or being torn down. Calling
         // setTiles in that window triggers a render-frame crash inside
-        // MapLibre at fa() / texture.bind() (Sentry WORLDMONITOR-P6:
+        // MapLibre at fa() / texture.bind() (Sentry MEGABRAIN_MARKET-P6:
         // Firefox 149, hit on the 5-minute radar refresh interval).
         // isSourceLoaded(id) is MapLibre's official "tiles fetched +
         // applied to GL state" check; defer to the next idle if false.
@@ -5471,7 +5471,7 @@ export class DeckGLMap {
     //   1. Clerk role === 'pro' (subscribeAuthState fires on Clerk changes)
     //   2. Convex entitlement tier >= 1 (onEntitlementChange fires on Convex changes)
     // Subscribing to BOTH covers Dodo subscribers whose Pro flag arrives via
-    // Convex (NOT via Clerk role). User-reported on energy.worldmonitor.app:
+    // Convex (NOT via Clerk role). User-reported on energy.megabrain.market:
     // "Pro Monthly" in settings UI but Resilience layer still showed the lock
     // because subscribeAuthState alone never fires on Convex transitions.
     //

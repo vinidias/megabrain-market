@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.news.v1;
+package megabrain-market.news.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/geo.proto";
+import "megabrain-market/core/v1/geo.proto";
 
 // NewsItem represents a single news article from RSS feed aggregation.
 message NewsItem {
@@ -27,7 +27,7 @@ message NewsItem {
   // Threat classification, if assessed.
   ThreatClassification threat = 6;
   // Geolocation extracted from the article.
-  worldmonitor.core.v1.GeoCoordinates location = 7;
+  megabrain-market.core.v1.GeoCoordinates location = 7;
   // Human-readable location name.
   string location_name = 8;
   // Composite importance score. The base 0-100 score uses severity × 55% +

@@ -75,7 +75,7 @@ const CHECKOUT_REFERRAL_PARAM = 'checkoutReferral';
 const CHECKOUT_DISCOUNT_PARAM = 'checkoutDiscount';
 const PENDING_CHECKOUT_KEY = 'wm-pending-checkout';
 const POST_CHECKOUT_FLAG_KEY = 'wm-post-checkout';
-const APP_CHECKOUT_BASE_URL = 'https://worldmonitor.app/dashboard';
+const APP_CHECKOUT_BASE_URL = 'https://megabrain.market/dashboard';
 
 /**
  * Session flag set just before the post-overlay reload. Lets panel-layout
@@ -824,7 +824,7 @@ export async function startCheckout(
 
     // Transient CF/origin 502s on this POST are retried once with an
     // Idempotency-Key (server dedupes replays — api/_idempotency.ts).
-    // WORLDMONITOR-Q4: without this, every transient was a lost checkout.
+    // MEGABRAIN_MARKET-Q4: without this, every transient was a lost checkout.
     const resp = await postCreateCheckout(createDefaultCheckoutTransportDeps(), {
       url: '/api/create-checkout',
       token,
@@ -844,7 +844,7 @@ export async function startCheckout(
       // (Cloudflare / Vercel deployment-protection 403s are HTML, not
       // JSON — the old `resp.json().catch(() => ({}))` swallowed the
       // smoking-gun page) AND still attempt structured-body parsing
-      // for our own JSON error envelopes. WORLDMONITOR-RN.
+      // for our own JSON error envelopes. MEGABRAIN_MARKET-RN.
       const rawText = await resp.text().catch(() => '');
       const upstream = snapshotUpstreamResponse(resp, rawText);
       // parseCheckoutErrorBody returns {} for invalid JSON AND for valid
@@ -918,7 +918,7 @@ export async function startCheckout(
       // service_unavailable + retryable=true in the classifier so the
       // user sees retry-friendly copy; reopening sign-in wouldn't help.
       // The `upstream` snapshot captured above identifies which layer
-      // emitted it (WORLDMONITOR-RN).
+      // emitted it (MEGABRAIN_MARKET-RN).
       if (error.code === 'unauthorized' || error.code === 'session_expired') {
         savePendingCheckoutIntent({
           productId,
@@ -1018,7 +1018,7 @@ function reportCheckoutError(
       code: error.code,
       // Promote cf-ray and server to tags so they're filterable in the
       // Sentry UI without opening the event. cf-ray presence alone is
-      // definitive for Cloudflare emission. WORLDMONITOR-RN.
+      // definitive for Cloudflare emission. MEGABRAIN_MARKET-RN.
       ...(upstream?.cfRay ? { cfRay: upstream.cfRay } : {}),
       ...(upstream?.server ? { upstreamServer: upstream.server } : {}),
     },
@@ -1061,7 +1061,7 @@ function renderCheckoutErrorSurface(
   fallbackToPricingPage: boolean,
 ): void {
   if (fallbackToPricingPage) {
-    window.location.assign('https://worldmonitor.app/pro');
+    window.location.assign('https://megabrain.market/pro');
     return;
   }
   showCheckoutErrorToast(error.userMessage);

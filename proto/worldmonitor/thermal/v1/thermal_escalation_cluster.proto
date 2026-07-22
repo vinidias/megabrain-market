@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package worldmonitor.thermal.v1;
+package megabrain-market.thermal.v1;
 
-import "worldmonitor/core/v1/geo.proto";
+import "megabrain-market/core/v1/geo.proto";
 
 message ThermalEscalationCluster {
   string id = 1;
-  worldmonitor.core.v1.GeoCoordinates centroid = 2;
+  megabrain-market.core.v1.GeoCoordinates centroid = 2;
   string country_code = 3;
   string country_name = 4;
   string region_label = 5;

@@ -5,7 +5,7 @@
  * The sebuf `protoc-gen-openapiv3` plugin (proto/buf.gen.yaml) has no option or
  * annotation for describing authentication, so every generated spec omits
  * `components.securitySchemes`, a root `security` requirement, and the `401`
- * response — even though every non-public WorldMonitor RPC is authenticated at
+ * response — even though every non-public MegaBrainMarket RPC is authenticated at
  * the gateway (server/gateway.ts). This post-generation step adds them so the
  * published contract matches runtime reality. See umbrella issue #4599 (root
  * cause #1).
@@ -21,7 +21,7 @@
  *      responses/notes). Re-serialized byte-faithfully to the generator's
  *      format (recursively sorted keys, Go-style <>&/U+2028/U+2029 escaping, no
  *      trailing newline) so the diff is additions-only.
- *   2. docs/api/<Service>.openapi.yaml and docs/api/worldmonitor.openapi.yaml —
+ *   2. docs/api/<Service>.openapi.yaml and docs/api/megabrain-market.openapi.yaml —
  *      docs-facing YAML (the bundle is copied to public/openapi.yaml at build).
  *      The generator's YAML emitter cannot be reproduced by js-yaml (a re-dump
  *      reformats ~100% of 21k lines), so YAML gets formatting-preserving
@@ -49,7 +49,7 @@ import {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const apiDir = resolve(root, 'docs/api');
-const bundlePath = resolve(apiDir, 'worldmonitor.openapi.yaml');
+const bundlePath = resolve(apiDir, 'megabrain-market.openapi.yaml');
 
 const CHECK = process.argv.includes('--check');
 
@@ -92,19 +92,19 @@ for (const path of PUBLIC_FORBIDDEN_GATES.keys()) {
 
 // ── Contract definitions ──────────────────────────────────────────────────
 // Header names mirror the gateway's accepted public API-key headers
-// (server/gateway.ts: X-WorldMonitor-Key / X-Api-Key) and docs/api-platform.mdx.
+// (server/gateway.ts: X-MegaBrainMarket-Key / X-Api-Key) and docs/api-platform.mdx.
 const API_KEY_SECURITY_SCHEMES = {
-  WorldMonitorKey: {
+  MegaBrainMarketKey: {
     type: 'apiKey',
     in: 'header',
-    name: 'X-WorldMonitor-Key',
-    description: 'User-issued WorldMonitor API key.',
+    name: 'X-MegaBrainMarket-Key',
+    description: 'User-issued MegaBrainMarket API key.',
   },
   ApiKeyHeader: {
     type: 'apiKey',
     in: 'header',
     name: 'X-Api-Key',
-    description: 'Alias header for the WorldMonitor API key (X-WorldMonitor-Key).',
+    description: 'Alias header for the MegaBrainMarket API key (X-MegaBrainMarket-Key).',
   },
 };
 
@@ -122,7 +122,7 @@ const SECURITY_SCHEMES = {
 // semantics). BearerAuth is narrower and is stamped only on operations the
 // gateway actually accepts bearer sessions for.
 const ROOT_SECURITY = [
-  { WorldMonitorKey: [] },
+  { MegaBrainMarketKey: [] },
   { ApiKeyHeader: [] },
 ];
 
@@ -356,7 +356,7 @@ function yamlRootSecurityBlock() {
   // 4-space list items to match the bundle's `servers:` style.
   return [
     'security:',
-    '    - WorldMonitorKey: []',
+    '    - MegaBrainMarketKey: []',
     '    - ApiKeyHeader: []',
   ].join('\n');
 }
@@ -367,16 +367,16 @@ function yamlSecuritySchemesBlock(hasBearer) {
   // bearer-capable operation, mirroring expectedSchemesForSpec in the JSON path.
   const L = [
     '    securitySchemes:',
-    '        WorldMonitorKey:',
+    '        MegaBrainMarketKey:',
     '            type: apiKey',
     '            in: header',
-    '            name: X-WorldMonitor-Key',
-    '            description: User-issued WorldMonitor API key.',
+    '            name: X-MegaBrainMarket-Key',
+    '            description: User-issued MegaBrainMarket API key.',
     '        ApiKeyHeader:',
     '            type: apiKey',
     '            in: header',
     '            name: X-Api-Key',
-    '            description: Alias header for the WorldMonitor API key (X-WorldMonitor-Key).',
+    '            description: Alias header for the MegaBrainMarket API key (X-MegaBrainMarket-Key).',
   ];
   if (hasBearer) {
     L.push(
@@ -543,7 +543,7 @@ const YAML_UNAUTHORIZED_SCHEMA = [
 // Operation-level security list items (16-space `-` under a 12-space `security:`).
 const YAML_BEARER_OPERATION_SECURITY = [
   '            security:',
-  '                - WorldMonitorKey: []',
+  '                - MegaBrainMarketKey: []',
   '                - ApiKeyHeader: []',
   '                - BearerAuth: []',
 ];
@@ -1096,7 +1096,7 @@ try {
   bundleChanged = authResult.changed || entitlementResult.changed;
   if (bundleChanged) {
     wouldChange++;
-    touched.push('worldmonitor.openapi.yaml');
+    touched.push('megabrain-market.openapi.yaml');
     if (!CHECK) writeFileSync(bundlePath, entitlementResult.text);
   }
 } catch (err) {

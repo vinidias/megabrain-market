@@ -3,7 +3,7 @@ import type {
     ListAviationNewsRequest,
     ListAviationNewsResponse,
     AviationNewsItem,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { cachedFetchJson } from '../../../_shared/redis';
 import { CHROME_UA } from '../../../_shared/constants';
 import { parseStringArray, xmlParser } from './_shared';

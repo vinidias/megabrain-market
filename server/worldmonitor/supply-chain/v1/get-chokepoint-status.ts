@@ -3,14 +3,14 @@ import type {
   GetChokepointStatusRequest,
   GetChokepointStatusResponse,
   ChokepointInfo,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 
 import type {
   ListNavigationalWarningsResponse,
   GetVesselSnapshotResponse,
   NavigationalWarning,
   AisDisruption,
-} from '../../../../src/generated/server/worldmonitor/maritime/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/maritime/v1/service_server';
 
 import { cachedFetchJson, getCachedJson, setCachedJson } from '../../../_shared/redis';
 import { listNavigationalWarnings } from '../../maritime/v1/list-navigational-warnings';

@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package worldmonitor.conflict.v1;
+package megabrain-market.conflict.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/conflict/v1/list_acled_events.proto";
-import "worldmonitor/conflict/v1/list_ucdp_events.proto";
-import "worldmonitor/conflict/v1/get_humanitarian_summary.proto";
-import "worldmonitor/conflict/v1/list_iran_events.proto";
-import "worldmonitor/conflict/v1/get_humanitarian_summary_batch.proto";
+import "megabrain-market/conflict/v1/list_acled_events.proto";
+import "megabrain-market/conflict/v1/list_ucdp_events.proto";
+import "megabrain-market/conflict/v1/get_humanitarian_summary.proto";
+import "megabrain-market/conflict/v1/list_iran_events.proto";
+import "megabrain-market/conflict/v1/get_humanitarian_summary_batch.proto";
 
 // ConflictService provides APIs for armed conflict data from ACLED, UCDP, and HAPI/HDX.
 service ConflictService {

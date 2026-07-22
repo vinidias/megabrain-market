@@ -1,4 +1,4 @@
-import type { ScenarioServiceHandler } from '../../../../src/generated/server/worldmonitor/scenario/v1/service_server';
+import type { ScenarioServiceHandler } from '../../../../src/generated/server/megabrain-market/scenario/v1/service_server';
 
 import { runScenario } from './run-scenario';
 import { getScenarioStatus } from './get-scenario-status';

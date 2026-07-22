@@ -4,8 +4,8 @@ import handler from './og-story.js';
 
 function renderOgStory(query = '') {
   const req = {
-    url: `https://worldmonitor.app/api/og-story${query ? `?${query}` : ''}`,
-    headers: { host: 'worldmonitor.app' },
+    url: `https://megabrain.market/api/og-story${query ? `?${query}` : ''}`,
+    headers: { host: 'megabrain.market' },
   };
 
   let statusCode = 0;

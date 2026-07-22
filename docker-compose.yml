@@ -1,5 +1,5 @@
 # =============================================================================
-# World Monitor — Docker / Podman Compose
+# MegaBrain Market — Docker / Podman Compose
 # =============================================================================
 # Self-contained stack: app + Redis + AIS relay.
 #
@@ -12,12 +12,12 @@
 
 services:
 
-  worldmonitor:
+  megabrain-market:
     build:
       context: .
       dockerfile: Dockerfile
-    image: worldmonitor:latest
-    container_name: worldmonitor
+    image: megabrain-market:latest
+    container_name: megabrain-market
     ports:
       - "${WM_PORT:-3000}:8080"
     environment:
@@ -66,8 +66,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.relay
-    image: worldmonitor-ais-relay:latest
-    container_name: worldmonitor-ais-relay
+    image: megabrain-market-ais-relay:latest
+    container_name: megabrain-market-ais-relay
     environment:
       AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
       FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
@@ -84,9 +84,9 @@ services:
 
   redis:
     image: docker.io/redis:7-alpine
-    container_name: worldmonitor-redis
+    container_name: megabrain-market-redis
     # --requirepass closes off the network so any future sidecar / compromised
-    # dependency added to the worldmonitor network can't read or write cache
+    # dependency added to the megabrain-market network can't read or write cache
     # entries without the password. Defense-in-depth alongside the REST token.
     command: >
       redis-server
@@ -101,8 +101,8 @@ services:
     build:
       context: docker
       dockerfile: Dockerfile.redis-rest
-    image: worldmonitor-redis-rest:latest
-    container_name: worldmonitor-redis-rest
+    image: megabrain-market-redis-rest:latest
+    container_name: megabrain-market-redis-rest
     ports:
       - "127.0.0.1:8079:80"
     environment:

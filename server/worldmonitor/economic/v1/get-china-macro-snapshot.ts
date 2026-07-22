@@ -5,7 +5,7 @@ import type {
   GetChinaMacroSnapshotRequest,
   GetChinaMacroSnapshotResponse,
   ServerContext,
-} from '../../../../src/generated/server/worldmonitor/economic/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/economic/v1/service_server';
 import { getCachedJsonBatch } from '../../../_shared/redis';
 import { CHINA_MACRO_KEY, CHINA_RELEASE_CALENDAR_KEY } from '../../../_shared/cache-keys';
 

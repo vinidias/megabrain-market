@@ -1,6 +1,6 @@
 /**
  * Bootstrap can serve seed-only Redis payloads that do not yet have dedicated
- * RPC handlers under server/worldmonitor. Keep the canonical keys here so the
+ * RPC handlers under server/megabrain-market. Keep the canonical keys here so the
  * bootstrap registry, health checks, and tests stay aligned.
  */
 export const SEED_ONLY_BOOTSTRAP_CACHE_KEYS = {

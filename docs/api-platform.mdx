@@ -1,6 +1,6 @@
 ---
 title: "Platform Endpoints"
-description: "Bootstrap, health, version, cache-purge, and user-preference endpoints — the plumbing every World Monitor client talks to on startup and cleanup."
+description: "Bootstrap, health, version, cache-purge, and user-preference endpoints — the plumbing every MegaBrain Market client talks to on startup and cleanup."
 ---
 
 These endpoints are not part of a domain RPC service — they sit at the root of the API surface and handle platform concerns.
@@ -11,9 +11,9 @@ These endpoints are not part of a domain RPC service — they sit at the root of
 
 Single round-trip hydration for the dashboard. Returns **all bootstrap-registered Redis cache keys** unwrapped from their seed envelopes in one response.
 
-- **Auth**: browser `wm-session` cookie, `X-WorldMonitor-Key`, or the `X-Api-Key` alias. User-issued keys are validated for current API access.
-- **Anonymous weather**: `?keys=weatherAlerts` is public **only when no API key header is sent**. If you attach `X-WorldMonitor-Key` / `X-Api-Key`, the request is fully validated even for weather — a malformed key returns `401`, a key without current API access returns `403`. Callers that always send a key must send a valid, entitled key (or omit the header to use the anonymous weather path).
-- **Server-to-server**: call `https://api.worldmonitor.app/api/bootstrap` directly with `X-WorldMonitor-Key: wm_...`. There is no separate gateway host, token exchange, activation step, or IP allow-list requirement for this endpoint.
+- **Auth**: browser `wm-session` cookie, `X-MegaBrainMarket-Key`, or the `X-Api-Key` alias. User-issued keys are validated for current API access.
+- **Anonymous weather**: `?keys=weatherAlerts` is public **only when no API key header is sent**. If you attach `X-MegaBrainMarket-Key` / `X-Api-Key`, the request is fully validated even for weather — a malformed key returns `401`, a key without current API access returns `403`. Callers that always send a key must send a valid, entitled key (or omit the header to use the anonymous weather path).
+- **Server-to-server**: call `https://api.megabrain.market/api/bootstrap` directly with `X-MegaBrainMarket-Key: wm_...`. There is no separate gateway host, token exchange, activation step, or IP allow-list requirement for this endpoint.
 - **Cache**: browser/session responses keep the default tier cache policy: all-keys responses use `Cache-Control: public, s-maxage=600, stale-while-revalidate=120, stale-if-error=900` plus fast-tier `CDN-Cache-Control`; explicit `?tier=fast` / `?tier=slow` requests use browser `max-age=60` / `max-age=300` and CDN `s-maxage=600` / `s-maxage=7200`. Key-authenticated responses use `Cache-Control: no-store` and do not emit CDN cache headers.
 - **Rate limit**: user API key validation on this endpoint has a fail-closed fixed 60 s per-IP pre-validation limit of 600 attempts, separate from the default API sliding-window limiter.
 - **Shape**: `{ "data": { "earthquakes": ..., "outages": ..., "marketQuotes": ... }, "missing": [] }` — ~40+ unwrapped seeded-domain payloads nested under `data`, plus a `missing` list for cache keys not present in Redis.
@@ -24,13 +24,13 @@ Use this on initial page load to avoid 40 parallel RPC calls.
 
 ### `GET /api/version`
 
-Returns the latest **GitHub Release** of `koala73/worldmonitor`. Used by the desktop app to detect a newer published release and prompt the user to update. It is **not** the currently-deployed Vercel commit.
+Returns the latest **GitHub Release** of `vinidias/megabrain-market`. Used by the desktop app to detect a newer published release and prompt the user to update. It is **not** the currently-deployed Vercel commit.
 
 ```json
 {
   "version": "2.6.7",
   "tag": "v2.6.7",
-  "url": "https://github.com/koala73/worldmonitor/releases/tag/v2.6.7",
+  "url": "https://github.com/vinidias/megabrain-market/releases/tag/v2.6.7",
   "prerelease": false
 }
 ```
@@ -139,7 +139,7 @@ City name → coordinates lookup.
 
 ### `GET /api/download?platform=<id>&variant=<id>`
 
-Redirects to the matching asset on the latest GitHub release of `koala73/worldmonitor`. Returns `302` to the asset URL on success, or `302` to [releases/latest](https://github.com/koala73/worldmonitor/releases/latest) on any failure (unknown platform, no match, GitHub error).
+Redirects to the matching asset on the latest GitHub release of `vinidias/megabrain-market`. Returns `302` to the asset URL on success, or `302` to [releases/latest](https://github.com/vinidias/megabrain-market/releases/latest) on any failure (unknown platform, no match, GitHub error).
 
 **`platform`** (required, exact string):
 
@@ -156,7 +156,7 @@ Redirects to the matching asset on the latest GitHub release of `koala73/worldmo
 
 | value | filters asset name to |
 |-------|-----------------------|
-| `full` / `world` | `worldmonitor` |
+| `full` / `world` | `megabrain-market` |
 | `tech` | `techmonitor` |
 | `finance` | `financemonitor` |
 
@@ -172,7 +172,7 @@ Captures email for Pro-waitlist signup. Writes to Convex and sends a confirmatio
 
 Browser callers must pass Turnstile. Desktop callers using `source: "desktop-settings"` bypass Turnstile only when the request is authenticated with the shared desktop secret:
 
-- `X-WorldMonitor-Desktop-Timestamp`: Unix epoch milliseconds, within 5 minutes of server time.
-- `X-WorldMonitor-Desktop-Signature`: `sha256=<hex HMAC-SHA256>`.
+- `X-MegaBrainMarket-Desktop-Timestamp`: Unix epoch milliseconds, within 5 minutes of server time.
+- `X-MegaBrainMarket-Desktop-Signature`: `sha256=<hex HMAC-SHA256>`.
 
 The HMAC input is `<timestamp>\n<canonical JSON>`, where canonical JSON contains `email`, `source`, `appVersion`, `referredBy`, `website`, and `turnstileToken` in that order. Configure `WM_DESKTOP_SHARED_SECRET` on both the desktop sidecar and the cloud API. During rollout, `WM_DESKTOP_AUTH_ALLOW_LEGACY=true` only accepts unsigned legacy desktop requests while the cloud API has no `WM_DESKTOP_SHARED_SECRET` configured. Once the cloud secret is set, desktop requests fail closed unless they include a valid signature, still subject to the tighter desktop rate limit.

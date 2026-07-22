@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.thermal.v1;
+package megabrain-market.thermal.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/thermal/v1/thermal_escalation_cluster.proto";
+import "megabrain-market/thermal/v1/thermal_escalation_cluster.proto";
 
 message ListThermalEscalationsRequest {
   // Maximum number of thermal escalation clusters to return.

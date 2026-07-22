@@ -29,7 +29,7 @@ const installPaintObservers = async (page: Page): Promise<void> => {
   await page.addInitScript(() => {
     localStorage.setItem('wm-layer-warning-dismissed', 'true');
     localStorage.setItem('wm-pro-banner-launched-dismissed', String(Date.now()));
-    localStorage.setItem('worldmonitor-mission-preset-dismissed-v1', '1');
+    localStorage.setItem('megabrain-market-mission-preset-dismissed-v1', '1');
     window.__wmPaintEntries = [];
     window.__wmLcpEntries = [];
 
@@ -181,10 +181,10 @@ test.describe('pre-hydration dashboard shell', () => {
       expect(preHydration.ariaBusy).toBe('true');
       expect(preHydration.appHeadingTag).toBe('H1');
       expect(preHydration.appHeadingAriaHidden).toBeNull();
-      expect(preHydration.appHeadingText).toContain('World Monitor');
+      expect(preHydration.appHeadingText).toContain('MegaBrain Market');
       expect(preHydration.badgeAriaLabel).toBeNull();
       expect(preHydration.focusableCount).toBe(0);
-      expect(preHydration.shellText).toContain('World Monitor');
+      expect(preHydration.shellText).toContain('MegaBrain Market');
       expect(preHydration.shellText).toContain(SHELL_LCP_TEXT);
       expect(preHydration.shellText).toContain('Primary View');
       expect(preHydration.candidateText).toBe(SHELL_LCP_TEXT);
@@ -206,7 +206,7 @@ test.describe('pre-hydration dashboard shell', () => {
 
       await expect(page.locator('.header')).toBeVisible({ timeout: 30000 });
       await expect(page.locator('.skeleton-shell')).toHaveCount(0);
-      await expect(page.locator('body > h1.app-heading')).toContainText('World Monitor');
+      await expect(page.locator('body > h1.app-heading')).toContainText('MegaBrain Market');
       await expect.poll(async () => page.evaluate(() => (
         document.documentElement.classList.contains('wm-layout-hydrated')
       ))).toBe(true);
@@ -345,7 +345,7 @@ test.describe('dashboard shell without JavaScript', () => {
     await expect(page.locator('.skeleton-shell')).toBeHidden();
     await expect(page.locator('body > h1.app-heading')).toBeHidden();
     await expect(page.locator('#seo-prerender')).toBeVisible();
-    await expect(page.locator('body')).toContainText('World Monitor Pro');
+    await expect(page.locator('body')).toContainText('MegaBrain Market Pro');
 
     const beforeScroll = await page.evaluate(() => ({
       bodyOverflow: getComputedStyle(document.body).overflow,

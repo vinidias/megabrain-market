@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package worldmonitor.unrest.v1;
+package megabrain-market.unrest.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/core/v1/severity.proto";
-import "worldmonitor/unrest/v1/unrest_event.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/core/v1/severity.proto";
+import "megabrain-market/unrest/v1/unrest_event.proto";
 
 // ListUnrestEventsRequest specifies filters for retrieving social unrest events.
 message ListUnrestEventsRequest {
@@ -23,7 +23,7 @@ message ListUnrestEventsRequest {
   string country = 5 [(sebuf.http.query) = { name: "country" }];
   // Optional minimum severity filter.
   // Accepted but currently ignored; no-op until this handler supports the parameter.
-  worldmonitor.core.v1.SeverityLevel min_severity = 6 [(sebuf.http.query) = { name: "min_severity" }, (sebuf.http.unimplemented) = true];
+  megabrain-market.core.v1.SeverityLevel min_severity = 6 [(sebuf.http.query) = { name: "min_severity" }, (sebuf.http.unimplemented) = true];
   // North-east corner latitude of bounding box.
   // Accepted but currently ignored; no-op until this handler supports the parameter.
   double ne_lat = 7 [(sebuf.http.query) = { name: "ne_lat" }, (sebuf.http.unimplemented) = true];
@@ -45,5 +45,5 @@ message ListUnrestEventsResponse {
   // Geographic clusters of related events.
   repeated UnrestCluster clusters = 2;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 3;
+  megabrain-market.core.v1.PaginationResponse pagination = 3;
 }

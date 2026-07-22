@@ -3,7 +3,7 @@ import type {
   ListNavigationalWarningsRequest,
   ListNavigationalWarningsResponse,
   NavigationalWarning,
-} from '../../../../src/generated/server/worldmonitor/maritime/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/maritime/v1/service_server';
 
 import { CHROME_UA } from '../../../_shared/constants';
 import { cachedFetchJson } from '../../../_shared/redis';

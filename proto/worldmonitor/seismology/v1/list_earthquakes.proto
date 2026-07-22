@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.seismology.v1;
+package megabrain-market.seismology.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/seismology/v1/earthquake.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/seismology/v1/earthquake.proto";
 
 // ListEarthquakesRequest specifies filters for retrieving earthquake data from USGS.
 message ListEarthquakesRequest {
@@ -30,5 +30,5 @@ message ListEarthquakesResponse {
   // The list of earthquakes.
   repeated Earthquake earthquakes = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

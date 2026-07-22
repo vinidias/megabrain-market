@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.batch.v1;
+package megabrain-market.batch.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/batch/v1/execute_batch.proto";
+import "megabrain-market/batch/v1/execute_batch.proto";
 
 // BatchService executes multiple documented read operations in a single HTTP request.
 service BatchService {

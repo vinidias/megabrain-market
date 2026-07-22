@@ -2,7 +2,7 @@ import type {
   GetStockAnalysisHistoryRequest,
   GetStockAnalysisHistoryResponse,
   MarketServiceHandler,
-} from '../../../../src/generated/server/worldmonitor/market/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/market/v1/service_server';
 import { parseStringArray } from './_shared';
 import { getStoredStockAnalysisHistory } from './premium-stock-store';
 

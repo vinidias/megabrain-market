@@ -23,7 +23,7 @@ use tauri::{AppHandle, Manager, RunEvent, Webview, WebviewUrl, WebviewWindowBuil
 use cache_bounds::validate_cache_write_sizes;
 
 const DEFAULT_LOCAL_API_PORT: u16 = 46123;
-const KEYRING_SERVICE: &str = "world-monitor";
+const KEYRING_SERVICE: &str = "megabrain-market";
 const LOCAL_API_LOG_FILE: &str = "local-api.log";
 const DESKTOP_LOG_FILE: &str = "desktop.log";
 const MENU_FILE_SETTINGS_ID: &str = "file.settings";
@@ -58,7 +58,7 @@ const SUPPORTED_SECRET_KEYS: [&str; 29] = [
     "UCDP_ACCESS_TOKEN",
     "OLLAMA_API_URL",
     "OLLAMA_MODEL",
-    "WORLDMONITOR_API_KEY",
+    "MEGABRAIN_MARKET_API_KEY",
     "WTO_API_KEY",
     "AVIATIONSTACK_API",
     "ICAO_API_KEY",
@@ -678,7 +678,7 @@ fn open_settings_window(app: &AppHandle) -> Result<(), String> {
 
     #[allow(unused_mut)]
     let mut settings_builder = WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("settings.html".into()))
-        .title("World Monitor Settings")
+        .title("MegaBrain Market Settings")
         .inner_size(980.0, 600.0)
         .min_inner_size(820.0, 480.0)
         .resizable(true)
@@ -718,7 +718,7 @@ fn open_live_channels_window(app: &AppHandle, base_url: Option<String>) -> Resul
 
     #[allow(unused_mut)]
     let mut channels_builder = WebviewWindowBuilder::new(app, "live-channels", url)
-        .title("Channel management - World Monitor")
+        .title("Channel management - MegaBrain Market")
         .inner_size(680.0, 760.0)
         .min_inner_size(520.0, 600.0)
         .resizable(true)
@@ -785,15 +785,15 @@ fn build_app_menu(handle: &AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     )?;
 
     let about_metadata = AboutMetadata {
-        name: Some("World Monitor".into()),
+        name: Some("MegaBrain Market".into()),
         version: Some(env!("CARGO_PKG_VERSION").into()),
         copyright: Some("\u{00a9} 2025 Elie Habib".into()),
-        website: Some("https://worldmonitor.app".into()),
-        website_label: Some("worldmonitor.app".into()),
+        website: Some("https://megabrain.market".into()),
+        website_label: Some("megabrain.market".into()),
         ..Default::default()
     };
     let about_item =
-        PredefinedMenuItem::about(handle, Some("About World Monitor"), Some(about_metadata))?;
+        PredefinedMenuItem::about(handle, Some("About MegaBrain Market"), Some(about_metadata))?;
     let github_item = MenuItem::with_id(
         handle,
         MENU_HELP_GITHUB_ID,
@@ -856,7 +856,7 @@ fn handle_menu_event(app: &AppHandle, event: tauri::menu::MenuEvent) {
             }
         }
         MENU_HELP_GITHUB_ID => {
-            let _ = open_in_shell("https://github.com/koala73/worldmonitor");
+            let _ = open_in_shell("https://github.com/vinidias/megabrain-market");
         }
         #[cfg(feature = "devtools")]
         MENU_HELP_DEVTOOLS_ID => {
@@ -1464,7 +1464,7 @@ fn main() {
             Ok(())
         })
         .build(tauri::generate_context!())
-        .expect("error while running world-monitor tauri application")
+        .expect("error while running megabrain-market tauri application")
         .run(|app, event| {
             match &event {
                 // macOS: hide window on close instead of quitting (standard behavior)

@@ -151,9 +151,9 @@ async function callEmbeddingsApi({ fetchImpl, apiKey, missingTitles, timeoutMs }
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://worldmonitor.app',
-        'X-Title': 'World Monitor',
-        'User-Agent': 'worldmonitor-digest/1.0',
+        'HTTP-Referer': 'https://megabrain.market',
+        'X-Title': 'MegaBrain Market',
+        'User-Agent': 'megabrain-market-digest/1.0',
       },
       body: JSON.stringify({
         model: EMBED_MODEL,

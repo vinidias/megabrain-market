@@ -89,4 +89,4 @@ still stale.
 
 ## Related Issues
 
-- [Issue #5288](https://github.com/koala73/worldmonitor/issues/5288)
+- [Issue #5288](https://github.com/vinidias/megabrain-market/issues/5288)

@@ -7,7 +7,7 @@
  * search, third-party discussion mentions). No ownership verification, no
  * filer-CIK match — any domain whose label collapsed to an unrelated org slug
  * was attributed someone else's footprint. Same anti-pattern as issue #3754
- * (koala73/worldmonitor) which only named the sibling list-company-signals
+ * (vinidias/megabrain-market) which only named the sibling list-company-signals
  * route; this handler had the identical bug.
  *
  * The route is preserved (proto contract, OpenAPI op, gateway entry) so
@@ -21,8 +21,8 @@ import type {
   ServerContext,
   GetCompanyEnrichmentRequest,
   GetCompanyEnrichmentResponse,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
-import { ValidationError } from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
+import { ValidationError } from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 export async function getCompanyEnrichment(
   _ctx: ServerContext,

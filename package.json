@@ -1,5 +1,5 @@
 {
-  "name": "world-monitor",
+  "name": "megabrain-market",
   "private": true,
   "version": "2.10.0",
   "license": "AGPL-3.0-only",
@@ -41,7 +41,7 @@
     "build:crawlable-corpus": "tsx scripts/build-crawlable-corpus.mjs",
     "build:content-corpus": "node scripts/build-content-corpus-sitemap.mjs",
     "build:pro": "cd pro-test && npm ci && npm run build",
-    "build:openapi": "node -e \"require('fs').cpSync('docs/api/worldmonitor.openapi.yaml', 'public/openapi.yaml')\" && node scripts/build-openapi-json.mjs",
+    "build:openapi": "node -e \"require('fs').cpSync('docs/api/megabrain-market.openapi.yaml', 'public/openapi.yaml')\" && node scripts/build-openapi-json.mjs",
     "gen:openapi:security": "node scripts/openapi-inject-security.mjs",
     "gen:openapi:examples": "node scripts/openapi-inject-examples.mjs",
     "gen:openapi:required": "node scripts/openapi-inject-required.mjs",

@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package worldmonitor.forecast.v1;
+package megabrain-market.forecast.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/forecast/v1/get_forecast_scorecard.proto";
-import "worldmonitor/forecast/v1/get_forecasts.proto";
-import "worldmonitor/forecast/v1/get_simulation_package.proto";
-import "worldmonitor/forecast/v1/get_simulation_outcome.proto";
-import "worldmonitor/forecast/v1/trigger_simulation.proto";
+import "megabrain-market/forecast/v1/get_forecast_scorecard.proto";
+import "megabrain-market/forecast/v1/get_forecasts.proto";
+import "megabrain-market/forecast/v1/get_simulation_package.proto";
+import "megabrain-market/forecast/v1/get_simulation_outcome.proto";
+import "megabrain-market/forecast/v1/trigger_simulation.proto";
 
 service ForecastService {
   option (sebuf.http.service_config) = {base_path: "/api/forecast/v1"};

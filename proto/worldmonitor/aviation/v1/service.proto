@@ -1,19 +1,19 @@
 syntax = "proto3";
 
-package worldmonitor.aviation.v1;
+package megabrain-market.aviation.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/aviation/v1/get_airport_ops_summary.proto";
-import "worldmonitor/aviation/v1/get_carrier_ops.proto";
-import "worldmonitor/aviation/v1/get_flight_status.proto";
-import "worldmonitor/aviation/v1/get_youtube_live_stream_info.proto";
-import "worldmonitor/aviation/v1/list_airport_delays.proto";
-import "worldmonitor/aviation/v1/list_airport_flights.proto";
-import "worldmonitor/aviation/v1/list_aviation_news.proto";
-import "worldmonitor/aviation/v1/search_flight_prices.proto";
-import "worldmonitor/aviation/v1/search_google_flights.proto";
-import "worldmonitor/aviation/v1/search_google_dates.proto";
-import "worldmonitor/aviation/v1/track_aircraft.proto";
+import "megabrain-market/aviation/v1/get_airport_ops_summary.proto";
+import "megabrain-market/aviation/v1/get_carrier_ops.proto";
+import "megabrain-market/aviation/v1/get_flight_status.proto";
+import "megabrain-market/aviation/v1/get_youtube_live_stream_info.proto";
+import "megabrain-market/aviation/v1/list_airport_delays.proto";
+import "megabrain-market/aviation/v1/list_airport_flights.proto";
+import "megabrain-market/aviation/v1/list_aviation_news.proto";
+import "megabrain-market/aviation/v1/search_flight_prices.proto";
+import "megabrain-market/aviation/v1/search_google_flights.proto";
+import "megabrain-market/aviation/v1/search_google_dates.proto";
+import "megabrain-market/aviation/v1/track_aircraft.proto";
 
 // AviationService provides APIs for flight delays, airport operations,
 // flight status, aircraft tracking, price search, and aviation news.

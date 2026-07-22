@@ -13,7 +13,7 @@ const { term } = Astro.props;
 const bySlug = new Map(GLOSSARY_TERMS.map((t) => [t.slug, t]));
 const related = term.related.map((slug) => bySlug.get(slug)).filter((t) => t != null);
 
-const pageUrl = `https://www.worldmonitor.app/blog/glossary/${term.slug}/`;
+const pageUrl = `https://www.megabrain.market/blog/glossary/${term.slug}/`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -25,8 +25,8 @@ const jsonLd = {
   inLanguage: 'en-US',
   inDefinedTermSet: {
     '@type': 'DefinedTermSet',
-    name: 'World Monitor Global Intelligence Glossary',
-    url: 'https://www.worldmonitor.app/blog/glossary/',
+    name: 'MegaBrain Market Global Intelligence Glossary',
+    url: 'https://www.megabrain.market/blog/glossary/',
   },
 };
 
@@ -34,8 +34,8 @@ const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://www.worldmonitor.app/blog/' },
-    { '@type': 'ListItem', position: 2, name: 'Glossary', item: 'https://www.worldmonitor.app/blog/glossary/' },
+    { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://www.megabrain.market/blog/' },
+    { '@type': 'ListItem', position: 2, name: 'Glossary', item: 'https://www.megabrain.market/blog/glossary/' },
     { '@type': 'ListItem', position: 3, name: term.term, item: pageUrl },
   ],
 };
@@ -56,7 +56,7 @@ const faqLd = {
 <Base
   title={`What is ${term.term}${term.abbr ? ` (${term.abbr})` : ''}?`}
   description={term.short}
-  metaTitle={`${term.term}${term.abbr ? ` (${term.abbr})` : ''} — Definition | World Monitor Glossary`}
+  metaTitle={`${term.term}${term.abbr ? ` (${term.abbr})` : ''} — Definition | MegaBrain Market Glossary`}
   ogType="article"
   section="Glossary"
   jsonLd={jsonLd}
@@ -118,10 +118,10 @@ const faqLd = {
     <div class="cta-banner glossary-cta">
       <h3>See it live</h3>
       <p>
-        World Monitor tracks this and hundreds of other signals in real time on one map —
+        MegaBrain Market tracks this and hundreds of other signals in real time on one map —
         free, no account required.
       </p>
-      <a href="https://www.worldmonitor.app" class="btn" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.megabrain.market" class="btn" target="_blank" rel="noopener noreferrer">
         Open Dashboard
       </a>
     </div>

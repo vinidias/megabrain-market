@@ -6,7 +6,7 @@ import type {
   ServerContext,
   GetTariffTrendsRequest,
   GetTariffTrendsResponse,
-} from '../../../../src/generated/server/worldmonitor/trade/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/trade/v1/service_server';
 import { getCachedJson } from '../../../_shared/redis';
 import { isCallerPremium } from '../../../_shared/premium-check';
 

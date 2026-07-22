@@ -3,7 +3,7 @@ import type {
   ResilienceRuntimeIntervalState,
   ResilienceServiceHandler,
   ServerContext,
-} from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/resilience/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';

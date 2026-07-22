@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package worldmonitor.resilience.v1;
+package megabrain-market.resilience.v1;
 
-import "worldmonitor/resilience/v1/resilience.proto";
+import "megabrain-market/resilience/v1/resilience.proto";
 
 message GetResilienceRankingRequest {}
 

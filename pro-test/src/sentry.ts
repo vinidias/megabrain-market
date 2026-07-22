@@ -9,12 +9,12 @@ export function initSentry(): void {
 
   Sentry.init({
     dsn: sentryDsn || undefined,
-    environment: (location.hostname === 'worldmonitor.app' || location.hostname.endsWith('.worldmonitor.app')) ? 'production'
+    environment: (location.hostname === 'megabrain.market' || location.hostname.endsWith('.megabrain.market')) ? 'production'
       : location.hostname.includes('vercel.app') ? 'preview'
       : 'development',
     enabled: Boolean(sentryDsn) && !location.hostname.startsWith('localhost'),
     allowUrls: [
-      /https?:\/\/(www\.|tech\.|finance\.|commodity\.|happy\.)?worldmonitor\.app/,
+      /https?:\/\/(www\.|tech\.|finance\.|commodity\.|happy\.)?megabrain-market\.app/,
       /https?:\/\/.*\.vercel\.app/,
     ],
     tracesSampleRate: 0.1,

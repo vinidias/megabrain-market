@@ -152,7 +152,7 @@ describe('planRequest — REST escape hatch and listing', () => {
 
 describe('resolveConfig', () => {
   it('reads the API key and hosts from the environment', () => {
-    const cfg = resolveConfig({ WORLDMONITOR_API_KEY: 'k', WORLDMONITOR_MCP_URL: 'http://m' });
+    const cfg = resolveConfig({ MEGABRAIN_MARKET_API_KEY: 'k', MEGABRAIN_MARKET_MCP_URL: 'http://m' });
     assert.equal(cfg.apiKey, 'k');
     assert.equal(cfg.mcpUrl, 'http://m');
   });

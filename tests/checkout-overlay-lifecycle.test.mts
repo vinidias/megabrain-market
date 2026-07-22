@@ -56,8 +56,8 @@ function installBrowserGlobals(): void {
       setInterval: () => 1,
       clearInterval: () => {},
       location: {
-        href: 'https://worldmonitor.app/dashboard',
-        origin: 'https://worldmonitor.app',
+        href: 'https://megabrain.market/dashboard',
+        origin: 'https://megabrain.market',
         pathname: '/dashboard',
         search: '',
         hash: '',
@@ -282,7 +282,7 @@ describe('checkout overlay lifecycle', () => {
     assert.equal(harness.fetchBodies.length, 1);
     assert.deepEqual(harness.fetchBodies[0], {
       productId: 'prod_monthly',
-      returnUrl: 'https://worldmonitor.app/dashboard?wm_checkout=return',
+      returnUrl: 'https://megabrain.market/dashboard?wm_checkout=return',
     });
     // #4449: redirect mode navigates the top window to Dodo's hosted checkout
     // (3DS/fraud run unconstrained) instead of opening the overlay iframe

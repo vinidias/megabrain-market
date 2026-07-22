@@ -1,20 +1,20 @@
 ---
 title: "Ground-Truth Inflation: Tracking Real Shelf Prices, Not Just CPI"
-description: "WorldMonitor scrapes real supermarket shelf prices — starting with four UAE retailers — and pairs them with the Big Mac Index, FAO food prices, fuel prices, and IMF CPI."
-metaTitle: "Real-Time Shelf Price & Inflation Tracking | WorldMonitor"
+description: "MegaBrainMarket scrapes real supermarket shelf prices — starting with four UAE retailers — and pairs them with the Big Mac Index, FAO food prices, fuel prices, and IMF CPI."
+metaTitle: "Real-Time Shelf Price & Inflation Tracking | MegaBrainMarket"
 keywords: "real time inflation data, grocery price tracker, consumer prices API, shelf price monitoring, cost of living dashboard, food price index"
 audience: "Economists, macro analysts, journalists, expats, cost-of-living researchers"
-heroImage: "/blog/og/ground-truth-inflation-shelf-price-tracking-worldmonitor.png"
+heroImage: "/blog/og/ground-truth-inflation-shelf-price-tracking-megabrain-market.png"
 pubDate: "2026-07-21"
 ---
 
 Official inflation is a lagging average of an averaged lag. A national CPI print arrives weeks after the month it measures, blends thousands of items into one number, and tells you nothing about whether *your* basket at *your* store got more expensive on Tuesday.
 
-The interesting question — what do things actually cost, right now, on the shelf? — has a different answer. You collect the prices yourself. That's what WorldMonitor's consumer-prices system does.
+The interesting question — what do things actually cost, right now, on the shelf? — has a different answer. You collect the prices yourself. That's what MegaBrainMarket's consumer-prices system does.
 
 ## Shelf prices, scraped daily
 
-The pilot market is the **United Arab Emirates**, where WorldMonitor tracks a defined essentials basket across **four major grocery retailers: Carrefour, Spinneys, Lulu, and Noon**. Real product pages, real listed prices — collected continuously and normalized into a comparable basket.
+The pilot market is the **United Arab Emirates**, where MegaBrainMarket tracks a defined essentials basket across **four major grocery retailers: Carrefour, Spinneys, Lulu, and Noon**. Real product pages, real listed prices — collected continuously and normalized into a comparable basket.
 
 From that raw feed, the Consumer Prices panel serves:
 
@@ -39,7 +39,7 @@ Read them as a chain: FAO tells you global food inputs are rising; tariff and fr
 
 ## For developers and agents
 
-The `get_consumer_prices` MCP tool (UAE today) returns the overview, category inflation, retailer spread, and movers in one structured call; the consumer-prices REST endpoints expose the same series, and `get_tariff_trends` adds the Big Mac, FAO, and fiscal context. For [macro traders](/blog/posts/geopolitics-to-markets-pipeline-macro-traders-worldmonitor/), shelf-price velocity is an inflation nowcast; for journalists, "bread rose 11% across four chains in three weeks" is a story with receipts.
+The `get_consumer_prices` MCP tool (UAE today) returns the overview, category inflation, retailer spread, and movers in one structured call; the consumer-prices REST endpoints expose the same series, and `get_tariff_trends` adds the Big Mac, FAO, and fiscal context. For [macro traders](/blog/posts/geopolitics-to-markets-pipeline-macro-traders-megabrain-market/), shelf-price velocity is an inflation nowcast; for journalists, "bread rose 11% across four chains in three weeks" is a story with receipts.
 
 ## Limits
 
@@ -57,7 +57,7 @@ Official CPI is broad, methodologically rigorous, and weeks delayed. Shelf-price
 
 **Can I query the price data programmatically?**
 
-Yes — the `get_consumer_prices` MCP tool and the consumer-prices REST endpoints in the [API reference](https://www.worldmonitor.app/docs/api-reference) return the overview, categories, movers, and retailer spread as structured series.
+Yes — the `get_consumer_prices` MCP tool and the consumer-prices REST endpoints in the [API reference](https://www.megabrain.market/docs/api-reference) return the overview, categories, movers, and retailer spread as structured series.
 
 ---
 

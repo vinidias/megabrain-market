@@ -104,11 +104,11 @@ const stubLocalStorage: Storage = {
 // transitively via runtime.ts → wm-session.ts) reads `location.hostname` at
 // module-eval time and calls `.startsWith(...)` on it.
 (globalThis as unknown as { location: Location }).location = {
-  href: 'https://worldmonitor.app/',
-  origin: 'https://worldmonitor.app',
-  hostname: 'worldmonitor.app',
+  href: 'https://megabrain.market/',
+  origin: 'https://megabrain.market',
+  hostname: 'megabrain.market',
   protocol: 'https:',
-  host: 'worldmonitor.app',
+  host: 'megabrain.market',
 } as Location;
 
 // ---------------------------------------------------------------------------
@@ -303,7 +303,7 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
       return Promise.resolve(new Response('unhandled', { status: 500 }));
     };
 
-    const resp = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap');
+    const resp = await wrappedFetch('https://api.megabrain.market/api/bootstrap');
     assert.equal(resp.status, 200, 'final response should be the retried 200');
     assert.equal(bootstrapAttempts, 2, 'bootstrap should be called twice (initial 401 + retry)');
     assert.equal(mintCalls, 1, 'one mint between the 401 and the retry');
@@ -329,7 +329,7 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     };
 
     // Pick any premium path — analyze-stock is one.
-    const resp = await wrappedFetch('https://api.worldmonitor.app/api/market/v1/analyze-stock');
+    const resp = await wrappedFetch('https://api.megabrain.market/api/market/v1/analyze-stock');
     assert.equal(resp.status, 401);
     assert.equal(attempts, 1, 'premium path must NOT trigger a retry inside this interceptor');
     assert.equal(mintCalls, 0, 'premium path must NOT mint a wms_ token (the dedicated injector handles it)');
@@ -357,7 +357,7 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
       return Promise.resolve(new Response('unauthorized', { status: 401 }));
     };
 
-    const resp = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap', {
+    const resp = await wrappedFetch('https://api.megabrain.market/api/bootstrap', {
       headers: { Authorization: 'Bearer caller-supplied-jwt' },
     });
     assert.equal(resp.status, 401);
@@ -394,10 +394,10 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     const originalWarn = console.warn;
     console.warn = (...args: unknown[]) => { warnings.push(args.map(String).join(' ')); };
     try {
-      const resp = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap');
+      const resp = await wrappedFetch('https://api.megabrain.market/api/bootstrap');
       assert.equal(resp.status, 401, 'the failed recovery returns the server response');
 
-      const suppressed = await wrappedFetch('https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses');
+      const suppressed = await wrappedFetch('https://api.megabrain.market/api/infrastructure/v1/list-service-statuses');
       assert.equal(suppressed.status, 503, 'the dead session suppresses later gated calls during the cooldown');
       assert.equal(suppressed.headers.get('x-wm-session-degraded'), '1');
     } finally {
@@ -431,36 +431,36 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     const originalWarn = console.warn;
     console.warn = () => {};
     try {
-      const failed = await wrappedFetch('https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses');
+      const failed = await wrappedFetch('https://api.megabrain.market/api/infrastructure/v1/list-service-statuses');
       assert.equal(failed.status, 401, 'failed recovery should enter the dead-session cooldown');
 
-      const fast = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap?tier=fast&public=1', {
+      const fast = await wrappedFetch('https://api.megabrain.market/api/bootstrap?tier=fast&public=1', {
         credentials: 'omit',
       });
       assert.equal(fast.status, 200, 'string input should reach the public tier while the session is dead');
 
-      const slowRequest = new Request('https://api.worldmonitor.app/api/bootstrap?public=1&tier=slow', {
+      const slowRequest = new Request('https://api.megabrain.market/api/bootstrap?public=1&tier=slow', {
         credentials: 'omit',
       });
       const slow = await wrappedFetch(slowRequest);
       assert.equal(slow.status, 200, 'Request input should preserve its effective omit credentials');
 
-      const digest = await wrappedFetch('https://api.worldmonitor.app/api/news/v1/list-feed-digest?variant=full&lang=en&public=1', {
+      const digest = await wrappedFetch('https://api.megabrain.market/api/news/v1/list-feed-digest?variant=full&lang=en&public=1', {
         credentials: 'omit',
       });
       assert.equal(digest.status, 200, 'public digest should bypass dead-session suppression');
 
-      const displacement = await wrappedFetch('https://api.worldmonitor.app/api/displacement/v1/get-displacement-summary?flow_limit=50&public=1', {
+      const displacement = await wrappedFetch('https://api.megabrain.market/api/displacement/v1/get-displacement-summary?flow_limit=50&public=1', {
         credentials: 'omit',
       });
       assert.equal(displacement.status, 200, 'public displacement should bypass dead-session suppression');
 
-      const missingPublicFlag = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap?tier=fast', {
+      const missingPublicFlag = await wrappedFetch('https://api.megabrain.market/api/bootstrap?tier=fast', {
         credentials: 'omit',
       });
       assert.equal(missingPublicFlag.status, 503, 'ordinary tier reads must remain session-gated');
 
-      const credentialed = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap?tier=fast&public=1', {
+      const credentialed = await wrappedFetch('https://api.megabrain.market/api/bootstrap?tier=fast&public=1', {
         credentials: 'include',
       });
       assert.equal(credentialed.status, 503, 'credentialed tier reads must remain session-gated');
@@ -471,10 +471,10 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     assert.deepEqual(
       forwarded.slice(-4),
       [
-        { url: 'https://api.worldmonitor.app/api/bootstrap?tier=fast&public=1', credentials: 'omit' },
-        { url: 'https://api.worldmonitor.app/api/bootstrap?public=1&tier=slow', credentials: 'omit' },
-        { url: 'https://api.worldmonitor.app/api/news/v1/list-feed-digest?variant=full&lang=en&public=1', credentials: 'omit' },
-        { url: 'https://api.worldmonitor.app/api/displacement/v1/get-displacement-summary?flow_limit=50&public=1', credentials: 'omit' },
+        { url: 'https://api.megabrain.market/api/bootstrap?tier=fast&public=1', credentials: 'omit' },
+        { url: 'https://api.megabrain.market/api/bootstrap?public=1&tier=slow', credentials: 'omit' },
+        { url: 'https://api.megabrain.market/api/news/v1/list-feed-digest?variant=full&lang=en&public=1', credentials: 'omit' },
+        { url: 'https://api.megabrain.market/api/displacement/v1/get-displacement-summary?flow_limit=50&public=1', credentials: 'omit' },
       ],
       'only exact credential-less public data requests should reach native fetch during cooldown',
     );
@@ -506,10 +506,10 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     console.warn = () => {};
     try {
       // First call trips the failed recovery → markWmSessionDead().
-      await wrappedFetch('https://api.worldmonitor.app/api/bootstrap');
+      await wrappedFetch('https://api.megabrain.market/api/bootstrap');
       // Later calls are suppressed by the cooldown — no additional captures.
-      const s1 = await wrappedFetch('https://api.worldmonitor.app/api/economic/v1/get-bls-series');
-      const s2 = await wrappedFetch('https://api.worldmonitor.app/api/supply-chain/v1/get-shipping-stress');
+      const s1 = await wrappedFetch('https://api.megabrain.market/api/economic/v1/get-bls-series');
+      const s2 = await wrappedFetch('https://api.megabrain.market/api/supply-chain/v1/get-shipping-stress');
       assert.equal(s1.status, 503);
       assert.equal(s2.status, 503);
     } finally {
@@ -544,7 +544,7 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     const originalWarn = console.warn;
     console.warn = () => {};
     try {
-      const resp = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap');
+      const resp = await wrappedFetch('https://api.megabrain.market/api/bootstrap');
       assert.equal(resp.status, 401, 'failed recovery returns the original server response');
     } finally {
       console.warn = originalWarn;
@@ -591,7 +591,7 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     const originalWarn = console.warn;
     console.warn = () => {};
     try {
-      const resp = await wrappedFetch('https://api.worldmonitor.app/api/bootstrap');
+      const resp = await wrappedFetch('https://api.megabrain.market/api/bootstrap');
       assert.equal(resp.status, 401, 'recovery must return the server 401, not reject');
     } finally {
       console.warn = originalWarn;
@@ -622,9 +622,9 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
     console.warn = () => {};
     try {
       const responses = await Promise.all([
-        wrappedFetch('https://api.worldmonitor.app/api/bootstrap'),
-        wrappedFetch('https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses'),
-        wrappedFetch('https://api.worldmonitor.app/api/infrastructure/v1/get-cable-health'),
+        wrappedFetch('https://api.megabrain.market/api/bootstrap'),
+        wrappedFetch('https://api.megabrain.market/api/infrastructure/v1/list-service-statuses'),
+        wrappedFetch('https://api.megabrain.market/api/infrastructure/v1/get-cable-health'),
       ]);
       assert.deepEqual(responses.map((response) => response.status), [401, 401, 401]);
     } finally {
@@ -664,8 +664,8 @@ describe('wm-session refresh-on-401 (Layer 2)', () => {
       return Promise.resolve(new Response('recovered', { status: 200 }));
     };
 
-    const first = wrappedFetch('https://api.worldmonitor.app/api/bootstrap');
-    const delayed = wrappedFetch('https://api.worldmonitor.app/api/infrastructure/v1/get-cable-health');
+    const first = wrappedFetch('https://api.megabrain.market/api/bootstrap');
+    const delayed = wrappedFetch('https://api.megabrain.market/api/infrastructure/v1/get-cable-health');
     await new Promise((resolve) => setImmediate(resolve));
     assert.ok(releaseDelayed401, 'the second request should already be awaiting its stale response');
     releaseDelayed401?.();

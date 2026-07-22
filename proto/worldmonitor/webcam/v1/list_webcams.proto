@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.webcam.v1;
+package megabrain-market.webcam.v1;
 
 import "sebuf/http/annotations.proto";
 

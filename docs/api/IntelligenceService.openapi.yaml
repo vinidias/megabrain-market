@@ -3,10 +3,10 @@ info:
     title: IntelligenceService API
     version: 1.0.0
 security:
-    - WorldMonitorKey: []
+    - MegaBrainMarketKey: []
     - ApiKeyHeader: []
 servers:
-    - url: https://api.worldmonitor.app
+    - url: https://api.megabrain.market
 paths:
     /api/intelligence/v1/get-risk-scores:
         get:
@@ -26,7 +26,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -129,7 +129,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -216,7 +216,7 @@ paths:
             description: ClassifyEvent analyzes a news event using AI models. PRO-gated. Requires entitlement tier >= 1.
             operationId: ClassifyEvent
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
@@ -231,7 +231,7 @@ paths:
                   in: query
                   description: Event description or body text.
                   required: false
-                  example: "Example WorldMonitor observation."
+                  example: "Example MegaBrainMarket observation."
                   schema:
                     type: string
                 - name: source
@@ -251,7 +251,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -343,7 +343,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -449,7 +449,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -577,7 +577,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -670,7 +670,7 @@ paths:
             description: DeductSituation performs broad situational analysis using LLMs. PRO-gated. Requires an active Pro subscription.
             operationId: DeductSituation
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             requestBody:
@@ -700,7 +700,7 @@ paths:
                             example:
                                 "analysis": "example"
                                 "model": "example"
-                                "provider": "worldmonitor"
+                                "provider": "megabrain-market"
                             schema:
                                 $ref: '#/components/schemas/DeductSituationResponse'
                 "400":
@@ -825,7 +825,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -916,7 +916,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1015,7 +1015,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1133,7 +1133,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1149,11 +1149,11 @@ paths:
                                 "error": "example"
                                 "messages":
                                     - "channelId": "example-id"
-                                      "channelName": "WorldMonitor Analyst"
+                                      "channelName": "MegaBrainMarket Analyst"
                                       "id": "example-id"
                                       "mediaUrls":
-                                          - "https://example.com/worldmonitor"
-                                      "sourceUrl": "https://example.com/worldmonitor"
+                                          - "https://example.com/megabrain-market"
+                                      "sourceUrl": "https://example.com/megabrain-market"
                             schema:
                                 $ref: '#/components/schemas/ListTelegramFeedResponse'
                 "400":
@@ -1233,13 +1233,13 @@ paths:
                   in: query
                   description: Company name to enrich when a domain is not available.
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "MegaBrainMarket Analyst"
                   schema:
                     type: string
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1251,14 +1251,14 @@ paths:
                         application/json:
                             example:
                                 "company":
-                                    "description": "Example WorldMonitor observation."
+                                    "description": "Example MegaBrainMarket observation."
                                     "domain": "example"
                                     "founded": 1
                                     "location": "example"
-                                    "name": "WorldMonitor Analyst"
+                                    "name": "MegaBrainMarket Analyst"
                                 "enrichedAtMs": 1
                                 "github":
-                                    "avatarUrl": "https://example.com/worldmonitor"
+                                    "avatarUrl": "https://example.com/megabrain-market"
                                     "followers": 1
                                     "publicRepos": 1
                                 "hackerNewsMentions":
@@ -1266,10 +1266,10 @@ paths:
                                       "createdAtMs": 1
                                       "points": 1
                                       "title": "example"
-                                      "url": "https://example.com/worldmonitor"
+                                      "url": "https://example.com/megabrain-market"
                                 "secFilings":
                                     "recentFilings":
-                                        - "description": "Example WorldMonitor observation."
+                                        - "description": "Example MegaBrainMarket observation."
                                           "fileDate": "2026-01-15"
                                           "form": "example"
                                     "totalFilings": 1
@@ -1358,7 +1358,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1473,7 +1473,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1556,7 +1556,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1570,7 +1570,7 @@ paths:
                                 "advisories":
                                     - "country": "US"
                                       "level": "example"
-                                      "link": "https://example.com/worldmonitor"
+                                      "link": "https://example.com/megabrain-market"
                                       "pubDate": "2026-01-15"
                                       "source": "example"
                                 "byCountry":
@@ -1648,7 +1648,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1734,7 +1734,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1817,7 +1817,7 @@ paths:
             description: ListMarketImplications returns AI-generated trade-implication cards from live world state. PRO-gated. Requires an active Pro subscription.
             operationId: ListMarketImplications
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
@@ -1831,7 +1831,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -1846,7 +1846,7 @@ paths:
                                     - "confidence": "example"
                                       "direction": "example"
                                       "driver": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "MegaBrainMarket Analyst"
                                       "narrative": "example"
                                 "degraded": true
                                 "emptyReason": "example"
@@ -1917,7 +1917,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2008,7 +2008,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2128,7 +2128,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2217,7 +2217,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2302,7 +2302,7 @@ paths:
                  this handler only reads canonical state. Premium-gated. PRO-gated. Requires an active Pro subscription.
             operationId: GetRegionalSnapshot
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
@@ -2320,7 +2320,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2344,7 +2344,7 @@ paths:
                                         "allianceCohesion": 1.5
                                         "buffers":
                                             - "axis": "example"
-                                              "description": "Example WorldMonitor observation."
+                                              "description": "Example MegaBrainMarket observation."
                                               "evidenceIds":
                                                   - "example"
                                               "magnitude": 1.5
@@ -2432,7 +2432,7 @@ paths:
                  diffRegionalSnapshot reports regime_changed. Premium-gated. PRO-gated. Requires an active Pro subscription.
             operationId: GetRegimeHistory
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
@@ -2461,7 +2461,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2543,7 +2543,7 @@ paths:
                  Written by scripts/seed-regional-briefs.mjs on a weekly cron. Premium-gated. PRO-gated. Requires an active Pro subscription.
             operationId: GetRegionalBrief
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
@@ -2558,7 +2558,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -2633,16 +2633,16 @@ paths:
                                     - $ref: '#/components/schemas/GatewayError'
 components:
     securitySchemes:
-        WorldMonitorKey:
+        MegaBrainMarketKey:
             type: apiKey
             in: header
-            name: X-WorldMonitor-Key
-            description: User-issued WorldMonitor API key.
+            name: X-MegaBrainMarket-Key
+            description: User-issued MegaBrainMarket API key.
         ApiKeyHeader:
             type: apiKey
             in: header
             name: X-Api-Key
-            description: Alias header for the WorldMonitor API key (X-WorldMonitor-Key).
+            description: Alias header for the MegaBrainMarket API key (X-MegaBrainMarket-Key).
         BearerAuth:
             type: http
             scheme: bearer
@@ -3373,7 +3373,7 @@ components:
                     description: TLE line 2.
             required:
                 - id
-            description: Satellite represents an orbital asset tracked by WorldMonitor.
+            description: Satellite represents an orbital asset tracked by MegaBrainMarket.
         ListGpsInterferenceRequest:
             type: object
             properties:

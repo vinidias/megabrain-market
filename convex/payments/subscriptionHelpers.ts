@@ -383,7 +383,7 @@ export async function resolvePlanKey(
   // NOTE: must use the static import — Convex's V8 isolate throws
   // `TypeError: dynamic module import unsupported` on `await import(...)`,
   // which would silently break the legacy-alias path on every webhook
-  // for users on rotated product IDs (WORLDMONITOR-QM, 13 events / 1 user).
+  // for users on rotated product IDs (MEGABRAIN_MARKET-QM, 13 events / 1 user).
   const aliasedPlan = LEGACY_PRODUCT_ALIASES[dodoProductId];
   if (aliasedPlan) {
     console.warn(

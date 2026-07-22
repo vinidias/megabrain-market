@@ -1,7 +1,7 @@
 ---
 title: "Country Resilience Index Methodology"
-description: "A practical guide to the WorldMonitor Country Resilience Index: 196 countries, 6 domains, 20 active dimensions, 3 pillars, and a transparent 0-100 score."
-metaTitle: "Country Resilience Index Methodology | WorldMonitor"
+description: "A practical guide to the MegaBrainMarket Country Resilience Index: 196 countries, 6 domains, 20 active dimensions, 3 pillars, and a transparent 0-100 score."
+metaTitle: "Country Resilience Index Methodology | MegaBrainMarket"
 keywords: "country resilience index, resilience score methodology, country risk methodology, national resilience indicators, shock absorption score"
 audience: "Risk analysts, policy teams, country researchers, resilience modelers"
 heroImage: "/blog/og/country-resilience-index-methodology-explained.png"
@@ -10,7 +10,7 @@ pubDate: "2026-06-13"
 
 Country risk tools usually start with the question "how unstable is this country right now?" That is useful, but it is not the whole decision. A country can be under pressure and still absorb the shock. Another can look calm until a single outage, debt squeeze, or import disruption exposes how little capacity it has to recover.
 
-WorldMonitor's Country Resilience Index is built for the second question:
+MegaBrainMarket's Country Resilience Index is built for the second question:
 
 > How well positioned is this country to absorb, adapt to, and recover from shocks?
 
@@ -38,7 +38,7 @@ That mechanism test matters. Electricity access can be resilience-relevant when 
 
 ## The six domains
 
-WorldMonitor groups indicators into six domains:
+MegaBrainMarket groups indicators into six domains:
 
 | Domain | What it captures |
 |---|---|
@@ -103,7 +103,7 @@ For acute risk context, pair CRI with the [Country Instability Index methodology
 
 The methodology pulls from official and authoritative providers such as World Bank, IMF, WHO, WTO, UNHCR, UCDP, BIS, IEA, FAO, Reporters Without Borders, and the Institute for Economics and Peace, among others.
 
-WorldMonitor treats missing data as a first-class modeling issue. Coverage, imputation class, retired dimensions, and source failures are distinct states. A missing upstream feed should not quietly become a zero score, and a structurally absent data point should not be rendered as if a source failed.
+MegaBrainMarket treats missing data as a first-class modeling issue. Coverage, imputation class, retired dimensions, and source failures are distinct states. A missing upstream feed should not quietly become a zero score, and a structurally absent data point should not be rendered as if a source failed.
 
 That is the difference between a display metric and an auditable index. A display metric only says "Country A is 74." An auditable index lets you ask why, how much evidence was observed, what changed, and whether the methodology itself changed.
 

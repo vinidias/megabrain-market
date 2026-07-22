@@ -2,7 +2,7 @@ import type {
   ForecastServiceHandler,
   GetForecastScorecardResponse,
   ServerContext,
-} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
 import { markNoStoreFallbackResponse } from '../../../_shared/response-headers';
 
 const REDIS_KEY = 'forecast:scorecard:v1';
@@ -89,7 +89,7 @@ async function getRawString(key: string): Promise<string | null> {
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) throw new Error('Redis credentials not configured');
   const resp = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'worldmonitor-gateway/1.0' },
+    headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'megabrain-market-gateway/1.0' },
     signal: AbortSignal.timeout(1_500),
   });
   if (!resp.ok) throw new Error(`Redis HTTP ${resp.status}`);

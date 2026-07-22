@@ -3,7 +3,7 @@ import type {
     GetFlightStatusRequest,
     GetFlightStatusResponse,
     FlightInstance,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { cachedFetchJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
 import { getRelayBaseUrl, getRelayHeaders } from './_shared';

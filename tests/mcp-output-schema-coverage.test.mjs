@@ -29,7 +29,7 @@ describe('api/mcp.ts — per-tool outputSchema coverage (v1.7.0)', () => {
   let mod;
 
   beforeEach(async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = VALID_KEY;
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = VALID_KEY;
     delete process.env.UPSTASH_REDIS_REST_URL;
     delete process.env.UPSTASH_REDIS_REST_TOKEN;
     mod = await freshMod();
@@ -154,9 +154,9 @@ describe('api/mcp.ts — per-tool outputSchema coverage (v1.7.0)', () => {
   // Unconditional emit per decision-point-1 — we want LLM clients to see the
   // schema on 2025-03-26 sessions too (clients ignore unknown fields per spec).
   it('tools/list emits outputSchema on every tool, regardless of MCP_PROTOCOL_FLOOR_2025_06_18', async () => {
-    const res = await mod.default(new Request('https://worldmonitor.app/mcp', {
+    const res = await mod.default(new Request('https://megabrain.market/mcp', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-WorldMonitor-Key': VALID_KEY },
+      headers: { 'Content-Type': 'application/json', 'X-MegaBrainMarket-Key': VALID_KEY },
       body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }),
     }));
     assert.equal(res.status, 200);

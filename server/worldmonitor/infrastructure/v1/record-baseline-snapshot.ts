@@ -2,7 +2,7 @@ import type {
   ServerContext,
   RecordBaselineSnapshotRequest,
   RecordBaselineSnapshotResponse,
-} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/infrastructure/v1/service_server';
 
 import { setCachedJson } from '../../../_shared/redis';
 import {

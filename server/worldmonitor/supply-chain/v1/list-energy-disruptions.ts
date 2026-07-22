@@ -4,7 +4,7 @@ import type {
   ListEnergyDisruptionsRequest,
   ListEnergyDisruptionsResponse,
   EnergyDisruptionEntry,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 
 interface RawRegistry {
   classifierVersion?: string;

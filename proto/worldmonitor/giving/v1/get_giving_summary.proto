@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.giving.v1;
+package megabrain-market.giving.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/giving/v1/giving.proto";
+import "megabrain-market/giving/v1/giving.proto";
 
 // GetGivingSummaryRequest specifies parameters for retrieving the global giving summary.
 message GetGivingSummaryRequest {

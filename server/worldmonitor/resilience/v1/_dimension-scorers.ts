@@ -60,7 +60,7 @@ export interface ResilienceDimensionScore {
   // constituent signals. Individual scorers return the zero value
   // (`{ lastObservedAtMs: 0, staleness: '' }`); `scoreAllDimensions`
   // decorates the real value in using `classifyDimensionFreshness`.
-  // See server/worldmonitor/resilience/v1/_dimension-freshness.ts.
+  // See server/megabrain-market/resilience/v1/_dimension-freshness.ts.
   freshness: { lastObservedAtMs: number; staleness: '' | 'fresh' | 'aging' | 'stale' };
 }
 
@@ -1105,7 +1105,7 @@ export function summarizeGps(raw: unknown, countryCode: string): { high: number;
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-// Lower than any WorldMonitor-sourced firstSeenAt; smaller numbers are usually
+// Lower than any MegaBrainMarket-sourced firstSeenAt; smaller numbers are usually
 // Unix seconds and should fall back to the current bucket.
 const MIN_FIRST_SEEN_EPOCH_MS = 1e11;
 

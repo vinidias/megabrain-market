@@ -1,4 +1,4 @@
-import type { MilitaryServiceHandler } from '../../../../src/generated/server/worldmonitor/military/v1/service_server';
+import type { MilitaryServiceHandler } from '../../../../src/generated/server/megabrain-market/military/v1/service_server';
 
 import { listMilitaryFlights } from './list-military-flights';
 import { getTheaterPosture } from './get-theater-posture';

@@ -3,7 +3,7 @@ import type {
   SearchImageryRequest,
   SearchImageryResponse,
   ImageryScene,
-} from '../../../../src/generated/server/worldmonitor/imagery/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/imagery/v1/service_server';
 import { cachedFetchJson } from '../../../_shared/redis';
 import { CHROME_UA } from '../../../_shared/constants';
 

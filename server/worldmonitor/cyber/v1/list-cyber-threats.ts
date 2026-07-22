@@ -7,7 +7,7 @@ import type {
   ServerContext,
   ListCyberThreatsRequest,
   ListCyberThreatsResponse,
-} from '../../../../src/generated/server/worldmonitor/cyber/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/cyber/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 import { markNoStoreFallbackResponse } from '../../../_shared/response-headers';

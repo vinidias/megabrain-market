@@ -1,25 +1,25 @@
 {
-  "name": "worldmonitor",
+  "name": "megabrain-market",
   "kind": "product",
-  "description": "WorldMonitor's live global-intelligence stack as an MCP server: real-time markets, conflict events, aviation, maritime, energy, climate, health, displacement, supply chain, and AI-generated regional briefs.",
-  "icon": "https://www.worldmonitor.app/favico/apple-touch-icon.png",
+  "description": "MegaBrainMarket's live global-intelligence stack as an MCP server: real-time markets, conflict events, aviation, maritime, energy, climate, health, displacement, supply chain, and AI-generated regional briefs.",
+  "icon": "https://www.megabrain.market/favico/apple-touch-icon.png",
   "version": "1.15.0",
-  "url": "https://worldmonitor.app/mcp",
-  "serverUrl": "https://worldmonitor.app/mcp",
+  "url": "https://megabrain.market/mcp",
+  "serverUrl": "https://megabrain.market/mcp",
   "serverInfo": {
-    "name": "worldmonitor",
+    "name": "megabrain-market",
     "version": "1.15.0",
-    "description": "WorldMonitor's live global-intelligence stack as an MCP server: real-time markets, conflict events, aviation, maritime, energy, climate, health, displacement, supply chain, and AI-generated regional briefs.",
-    "vendor": "WorldMonitor",
-    "homepage": "https://www.worldmonitor.app"
+    "description": "MegaBrainMarket's live global-intelligence stack as an MCP server: real-time markets, conflict events, aviation, maritime, energy, climate, health, displacement, supply chain, and AI-generated regional briefs.",
+    "vendor": "MegaBrainMarket",
+    "homepage": "https://www.megabrain.market"
   },
   "protocolVersion": "2025-06-18",
   "transport": {
     "type": "streamableHttp",
-    "endpoint": "https://worldmonitor.app/mcp"
+    "endpoint": "https://megabrain.market/mcp"
   },
   "remotes": [
-    { "type": "streamable-http", "url": "https://worldmonitor.app/mcp" }
+    { "type": "streamable-http", "url": "https://megabrain.market/mcp" }
   ],
   "capabilities": {
     "tools": true,
@@ -31,7 +31,7 @@
   "tools": [
     {
       "name": "get_market_data",
-      "description": "Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from WorldMonitor's curated bootstrap cache."
+      "description": "Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from MegaBrainMarket's curated bootstrap cache."
     },
     {
       "name": "get_conflict_events",
@@ -43,7 +43,7 @@
     },
     {
       "name": "get_news_intelligence",
-      "description": "AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from WorldMonitor's intelligence layer."
+      "description": "AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from MegaBrainMarket's intelligence layer."
     },
     {
       "name": "get_natural_disasters",
@@ -131,7 +131,7 @@
     },
     {
       "name": "get_forecast_predictions",
-      "description": "AI-generated geopolitical and economic forecasts from WorldMonitor's predictive models. Covers upcoming risk events and probability assessments."
+      "description": "AI-generated geopolitical and economic forecasts from MegaBrainMarket's predictive models. Covers upcoming risk events and probability assessments."
     },
     {
       "name": "get_forecast_scorecard",
@@ -206,24 +206,24 @@
   ],
   "authentication": {
     "type": "oauth2",
-    "authorization_servers": ["https://api.worldmonitor.app"],
-    "resource": "https://worldmonitor.app",
+    "authorization_servers": ["https://api.megabrain.market"],
+    "resource": "https://megabrain.market",
     "scopes": ["mcp"],
     "alternative_methods": [
       {
         "type": "api_key",
-        "header": "X-WorldMonitor-Key",
+        "header": "X-MegaBrainMarket-Key",
         "description": "API-tier subscribers may pass a wm_<40 lowercase hex> key directly instead of completing the OAuth flow."
       }
     ]
   },
   "documentation": {
-    "guide": "https://www.worldmonitor.app/docs/mcp-overview",
-    "toolReference": "https://www.worldmonitor.app/docs/mcp-tools-reference",
-    "apiReference": "https://www.worldmonitor.app/docs/api-reference",
-    "support": "https://www.worldmonitor.app/docs/support",
-    "pricing": "https://worldmonitor.app/pricing.md",
-    "productCatalog": "https://www.worldmonitor.app/api/product-catalog"
+    "guide": "https://www.megabrain.market/docs/mcp-overview",
+    "toolReference": "https://www.megabrain.market/docs/mcp-tools-reference",
+    "apiReference": "https://www.megabrain.market/docs/api-reference",
+    "support": "https://www.megabrain.market/docs/support",
+    "pricing": "https://megabrain.market/pricing.md",
+    "productCatalog": "https://www.megabrain.market/api/product-catalog"
   },
   "rateLimits": {
     "perMinute": 60,
@@ -233,7 +233,7 @@
       "apiBusiness": null,
       "enterprise": null
     },
-    "notes": "MCP hard daily reservation is currently enforced for Pro/OAuth contexts only: tools/call and resources/read of a data-bearing URI-template instantiation reserve against the 50/day Pro counter, except describe_tool. API-key (env_key, wm_...) MCP callers do not use this MCP daily reservation path; they are protected here by the 60/min per-key limiter, while broader REST/API plan allowances are enforced outside the MCP handler. Exempt Pro/OAuth daily-quota methods: initialize, tools/list, prompts/list, prompts/get, resources/list, resources/templates/list, logging/setLevel, notifications/initialized, and ping. The describe_tool tools/call is also exempt (v1.5.0 metadata escape hatch; SERVER_INSTRUCTIONS encourages calling it freely while exploring). resources/read of a public (concrete, metadata-only) resource such as worldmonitor://seed-meta/freshness is also exempt and anonymously readable; resources/read of a template instantiation intentionally counts toward the Pro/OAuth cap symmetrically with the equivalent tools/call. Per-minute (60/min, per-user on OAuth contexts, per-key on API-key contexts) counts ALL methods, so a tight discovery probe loop on tools/list or logging/setLevel will still trip the throttle."
+    "notes": "MCP hard daily reservation is currently enforced for Pro/OAuth contexts only: tools/call and resources/read of a data-bearing URI-template instantiation reserve against the 50/day Pro counter, except describe_tool. API-key (env_key, wm_...) MCP callers do not use this MCP daily reservation path; they are protected here by the 60/min per-key limiter, while broader REST/API plan allowances are enforced outside the MCP handler. Exempt Pro/OAuth daily-quota methods: initialize, tools/list, prompts/list, prompts/get, resources/list, resources/templates/list, logging/setLevel, notifications/initialized, and ping. The describe_tool tools/call is also exempt (v1.5.0 metadata escape hatch; SERVER_INSTRUCTIONS encourages calling it freely while exploring). resources/read of a public (concrete, metadata-only) resource such as megabrain-market://seed-meta/freshness is also exempt and anonymously readable; resources/read of a template instantiation intentionally counts toward the Pro/OAuth cap symmetrically with the equivalent tools/call. Per-minute (60/min, per-user on OAuth contexts, per-key on API-key contexts) counts ALL methods, so a tight discovery probe loop on tools/list or logging/setLevel will still trip the throttle."
   },
   "tags": [
     "geopolitical-intelligence",
@@ -257,16 +257,16 @@
       "specVersion": "2026-01-26",
       "uiResourceMimeType": "text/html;profile=mcp-app",
       "uiResources": [
-        "ui://worldmonitor/country-risk.html",
-        "ui://worldmonitor/world-brief.html",
-        "ui://worldmonitor/country-brief.html",
-        "ui://worldmonitor/market-radar.html",
-        "ui://worldmonitor/chokepoint-monitor.html",
-        "ui://worldmonitor/news-intelligence.html",
-        "ui://worldmonitor/conflict-events.html",
-        "ui://worldmonitor/natural-disasters.html",
-        "ui://worldmonitor/prediction-markets.html",
-        "ui://worldmonitor/forecasts.html"
+        "ui://megabrain-market/country-risk.html",
+        "ui://megabrain-market/world-brief.html",
+        "ui://megabrain-market/country-brief.html",
+        "ui://megabrain-market/market-radar.html",
+        "ui://megabrain-market/chokepoint-monitor.html",
+        "ui://megabrain-market/news-intelligence.html",
+        "ui://megabrain-market/conflict-events.html",
+        "ui://megabrain-market/natural-disasters.html",
+        "ui://megabrain-market/prediction-markets.html",
+        "ui://megabrain-market/forecasts.html"
       ],
       "note": "MCP Apps support: tools with an interactive surface carry `_meta.ui.resourceUri` (get_country_risk → country-risk.html, get_world_brief → world-brief.html, get_country_brief → country-brief.html, get_market_data → market-radar.html, get_chokepoint_status → chokepoint-monitor.html, get_news_intelligence → news-intelligence.html, get_conflict_events → conflict-events.html, get_natural_disasters → natural-disasters.html, get_prediction_markets → prediction-markets.html, get_forecast_predictions → forecasts.html). Issue `resources/list` to enumerate ui:// app shells and `resources/read` to fetch them — ui:// reads are public + quota-exempt (static, data-free templates); live data reaches the shell via host postMessage after a normal tools/call."
     }

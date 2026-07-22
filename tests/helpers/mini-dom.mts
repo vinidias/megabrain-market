@@ -502,8 +502,8 @@ export function createBrowserEnvironment() {
     removeEventListener() {},
     open() {},
     location: {
-      origin: 'https://worldmonitor.test',
-      href: 'https://worldmonitor.test/',
+      origin: 'https://megabrain-market.test',
+      href: 'https://megabrain-market.test/',
     },
     navigator: {
       clipboard: {

@@ -87,7 +87,7 @@ describe('api/mcp.ts — per-tool output contract (envelope-shape, all 41 tools)
   let originalExecutes;
 
   beforeEach(async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = 'wm_test_key_tool_contracts';
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = 'wm_test_key_tool_contracts';
     process.env.UPSTASH_REDIS_REST_URL = 'https://stub.upstash';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'stub';
     process.env.MCP_INTERNAL_HMAC_SECRET = HMAC_SECRET;

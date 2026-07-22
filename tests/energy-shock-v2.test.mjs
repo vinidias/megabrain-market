@@ -22,9 +22,9 @@ import {
   buildGasAssessment,
   REFINERY_YIELD,
   REFINERY_YIELD_BASIS,
-} from '../server/worldmonitor/intelligence/v1/_shock-compute.js';
+} from '../server/megabrain-market/intelligence/v1/_shock-compute.js';
 
-import { ISO2_TO_COMTRADE } from '../server/worldmonitor/intelligence/v1/_comtrade-reporters.js';
+import { ISO2_TO_COMTRADE } from '../server/megabrain-market/intelligence/v1/_comtrade-reporters.js';
 
 // ---------------------------------------------------------------------------
 // deriveCoverageLevel

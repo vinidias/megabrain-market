@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.market.v1;
+package megabrain-market.market.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/market/v1/market_quote.proto";
+import "megabrain-market/market/v1/market_quote.proto";
 
 // ListCryptoQuotesRequest specifies which cryptocurrencies to retrieve.
 message ListCryptoQuotesRequest {

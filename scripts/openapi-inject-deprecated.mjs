@@ -25,7 +25,7 @@ import { serialize } from './lib/openapi-codegen.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const apiDir = resolve(root, 'docs/api');
-const protoDir = resolve(root, 'proto/worldmonitor');
+const protoDir = resolve(root, 'proto/megabrain-market');
 const CHECK = process.argv.includes('--check');
 
 const HTTP_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch', 'options', 'head']);
@@ -146,7 +146,7 @@ function injectYaml(text) {
 // ── Run ──────────────────────────────────────────────────────────────────────
 const jsonFiles = readdirSync(apiDir).filter((f) => /Service\.openapi\.json$/.test(f)).sort();
 const yamlFiles = readdirSync(apiDir)
-  .filter((f) => /Service\.openapi\.yaml$/.test(f) || f === 'worldmonitor.openapi.yaml')
+  .filter((f) => /Service\.openapi\.yaml$/.test(f) || f === 'megabrain-market.openapi.yaml')
   .sort();
 let wouldChange = 0;
 const touched = [];

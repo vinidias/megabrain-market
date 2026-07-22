@@ -65,7 +65,7 @@ const HEALTH_VERDICT_RELEASE_LOCK_SCRIPT = [
 
 // Iran-events domain sunset (war ended 2026-07). Default OFF everywhere; set
 // IRAN_EVENTS_ENABLED=true to restore the whole domain. Mirrors the backend
-// *_ENABLED env idiom (server/worldmonitor/resilience/v1/_shared.ts).
+// *_ENABLED env idiom (server/megabrain-market/resilience/v1/_shared.ts).
 const IRAN_EVENTS_ENABLED = (process.env.IRAN_EVENTS_ENABLED ?? 'false').toLowerCase() === 'true';
 
 const BOOTSTRAP_KEYS = {
@@ -654,7 +654,7 @@ const ON_DEMAND_KEYS = new Set([
   // absent — which is the alarm a future operator needs before flipping
   // `RESILIENCE_ENERGY_V2_ENABLED=true`. The scorer fails closed via
   // ResilienceConfigurationError if the flag flips before the seeds
-  // populate (server/worldmonitor/resilience/v1/_dimension-scorers.ts
+  // populate (server/megabrain-market/resilience/v1/_dimension-scorers.ts
   // #scoreEnergy). Do NOT add these labels back to ON_DEMAND_KEYS
   // without revisiting that plan.
   'displacementPrev', // covered by cascade onto current-year displacement; empty most of the year
@@ -1248,7 +1248,7 @@ export default async function handler(req, ctx) {
         : keyCheck.error;
       // RFC 7235 §3.1 requires WWW-Authenticate on every 401. The challenge
       // must reflect what this gate actually accepts: validateApiKey reads the
-      // X-WorldMonitor-Key / X-Api-Key headers (or tester cookies) — never
+      // X-MegaBrainMarket-Key / X-Api-Key headers (or tester cookies) — never
       // Authorization: Bearer — so advertising a Bearer/OAuth challenge here
       // sent agents down a flow that cannot succeed (post-#4867 review). The
       // hint exists because this URL is what old copies of the api-catalog
@@ -1262,7 +1262,7 @@ export default async function handler(req, ctx) {
         401,
         {
           ...headers,
-          'WWW-Authenticate': 'ApiKey realm="worldmonitor-health", header="X-WorldMonitor-Key"',
+          'WWW-Authenticate': 'ApiKey realm="megabrain-market-health", header="X-MegaBrainMarket-Key"',
         }
       );
     }

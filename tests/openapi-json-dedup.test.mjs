@@ -21,7 +21,7 @@ import { dedupeErrorResponses } from '../scripts/openapi-dedup-responses.mjs';
 // re-cross the cap.
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const bundlePath = resolve(root, 'docs/api/worldmonitor.openapi.yaml');
+const bundlePath = resolve(root, 'docs/api/megabrain-market.openapi.yaml');
 const buildScriptPath = resolve(root, 'scripts/build-openapi-json.mjs');
 
 // Leave headroom under the ~1 MB cap: the spec sat at ~752 KB when the check

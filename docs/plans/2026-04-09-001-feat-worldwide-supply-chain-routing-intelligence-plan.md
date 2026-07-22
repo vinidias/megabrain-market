@@ -21,7 +21,7 @@ origin: docs/brainstorms/2026-04-09-worldwide-shipping-intelligence-requirements
 - `api/scenario/v1/status.ts` — polling endpoint, `pending | processing | done | failed`
 - `api/scenario/v1/templates.ts` — public discovery endpoint (no PRO gate)
 - `scripts/scenario-worker.mjs` — always-on Railway worker, BLMOVE atomic FIFO dequeue, pipeline Redis reads, SIGTERM handler, startup orphan drain
-- `server/worldmonitor/supply-chain/v1/scenario-templates.ts` — authoritative template registry
+- `server/megabrain-market/supply-chain/v1/scenario-templates.ts` — authoritative template registry
 - `src/config/scenario-templates.ts` — type-only shim for src/ consumers
 - `src/components/MapContainer.ts` — `activateScenario()` / `deactivateScenario()`
 - `src/components/DeckGLMap.ts` — `setScenarioState()`, arc orange recolor for disrupted routes
@@ -36,7 +36,7 @@ origin: docs/brainstorms/2026-04-09-worldwide-shipping-intelligence-requirements
 
 ## Overview
 
-WorldMonitor's supply chain backend (Sprints 0–2) is complete: bypass corridors config, chokepoint exposure seeder, bypass RPC, cost-shock RPC, and chokepoint index RPC are all live and PRO-gated. What remains is the UI layer that surfaces this data in the panel and map, plus the async scenario engine.
+MegaBrainMarket's supply chain backend (Sprints 0–2) is complete: bypass corridors config, chokepoint exposure seeder, bypass RPC, cost-shock RPC, and chokepoint index RPC are all live and PRO-gated. What remains is the UI layer that surfaces this data in the panel and map, plus the async scenario engine.
 
 This plan covers four implementation sprints in priority order:
 - **Sprint A** — Supply Chain Panel UI: bypass cards + sector exposure + war risk badges
@@ -44,7 +44,7 @@ This plan covers four implementation sprints in priority order:
 - **Sprint C** — Scenario Engine: templates config + async job API + Railway worker + map activation
 - **Sprint D** — Sector Dependency RPC + Vendor API
 
-Reference: `gcc-optimal-shipping-routes.vercel.app` was the product reference app (fully analyzed 2026-04-09). See `docs/internal/worldmonitor-global-shipping-intelligence-roadmap.md` for the full 5-sprint roadmap.
+Reference: `gcc-optimal-shipping-routes.vercel.app` was the product reference app (fully analyzed 2026-04-09). See `docs/internal/megabrain-market-global-shipping-intelligence-roadmap.md` for the full 5-sprint roadmap.
 
 ---
 
@@ -52,7 +52,7 @@ Reference: `gcc-optimal-shipping-routes.vercel.app` was the product reference ap
 
 The backend intelligence (bypass corridors, cost shock, chokepoint exposure) exists in Redis but nothing surfaces it to users. The supply chain panel shows chokepoints with disruption scores but no bypass options, no sector exposure breakdown, and no war risk tier badge. The map arcs are static blue — no disruption coloring. The scenario engine doesn't exist.
 
-Users cannot answer "if Hormuz closes, what are my options?" from the WorldMonitor UI today.
+Users cannot answer "if Hormuz closes, what are my options?" from the MegaBrainMarket UI today.
 
 ---
 
@@ -484,7 +484,7 @@ export const SCENARIO_TEMPLATES: ScenarioTemplate[] = [
 **Files:**
 - `api/scenario/v1/run.ts` — edge function: validate + PRO gate + enqueue + return jobId
 - `api/scenario/v1/status.ts` — edge function: poll job result from Redis
-- `server/worldmonitor/supply-chain/v1/scenario-compute.ts` — pure compute function (no I/O)
+- `server/megabrain-market/supply-chain/v1/scenario-compute.ts` — pure compute function (no I/O)
 
 **Approach — `run.ts`:**
 ```ts
@@ -713,10 +713,10 @@ public deactivateScenario(): void {
 **Goal:** New RPC `GetSectorDependency` returns dependency flags (SINGLE_SOURCE_CRITICAL, etc.) for a country + HS2 sector.
 
 **Files:**
-- `server/worldmonitor/supply-chain/v1/get-sector-dependency.ts` — new handler
-- `proto/worldmonitor/supply_chain/v1/get_sector_dependency.proto` — new proto
-- `proto/worldmonitor/supply_chain/v1/service.proto` — register new RPC
-- `server/worldmonitor/supply-chain/v1/handler.ts` — register handler
+- `server/megabrain-market/supply-chain/v1/get-sector-dependency.ts` — new handler
+- `proto/megabrain-market/supply_chain/v1/get_sector_dependency.proto` — new proto
+- `proto/megabrain-market/supply_chain/v1/service.proto` — register new RPC
+- `server/megabrain-market/supply-chain/v1/handler.ts` — register handler
 - `api/supply-chain/v1/[rpc].ts` — routed automatically
 - `src/generated/...` — run `make generate` after proto changes
 - `server/_shared/cache-keys.ts` — add `SECTOR_DEPENDENCY_KEY`
@@ -779,7 +779,7 @@ enum DependencyFlag {
 **Route Intelligence API:**
 ```
 GET /api/v2/shipping/route-intelligence
-  X-WorldMonitor-Key: <api_key>
+  X-MegaBrainMarket-Key: <api_key>
   ?fromIso2=US&toIso2=JP&cargoType=container&hs2=85
 ```
 
@@ -953,13 +953,13 @@ scenario run (PRO user)
 
 ### Full Roadmap
 
-- `docs/internal/worldmonitor-global-shipping-intelligence-roadmap.md` — complete 5-sprint roadmap with all technical specs
+- `docs/internal/megabrain-market-global-shipping-intelligence-roadmap.md` — complete 5-sprint roadmap with all technical specs
 
 ### Existing Implementations (Backend — All Done)
 
-- `server/worldmonitor/supply-chain/v1/get-bypass-options.ts` — PRO-gated bypass scoring
-- `server/worldmonitor/supply-chain/v1/get-country-cost-shock.ts` — energy shock RPC
-- `server/worldmonitor/supply-chain/v1/get-country-chokepoint-index.ts` — exposure index RPC
+- `server/megabrain-market/supply-chain/v1/get-bypass-options.ts` — PRO-gated bypass scoring
+- `server/megabrain-market/supply-chain/v1/get-country-cost-shock.ts` — energy shock RPC
+- `server/megabrain-market/supply-chain/v1/get-country-chokepoint-index.ts` — exposure index RPC
 - `scripts/seed-hs2-chokepoint-exposure.mjs` — Redis seeder (needs `country-port-clusters.json`)
 - `src/config/bypass-corridors.ts` — 40 corridors for 13 chokepoints
 - `src/config/chokepoint-registry.ts` — canonical 13-ID registry

@@ -11,7 +11,7 @@ import type {
   ListAcledEventsRequest,
   ListAcledEventsResponse,
   AcledConflictEvent,
-} from '../../../../src/generated/server/worldmonitor/conflict/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/conflict/v1/service_server';
 
 import { cachedFetchJson } from '../../../_shared/redis';
 import { fetchAcledCached } from '../../../_shared/acled';

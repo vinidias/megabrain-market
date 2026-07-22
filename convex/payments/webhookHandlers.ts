@@ -21,7 +21,7 @@ import { verifyWebhookPayload } from "@dodopayments/core";
  *
  * Without this, a botched secret rotation could 401 every Dodo webhook
  * silently for hours — same observability gap shape as the canary OCC
- * bug (WORLDMONITOR-PA), just on a different surface.
+ * bug (MEGABRAIN_MARKET-PA), just on a different surface.
  */
 export const reportDodoSignatureFailure = internalMutation({
   args: {

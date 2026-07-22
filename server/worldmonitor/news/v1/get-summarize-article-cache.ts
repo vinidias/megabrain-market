@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetSummarizeArticleCacheRequest,
   SummarizeArticleResponse,
-} from '../../../../src/generated/server/worldmonitor/news/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/news/v1/service_server';
 
 import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
 import { getCachedJson } from '../../../_shared/redis';

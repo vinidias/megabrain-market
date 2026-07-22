@@ -23,7 +23,7 @@ import type {
   EvidenceItem,
   RegionalNarrative,
   NarrativeSection,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 import { getCachedJson, getCachedRawString } from '../../../_shared/redis';
 
 const LATEST_KEY_PREFIX = 'intelligence:snapshot:v1:';

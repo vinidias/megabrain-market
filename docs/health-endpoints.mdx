@@ -1,6 +1,6 @@
 ---
 title: "Health Endpoints"
-description: "Two health endpoints World Monitor exposes for monitoring data pipeline integrity — Edge Runtime handlers querying Upstash Redis for system state."
+description: "Two health endpoints MegaBrain Market exposes for monitoring data pipeline integrity — Edge Runtime handlers querying Upstash Redis for system state."
 ---
 
 ## `/api/health`
@@ -146,14 +146,14 @@ Selected thresholds from `SEED_META`:
 
 ```bash
 # Full health check (requires an operator API key)
-curl -s https://api.worldmonitor.app/api/health \
-  -H "X-WorldMonitor-Key: $WORLDMONITOR_API_KEY" | jq .
+curl -s https://api.megabrain.market/api/health \
+  -H "X-MegaBrainMarket-Key: $MEGABRAIN_MARKET_API_KEY" | jq .
 
 # Compact (problems only)
-curl -s "https://api.worldmonitor.app/api/health?compact=1" | jq .
+curl -s "https://api.megabrain.market/api/health?compact=1" | jq .
 
 # UptimeRobot / monitoring: check HTTP status code
-curl -o /dev/null -s -w "%{http_code}" "https://api.worldmonitor.app/api/health?compact=1"
+curl -o /dev/null -s -w "%{http_code}" "https://api.megabrain.market/api/health?compact=1"
 # Returns 503 only when Redis is unreachable (REDIS_DOWN); 200 for every other
 # state — the verdict (HEALTHY/WARNING/DEGRADED/UNHEALTHY) is in the body's `status`.
 ```
@@ -229,8 +229,8 @@ A seed is considered stale when its age exceeds **2x the configured interval**. 
 ### Example Request
 
 ```bash
-curl -s https://api.worldmonitor.app/api/seed-health \
-  -H "Origin: https://worldmonitor.app" | jq .
+curl -s https://api.megabrain.market/api/seed-health \
+  -H "Origin: https://megabrain.market" | jq .
 ```
 
 ## Integration with Monitoring Tools
@@ -244,7 +244,7 @@ Use `/api/health?compact=1` as the public monitor URL. The HTTP status code only
 
 So an HTTP-status-only monitor catches a full backend outage but **not** degraded/unhealthy data. For those, add a keyword monitor.
 
-Point the keyword monitor at `https://api.worldmonitor.app/api/health?compact=1` and alert when the compact token `"status":"HEALTHY"` (no space after the colon) is **absent** from the response body. Compact mode serializes with no indentation, so this exact token is stable regardless of formatting.
+Point the keyword monitor at `https://api.megabrain.market/api/health?compact=1` and alert when the compact token `"status":"HEALTHY"` (no space after the colon) is **absent** from the response body. Compact mode serializes with no indentation, so this exact token is stable regardless of formatting.
 
 > The bare `/api/health` URL is now an operator view and returns `401` without an API key. Public monitoring should always use `?compact=1`.
 
@@ -254,7 +254,7 @@ Parse the JSON response to build granular alerts:
 
 ```bash
 # Alert on any critical keys
-STATUS=$(curl -s "https://api.worldmonitor.app/api/health?compact=1")
+STATUS=$(curl -s "https://api.megabrain.market/api/health?compact=1")
 CRIT=$(echo "$STATUS" | jq '.summary.crit')
 if [ "$CRIT" -gt 0 ]; then
   echo "CRITICAL: $CRIT data keys empty"

@@ -35,12 +35,12 @@ function sentHeaders(callIndex = 0): Headers {
 // injection is now path-gated. Using `some-premium-rpc` (a non-existent
 // path) made every "Clerk Bearer attached" assertion silently fail under
 // the new logic. See PREMIUM_RPC_PATHS in src/shared/premium-paths.ts.
-const TARGET = 'https://api.worldmonitor.app/api/sanctions/v1/list-sanctions-pressure';
+const TARGET = 'https://api.megabrain.market/api/sanctions/v1/list-sanctions-pressure';
 // A real PUBLIC path used to verify the path-gating bypass: hits below
 // fetch the same way but should NOT see Bearer attached.
-const PUBLIC_TARGET = 'https://api.worldmonitor.app/api/economic/v1/get-fred-series-batch';
+const PUBLIC_TARGET = 'https://api.megabrain.market/api/economic/v1/get-fred-series-batch';
 const PUBLIC_INSIDER_TRANSACTIONS_TARGET =
-  'https://api.worldmonitor.app/api/market/v1/get-insider-transactions?symbol=AAPL';
+  'https://api.megabrain.market/api/market/v1/get-insider-transactions?symbol=AAPL';
 
 // ---------------------------------------------------------------------------
 // Suite
@@ -74,14 +74,14 @@ describe('premiumFetch', () => {
     await premiumFetch(TARGET, { headers: { Authorization: 'Bearer existing-token' } });
     assert.equal(fetchMock.mock.calls.length, 1);
     assert.equal(sentHeaders().get('Authorization'), 'Bearer existing-token');
-    assert.equal(sentHeaders().get('X-WorldMonitor-Key'), null);
+    assert.equal(sentHeaders().get('X-MegaBrainMarket-Key'), null);
   });
 
-  it('passthrough when X-WorldMonitor-Key header already set', async () => {
+  it('passthrough when X-MegaBrainMarket-Key header already set', async () => {
     setup();
-    await premiumFetch(TARGET, { headers: { 'X-WorldMonitor-Key': 'caller-key' } });
+    await premiumFetch(TARGET, { headers: { 'X-MegaBrainMarket-Key': 'caller-key' } });
     assert.equal(fetchMock.mock.calls.length, 1);
-    assert.equal(sentHeaders().get('X-WorldMonitor-Key'), 'caller-key');
+    assert.equal(sentHeaders().get('X-MegaBrainMarket-Key'), 'caller-key');
   });
 
   it('tester key: valid key accepted — exactly one fetch, key forwarded', async () => {
@@ -89,7 +89,7 @@ describe('premiumFetch', () => {
     const res = await premiumFetch(TARGET);
     assert.equal(res.status, 200);
     assert.equal(fetchMock.mock.calls.length, 1, 'No Clerk retry expected');
-    assert.equal(sentHeaders().get('X-WorldMonitor-Key'), 'valid-gateway-key');
+    assert.equal(sentHeaders().get('X-MegaBrainMarket-Key'), 'valid-gateway-key');
   });
 
   it('tester key: 401 falls through to Clerk JWT (two fetches)', async () => {
@@ -104,11 +104,11 @@ describe('premiumFetch', () => {
     assert.equal(res.status, 200);
     assert.equal(fetchMock.mock.calls.length, 2, 'Expected tester-key attempt + Clerk retry');
     // First call: tester key sent
-    assert.equal(sentHeaders(0).get('X-WorldMonitor-Key'), 'widget-only-key');
+    assert.equal(sentHeaders(0).get('X-MegaBrainMarket-Key'), 'widget-only-key');
     assert.equal(sentHeaders(0).get('Authorization'), null);
     // Second call: Clerk Bearer sent, no tester key
     assert.equal(sentHeaders(1).get('Authorization'), 'Bearer clerk-jwt-abc');
-    assert.equal(sentHeaders(1).get('X-WorldMonitor-Key'), null);
+    assert.equal(sentHeaders(1).get('X-MegaBrainMarket-Key'), null);
   });
 
   it('wm-pro-key 401 retries with wm-widget-key before Clerk', async () => {
@@ -122,9 +122,9 @@ describe('premiumFetch', () => {
     const res = await premiumFetch(TARGET);
     assert.equal(res.status, 200);
     assert.equal(fetchMock.mock.calls.length, 2, 'Expected pro-key attempt then widget-key retry');
-    assert.equal(sentHeaders(0).get('X-WorldMonitor-Key'), 'relay-only-pro-key');
+    assert.equal(sentHeaders(0).get('X-MegaBrainMarket-Key'), 'relay-only-pro-key');
     assert.equal(sentHeaders(0).get('Authorization'), null);
-    assert.equal(sentHeaders(1).get('X-WorldMonitor-Key'), 'valid-widget-key');
+    assert.equal(sentHeaders(1).get('X-MegaBrainMarket-Key'), 'valid-widget-key');
     assert.equal(sentHeaders(1).get('Authorization'), null);
   });
 
@@ -160,7 +160,7 @@ describe('premiumFetch', () => {
     assert.equal(res.status, 200);
     assert.equal(fetchMock.mock.calls.length, 1);
     assert.equal(sentHeaders().get('Authorization'), null);
-    assert.equal(sentHeaders().get('X-WorldMonitor-Key'), null);
+    assert.equal(sentHeaders().get('X-MegaBrainMarket-Key'), null);
   });
 
   it('Clerk JWT used when no tester key', async () => {
@@ -169,7 +169,7 @@ describe('premiumFetch', () => {
     assert.equal(res.status, 200);
     assert.equal(fetchMock.mock.calls.length, 1);
     assert.equal(sentHeaders().get('Authorization'), 'Bearer clerk-only-token');
-    assert.equal(sentHeaders().get('X-WorldMonitor-Key'), null);
+    assert.equal(sentHeaders().get('X-MegaBrainMarket-Key'), null);
   });
 
   // ---------------------------------------------------------------------
@@ -199,7 +199,7 @@ describe('premiumFetch', () => {
       null,
       'Bearer must NOT be attached on non-premium paths — gateway only resolves it on tier-gated routes',
     );
-    assert.equal(sentHeaders().get('X-WorldMonitor-Key'), null);
+    assert.equal(sentHeaders().get('X-MegaBrainMarket-Key'), null);
   });
 
   it('forcePremium attaches Clerk JWT on a non-premium path without forwarding the option', async () => {
@@ -225,7 +225,7 @@ describe('premiumFetch', () => {
   it('non-premium path: tester key still attached (works on any path)', async () => {
     setup({ testerKey: 'valid-key', clerkToken: 'clerk-token' });
     await premiumFetch(PUBLIC_TARGET);
-    assert.equal(sentHeaders(0).get('X-WorldMonitor-Key'), 'valid-key');
+    assert.equal(sentHeaders(0).get('X-MegaBrainMarket-Key'), 'valid-key');
     assert.equal(sentHeaders(0).get('Authorization'), null);
   });
 

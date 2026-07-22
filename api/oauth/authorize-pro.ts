@@ -24,7 +24,7 @@
  *   6. Re-fetches `getEntitlements(userId)` from Convex — the grant could
  *      be up to 5 minutes old; tier may have lapsed since mint.
  *   7. Calls `issueProMcpTokenForUser` to insert a Convex `mcpProTokens`
- *      row. NO `wm_` key, NO `WORLDMONITOR_VALID_KEYS` write — Pro identity
+ *      row. NO `wm_` key, NO `MEGABRAIN_MARKET_VALID_KEYS` write — Pro identity
  *      lives only in Convex, the OAuth code carries the row id.
  *   8. Writes `oauth:code:<code>` = `{kind:'pro', userId, mcpTokenId,
  *      client_id, redirect_uri, code_challenge, scope:'mcp_pro'}` with
@@ -105,11 +105,11 @@ function escapeHtml(str: string): string {
  */
 function htmlError(title: string, detail: string, status: number = 400): Response {
   return new Response(
-    `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Error &#x2014; WorldMonitor MCP</title>
+    `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Error &#x2014; MegaBrainMarket MCP</title>
 <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:ui-monospace,'SF Mono','Cascadia Code',monospace;background:#0a0a0a;color:#e8e8e8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}.wm-logo{display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;text-decoration:none}.wm-logo svg{color:#2d8a6e}.wm-logo-text{font-size:.75rem;color:#555;letter-spacing:.1em;text-transform:uppercase}.card{width:100%;max-width:420px;background:#111;border:1px solid #1e1e1e;padding:2rem}h1{font-size:.95rem;font-weight:600;color:#ef4444;margin-bottom:.75rem;letter-spacing:.02em}p{font-size:.85rem;color:#666;line-height:1.6}.back{display:inline-block;margin-top:1.5rem;font-size:.75rem;color:#444;text-decoration:none;letter-spacing:.03em}.back:hover{color:#888}.footer{margin-top:1.5rem;font-size:.7rem;color:#2a2a2a;text-align:center}.footer a{color:#333;text-decoration:none}.footer a:hover{color:#555}</style></head>
-<body><a href="https://www.worldmonitor.app" class="wm-logo" target="_blank" rel="noopener">${GLOBE_SVG}<span class="wm-logo-text">WorldMonitor MCP</span></a>
+<body><a href="https://www.megabrain.market" class="wm-logo" target="_blank" rel="noopener">${GLOBE_SVG}<span class="wm-logo-text">MegaBrainMarket MCP</span></a>
 <div class="card"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(detail)}</p><a href="javascript:history.back()" class="back">&#8592; go back</a></div>
-<p class="footer"><a href="https://www.worldmonitor.app" target="_blank" rel="noopener">worldmonitor.app</a></p>
+<p class="footer"><a href="https://www.megabrain.market" target="_blank" rel="noopener">megabrain.market</a></p>
 </body></html>`,
     { status, headers: PAGE_HEADERS },
   );
@@ -367,7 +367,7 @@ export async function authorizeProHandler(req: Request, deps: AuthorizeProDeps):
   ) {
     return htmlError(
       'Pro Subscription Required',
-      'A WorldMonitor Pro subscription is required for this connection. Please subscribe and try again.',
+      'A MegaBrainMarket Pro subscription is required for this connection. Please subscribe and try again.',
       403,
     );
   }
@@ -382,7 +382,7 @@ export async function authorizeProHandler(req: Request, deps: AuthorizeProDeps):
       if (err.kind === 'pro-required') {
         return htmlError(
           'Pro Subscription Required',
-          'A WorldMonitor Pro subscription is required for this connection. Please subscribe and try again.',
+          'A MegaBrainMarket Pro subscription is required for this connection. Please subscribe and try again.',
           403,
         );
       }

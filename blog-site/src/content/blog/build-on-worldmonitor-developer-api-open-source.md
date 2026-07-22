@@ -1,21 +1,21 @@
 ---
-title: "Build on World Monitor: APIs and Developer Platform"
-description: "Build intelligence apps on World Monitor's typed API: 35 services, 281 proto files, 60+ edge functions, and auto-generated TypeScript clients. AGPL-3.0."
-metaTitle: "Developer API & Open Source Platform | World Monitor"
+title: "Build on MegaBrain Market: APIs and Developer Platform"
+description: "Build intelligence apps on MegaBrain Market's typed API: 35 services, 281 proto files, 60+ edge functions, and auto-generated TypeScript clients. AGPL-3.0."
+metaTitle: "Developer API & Open Source Platform | MegaBrain Market"
 keywords: "open source intelligence API, OSINT API free, geopolitical data API, intelligence platform developer, proto-first API architecture"
 audience: "Developers, data engineers, startup builders, academic researchers, open-source contributors"
-heroImage: "/blog/images/blog/build-on-worldmonitor-developer-api-open-source.jpg"
+heroImage: "/blog/images/blog/build-on-megabrain-market-developer-api-open-source.jpg"
 pubDate: "2026-03-09"
 modifiedDate: "2026-07-07"
 ---
 
 Most intelligence platforms are walled gardens. You pay for access, you use their interface, and if you want to build something custom, you're out of luck. The data is locked behind a UI.
 
-World Monitor is designed differently. The entire intelligence platform, every data feed, every scoring algorithm, every aggregation pipeline, is built on a **typed API layer** that developers can use, extend, and build upon.
+MegaBrain Market is designed differently. The entire intelligence platform, every data feed, every scoring algorithm, every aggregation pipeline, is built on a **typed API layer** that developers can use, extend, and build upon.
 
 ## Proto-First Architecture
 
-World Monitor uses **Protocol Buffers (protobuf)** as the single source of truth for all API contracts. The codebase contains:
+MegaBrain Market uses **Protocol Buffers (protobuf)** as the single source of truth for all API contracts. The codebase contains:
 
 - **281 proto files** defining every data structure and service
 - **35 typed service domains** covering all intelligence verticals
@@ -38,11 +38,11 @@ Protocol Buffers enforce a contract between client and server that can't drift:
 - **Code generation:** TypeScript clients are generated, not handwritten. Zero chance of client/server mismatch.
 - **Documentation:** The proto file IS the documentation. Field names, types, and comments are the API spec.
 
-For developers building on World Monitor, this means you can trust the API contracts completely. If the proto says a field is `int64`, it's `int64`. If it says `repeated string`, it's an array of strings.
+For developers building on MegaBrain Market, this means you can trust the API contracts completely. If the proto says a field is `int64`, it's `int64`. If it says `repeated string`, it's an array of strings.
 
 ## 35 Service Domains
 
-World Monitor's API is organized into domain-specific services:
+MegaBrain Market's API is organized into domain-specific services:
 
 | Domain | What It Covers |
 |--------|---------------|
@@ -95,16 +95,16 @@ The API layer runs on **Vercel Edge Functions**, providing:
 
 API endpoints follow the pattern:
 ```
-api.worldmonitor.app/api/{domain}/v1/{rpc}
+api.megabrain.market/api/{domain}/v1/{rpc}
 ```
 
 For example:
 
-- `api.worldmonitor.app/api/market/v1/quotes` for stock quotes
-- `api.worldmonitor.app/api/conflict/v1/events` for conflict data
-- `api.worldmonitor.app/api/intelligence/v1/cii` for Country Instability Index scores
+- `api.megabrain.market/api/market/v1/quotes` for stock quotes
+- `api.megabrain.market/api/conflict/v1/events` for conflict data
+- `api.megabrain.market/api/intelligence/v1/cii` for Country Instability Index scores
 
-## Building with World Monitor's API
+## Building with MegaBrain Market's API
 
 ### Custom Dashboards
 
@@ -118,7 +118,7 @@ const cii = await intelligenceClient.getCII({ countries: ['US', 'CN', 'RU'] });
 
 ### Data Pipelines
 
-Feed World Monitor data into your own analytics:
+Feed MegaBrain Market data into your own analytics:
 
 - Pull conflict events into a data warehouse for historical analysis
 - Stream market data alongside geopolitical scores for correlation studies
@@ -130,11 +130,11 @@ Academic researchers can use the API programmatically:
 
 - Study the relationship between news velocity and conflict escalation
 - Analyze prediction market accuracy against actual outcomes (see [prediction markets and AI forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/))
-- Build custom scoring models using World Monitor's raw data feeds
+- Build custom scoring models using MegaBrain Market's raw data feeds
 
 ### Mobile Apps
 
-Build a mobile app that consumes World Monitor's API for a custom mobile intelligence experience. The OpenAPI spec makes it accessible from any language (Swift, Kotlin, Python, Go).
+Build a mobile app that consumes MegaBrain Market's API for a custom mobile intelligence experience. The OpenAPI spec makes it accessible from any language (Swift, Kotlin, Python, Go).
 
 ### Slack/Teams Bots
 
@@ -147,16 +147,16 @@ Build alerting bots that post to your team channel when:
 
 ## Developer Resources
 
-Every developer surface has a dedicated, named page you can jump to directly — the [World Monitor Developer Portal](https://worldmonitor.app/developers.md) links them all in one place:
+Every developer surface has a dedicated, named page you can jump to directly — the [MegaBrain Market Developer Portal](https://megabrain.market/developers.md) links them all in one place:
 
-- **[World Monitor MCP Server](https://worldmonitor.app/mcp-server.md)** — the recommended agent surface at `https://worldmonitor.app/mcp`, with 39 tools over Streamable HTTP. Connect Claude, Cursor, or any MCP client. See the [MCP Overview](https://www.worldmonitor.app/docs/mcp-overview) for auth and the full catalog.
-- **[World Monitor OpenAPI Specification](https://worldmonitor.app/openapi.md)** — the OpenAPI 3.1 contract for the REST API ([openapi.yaml](https://worldmonitor.app/openapi.yaml) / [openapi.json](https://worldmonitor.app/openapi.json)), so you can generate a typed client in any language.
-- **[World Monitor SDKs](https://worldmonitor.app/sdks.md)** — official zero-dependency client libraries for Python, Ruby, Go, and JavaScript, plus the [`worldmonitor` CLI](https://www.worldmonitor.app/docs/cli).
-- **World Monitor API docs** — the full [developer documentation](https://www.worldmonitor.app/docs/documentation) site, with an [MCP Quickstart](https://www.worldmonitor.app/docs/mcp-quickstart) and [agent auth walkthrough](https://worldmonitor.app/auth.md).
+- **[MegaBrain Market MCP Server](https://megabrain.market/mcp-server.md)** — the recommended agent surface at `https://megabrain.market/mcp`, with 39 tools over Streamable HTTP. Connect Claude, Cursor, or any MCP client. See the [MCP Overview](https://www.megabrain.market/docs/mcp-overview) for auth and the full catalog.
+- **[MegaBrain Market OpenAPI Specification](https://megabrain.market/openapi.md)** — the OpenAPI 3.1 contract for the REST API ([openapi.yaml](https://megabrain.market/openapi.yaml) / [openapi.json](https://megabrain.market/openapi.json)), so you can generate a typed client in any language.
+- **[MegaBrain Market SDKs](https://megabrain.market/sdks.md)** — official zero-dependency client libraries for Python, Ruby, Go, and JavaScript, plus the [`megabrain-market` CLI](https://www.megabrain.market/docs/cli).
+- **MegaBrain Market API docs** — the full [developer documentation](https://www.megabrain.market/docs/documentation) site, with an [MCP Quickstart](https://www.megabrain.market/docs/mcp-quickstart) and [agent auth walkthrough](https://megabrain.market/auth.md).
 
 ## Self-Hosting
 
-World Monitor is AGPL-3.0. You can self-host the entire platform, including [local AI capabilities that run without cloud dependencies](/blog/posts/ai-powered-intelligence-without-the-cloud/):
+MegaBrain Market is AGPL-3.0. You can self-host the entire platform, including [local AI capabilities that run without cloud dependencies](/blog/posts/ai-powered-intelligence-without-the-cloud/):
 
 **Frontend:** React + TypeScript + Vite. Standard `npm install && npm run build`.
 
@@ -187,7 +187,7 @@ The proto-first architecture makes contributing safe: the type system catches co
 
 ## The Developer Stack
 
-For reference, World Monitor is built with:
+For reference, MegaBrain Market is built with:
 
 | Layer | Technology |
 |-------|-----------|
@@ -204,11 +204,11 @@ For reference, World Monitor is built with:
 | i18n | i18next (21 locales) |
 | Testing | Vitest, Playwright |
 
-## Why Build on World Monitor?
+## Why Build on MegaBrain Market?
 
-The intelligence industry has a consolidation problem. A handful of vendors control the data, the algorithms, and the interfaces. Analysts are locked into ecosystems they can't customize, audit, or extend. See how World Monitor [compares to traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/) in practice.
+The intelligence industry has a consolidation problem. A handful of vendors control the data, the algorithms, and the interfaces. Analysts are locked into ecosystems they can't customize, audit, or extend. See how MegaBrain Market [compares to traditional intelligence tools](/blog/posts/megabrain-market-vs-traditional-intelligence-tools/) in practice.
 
-World Monitor's open, typed, proto-first architecture is the alternative:
+MegaBrain Market's open, typed, proto-first architecture is the alternative:
 
 - **Audit everything:** Every scoring algorithm, every data pipeline, every API contract is in the codebase
 - **Extend anything:** Add data sources, build custom panels, create new service domains
@@ -216,14 +216,14 @@ World Monitor's open, typed, proto-first architecture is the alternative:
 - **Deploy anywhere:** Edge functions, self-hosted, or desktop
 - **Own your intelligence:** No vendor lock-in, no API key revocation, no price hikes
 
-The intelligence platform of the future isn't a product. It's an ecosystem. World Monitor is building the foundation.
+The intelligence platform of the future isn't a product. It's an ecosystem. MegaBrain Market is building the foundation.
 
-Building an AI agent instead of an app? The same platform is exposed as a Model Context Protocol server with 39 live tools. See [how to connect Claude and other agents to World Monitor's MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
+Building an AI agent instead of an app? The same platform is exposed as a Model Context Protocol server with 39 live tools. See [how to connect Claude and other agents to MegaBrain Market's MCP server](/blog/posts/megabrain-market-mcp-server-ai-agents-real-time-intelligence/).
 
 ## Frequently Asked Questions
 
-**Is the World Monitor API free to use?**
-Yes. World Monitor is AGPL-3.0 open source. You can use the public API at api.worldmonitor.app or self-host the entire stack. There are no API keys required for public endpoints and no usage fees.
+**Is the MegaBrain Market API free to use?**
+Yes. MegaBrain Market is AGPL-3.0 open source. You can use the public API at api.megabrain.market or self-host the entire stack. There are no API keys required for public endpoints and no usage fees.
 
 **What languages can I use to consume the API?**
 Any language that supports HTTP. The auto-generated OpenAPI spec provides compatibility with Swift, Kotlin, Python, Go, Java, and more. TypeScript clients are generated directly from the proto files for first-class type safety.
@@ -233,4 +233,4 @@ Define your data structures in a proto file, implement a handler function, wire 
 
 ---
 
-**Start building at [github.com/koala73/worldmonitor](https://github.com/koala73/worldmonitor). 35 services, 281 proto files, and a global intelligence dataset waiting for your application.**
+**Start building at [github.com/vinidias/megabrain-market](https://github.com/vinidias/megabrain-market). 35 services, 281 proto files, and a global intelligence dataset waiting for your application.**

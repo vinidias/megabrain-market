@@ -29,7 +29,7 @@ const isPremium = frameworkRaw ? await isCallerPremium(ctx.request) : false;
 ```
 
 ## Technical Details
-- Files: `server/worldmonitor/news/v1/summarize-article.ts:42`, `server/worldmonitor/intelligence/v1/deduct-situation.ts:26`, `server/worldmonitor/intelligence/v1/get-country-intel-brief.ts`
+- Files: `server/megabrain-market/news/v1/summarize-article.ts:42`, `server/megabrain-market/intelligence/v1/deduct-situation.ts:26`, `server/megabrain-market/intelligence/v1/get-country-intel-brief.ts`
 - Effort: Small | Risk: Low
 
 ## Acceptance Criteria

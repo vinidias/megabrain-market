@@ -28,7 +28,7 @@ describe('crawlable corpus generator', () => {
       const manifest = await buildCorpus({
         rootDir: repoRoot,
         outDir,
-        baseUrl: 'https://www.worldmonitor.app',
+        baseUrl: 'https://www.megabrain.market',
       });
 
       assert.equal(manifest.sections.countries.count, 196);
@@ -50,12 +50,12 @@ describe('crawlable corpus generator', () => {
 
       const norway = read(outDir, 'countries/norway/index.html');
       assert.match(norway, /<h1>Norway country risk and resilience<\/h1>/);
-      assert.match(norway, /<link rel="canonical" href="https:\/\/www\.worldmonitor\.app\/countries\/norway\/">/);
+      assert.match(norway, /<link rel="canonical" href="https:\/\/www\.megabrain-market\.app\/countries\/norway\/">/);
       assert.match(norway, /<meta name="lastmod" content="2026-05-28">/);
       assert.match(norway, /Source: docs\/snapshots\/resilience-ranking-2026-05-28\.json/);
       assert.doesNotMatch(norway, /<script[^>]+type="module"|id="app"/, 'country page must be raw static HTML, not the SPA shell');
       // Deep-link CTA into the live map (opens the maximized country brief). `&` is HTML-escaped.
-      assert.match(norway, /<a class="cta" href="https:\/\/www\.worldmonitor\.app\/\?country=NO&amp;expanded=1">Open Norway on the live map/);
+      assert.match(norway, /<a class="cta" href="https:\/\/www\.megabrain-market\.app\/\?country=NO&amp;expanded=1">Open Norway on the live map/);
 
       const norwayLd = jsonLdObjects(norway);
       assert.ok(norwayLd.some((entry) => entry['@type'] === 'WebPage' && entry.about?.['@type'] === 'Country' && entry.about?.name === 'Norway'));
@@ -69,9 +69,9 @@ describe('crawlable corpus generator', () => {
 
       const hormuz = read(outDir, 'chokepoints/strait-of-hormuz/index.html');
       assert.match(hormuz, /<h1>Strait of Hormuz<\/h1>/);
-      assert.match(hormuz, /<link rel="canonical" href="https:\/\/www\.worldmonitor\.app\/chokepoints\/strait-of-hormuz\/">/);
+      assert.match(hormuz, /<link rel="canonical" href="https:\/\/www\.megabrain-market\.app\/chokepoints\/strait-of-hormuz\/">/);
       // Deep-link CTA into the live map (pans to + opens the waterway popup).
-      assert.match(hormuz, /<a class="cta" href="https:\/\/www\.worldmonitor\.app\/\?chokepoint=hormuz_strait">Open Strait of Hormuz on the live map/);
+      assert.match(hormuz, /<a class="cta" href="https:\/\/www\.megabrain-market\.app\/\?chokepoint=hormuz_strait">Open Strait of Hormuz on the live map/);
       // Human trade-route names replace the old raw route-id dump.
       assert.match(hormuz, /Persian Gulf → Europe \(Oil\)/);
       assert.doesNotMatch(hormuz, /Canonical ID|Energy baseline|Route IDs:/, 'chokepoint page must not dump raw registry fields');
@@ -89,10 +89,10 @@ describe('crawlable corpus generator', () => {
 
       const changelogIndex = read(outDir, 'reference/changelog/index.html');
       const changelogPage2 = read(outDir, 'reference/changelog/page/2/index.html');
-      assert.match(changelogIndex, /<link rel="next" href="https:\/\/www\.worldmonitor\.app\/reference\/changelog\/page\/2\/">/);
+      assert.match(changelogIndex, /<link rel="next" href="https:\/\/www\.megabrain-market\.app\/reference\/changelog\/page\/2\/">/);
       assert.match(changelogIndex, /server scorer read non-existent/);
       assert.match(changelogIndex, /methodology_version is now v8/);
-      assert.match(changelogPage2, /<link rel="prev" href="https:\/\/www\.worldmonitor\.app\/reference\/changelog\/">/);
+      assert.match(changelogPage2, /<link rel="prev" href="https:\/\/www\.megabrain-market\.app\/reference\/changelog\/">/);
     } finally {
       rmSync(outDir, { recursive: true, force: true });
     }

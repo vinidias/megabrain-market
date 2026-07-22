@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package worldmonitor.trade.v1;
+package megabrain-market.trade.v1;
 
-import "worldmonitor/trade/v1/trade_data.proto";
+import "megabrain-market/trade/v1/trade_data.proto";
 
 message GetCustomsRevenueRequest {}
 

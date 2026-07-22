@@ -2,7 +2,7 @@ import { describe, it, beforeEach, before, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 
 /**
- * WORLDMONITOR-WW/WX/WY — `TypeError: Failed to fetch`, onunhandledrejection,
+ * MEGABRAIN_MARKET-WW/WX/WY — `TypeError: Failed to fetch`, onunhandledrejection,
  * 2026-07-20.
  *
  * Umami's `track()` / `identify()` return the beacon `fetch()` promise from
@@ -71,7 +71,7 @@ async function assertNoLeak(fire: () => void, label: string): Promise<void> {
   }
 }
 
-describe('umami beacon rejection is swallowed (WORLDMONITOR-WW/WX/WY)', () => {
+describe('umami beacon rejection is swallowed (MEGABRAIN_MARKET-WW/WX/WY)', () => {
   beforeEach(() => {
     resetAnalyticsForTesting();
     stubFailingUmami();

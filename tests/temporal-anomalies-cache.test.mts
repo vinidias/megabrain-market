@@ -5,7 +5,7 @@ import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import { __testing__ } from '../api/health.js';
-import { TEMPORAL_ANOMALIES_TTL } from '../server/worldmonitor/infrastructure/v1/_shared.ts';
+import { TEMPORAL_ANOMALIES_TTL } from '../server/megabrain-market/infrastructure/v1/_shared.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,7 +21,7 @@ describe('temporal anomalies cache freshness', () => {
 
   it('refreshes the data key and seed-meta on fresh cache hits', () => {
     const src = readFileSync(
-      resolve(ROOT, 'server/worldmonitor/infrastructure/v1/list-temporal-anomalies.ts'),
+      resolve(ROOT, 'server/megabrain-market/infrastructure/v1/list-temporal-anomalies.ts'),
       'utf8',
     );
 

@@ -22,7 +22,7 @@ function makeReq(method = 'POST', body = null, headers = {}) {
     method,
     headers: {
       'Content-Type': 'application/json',
-      'X-WorldMonitor-Key': VALID_KEY,
+      'X-MegaBrainMarket-Key': VALID_KEY,
       ...headers,
     },
     body: body ? JSON.stringify(body) : undefined,
@@ -46,7 +46,7 @@ let evaluateFreshness;
 
 describe('api/mcp.ts — PRO MCP Server', () => {
   beforeEach(async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = VALID_KEY;
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = VALID_KEY;
     // No UPSTASH vars — rate limiter gracefully skipped, Redis reads return null
     delete process.env.UPSTASH_REDIS_REST_URL;
     delete process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -87,7 +87,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
     });
     const res = await handler(req);
     assert.equal(res.status, 401);
-    assert.ok(res.headers.get('www-authenticate')?.includes('Bearer realm="worldmonitor"'), 'must include WWW-Authenticate header');
+    assert.ok(res.headers.get('www-authenticate')?.includes('Bearer realm="megabrain-market"'), 'must include WWW-Authenticate header');
     assert.match(res.headers.get('cache-control') || '', /\bno-store\b/i);
     const body = await res.json();
     assert.equal(body.error?.code, -32001);
@@ -105,7 +105,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
     assert.equal(res.status, 200, 'unauthenticated initialize must be public');
     const body = await res.json();
     assert.equal(body.result?.protocolVersion, '2025-03-26');
-    assert.equal(body.result?.serverInfo?.name, 'worldmonitor');
+    assert.equal(body.result?.serverInfo?.name, 'megabrain-market');
     assert.ok(res.headers.get('mcp-session-id'), 'Mcp-Session-Id must be issued on the anonymous handshake');
     assertNoStore(res, 'anonymous initialize');
   });
@@ -164,7 +164,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
     const req = new Request(BASE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 6, method: 'resources/read', params: { uri: 'worldmonitor://seed-meta/freshness' } }),
+      body: JSON.stringify({ jsonrpc: '2.0', id: 6, method: 'resources/read', params: { uri: 'megabrain-market://seed-meta/freshness' } }),
     });
     const res = await handler(req);
     assert.equal(res.status, 200, 'anonymous resources/read of a public resource must be 200');
@@ -246,7 +246,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
     const req = new Request(BASE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 7, method: 'resources/read', params: { uri: 'worldmonitor://countries/de/risk' } }),
+      body: JSON.stringify({ jsonrpc: '2.0', id: 7, method: 'resources/read', params: { uri: 'megabrain-market://countries/de/risk' } }),
     });
     const res = await handler(req);
     assert.equal(res.status, 401, 'resources/read of a data-bearing template is a data/quota method — must stay gated');
@@ -267,11 +267,11 @@ describe('api/mcp.ts — PRO MCP Server', () => {
   });
 
   it('returns HTTP 401 + WWW-Authenticate when invalid API key provided', async () => {
-    const req = makeReq('POST', initBody(), { 'X-WorldMonitor-Key': 'wrong_key' });
+    const req = makeReq('POST', initBody(), { 'X-MegaBrainMarket-Key': 'wrong_key' });
     const res = await handler(req);
     assert.equal(res.status, 401);
     const wwwAuth = res.headers.get('www-authenticate') ?? '';
-    assert.ok(wwwAuth.includes('Bearer realm="worldmonitor"'), 'must include WWW-Authenticate Bearer realm');
+    assert.ok(wwwAuth.includes('Bearer realm="megabrain-market"'), 'must include WWW-Authenticate Bearer realm');
     assert.ok(wwwAuth.includes('error="invalid_token"'), 'must include error="invalid_token" per RFC 6750');
     const body = await res.json();
     assert.equal(body.error?.code, -32001);
@@ -280,7 +280,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
   // --- Protocol ---
 
   it('OPTIONS returns 204 with CORS headers', async () => {
-    const req = new Request(BASE_URL, { method: 'OPTIONS', headers: { origin: 'https://worldmonitor.app' } });
+    const req = new Request(BASE_URL, { method: 'OPTIONS', headers: { origin: 'https://megabrain.market' } });
     const res = await handler(req);
     assert.equal(res.status, 204);
     assert.ok(res.headers.get('access-control-allow-methods'));
@@ -294,7 +294,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
     assert.equal(body.jsonrpc, '2.0');
     assert.equal(body.id, 1);
     assert.equal(body.result?.protocolVersion, '2025-03-26');
-    assert.equal(body.result?.serverInfo?.name, 'worldmonitor');
+    assert.equal(body.result?.serverInfo?.name, 'megabrain-market');
     assert.ok(res.headers.get('mcp-session-id'), 'Mcp-Session-Id header must be present');
   });
 
@@ -331,7 +331,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
   it('malformed body returns JSON-RPC -32600', async () => {
     const req = new Request(BASE_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-WorldMonitor-Key': VALID_KEY },
+      headers: { 'Content-Type': 'application/json', 'X-MegaBrainMarket-Key': VALID_KEY },
       body: '{bad json',
     });
     const res = await handler(req);
@@ -2453,7 +2453,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
     // camelCase keys + nested `location` objects. The original fixture used
     // snake_case (which the wire never produces), so the tool's misread of
     // density_zones/snapshot_at passed the suite while returning total_zones=0
-    // in production — WORLDMONITOR-T8. Items outside the AE bbox (+3° pad)
+    // in production — MEGABRAIN_MARKET-T8. Items outside the AE bbox (+3° pad)
     // must be filtered out tool-side; the inner fetch must carry NO bbox
     // query (the handler 400s any dimension >10°, and 67 COUNTRY_BBOXES
     // exceed that).
@@ -2640,7 +2640,7 @@ describe('api/mcp.ts — PRO MCP Server', () => {
 describe('api/mcp.ts — U7 Pro-path', () => {
   let mcpHandler;
   beforeEach(async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = VALID_KEY;
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = VALID_KEY;
     delete process.env.UPSTASH_REDIS_REST_URL;
     delete process.env.UPSTASH_REDIS_REST_TOKEN;
     process.env.MCP_INTERNAL_HMAC_SECRET = HMAC_SECRET;
@@ -2856,7 +2856,7 @@ describe('api/mcp.ts — U7 Pro-path', () => {
     assert.equal(pipe.ops.length, 0);
   });
 
-  it('edge: Pro tool _execute fetch sends X-WM-MCP-Internal + X-WM-MCP-User-Id, no X-WorldMonitor-Key', async () => {
+  it('edge: Pro tool _execute fetch sends X-WM-MCP-Internal + X-WM-MCP-User-Id, no X-MegaBrainMarket-Key', async () => {
     const { deps } = makeProDeps();
     let captured = null;
     globalThis.fetch = async (url, init) => {
@@ -2868,7 +2868,7 @@ describe('api/mcp.ts — U7 Pro-path', () => {
     assert.ok(captured, 'fetch was called');
     assert.ok(captured.headers.get('x-wm-mcp-internal'), 'X-WM-MCP-Internal must be set');
     assert.equal(captured.headers.get('x-wm-mcp-user-id'), PRO_USER_ID);
-    assert.equal(captured.headers.get('x-worldmonitor-key'), null, 'X-WorldMonitor-Key must NOT be set for Pro');
+    assert.equal(captured.headers.get('x-megabrain-market-key'), null, 'X-MegaBrainMarket-Key must NOT be set for Pro');
     // Signature shape: <ts>.<base64url>
     const sig = captured.headers.get('x-wm-mcp-internal');
     assert.match(sig, /^\d{10}\.[A-Za-z0-9_-]+$/, 'signature must be <ts>.<base64url-sig>');
@@ -2936,7 +2936,7 @@ describe('api/mcp.ts — U7 Pro-path', () => {
 
     assert.ok(countryCall.headers.get('x-wm-mcp-internal'), 'X-WM-MCP-Internal must be set');
     assert.equal(countryCall.headers.get('x-wm-mcp-user-id'), PRO_USER_ID);
-    assert.equal(countryCall.headers.get('x-worldmonitor-key'), null, 'X-WorldMonitor-Key must NOT be set for Pro');
+    assert.equal(countryCall.headers.get('x-megabrain-market-key'), null, 'X-MegaBrainMarket-Key must NOT be set for Pro');
 
     const { verifyInternalMcpRequest } = await import(`../server/_shared/mcp-internal-hmac.ts?t=${Date.now()}`);
     const signedReq = new Request(countryCall.url, {
@@ -3109,13 +3109,13 @@ describe('api/mcp.ts — U7 Pro-path', () => {
     // Sign for digest endpoint.
     const signed = await signInternalMcpRequest({
       method: 'GET',
-      url: 'https://worldmonitor.app/api/news/v1/list-feed-digest?lang=en&variant=full',
+      url: 'https://megabrain.market/api/news/v1/list-feed-digest?lang=en&variant=full',
       body: null,
       userId: PRO_USER_ID,
       secret: HMAC_SECRET,
     });
     // Re-construct the payload that would be expected for the SAME ts on a different path.
-    const replayUrl = new URL('https://worldmonitor.app/api/intelligence/v1/deduct-situation');
+    const replayUrl = new URL('https://megabrain.market/api/intelligence/v1/deduct-situation');
     const replayPayload = buildHmacPayload({
       ts: signed.ts,
       method: 'POST',

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.military.v1;
+package megabrain-market.military.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/military/v1/military_flight.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/military/v1/military_flight.proto";
 
 // ListMilitaryFlightsRequest specifies filters for retrieving military flight data.
 message ListMilitaryFlightsRequest {
@@ -36,5 +36,5 @@ message ListMilitaryFlightsResponse {
   // Geographic clusters of flights.
   repeated MilitaryFlightCluster clusters = 2;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 3;
+  megabrain-market.core.v1.PaginationResponse pagination = 3;
 }

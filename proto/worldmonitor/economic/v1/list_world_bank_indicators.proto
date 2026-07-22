@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package worldmonitor.economic.v1;
+package megabrain-market.economic.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/economic/v1/economic_data.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/economic/v1/economic_data.proto";
 
 // ListWorldBankIndicatorsRequest specifies filters for retrieving World Bank data.
 message ListWorldBankIndicatorsRequest {
@@ -32,5 +32,5 @@ message ListWorldBankIndicatorsResponse {
   // Country-level indicator data.
   repeated WorldBankCountryData data = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

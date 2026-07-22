@@ -3,9 +3,9 @@ title: "CII 风险评分方法论"
 description: "综合不稳定指数（CII）与战略风险汇总背后的编辑方法论：baselineRisk 基准风险、eventMultiplier 事件乘数、四分量评分模型与战略风险等级带，以及在 CiiScore 上戳记的 v7 公式版本，帮助用户理解国家风险评分的构成、更新逻辑与可解释性。"
 ---
 
-`GET /api/intelligence/v1/get-risk-scores`（proto `worldmonitor.intelligence.v1.GetRiskScoresResponse`）暴露的 **综合不稳定指数（CII）** 和 **战略风险** 汇总的已发布方法论说明。
+`GET /api/intelligence/v1/get-risk-scores`（proto `megabrain-market.intelligence.v1.GetRiskScoresResponse`）暴露的 **综合不稳定指数（CII）** 和 **战略风险** 汇总的已发布方法论说明。
 
-这些权重是**编辑性**的——由 WorldMonitor 情报团队基于对历史事件和当前地缘政治姿态的内部审阅撰写。它们**并非派生自已发布的学术指数**、同行评审论文或第三方风险产品。请将这些评分视为有态度的，而非经验性的。本说明的目的是使这些态度可被检查，以便下游消费者决定是否同意。
+这些权重是**编辑性**的——由 MegaBrainMarket 情报团队基于对历史事件和当前地缘政治姿态的内部审阅撰写。它们**并非派生自已发布的学术指数**、同行评审论文或第三方风险产品。请将这些评分视为有态度的，而非经验性的。本说明的目的是使这些态度可被检查，以便下游消费者决定是否同意。
 
 每个 `CiiScore` 上传输的 `methodology_version` 字段反映了计算评分时本文档的哪个修订版本处于活跃状态。当前版本为 **v8**。
 
@@ -36,7 +36,7 @@ description: "综合不稳定指数（CII）与战略风险汇总背后的编辑
 > 未改变评分系数、CII 公式版本或
 > `risk:scores:sebuf:v8` 缓存键。UCDP 种子器现在优先选择返回事件的
 > 最新 GED 版本，而非停留在第一个响应版本
-> （[#4200](https://github.com/koala73/worldmonitor/issues/4200)），且
+> （[#4200](https://github.com/vinidias/megabrain-market/issues/4200)），且
 > CII 刷新路径在 ACLED 对两个比较窗口均返回零事件时发出警告，
 > 以便运维人员区分安静源与鉴权/上游缺口。
 
@@ -50,11 +50,11 @@ description: "综合不稳定指数（CII）与战略风险汇总背后的编辑
 
 > **v3（2026-05-27）。** 冲突事件活动现在在最终分量上限（`cap = 70`，`pivot = 4000`）之前使用对数缩放曲线，取代了早期线性提前上限——后者可能将中等和极端政治暴力体量压缩到同一分量值。浏览器侧旧版 CII 路径现在使用与服务端相同的位移对数斜坡（`100K ≈ +4`、`500K ≈ +10`、`1M ≈ +12`、`5M ≈ +18`、`10M+ = +20`），而非旧的两档 `+4/+8` 加成。浏览器新闻警报压力不再乘以各国 `eventMultiplier`；它仍是一个信息分量信号，而非国内不稳定性的国家调校代理。固定于 `methodology_version` 的客户端应重新基线。
 
-> **实现说明（2026-05-27）。** `baselineRisk` 和 `eventMultiplier` 现在来自服务端和前端共用的一张共享系数表。这通过为 AF、EG、IQ、JP、KR、LB 和 QA 保留此前已发布的服务端/API 值，解决了 [#3789](https://github.com/koala73/worldmonitor/issues/3789) 跟踪的 7 国漂移。前端客户端 CII 渲染现在使用相同的值。服务端/API 值在此重构中未变化——上方的 v3 升级来自校准变更，而非此次真相源迁移。
+> **实现说明（2026-05-27）。** `baselineRisk` 和 `eventMultiplier` 现在来自服务端和前端共用的一张共享系数表。这通过为 AF、EG、IQ、JP、KR、LB 和 QA 保留此前已发布的服务端/API 值，解决了 [#3789](https://github.com/vinidias/megabrain-market/issues/3789) 跟踪的 7 国漂移。前端客户端 CII 渲染现在使用相同的值。服务端/API 值在此重构中未变化——上方的 v3 升级来自校准变更，而非此次真相源迁移。
 
 > **v2（2026-05-22）。** `Security` 分量不再是仅 GPS 干扰——它现在与 GPS 干扰一起对军事飞行、军事船舶和航空中断进行评分（issue #3738）。复合混合获得了 `newsUrgencyBoost`、`earthquakeBoost`、`sanctionsBoost` 和 AIS 中断加成，且 `cyberBoost`/`fireBoost` 现在按严重性加权而非原始计数。`combinedScore` 值相应变化——固定于 `methodology_version` 的客户端应重新基线。
 
-> **注意 — 评分契约变更。** 任何更改服务端/API 各国基线、事件乘数、战略风险汇总系数、内联服务端公式字面量、受保护的顶级公式常量或 CII 移动语义的编辑，必须伴随 `server/worldmonitor/intelligence/v1/_risk-config.ts` 中 `CII_FORMULA_VERSION` 的提升，在同一提交中更新本文档，以及一条公开 CHANGELOG 条目。保留服务端/API 评分的真相源重构不提升传输版本。`tests/cii-scoring.test.mts` 中的测试强制本文档列出 `CURATED_COUNTRIES` 中的每个国家代码。
+> **注意 — 评分契约变更。** 任何更改服务端/API 各国基线、事件乘数、战略风险汇总系数、内联服务端公式字面量、受保护的顶级公式常量或 CII 移动语义的编辑，必须伴随 `server/megabrain-market/intelligence/v1/_risk-config.ts` 中 `CII_FORMULA_VERSION` 的提升，在同一提交中更新本文档，以及一条公开 CHANGELOG 条目。保留服务端/API 评分的真相源重构不提升传输版本。`tests/cii-scoring.test.mts` 中的测试强制本文档列出 `CURATED_COUNTRIES` 中的每个国家代码。
 
 ---
 
@@ -104,7 +104,7 @@ composite = baseline * 0.4
 警示等级也可在下限应用前添加 `advisoryBoost`：
 "请勿旅行" `+15`，"重新考虑旅行" `+10`，"谨慎" `+5`。服务端优先使用
 可用的实时 `intelligence:advisories:v1` `byCountry` 等级。若被追踪国家无实时等级，它可应用
-`server/worldmonitor/intelligence/v1/get-risk-scores.ts` 中内嵌的国务院兜底表。因此每个 `CiiScore`
+`server/megabrain-market/intelligence/v1/get-risk-scores.ts` 中内嵌的国务院兜底表。因此每个 `CiiScore`
 暴露：
 
 | 传输字段 | 取值 | 含义 |
@@ -152,7 +152,7 @@ composite = baseline * 0.4
 
 ## 2. 各国 `baselineRisk` 和 `eventMultiplier`
 
-这些是服务端 API 评分和前端客户端 CII 渲染都应用的编辑值。真相源是 [`shared/cii-weights.ts`](https://github.com/koala73/worldmonitor/blob/main/shared/cii-weights.ts)；服务端和前端表从该模块派生，因此系数漂移在测试中失败而非静默发布。
+这些是服务端 API 评分和前端客户端 CII 渲染都应用的编辑值。真相源是 [`shared/cii-weights.ts`](https://github.com/vinidias/megabrain-market/blob/main/shared/cii-weights.ts)；服务端和前端表从该模块派生，因此系数漂移在测试中失败而非静默发布。
 
 Tier-1 国家集是一个精选的监测范围，而非所有主权国家的自动排名。当一个国家满足至少一项编辑标准时进入该集：持续的全球风险相关性、活跃/近期的武装冲突或严重国内动荡、高影响区域升级潜力、重大经济/安全体系重要性，或仪表盘中的特定运营覆盖需求。该集有意保持小规模，以使 CII 维持为高频分诊面；CRI 覆盖更广的 196 国可排名范围。
 
@@ -219,7 +219,7 @@ overallScore = min(100, round(weightedAvg * 0.70 + 15))             # banded to 
 ```
 
 衰减步长、top-N 窗口、尺度下限（`15`）和尺度因子（`0.70`）都定义在
-[`server/worldmonitor/intelligence/v1/_risk-config.ts`](https://github.com/koala73/worldmonitor/blob/main/server/worldmonitor/intelligence/v1/_risk-config.ts)。
+[`server/megabrain-market/intelligence/v1/_risk-config.ts`](https://github.com/vinidias/megabrain-market/blob/main/server/megabrain-market/intelligence/v1/_risk-config.ts)。
 它们的**理由**：
 
 - **`STRATEGIC_RISK_POSITIONAL_DECAY = 0.15`** — 受影响最大的国家获得完整权重；接下来四个位置衰减到 `0.85`、`0.70`、`0.55` 和 `0.40`。第 6 个 1 基位置（0 基索引 5）仍会携带 `0.25`，因此是显式的 top-5 窗口而非零权重截断界定了该汇总。

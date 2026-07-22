@@ -11,7 +11,7 @@ import type {
   GetHumanitarianSummaryRequest,
   GetHumanitarianSummaryResponse,
   HumanitarianCountrySummary,
-} from '../../../../src/generated/server/worldmonitor/conflict/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/conflict/v1/service_server';
 
 import { CHROME_UA } from '../../../_shared/constants';
 import { cachedFetchJson } from '../../../_shared/redis';
@@ -34,7 +34,7 @@ interface HapiCountryAgg {
 
 async function fetchHapiSummary(countryCode: string): Promise<HumanitarianCountrySummary | undefined> {
   try {
-    const appId = btoa('worldmonitor:monitor@worldmonitor.app');
+    const appId = btoa('megabrain-market:monitor@megabrain.market');
     let url = `https://hapi.humdata.org/api/v2/coordination-context/conflict-events?output_format=json&limit=1000&offset=0&app_identifier=${appId}`;
 
     // Filter by country — if a specific country was requested but has no ISO3 mapping,

@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package worldmonitor.shipping.v2;
+package megabrain-market.shipping.v2;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/shipping/v2/route_intelligence.proto";
-import "worldmonitor/shipping/v2/register_webhook.proto";
-import "worldmonitor/shipping/v2/list_webhooks.proto";
+import "megabrain-market/shipping/v2/route_intelligence.proto";
+import "megabrain-market/shipping/v2/register_webhook.proto";
+import "megabrain-market/shipping/v2/list_webhooks.proto";
 
 // ShippingV2Service is the partner-facing (vendor) surface for chokepoint
 // route intelligence and disruption-alert webhooks. PRO-gated, authenticated
-// via X-WorldMonitor-Key (server-to-server; browser origins are NOT exempt).
+// via X-MegaBrainMarket-Key (server-to-server; browser origins are NOT exempt).
 //
 // The base_path intentionally reverses the usual /api/{domain}/v{N} ordering
 // because the existing partner contract is /api/v2/shipping/*. The proto does

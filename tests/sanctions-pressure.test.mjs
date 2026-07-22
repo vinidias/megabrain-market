@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const handlerSrc = readFileSync('server/worldmonitor/sanctions/v1/list-sanctions-pressure.ts', 'utf8');
+const handlerSrc = readFileSync('server/megabrain-market/sanctions/v1/list-sanctions-pressure.ts', 'utf8');
 const seedSrc = readFileSync('scripts/seed-sanctions-pressure.mjs', 'utf8');
 
 // ---------------------------------------------------------------------------

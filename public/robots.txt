@@ -1,4 +1,4 @@
-# World Monitor - protect API routes from crawlers
+# MegaBrain Market - protect API routes from crawlers
 #
 # Three-tier AI crawler policy (#4952):
 #   1. `User-agent: *` — default rules + Content-Signal usage preferences.
@@ -59,7 +59,7 @@ User-agent: Bytespider
 User-agent: anthropic-ai
 Disallow: /
 
-Sitemap: https://www.worldmonitor.app/sitemap.xml
-Sitemap: https://www.worldmonitor.app/blog/sitemap-index.xml
+Sitemap: https://www.megabrain.market/sitemap.xml
+Sitemap: https://www.megabrain.market/blog/sitemap-index.xml
 # Mintlify owns the documentation index, including /docs/zh/ translations.
-Sitemap: https://www.worldmonitor.app/docs/sitemap.xml
+Sitemap: https://www.megabrain.market/docs/sitemap.xml

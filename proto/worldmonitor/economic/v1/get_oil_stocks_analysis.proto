@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.economic.v1;
+package megabrain-market.economic.v1;
 
 // OilStocksAnalysisMember holds days-of-cover data and obligation status for one IEA member country.
 message OilStocksAnalysisMember {

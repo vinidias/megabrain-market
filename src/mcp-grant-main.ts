@@ -3,7 +3,7 @@
  *
  * Clerk-protected consent screen for the cross-subdomain Pro MCP flow.
  * The user lands here from the api-subdomain consent page (U4 will add
- * a "Sign in with WorldMonitor Pro" CTA on `api/oauth/authorize.js`).
+ * a "Sign in with MegaBrainMarket Pro" CTA on `api/oauth/authorize.js`).
  *
  * Flow on this page:
  *   1. Boot Clerk; if signed-out, openSignIn(). On sign-in, the modal
@@ -14,7 +14,7 @@
  *   4. Render the consent card (real metadata so users can spot phishing).
  *   5. On Authorize click: POST /api/internal/mcp-grant-mint {nonce}
  *      with Bearer JWT, navigate to the returned `redirect` URL (always
- *      `https://api.worldmonitor.app/oauth/authorize-pro?...` — the
+ *      `https://api.megabrain.market/oauth/authorize-pro?...` — the
  *      apex page never controls the host).
  */
 
@@ -25,7 +25,7 @@ import { initClerk, getClerkToken, getCurrentClerkUser, openSignIn, subscribeCle
 // inline-script hashes is brittle. A brief default-theme flash on light-
 // preference users is acceptable for this transient consent UI.
 try {
-  const savedTheme = localStorage.getItem('worldmonitor-theme');
+  const savedTheme = localStorage.getItem('megabrain-market-theme');
   if (savedTheme === 'light') document.documentElement.dataset.theme = 'light';
 } catch {
   // localStorage may be unavailable in privacy modes — proceed with default.
@@ -126,7 +126,7 @@ function errorCodeToMessage(code: string | undefined): string {
     case 'INVALID_REDIRECT_URI':
       return 'The redirect destination is not allowed. Start over from your MCP client.';
     case 'INSUFFICIENT_TIER':
-      return 'A WorldMonitor Pro subscription is required to authorize MCP clients.';
+      return 'A MegaBrainMarket Pro subscription is required to authorize MCP clients.';
     case 'CONFIGURATION_ERROR':
       return 'MCP authorization is temporarily unavailable. Please try again later.';
     case 'SERVICE_UNAVAILABLE':
@@ -183,7 +183,7 @@ async function onAuthorizeClick(nonce: string): Promise<void> {
     return;
   }
 
-  // Defense-in-depth: the apex page MUST navigate only to api.worldmonitor.app.
+  // Defense-in-depth: the apex page MUST navigate only to api.megabrain.market.
   // The server-returned URL is hard-coded to that host, but check anyway so a
   // future server bug (or an XSS that swaps the response) cannot bounce to
   // an attacker-controlled host.
@@ -194,7 +194,7 @@ async function onAuthorizeClick(nonce: string): Promise<void> {
     showErrorView('The authorization service returned an invalid redirect.');
     return;
   }
-  if (target.origin !== 'https://api.worldmonitor.app') {
+  if (target.origin !== 'https://api.megabrain.market') {
     showErrorView('The authorization service returned an unexpected redirect host.');
     return;
   }

@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package worldmonitor.consumer_prices.v1;
+package megabrain-market.consumer_prices.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/consumer_prices/v1/get_consumer_price_overview.proto";
-import "worldmonitor/consumer_prices/v1/get_consumer_price_basket_series.proto";
-import "worldmonitor/consumer_prices/v1/list_consumer_price_categories.proto";
-import "worldmonitor/consumer_prices/v1/list_consumer_price_movers.proto";
-import "worldmonitor/consumer_prices/v1/list_retailer_price_spreads.proto";
-import "worldmonitor/consumer_prices/v1/get_consumer_price_freshness.proto";
+import "megabrain-market/consumer_prices/v1/get_consumer_price_overview.proto";
+import "megabrain-market/consumer_prices/v1/get_consumer_price_basket_series.proto";
+import "megabrain-market/consumer_prices/v1/list_consumer_price_categories.proto";
+import "megabrain-market/consumer_prices/v1/list_consumer_price_movers.proto";
+import "megabrain-market/consumer_prices/v1/list_retailer_price_spreads.proto";
+import "megabrain-market/consumer_prices/v1/get_consumer_price_freshness.proto";
 
 // ConsumerPricesService provides APIs for consumer price intelligence.
 // Data is sourced from the consumer-prices-core companion service via Redis snapshots.

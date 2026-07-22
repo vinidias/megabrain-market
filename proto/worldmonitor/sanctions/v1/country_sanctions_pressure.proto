@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.sanctions.v1;
+package megabrain-market.sanctions.v1;
 
 // CountrySanctionsPressure summarizes designation volume and recent additions by country.
 message CountrySanctionsPressure {

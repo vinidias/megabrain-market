@@ -25,7 +25,7 @@ import {
   type ExplorerUrlState,
   type ExplorerTab,
 } from './url-state';
-import type { GetRouteExplorerLaneResponse, GetRouteImpactResponse, BypassCorridorOption } from '@/generated/server/worldmonitor/supply_chain/v1/service_server';
+import type { GetRouteExplorerLaneResponse, GetRouteImpactResponse, BypassCorridorOption } from '@/generated/server/megabrain-market/supply_chain/v1/service_server';
 import { fetchRouteExplorerLane, fetchRouteImpact } from '@/services/supply-chain';
 import { hasPremiumAccess } from '@/services/panel-gating';
 import { getAuthState } from '@/services/auth-state';
@@ -358,7 +358,7 @@ export class RouteExplorer {
         });
         void import('@/services/checkout')
           .then((m) => m.startCheckout('pro_monthly'))
-          .catch(() => window.open('https://worldmonitor.app/pro', '_blank', 'noopener,noreferrer'));
+          .catch(() => window.open('https://megabrain.market/pro', '_blank', 'noopener,noreferrer'));
       }, { once: true });
     }
   }

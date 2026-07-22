@@ -4,7 +4,7 @@ import type {
   GetBypassOptionsResponse,
   BypassOption,
   ChokepointInfo,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 
 import { isCallerPremium } from '../../../_shared/premium-check';
 import { BYPASS_CORRIDORS_BY_CHOKEPOINT } from '../../../../src/config/bypass-corridors';

@@ -30,13 +30,13 @@
 
 Railway stores watch paths in each service's environment configuration, not in
 the repository. The repo-side contract is
-`scripts/audit-railway-watch-paths.mjs`: every WorldMonitor Railway seeder,
+`scripts/audit-railway-watch-paths.mjs`: every MegaBrainMarket Railway seeder,
 including Dockerfile and repo-root services, must either have no watch filter
 (watch the whole repo) or include both `scripts/**` and `shared/**`. Enumerating
 the current entry file and known helpers is unsafe because the next helper can
 be added without updating the dashboard list.
 
-After linking the CLI to the `world-monitor` production environment, audit the
+After linking the CLI to the `megabrain-market` production environment, audit the
 live settings with:
 
 ```bash
@@ -57,7 +57,7 @@ Run the audit after adding or replacing a standalone seeder.
 ### Bootstrap R2 publisher contract
 
 The public bootstrap tiers use the dedicated private bucket
-`worldmonitor-bootstrap`. Managed `r2.dev` access stays disabled and the bucket
+`megabrain-market-bootstrap`. Managed `r2.dev` access stays disabled and the bucket
 has no custom domain; clients continue to enter through `/api/bootstrap` so the
 WAF, origin policy, rate limits, telemetry, and future access controls remain in
 the request path.
@@ -75,9 +75,9 @@ The environment contract is deliberately split by consumer:
 
 | Scope | Variables | Install in | Capability |
 |---|---|---|---|
-| Shared routing and tier shape | `R2_ACCOUNT_ID`, optional `R2_ENDPOINT`, `R2_BOOTSTRAP_BUCKET=worldmonitor-bootstrap`, `IRAN_EVENTS_ENABLED` | Railway production and Vercel production | Names plus the feature flag that controls `iranEvents` tier membership; values must match |
-| Publisher | `R2_BOOTSTRAP_ACCESS_KEY_ID`, `R2_BOOTSTRAP_SECRET_ACCESS_KEY` | Railway production publisher only | Publisher can PUT and GET only in `worldmonitor-bootstrap` |
-| Edge reader | `R2_BOOTSTRAP_READ_KEY_ID`, `R2_BOOTSTRAP_READ_SECRET` | Vercel production only | Edge can GET; it cannot PUT or DELETE, and cannot read `worldmonitor-data` |
+| Shared routing and tier shape | `R2_ACCOUNT_ID`, optional `R2_ENDPOINT`, `R2_BOOTSTRAP_BUCKET=megabrain-market-bootstrap`, `IRAN_EVENTS_ENABLED` | Railway production and Vercel production | Names plus the feature flag that controls `iranEvents` tier membership; values must match |
+| Publisher | `R2_BOOTSTRAP_ACCESS_KEY_ID`, `R2_BOOTSTRAP_SECRET_ACCESS_KEY` | Railway production publisher only | Publisher can PUT and GET only in `megabrain-market-bootstrap` |
+| Edge reader | `R2_BOOTSTRAP_READ_KEY_ID`, `R2_BOOTSTRAP_READ_SECRET` | Vercel production only | Edge can GET; it cannot PUT or DELETE, and cannot read `megabrain-market-data` |
 
 Preview and development do not receive either credential; missing credentials
 must use the Redis path. The publisher must not fall back to any
@@ -97,8 +97,8 @@ Provision and release in this order:
 4. Install only the shared and read-only variables in Vercel production. Keep
    them absent from preview and development.
 5. Run the negative permission probes: publisher cannot access
-   `worldmonitor-data`; edge cannot write/delete in `worldmonitor-bootstrap` and
-   cannot read `worldmonitor-data`.
+   `megabrain-market-data`; edge cannot write/delete in `megabrain-market-bootstrap` and
+   cannot read `megabrain-market-data`.
 
 Rotate one consumer at a time: create a replacement token, update that consumer,
 verify its publish or read with the replacement, then revoke the old token. On
@@ -493,7 +493,7 @@ entries.
 
 | Service | ID | Type |
 |---|---|---|
-| worldmonitor (ais-relay) | `a5f66d97-217f-44a0-a42d-5f3b67752223` | AIS relay + inline seeds |
+| megabrain-market (ais-relay) | `a5f66d97-217f-44a0-a42d-5f3b67752223` | AIS relay + inline seeds |
 | notification-relay | `aa37bd8e-c28d-4e9b-9d1e-0961f1b63d97` | Notification dispatch |
 | simulation-worker | `67264e35-0b51-457b-984f-4ef20e36a117` | Forecast simulations |
 | deep-forecast-worker | `750bc68f-9840-49a3-95eb-7c8bcc060485` | Deep forecast tasks |
@@ -641,7 +641,7 @@ Each bundle service inherits the same env vars as the individual seeds it replac
 - Plus any API keys used by member seeds (GIE_API_KEY, ICAO_API_KEY, etc.)
 - `SAM_GOV_API_KEY` for the Global Tenders SAM.gov adapter. The other initial procurement adapters do not require credentials.
 
-The simplest approach: use Railway's "shared variables" or copy all env vars from the `worldmonitor` (ais-relay) service, which has a superset of all API keys.
+The simplest approach: use Railway's "shared variables" or copy all env vars from the `megabrain-market` (ais-relay) service, which has a superset of all API keys.
 
 ---
 
@@ -679,15 +679,15 @@ IMPORT_HHI_VERBOSE=1 FORCE_RESEED=true node scripts/seed-recovery-import-hhi.mjs
 Then warm live scores so `importConcentration` reads the refreshed canonical key:
 
 ```bash
-API_BASE_URL=https://api.worldmonitor.app \
-WORLDMONITOR_SEED_REFRESH_KEY=<seed-refresh-key> \
-WORLDMONITOR_API_KEY=<read-key> \
+API_BASE_URL=https://api.megabrain.market \
+MEGABRAIN_MARKET_SEED_REFRESH_KEY=<seed-refresh-key> \
+MEGABRAIN_MARKET_API_KEY=<read-key> \
 node scripts/seed-resilience-scores.mjs
 ```
 
-`WORLDMONITOR_SEED_REFRESH_KEY` is required: the resilience score seeder uses it
+`MEGABRAIN_MARKET_SEED_REFRESH_KEY` is required: the resilience score seeder uses it
 for the seed-only `get-resilience-ranking?refresh=1` recompute path. Keep
-`WORLDMONITOR_API_KEY` or `WORLDMONITOR_VALID_KEYS` available too so laggard
+`MEGABRAIN_MARKET_API_KEY` or `MEGABRAIN_MARKET_VALID_KEYS` available too so laggard
 per-country score warms can fall back to the normal premium read endpoint. In
 Railway, the service environment should already provide the Upstash Redis
 credentials; for a local force-run, export `UPSTASH_REDIS_REST_URL` and
@@ -704,9 +704,9 @@ counts `intervalMissingScorePayloadCount`, `intervalStaleScorePayloadCount`,
 Verify the public audit surfaces after the run:
 
 ```bash
-curl -fsS https://api.worldmonitor.app/api/resilience/v1/get-runtime-manifest \
+curl -fsS https://api.megabrain.market/api/resilience/v1/get-runtime-manifest \
   | jq '{formulaTag, rankingCache, constructVersions, intervals}'
-curl -fsS https://api.worldmonitor.app/api/health \
+curl -fsS https://api.megabrain.market/api/health \
   | jq '.checks.resilienceIntervals'
 ```
 
@@ -719,7 +719,7 @@ Pass condition for interval recovery: runtime manifest reports
 Verify both Redis and the live score API:
 
 ```bash
-WORLDMONITOR_API_KEY=<key> node scripts/verify-import-hhi-coverage.mjs
+MEGABRAIN_MARKET_API_KEY=<key> node scripts/verify-import-hhi-coverage.mjs
 ```
 
 Pass condition for AE/RU/NO/CH:

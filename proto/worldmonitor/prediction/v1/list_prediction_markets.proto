@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.prediction.v1;
+package megabrain-market.prediction.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/prediction/v1/prediction_market.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/prediction/v1/prediction_market.proto";
 
 // ListPredictionMarketsRequest specifies filters for retrieving prediction markets.
 message ListPredictionMarketsRequest {
@@ -24,7 +24,7 @@ message ListPredictionMarketsResponse {
   // The list of prediction markets.
   repeated PredictionMarket markets = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
   // Time the seed snapshot was fetched, as Unix epoch milliseconds. A value of
   // 0 means the snapshot is unavailable/degraded, not that there are confirmed
   // zero matching markets.

@@ -1,9 +1,9 @@
 ---
 title: "AI Brief Endpoints"
-description: "Read, share, render, and paginate the AI-composed World Monitor intelligence brief — endpoints for public shares, carousels, and share URLs."
+description: "Read, share, render, and paginate the AI-composed MegaBrain Market intelligence brief — endpoints for public shares, carousels, and share URLs."
 ---
 
-WorldMonitor composes a per-user intelligence brief on Railway, stores each
+MegaBrainMarket composes a per-user intelligence brief on Railway, stores each
 edition in Redis at `brief:{userId}:{issueSlot}`, writes a latest pointer at
 `brief:latest:{userId}`, and exposes these routes for dashboard readback,
 public sharing, and Telegram/Slack carousel rendering. Default cadence is
@@ -96,4 +96,4 @@ Streaming chat endpoint for the "Ask the analyst" in-dashboard assistant. Takes 
 
 ### `POST /api/widget-agent`
 
-Single-shot completion endpoint used by embedded widget iframes. Auth via `X-WorldMonitor-Key` (partner keys). Rate-limited per key.
+Single-shot completion endpoint used by embedded widget iframes. Auth via `X-MegaBrainMarket-Key` (partner keys). Rate-limited per key.

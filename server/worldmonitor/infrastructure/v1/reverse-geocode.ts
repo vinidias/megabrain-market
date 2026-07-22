@@ -3,11 +3,11 @@ import type {
   ServerContext,
   ReverseGeocodeRequest,
   ReverseGeocodeResponse,
-} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/infrastructure/v1/service_server';
 import { getCachedJson, setCachedJson } from '../../../_shared/redis';
 
 const NOMINATIM_BASE = 'https://nominatim.openstreetmap.org/reverse';
-const CHROME_UA = 'WorldMonitor/2.0 (https://worldmonitor.app)';
+const CHROME_UA = 'MegaBrainMarket/2.0 (https://megabrain.market)';
 
 interface ReverseCacheEntry {
   country?: string;

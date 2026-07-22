@@ -3,7 +3,7 @@ import type {
   ServerContext,
   GetSimulationOutcomeRequest,
   GetSimulationOutcomeResponse,
-} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
 import { getRawJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
 // Both keys come from the shim — single source of truth. Importing

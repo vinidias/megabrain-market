@@ -192,7 +192,7 @@ describe('layer explanation metadata', () => {
     assertDuration(
       renderedFreshnessText('ais'),
       /([0-9]+)\s+(minute)s?/i,
-      constNumber('server/worldmonitor/maritime/v1/get-vessel-snapshot.ts', 'SNAPSHOT_CACHE_TTL_BASE_MS') / 60_000,
+      constNumber('server/megabrain-market/maritime/v1/get-vessel-snapshot.ts', 'SNAPSHOT_CACHE_TTL_BASE_MS') / 60_000,
       'AIS base snapshot server cache',
     );
 

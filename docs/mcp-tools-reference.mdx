@@ -1,6 +1,6 @@
 ---
 title: "MCP Tools Reference"
-description: "Per-tool reference for every MCP tool World Monitor exposes — parameters, freshness windows, backing API endpoints, and example call payloads."
+description: "Per-tool reference for every MCP tool MegaBrain Market exposes — parameters, freshness windows, backing API endpoints, and example call payloads."
 ---
 
 Complete reference for every MCP tool. Use this alongside the [MCP Server overview](/mcp-overview) (connection, auth, plans, errors).
@@ -19,7 +19,7 @@ The `curl` examples below all assume you've exported your API key:
 export WM_KEY="wm_0123456789abcdef0123456789abcdef01234567"  # or use the OAuth bearer token instead — see /mcp-overview#authentication
 ```
 
-If you've completed the OAuth flow instead, replace `-H "X-WorldMonitor-Key: $WM_KEY"` with `-H "Authorization: Bearer $TOKEN"` in each example.
+If you've completed the OAuth flow instead, replace `-H "X-MegaBrainMarket-Key: $WM_KEY"` with `-H "Authorization: Bearer $TOKEN"` in each example.
 
 <Tip>
 **Recently added** (May 2026): `get_displacement_data`, `get_health_signals`, `get_energy_intelligence`, `get_consumer_prices`, `get_tariff_trends`, `get_chokepoint_status` — six new bundled tools that exposed previously-cached domains via MCP.
@@ -165,7 +165,7 @@ Universal arguments:
 
 ### `get_market_data`
 
-Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from WorldMonitor's curated bootstrap cache.
+Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from MegaBrainMarket's curated bootstrap cache.
 
 **Parameters (tool-specific):**
 
@@ -182,8 +182,8 @@ Real-time equity quotes, commodity prices (including gold futures GC=F), crypto 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -213,8 +213,8 @@ Macro economic indicators: Fed Funds rate (FRED), economic calendar events, fuel
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -253,8 +253,8 @@ Unfiltered calls preserve the standard all-open-opportunities behavior; `min_aut
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -283,8 +283,8 @@ Per-country macroeconomic indicators from IMF WEO (~210 countries, monthly caden
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -313,8 +313,8 @@ Eurostat annual house price index (prc_hpi_a, base 2015=100) for all 27 EU membe
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -343,8 +343,8 @@ Eurostat quarterly general government gross debt (gov_10q_ggdebt, %GDP) for all 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -373,8 +373,8 @@ Eurostat monthly industrial production index (sts_inpr_m, NACE B-D industry excl
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -404,8 +404,8 @@ Global trade and pricing indicators: US tariff trends (HTS-coded), BigMac index,
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -433,8 +433,8 @@ Per-country consumer-prices intelligence: 30-day overview, category-level inflat
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -462,8 +462,8 @@ Global mining sites with coordinates, operator, mineral type, and production sta
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -494,8 +494,8 @@ Active Polymarket event contracts with current probabilities. Covers geopolitica
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -527,8 +527,8 @@ Energy supply, prices, storage, disruptions, and policy: EIA petroleum stocks, e
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -560,8 +560,8 @@ Active armed conflict events (UCDP, Iran), unrest events with geo-coordinates, a
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -583,13 +583,13 @@ Structured risk intelligence for a specific country: Composite Instability Index
 | `country_code` | string | **yes** | ISO 3166-1 alpha-2 country code, e.g. "RU", "IR", "CN", "UA" |
 
 - **API endpoints:** `GET /api/intelligence/v1/get-country-risk`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **8.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **8.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -612,14 +612,14 @@ AI-generated per-country intelligence brief. Produces an LLM-analyzed geopolitic
 | `framework` | string | no | Optional analytical framework instructions to shape the analysis lens (e.g. Ray Dalio debt cycle, PMESII-PT) |
 
 - **API endpoints:** `GET /api/intelligence/v1/get-country-intel-brief`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Worst-case total budget **~24s** (2s context-digest fetch + 22s brief generation, sequential).
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Worst-case total budget **~24s** (2s context-digest fetch + 22s brief generation, sequential).
 - **Sources:** returns a bounded `sources` array with original article links from the digest items used to ground the country context. URLs are copied from feed data, not generated by the LLM.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -632,7 +632,7 @@ curl -s https://worldmonitor.app/mcp \
 
 ### `get_news_intelligence`
 
-AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from WorldMonitor's intelligence layer.
+AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from MegaBrainMarket's intelligence layer.
 
 **Parameters (tool-specific):**
 
@@ -651,8 +651,8 @@ AI-classified geopolitical threat news summaries, GDELT intelligence signals, cr
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -683,8 +683,8 @@ Active cyber threat intelligence: malware IOCs (URLhaus, Feodotracker), CISA kno
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -715,8 +715,8 @@ OFAC SDN sanctioned entities list and sanctions pressure scores by country. Usef
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -745,8 +745,8 @@ Reddit geopolitical social velocity: top posts from worldnews, geopolitics, and 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -776,8 +776,8 @@ Theater posture assessment and military risk scores. Reflects aggregated militar
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -807,8 +807,8 @@ Live maritime chokepoint status: per-chokepoint vessel transit counts (10-min ca
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -837,8 +837,8 @@ Positive geopolitical events: diplomatic agreements, humanitarian aid, developme
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -871,8 +871,8 @@ Airport delays, NOTAM airspace closures, and tracked military aircraft. Covers F
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -895,13 +895,13 @@ Live ADS-B aircraft over a country. Returns civilian flights (OpenSky) and ident
 | `type` | string (all / civilian / military) | no | Filter: all flights (default), civilian only, or military only |
 
 - **API endpoints:** `GET /api/aviation/v1/track-aircraft`, `GET /api/military/v1/list-military-flights`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **8.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **8.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -923,13 +923,13 @@ Live vessel traffic and maritime disruptions for a country's waters. Returns AIS
 | `country_code` | string | **yes** | ISO 3166-1 alpha-2 country code (e.g. "AE", "SA", "JP", "EG") |
 
 - **API endpoints:** `GET /api/maritime/v1/get-vessel-snapshot`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **8.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **8.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -960,8 +960,8 @@ Dry bulk shipping stress index, customs revenue flows, and COMTRADE bilateral tr
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -991,8 +991,8 @@ Internet infrastructure health: Cloudflare Radar outages and service status for 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1021,13 +1021,13 @@ Search Google Flights for real-time flight options between two airports on a spe
 | `sort_by` | string | no | Sort order: "price" (cheapest), "duration", "departure", or "arrival" (optional) |
 
 - **API endpoints:** `GET /api/aviation/v1/search-google-flights`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **25.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **25.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1057,13 +1057,13 @@ Search Google Flights date-grid pricing across a date range. Returns cheapest pr
 | `sort_by_price` | boolean | no | Sort results by price ascending (default false, sorts by date) |
 
 - **API endpoints:** `GET /api/aviation/v1/search-google-dates`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **25.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **25.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1095,8 +1095,8 @@ Climate intelligence: temperature/precipitation anomalies (vs 30-year WMO normal
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1127,8 +1127,8 @@ Recent earthquakes (USGS), active wildfires (NASA FIRMS), and natural hazard eve
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1158,8 +1158,8 @@ Radiation observation levels from global monitoring stations. Flags anomalous re
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1189,8 +1189,8 @@ Tech and research event signals: emerging technology events bootstrap data from 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1224,8 +1224,8 @@ Active disease outbreaks (WHO/ECDC etc.) and global air-quality station readings
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1256,8 +1256,8 @@ Refugee and IDP counts by country (UNHCR annual data).
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1281,14 +1281,14 @@ AI-generated world intelligence brief. Fetches the latest geopolitical headlines
 | `geo_context` | string | no | Optional focus context (e.g. "Middle East tensions", "US-China trade war") |
 
 - **API endpoints:** `GET /api/news/v1/list-feed-digest`, `POST /api/news/v1/summarize-article`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Worst-case total budget **~24s** (6s digest fetch + 18s LLM summarization, sequential).
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Worst-case total budget **~24s** (6s digest fetch + 18s LLM summarization, sequential).
 - **Sources:** returns a bounded `sources` array with original article links from the feed digest items sent as grounding inputs. URLs are copied from feed data, not generated by the LLM.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1312,13 +1312,13 @@ AI geopolitical situation analysis (DeductionPanel). Provide a query and optiona
 | `framework` | string | no | Optional analytical framework instructions to shape the analysis lens (e.g. Ray Dalio debt cycle, PMESII-PT, Porter's Five Forces) |
 
 - **API endpoints:** `POST /api/intelligence/v1/deduct-situation`
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **25.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **25.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1341,13 +1341,13 @@ Generate live AI geopolitical and economic forecasts. Unlike get_forecast_predic
 | `region` | string | no | Geographic region filter, e.g. "Middle East", "Europe", "Asia Pacific", or empty for global |
 
 - **API endpoints:** no public OpenAPI row; runtime proxies `POST /api/forecast/v1/get-forecasts` (the OpenAPI spec only declares `GET` on that path, which is covered by `get_forecast_predictions` — this tool's POST variant runs a fresh forecast).
-- **Kind:** live RPC — proxies a fetch to the WorldMonitor API on each call. Edge-runtime timeout: **25.0s**.
+- **Kind:** live RPC — proxies a fetch to the MegaBrainMarket API on each call. Edge-runtime timeout: **25.0s**.
 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1360,7 +1360,7 @@ curl -s https://worldmonitor.app/mcp \
 
 ### `get_forecast_predictions`
 
-AI-generated geopolitical and economic forecasts from WorldMonitor's predictive models. Covers upcoming risk events and probability assessments.
+AI-generated geopolitical and economic forecasts from MegaBrainMarket's predictive models. Covers upcoming risk events and probability assessments.
 
 **Parameters (tool-specific):**
 
@@ -1377,8 +1377,8 @@ AI-generated geopolitical and economic forecasts from WorldMonitor's predictive 
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1402,8 +1402,8 @@ Forecast resolution scorecard with calibration, Brier/log score, domain and gene
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,
@@ -1438,8 +1438,8 @@ Returns the full uncompressed definition of any other tool by name. Use when the
 <CodeGroup>
 
 ```bash curl
-curl -s https://worldmonitor.app/mcp \
-  -H "X-WorldMonitor-Key: $WM_KEY" \
+curl -s https://megabrain.market/mcp \
+  -H "X-MegaBrainMarket-Key: $WM_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jsonrpc":"2.0","id":1,

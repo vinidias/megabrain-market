@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.news.v1;
+package megabrain-market.news.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/news/v1/news_item.proto";
+import "megabrain-market/news/v1/news_item.proto";
 
 message ListFeedDigestRequest {
   // Digest variant: full, tech, finance, happy, commodity. Unsupported site variants, including energy, currently fall back to full.

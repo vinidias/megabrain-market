@@ -9,7 +9,7 @@ date: 2026-03-29
 
 ## Overview
 
-Enhance WorldMonitor's commodity variant with learnings from the `Yazan-Abuawwad/gold-monitor` fork. The fork was a fully independent Angular+Spring Boot app (not based on our codebase), but its gold layer design surfaces four concrete gaps in our current commodity variant:
+Enhance MegaBrainMarket's commodity variant with learnings from the `Yazan-Abuawwad/gold-monitor` fork. The fork was a fully independent Angular+Spring Boot app (not based on our codebase), but its gold layer design surfaces four concrete gaps in our current commodity variant:
 
 1. **10 major gold mines missing** from our `MINING_SITES` geo data
 2. **2 direct gold RSS feeds missing** from the `gold-silver` panel
@@ -29,7 +29,7 @@ This plan is additive enrichment, not new infrastructure.
 
 ## Problem Statement / Motivation
 
-The commodity variant (`commodity.worldmonitor.app`) serves users focused on gold, metals, and energy markets. Compared to the fork's gold layer design, three user-facing gaps exist:
+The commodity variant (`commodity.megabrain.market`) serves users focused on gold, metals, and energy markets. Compared to the fork's gold layer design, three user-facing gaps exist:
 
 - **Map incompleteness**: Major producing mines (Muruntau, Kibali, Yanacocha, Ahafo, South Deep, etc.) are absent from the mining layer. A user clicking into gold production misses ~40% of the top 20 global mines.
 - **Brief irrelevance**: The AI brief on the commodity variant reads news from `['markets', 'economic', 'crypto', 'finance']` — all of which are finance-variant categories. Commodity users get a stock market brief, not a gold/commodities brief.
@@ -109,7 +109,7 @@ Add `XAUUSD=X` (London spot gold, Yahoo Finance):
 { "symbol": "XAUUSD=X", "name": "Gold Spot", "display": "XAU SPOT" }
 ```
 
-This is auto-picked up by `ais-relay.cjs` `COMMODITY_SYMBOLS` + `YAHOO_ONLY` set check (it ends in `=X`, similar treatment to `=F` futures). Verify: confirm `YAHOO_ONLY_SYMBOLS` in `server/worldmonitor/market/v1/_shared.ts` includes `XAUUSD=X` or add it.
+This is auto-picked up by `ais-relay.cjs` `COMMODITY_SYMBOLS` + `YAHOO_ONLY` set check (it ends in `=X`, similar treatment to `=F` futures). Verify: confirm `YAHOO_ONLY_SYMBOLS` in `server/megabrain-market/market/v1/_shared.ts` includes `XAUUSD=X` or add it.
 
 Value: frontend can now show futures vs spot basis spread in `CommoditiesPanel` (contango/backwardation signal for gold market sentiment).
 
@@ -246,7 +246,7 @@ Shows XAU (gold) priced in 10 currencies with live calculation:
 
 ### Gold Standard Seeder Compliance
 
-- [ ] Any new `=F` or `=X` symbols added to `YAHOO_ONLY_SYMBOLS` in **both** `server/worldmonitor/market/v1/_shared.ts` and `ais-relay.cjs`
+- [ ] Any new `=F` or `=X` symbols added to `YAHOO_ONLY_SYMBOLS` in **both** `server/megabrain-market/market/v1/_shared.ts` and `ais-relay.cjs`
 - [ ] No new seeder scripts created (symbols ride existing `seedCommodityQuotes()`)
 - [ ] TTL for new symbols: inherited from existing `MARKET_SEED_TTL = 7200` (2h) — no change
 
@@ -281,7 +281,7 @@ Shows XAU (gold) priced in 10 currencies with live calculation:
 - Gold feeds: `src/config/feeds.ts:1107` (`gold-silver` block)
 - Commodity symbols: `shared/commodities.json`
 - Seeder: `scripts/ais-relay.cjs` `seedCommodityQuotes()` ~line 1413
-- Yahoo-only symbols: `server/worldmonitor/market/v1/_shared.ts` `YAHOO_ONLY_SYMBOLS`
+- Yahoo-only symbols: `server/megabrain-market/market/v1/_shared.ts` `YAHOO_ONLY_SYMBOLS`
 - Brief categories: `src/services/daily-market-brief.ts:97` (`BRIEF_NEWS_CATEGORIES`)
 - InsightsPanel title: `src/components/InsightsPanel.ts:553`
 - Layer registry: `src/config/map-layer-definitions.ts`
@@ -293,5 +293,5 @@ Shows XAU (gold) priced in 10 currencies with live calculation:
 ### Seeder Gold Standard
 
 - Memory: `feedback_seeder_gold_standard.md` — TTL ≥ 3x interval, `upstashExpire` on both failure paths, 20min retry, `inFlight` guard
-- Bootstrap 4-file checklist: `worldmonitor-bootstrap-registration.md`
+- Bootstrap 4-file checklist: `megabrain-market-bootstrap-registration.md`
 - Yahoo rate limit: ~49 calls/5min max; Phase 4 adds 9 symbols (safe)

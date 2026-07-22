@@ -5,7 +5,7 @@ import type {
   MilitaryAircraftType,
   MilitaryOperator,
   MilitaryConfidence,
-} from '../../../../src/generated/server/worldmonitor/military/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/military/v1/service_server';
 
 import { isMilitaryCallsign, isMilitaryHex, detectAircraftType, UPSTREAM_TIMEOUT_MS } from './_shared';
 import { cachedFetchJson, getRawJson } from '../../../_shared/redis';

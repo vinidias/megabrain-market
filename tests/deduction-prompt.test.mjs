@@ -7,7 +7,7 @@ import {
   inferProviderLabel,
   postProcessDeductionOutput,
   splitDeductionContext,
-} from '../server/worldmonitor/intelligence/v1/deduction-prompt.ts';
+} from '../server/megabrain-market/intelligence/v1/deduction-prompt.ts';
 import { buildNewsContextFromItems } from '../src/utils/news-context.ts';
 
 describe('inferDeductionMode', () => {

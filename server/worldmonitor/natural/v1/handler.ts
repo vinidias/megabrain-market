@@ -1,4 +1,4 @@
-import type { NaturalServiceHandler } from '../../../../src/generated/server/worldmonitor/natural/v1/service_server';
+import type { NaturalServiceHandler } from '../../../../src/generated/server/megabrain-market/natural/v1/service_server';
 
 import { listNaturalEvents } from './list-natural-events';
 

@@ -223,8 +223,8 @@ export function __setWmSessionSentryEnqueueForTests(fn: typeof enqueueSentryCall
 //
 //   2. PR #3575 review — using raw `startsWith(apiOrigin)` for absolute URLs
 //      lets attacker-controlled origins that embed the canonical-origin
-//      string as a prefix (e.g. `https://api.worldmonitor.app.evil.example/`)
-//      OR as the userinfo portion (`https://api.worldmonitor.app@evil/`)
+//      string as a prefix (e.g. `https://api.megabrain.market.evil.example/`)
+//      OR as the userinfo portion (`https://api.megabrain.market@evil/`)
 //      slip through, sending the wms_ token to a foreign host. Bug class:
 //      matcher over-matches → token leaks cross-origin.
 //
@@ -276,7 +276,7 @@ function isCredentiallessPublicDataRequest(
     && publicFlags[0] === '1';
 }
 
-// If a caller already set Authorization / X-WorldMonitor-Key / X-Api-Key, we
+// If a caller already set Authorization / X-MegaBrainMarket-Key / X-Api-Key, we
 // don't override — Clerk Bearer JWT and explicit user keys still take
 // precedence over the anonymous session token.
 export function installWmSessionFetchInterceptor(): void {
@@ -286,7 +286,7 @@ export function installWmSessionFetchInterceptor(): void {
   // CRITICAL: must be getCanonicalApiOrigin(), NOT getApiBaseUrl(). The latter
   // returns '' for non-desktop runtimes (see runtime.ts:111), which makes the
   // interceptor's cross-origin match below silently fail for every browser
-  // request to https://api.worldmonitor.app/api/* — the interceptor only
+  // request to https://api.megabrain.market/api/* — the interceptor only
   // catches relative '/api/' paths, the wms_ token never gets attached, and
   // the gateway returns {"error":"API key required"}. Production incident
   // 2026-05-03: every browser request 401'd because of this.
@@ -324,9 +324,9 @@ export function installWmSessionFetchInterceptor(): void {
 
     // Premium routes have a dedicated auth-injection layer
     // (`installWebApiRedirect`'s `enrichInitForPremium` adds Clerk Bearer JWT,
-    // WORLDMONITOR_API_KEY, or tester key based on what the user has). Stepping
+    // MEGABRAIN_MARKET_API_KEY, or tester key based on what the user has). Stepping
     // aside lets that inner layer attach the right credential — if we set
-    // X-WorldMonitor-Key=wms_... here, the premium injector sees the header
+    // X-MegaBrainMarket-Key=wms_... here, the premium injector sees the header
     // and bails, and the server then 401s because wms_ is rejected on premium
     // routes (it's anonymous, not user-bound). PR #3557 review finding.
     const path = (() => {
@@ -346,7 +346,7 @@ export function installWmSessionFetchInterceptor(): void {
     // Don't override — Clerk and explicit-key paths take precedence.
     if (
       headers.has('Authorization') ||
-      headers.has('X-WorldMonitor-Key') ||
+      headers.has('X-MegaBrainMarket-Key') ||
       headers.has('X-Api-Key')
     ) {
       return original(input, withCredentials(init));

@@ -2,11 +2,11 @@ import type {
   ServerContext,
   RegisterWebhookRequest,
   RegisterWebhookResponse,
-} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
+} from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
 import {
   ApiError,
   ValidationError,
-} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
+} from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
 
 // @ts-expect-error — JS module, no declaration file
 import { validateApiKey } from '../../../../api/_api-key.js';
@@ -34,7 +34,7 @@ export async function registerWebhook(
   // every such caller collapses into a shared 'anon' owner bucket — letting
   // one Clerk-session holder enumerate/overwrite other tenants' webhooks.
   // Matches the legacy `api/v2/shipping/webhooks/[subscriberId]{,/[action]}.ts`
-  // gate and the documented "X-WorldMonitor-Key required" contract in
+  // gate and the documented "X-MegaBrainMarket-Key required" contract in
   // docs/api-shipping-v2.mdx.
   const apiKeyResult = (await validateApiKey(ctx.request, { forceKey: true })) as {
     valid: boolean; required: boolean; error?: string;

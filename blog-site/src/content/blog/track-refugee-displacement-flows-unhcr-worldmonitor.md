@@ -1,16 +1,16 @@
 ---
 title: "Track Refugee and Displacement Flows with UNHCR Data"
-description: "WorldMonitor maps refugee and IDP populations from UNHCR's official API — displacement flows on the map, a dedicated panel, and structured data for agents."
-metaTitle: "Refugee & Displacement Tracking | WorldMonitor"
+description: "MegaBrainMarket maps refugee and IDP populations from UNHCR's official API — displacement flows on the map, a dedicated panel, and structured data for agents."
+metaTitle: "Refugee & Displacement Tracking | MegaBrainMarket"
 keywords: "refugee flow data, displacement tracking dashboard, UNHCR data visualization, IDP monitoring, forced displacement statistics, displacement data API"
 audience: "Humanitarian and NGO teams, researchers, journalists, policy analysts, students"
-heroImage: "/blog/og/track-refugee-displacement-flows-unhcr-worldmonitor.png"
+heroImage: "/blog/og/track-refugee-displacement-flows-unhcr-megabrain-market.png"
 pubDate: "2026-07-21"
 ---
 
 Displacement is the human ledger of every crisis. Conflict, drought, floods, economic collapse — whatever the driver, people moving in numbers is both the consequence that matters most and one of the most reliable indicators that a situation has crossed from tension into emergency.
 
-WorldMonitor builds displacement into the same dashboard as the conflicts, disasters, and risk scores that drive it.
+MegaBrainMarket builds displacement into the same dashboard as the conflicts, disasters, and risk scores that drive it.
 
 ## What the displacement layer shows
 
@@ -26,7 +26,7 @@ The point of the placement is context. A displacement chart in isolation tells y
 
 ## Displacement as an early-warning input
 
-For humanitarian teams, displacement data answers the operational questions: where caseloads are growing, which asylum countries are absorbing pressure, which corridors are active. The [NGO situational-awareness workflow](/blog/posts/humanitarian-situational-awareness-ngo-security-monitoring-worldmonitor/) walks through pairing it with advisories, disease alerts, and country risk for field-security planning.
+For humanitarian teams, displacement data answers the operational questions: where caseloads are growing, which asylum countries are absorbing pressure, which corridors are active. The [NGO situational-awareness workflow](/blog/posts/humanitarian-situational-awareness-ngo-security-monitoring-megabrain-market/) walks through pairing it with advisories, disease alerts, and country risk for field-security planning.
 
 For analysts, it's a lagging-but-honest confirmation layer. Rhetoric and skirmishes can be noise; six figures of new displacement is not. When the [Country Instability Index](/blog/posts/country-instability-index-methodology-explained/) rises and displacement follows, you're watching escalation confirm itself in the most consequential data there is.
 
@@ -46,11 +46,11 @@ UNHCR's official population API — refugee populations by origin and asylum cou
 
 **Is it real-time?**
 
-No, and no honest tool would claim otherwise. Official displacement statistics follow reporting cycles. WorldMonitor pairs them with real-time layers — conflict events, disasters, news — so you can see the leading edge and the confirmed magnitude side by side.
+No, and no honest tool would claim otherwise. Official displacement statistics follow reporting cycles. MegaBrainMarket pairs them with real-time layers — conflict events, disasters, news — so you can see the leading edge and the confirmed magnitude side by side.
 
 **Can I use this data in my own analysis or app?**
 
-Yes — via the `get_displacement_data` MCP tool or the displacement REST endpoints. See the [API reference](https://www.worldmonitor.app/docs/api-reference) and the [developer platform overview](/blog/posts/build-on-worldmonitor-developer-api-open-source/).
+Yes — via the `get_displacement_data` MCP tool or the displacement REST endpoints. See the [API reference](https://www.megabrain.market/docs/api-reference) and the [developer platform overview](/blog/posts/build-on-megabrain-market-developer-api-open-source/).
 
 ---
 

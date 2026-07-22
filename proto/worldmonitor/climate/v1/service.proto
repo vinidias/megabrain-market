@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package worldmonitor.climate.v1;
+package megabrain-market.climate.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/climate/v1/get_co2_monitoring.proto";
-import "worldmonitor/climate/v1/get_ocean_ice_data.proto";
-import "worldmonitor/climate/v1/list_air_quality_data.proto";
-import "worldmonitor/climate/v1/list_climate_anomalies.proto";
-import "worldmonitor/climate/v1/list_climate_disasters.proto";
-import "worldmonitor/climate/v1/list_climate_news.proto";
+import "megabrain-market/climate/v1/get_co2_monitoring.proto";
+import "megabrain-market/climate/v1/get_ocean_ice_data.proto";
+import "megabrain-market/climate/v1/list_air_quality_data.proto";
+import "megabrain-market/climate/v1/list_climate_anomalies.proto";
+import "megabrain-market/climate/v1/list_climate_disasters.proto";
+import "megabrain-market/climate/v1/list_climate_news.proto";
 
 // ClimateService provides APIs for climate anomaly data sourced from Open-Meteo.
 service ClimateService {

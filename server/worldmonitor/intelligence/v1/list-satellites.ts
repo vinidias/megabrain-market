@@ -4,7 +4,7 @@ import type {
   ListSatellitesRequest,
   ListSatellitesResponse,
   Satellite,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 import { getCachedJson } from '../../../_shared/redis';
 
 const REDIS_KEY = 'intelligence:satellites:tle:v1';

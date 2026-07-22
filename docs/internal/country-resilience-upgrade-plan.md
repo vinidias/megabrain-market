@@ -198,7 +198,7 @@ model.** Three specific gaps keep it below reference grade:
    capacity as first-class top-level pillars. INFORM centers
    hazard/vulnerability/coping capacity. ND-GAIN centers vulnerability and
    readiness. WorldRiskIndex separates exposure from societal vulnerability.
-   Today's WorldMonitor resilience reads as a "readiness-plus-stress" model,
+   Today's MegaBrainMarket resilience reads as a "readiness-plus-stress" model,
    not a full resilience model. Confidence is also collapsed: the API exposes
    coverage, imputation share, and optional score intervals, but the widget
    reduces all of it to a single label.
@@ -229,11 +229,11 @@ intervals, change attribution, external expert review).
 - **13 dimensions across 5 weighted domains**, final aggregation is a
   domain-weighted average. Domain weights today: economic 0.22, infrastructure
   0.20, energy 0.15, social-governance 0.25, health-food 0.18.
-  Source: `server/worldmonitor/resilience/v1/_dimension-scorers.ts`,
-  `server/worldmonitor/resilience/v1/_shared.ts:~200`.
+  Source: `server/megabrain-market/resilience/v1/_dimension-scorers.ts`,
+  `server/megabrain-market/resilience/v1/_shared.ts:~200`.
 - **RPC handlers:** `GetResilienceScore(countryCode)` and
   `GetResilienceRanking()` under
-  `server/worldmonitor/resilience/v1/{get-resilience-score.ts, get-resilience-ranking.ts, handler.ts}`.
+  `server/megabrain-market/resilience/v1/{get-resilience-score.ts, get-resilience-ranking.ts, handler.ts}`.
 - **Cache keys** (all in `_shared.ts`): `resilience:score:v7:<cc>` (6h),
   `resilience:ranking:v8` (6h, written only when all countries scored),
   `resilience:history:v4:<cc>` (daily sorted set, 30-day retention),
@@ -283,9 +283,9 @@ intervals, change attribution, external expert review).
 
 ### AGENTS.md conventions (must follow)
 
-- **New RPCs:** define message in `proto/worldmonitor/<domain>/`, add RPC with
+- **New RPCs:** define message in `proto/megabrain-market/<domain>/`, add RPC with
   `(sebuf.http.config)` annotation, `make generate`, create handler in
-  `server/worldmonitor/<domain>/`, wire in domain's `handler.ts`, use
+  `server/megabrain-market/<domain>/`, wire in domain's `handler.ts`, use
   `cachedFetchJson()` with request-varying params in the cache key.
 - **4-file bootstrap wiring** for any new globally-bootstrapped RPC:
   `server/_shared/cache-keys.ts`, `api/bootstrap.js`, `api/health.js`
@@ -1155,13 +1155,13 @@ are complete.
 
 ### Internal references
 
-- `server/worldmonitor/resilience/v1/_dimension-scorers.ts`, 13 dimension
+- `server/megabrain-market/resilience/v1/_dimension-scorers.ts`, 13 dimension
   scorers, ~1073 lines.
-- `server/worldmonitor/resilience/v1/_shared.ts`, aggregation, confidence,
+- `server/megabrain-market/resilience/v1/_shared.ts`, aggregation, confidence,
   cache keys (~line 200 onwards).
-- `server/worldmonitor/resilience/v1/get-resilience-score.ts`
-- `server/worldmonitor/resilience/v1/get-resilience-ranking.ts`
-- `server/worldmonitor/resilience/v1/handler.ts`
+- `server/megabrain-market/resilience/v1/get-resilience-score.ts`
+- `server/megabrain-market/resilience/v1/get-resilience-ranking.ts`
+- `server/megabrain-market/resilience/v1/handler.ts`
 - `server/_shared/resilience-stats.ts`, statistical utilities (Cronbach,
   CUSUM, forecast).
 - `scripts/seed-resilience-static.mjs`, 11 slots, ~920 lines.
@@ -1196,7 +1196,7 @@ are complete.
 
 - `feedback_world_coverage_never_subset`, NEVER ship features limited to
   N countries (CRITICAL, repeated violation).
-- `worldmonitor-bootstrap-registration`, 4-file checklist.
+- `megabrain-market-bootstrap-registration`, 4-file checklist.
 - `feedback_health_js_registry_names`, `SEED_META`, not `SEED_DOMAINS`.
 - `feedback_seeder_gold_standard`, Railway seeder pattern.
 - `feedback_global_rpc_cache_contract`, request-varying params in cache key

@@ -1,16 +1,16 @@
 ---
 title: "Track Tariffs and Trade Policy Before They Hit Your Costs"
-description: "WorldMonitor's Trade Policy tracker combines WTO tariff baselines, US customs revenue, food-price indices, and trade news so you see policy shifts before invoices do."
-metaTitle: "Tariff Tracker & Trade Policy Monitoring | WorldMonitor"
+description: "MegaBrainMarket's Trade Policy tracker combines WTO tariff baselines, US customs revenue, food-price indices, and trade news so you see policy shifts before invoices do."
+metaTitle: "Tariff Tracker & Trade Policy Monitoring | MegaBrainMarket"
 keywords: "tariff tracker, trade policy monitoring, US tariff trends, customs revenue data, trade war dashboard, tariff data API, import tariffs"
 audience: "Importers and exporters, procurement teams, supply-chain analysts, macro traders, trade researchers"
-heroImage: "/blog/og/tariff-tracker-trade-policy-monitoring-worldmonitor.png"
+heroImage: "/blog/og/tariff-tracker-trade-policy-monitoring-megabrain-market.png"
 pubDate: "2026-07-21"
 ---
 
 Tariffs are the rare geopolitical instrument with a direct line item on your invoice. A new duty schedule doesn't just signal intent like a speech does — it reprices goods on a date certain, and everyone in the affected supply chain either saw it coming or didn't.
 
-WorldMonitor's trade-policy surface is built for seeing it coming.
+MegaBrainMarket's trade-policy surface is built for seeing it coming.
 
 ## What the Trade Policy tracker shows
 
@@ -31,11 +31,11 @@ A tariff announcement raises three questions in order:
 2. **What's exposed?** Trade-flow data tells you the actual goods volume moving on the affected lanes. A 25% tariff on a $100M flow and a 25% tariff on a $40B flow are different events.
 3. **What reroutes?** Trade doesn't stop; it detours. That's when tariffs become a logistics story — and why the trade-policy view sits next to [chokepoint and freight monitoring](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/) on the same platform.
 
-For question three, the [Scenario Engine](/blog/posts/stress-test-supply-chain-scenario-engine-worldmonitor/) includes pre-built tariff scenarios so you can stress-test exposure before the implementation date instead of after.
+For question three, the [Scenario Engine](/blog/posts/stress-test-supply-chain-scenario-engine-megabrain-market/) includes pre-built tariff scenarios so you can stress-test exposure before the implementation date instead of after.
 
 ## For developers and agents
 
-The `get_tariff_trends` MCP tool returns the tariff-trend series with customs revenue, Big Mac Index, FAO Food Price Index, and national-debt context in one call, and `get_supply_chain_data` adds COMTRADE bilateral flows and customs revenue for lane-level analysis. An agent handling "what does the new steel tariff mean for our Q4 landed costs?" can ground itself in actual baselines and flows rather than headlines — the [supply-chain early-warning tutorial](/blog/posts/build-supply-chain-early-warning-system-api/) and [tender-tracking guide](/blog/posts/government-tenders-procurement-intelligence-worldmonitor/) both build on the same API surface.
+The `get_tariff_trends` MCP tool returns the tariff-trend series with customs revenue, Big Mac Index, FAO Food Price Index, and national-debt context in one call, and `get_supply_chain_data` adds COMTRADE bilateral flows and customs revenue for lane-level analysis. An agent handling "what does the new steel tariff mean for our Q4 landed costs?" can ground itself in actual baselines and flows rather than headlines — the [supply-chain early-warning tutorial](/blog/posts/build-supply-chain-early-warning-system-api/) and [tender-tracking guide](/blog/posts/government-tenders-procurement-intelligence-megabrain-market/) both build on the same API surface.
 
 ## Limits
 

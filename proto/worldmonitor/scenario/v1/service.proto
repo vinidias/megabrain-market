@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package worldmonitor.scenario.v1;
+package megabrain-market.scenario.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/scenario/v1/run_scenario.proto";
-import "worldmonitor/scenario/v1/get_scenario_status.proto";
-import "worldmonitor/scenario/v1/list_scenario_templates.proto";
+import "megabrain-market/scenario/v1/run_scenario.proto";
+import "megabrain-market/scenario/v1/get_scenario_status.proto";
+import "megabrain-market/scenario/v1/list_scenario_templates.proto";
 
 // ScenarioService exposes the scenario engine: enqueue a scenario job,
 // poll its status, and list the template catalog.

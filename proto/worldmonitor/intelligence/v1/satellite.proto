@@ -1,9 +1,9 @@
 syntax = "proto3";
-package worldmonitor.intelligence.v1;
+package megabrain-market.intelligence.v1;
 
 import "buf/validate/validate.proto";
 
-// Satellite represents an orbital asset tracked by WorldMonitor.
+// Satellite represents an orbital asset tracked by MegaBrainMarket.
 message Satellite {
   // NORAD identifier (e.g., "25544").
   string id = 1 [

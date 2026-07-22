@@ -3,7 +3,7 @@ import type {
   ListSanctionsPressureResponse,
   SanctionsServiceHandler,
   ServerContext,
-} from '../../../../src/generated/server/worldmonitor/sanctions/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/sanctions/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 import { isCallerPremium } from '../../../_shared/premium-check';

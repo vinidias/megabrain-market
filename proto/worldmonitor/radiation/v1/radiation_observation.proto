@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.radiation.v1;
+package megabrain-market.radiation.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/geo.proto";
+import "megabrain-market/core/v1/geo.proto";
 
 // RadiationObservation represents a normalized ambient dose-rate reading.
 message RadiationObservation {
@@ -25,7 +25,7 @@ message RadiationObservation {
   string country = 4;
 
   // Geographic location of the reading.
-  worldmonitor.core.v1.GeoCoordinates location = 5;
+  megabrain-market.core.v1.GeoCoordinates location = 5;
 
   // Dose equivalent rate normalized to nSv/h.
   double value = 6;

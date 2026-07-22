@@ -163,8 +163,8 @@ function generatedQuerySpecs() {
   return [
     ...serviceJsonSpecs,
     {
-      file: 'worldmonitor.openapi.yaml',
-      spec: YAML.parse(readFileSync(resolve(apiDir, 'worldmonitor.openapi.yaml'), 'utf8')),
+      file: 'megabrain-market.openapi.yaml',
+      spec: YAML.parse(readFileSync(resolve(apiDir, 'megabrain-market.openapi.yaml'), 'utf8')),
     },
   ];
 }

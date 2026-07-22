@@ -3,10 +3,10 @@ info:
     title: ShippingV2Service API
     version: 1.0.0
 security:
-    - WorldMonitorKey: []
+    - MegaBrainMarketKey: []
     - ApiKeyHeader: []
 servers:
-    - url: https://api.worldmonitor.app
+    - url: https://api.megabrain.market
 paths:
     /api/v2/shipping/route-intelligence:
         get:
@@ -21,7 +21,7 @@ paths:
                  unavailable/degraded, not that the route has confirmed zero exposure. PRO-gated. Requires an active Pro subscription.
             operationId: RouteIntelligence
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
@@ -63,7 +63,7 @@ paths:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -79,11 +79,11 @@ paths:
                                       "addedCostMultiplier": 75.25
                                       "addedTransitDays": 7
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "MegaBrainMarket Analyst"
                                 "cargoType": "container"
                                 "chokepointExposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "MegaBrainMarket Analyst"
                                       "exposurePct": 1
                                 "disruptionScore": 42
                                 "fetchedAt": "2026-01-15T12:00:00Z"
@@ -153,14 +153,14 @@ paths:
                  omitted from the response; use rotate-secret to obtain a new one. PRO-gated. Requires an active Pro subscription.
             operationId: ListWebhooks
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             parameters:
                 - name: jmespath
                   in: query
                   description: |-
-                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.worldmonitor.app/docs/mcp-jmespath.
+                    Optional JMESPath expression applied server-side to project or reduce the JSON response before it is returned (mirrors the MCP jmespath argument). Invalid expressions, expressions larger than 1024 UTF-8 bytes, or projections that exceed the 256 KB output cap return HTTP 400 with a {_jmespath_error, original_keys} envelope. Grammar and worked examples: https://www.megabrain.market/docs/mcp-jmespath.
                   required: false
                   example: "keys(@)"
                   schema:
@@ -174,7 +174,7 @@ paths:
                                 "webhooks":
                                     - "active": true
                                       "alertThreshold": 1
-                                      "callbackUrl": "https://example.com/worldmonitor-webhook"
+                                      "callbackUrl": "https://example.com/megabrain-market-webhook"
                                       "chokepointIds":
                                           - "suez"
                                       "createdAt": "2026-01-15T12:00:00Z"
@@ -254,7 +254,7 @@ paths:
                  returned again except via rotate-secret. PRO-gated. Requires an active Pro subscription.
             operationId: RegisterWebhook
             security:
-                - WorldMonitorKey: []
+                - MegaBrainMarketKey: []
                 - ApiKeyHeader: []
                 - BearerAuth: []
             requestBody:
@@ -262,7 +262,7 @@ paths:
                     application/json:
                         example:
                             "alertThreshold": 1
-                            "callbackUrl": "https://example.com/worldmonitor-webhook"
+                            "callbackUrl": "https://example.com/megabrain-market-webhook"
                             "chokepointIds":
                                 - "suez"
                         schema:
@@ -393,16 +393,16 @@ paths:
                                     - $ref: '#/components/schemas/GatewayError'
 components:
     securitySchemes:
-        WorldMonitorKey:
+        MegaBrainMarketKey:
             type: apiKey
             in: header
-            name: X-WorldMonitor-Key
-            description: User-issued WorldMonitor API key.
+            name: X-MegaBrainMarket-Key
+            description: User-issued MegaBrainMarket API key.
         ApiKeyHeader:
             type: apiKey
             in: header
             name: X-Api-Key
-            description: Alias header for the WorldMonitor API key (X-WorldMonitor-Key).
+            description: Alias header for the MegaBrainMarket API key (X-MegaBrainMarket-Key).
         BearerAuth:
             type: http
             scheme: bearer
@@ -662,7 +662,7 @@ components:
             type: object
             description: |-
                 ListWebhooksRequest has no fields — the owner is derived from the caller's
-                 API-key fingerprint (SHA-256 of X-WorldMonitor-Key).
+                 API-key fingerprint (SHA-256 of X-MegaBrainMarket-Key).
         ListWebhooksResponse:
             type: object
             properties:

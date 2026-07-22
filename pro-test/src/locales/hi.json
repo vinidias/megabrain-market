@@ -26,12 +26,12 @@
     "asFeaturedIn": "इनमें उल्लेखित"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "MegaBrain Market Pro",
     "proDesc": "आपका AI विश्लेषक। निजी इंटेलिजेंस डेस्क। वह प्लेटफ़ॉर्म जिस पर आप बना सकते हैं। 30+ लाइव सेवाओं के लिए एक ही कुंजी।",
     "proF1": "WM Analyst chat — सभी 30+ सेवाओं से बातचीत की तरह पूछें",
     "proF2": "AI digest — दैनिक, दिन में दो बार या साप्ताहिक — Slack, Discord, Telegram, ईमेल या webhook पर",
     "proF3": "Custom Widget Builder — AI-सहायता से बदलाव के साथ HTML/CSS/JS",
-    "proF4": "MCP connectors — WorldMonitor को Claude, GPT या अपने LLMs से जोड़ें",
+    "proF4": "MCP connectors — MegaBrainMarket को Claude, GPT या अपने LLMs से जोड़ें",
     "proF5": "इक्विटी रिसर्च, स्टॉक विश्लेषण और backtesting",
     "proF6": "फ़्लाइट खोज और कीमत तुलना",
     "proF7": "अलर्ट नियम इंजन — कस्टम triggers, quiet hours, AES-256 एन्क्रिप्टेड चैनल",
@@ -39,7 +39,7 @@
     "proF9": "AI Market Implications और Regional Intelligence (जल्द: orbital surveillance, premium map layers, लंबा history)",
     "proCta": "अपना शुरुआती एक्सेस आरक्षित करें",
     "choosePlan": "अपना प्लान चुनें",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "MegaBrain Market Enterprise",
     "entDesc": "उन टीमों के लिए जिन्हें shared monitoring, API access, deployment options, TV apps और direct support चाहिए।",
     "entF1": "Pro की हर चीज़, और साथ में:",
     "entF2": "Live-edge + satellite imagery और SAR",
@@ -82,10 +82,10 @@
     "channels": "Slack · Discord · Telegram · Email · Webhook · AES-256 encrypted · Quiet hours"
   },
   "livePreview": {
-    "windowTitle": "worldmonitor.app — Live Dashboard",
+    "windowTitle": "megabrain.market — Live Dashboard",
     "openFullScreen": "Full screen खोलें",
     "tryLiveDashboard": "Live Dashboard आज़माएँ",
-    "iframeTitle": "World Monitor — Live Intelligence Dashboard",
+    "iframeTitle": "MegaBrain Market — Live Intelligence Dashboard",
     "description": "3D WebGL globe · 50+ interactive map layers · Real-time market, macro, geopolitical, energy और infrastructure data"
   },
   "socialProof": {
@@ -113,7 +113,7 @@
     "teamsDesc": "Individual use से shared workflows, API access, TV apps और managed deployments तक जाएँ।"
   },
   "dataCoverage": {
-    "title": "World Monitor क्या track करता है",
+    "title": "MegaBrain Market क्या track करता है",
     "subtitle": "30+ service domains एक साथ ingest होते हैं। Markets, macro, geopolitics, energy, infrastructure — सब normalized और WebGL globe पर rendered।",
     "markets": "Financial Markets और Equities",
     "marketsDesc": "Global stock analysis, commodities, crypto, ETF flows, analyst targets और FRED macro data",
@@ -177,7 +177,7 @@
   "apiSection": {
     "apiTier": "API TIER",
     "title": "Programmatic Intelligence",
-    "subtitle": "World Monitor data पर build करने वाले developers, analysts और teams के लिए। Pro से अलग — दोनों या कोई एक use करें।",
+    "subtitle": "MegaBrain Market data पर build करने वाले developers, analysts और teams के लिए। Pro से अलग — दोनों या कोई एक use करें।",
     "restApi": "सभी 30+ service domains में REST API — JavaScript, Python, Ruby, Go के लिए आधिकारिक SDK",
     "authenticated": "Per-key authenticated, per-tier rate-limited",
     "structured": "Cache headers और OpenAPI 3.1 docs के साथ structured JSON",
@@ -196,7 +196,7 @@
     "security": "Government-Grade Security",
     "securityDesc": "Air-gapped deployment, on-premises Docker, dedicated cloud tenant, SOC 2 Type II path, SSO/MFA और full audit trail.",
     "aiAgents": "AI Agents और MCP",
-    "aiAgentsDesc": "Investor personas वाले autonomous intelligence agents. World Monitor को MCP के ज़रिए Claude, GPT या custom LLMs के tool के रूप में connect करें।",
+    "aiAgentsDesc": "Investor personas वाले autonomous intelligence agents. MegaBrain Market को MCP के ज़रिए Claude, GPT या custom LLMs के tool के रूप में connect करें।",
     "dataLayers": "Expanded Data Layers",
     "dataLayersDesc": "दुनिया भर में tens of thousands infrastructure assets mapped. Change detection और SAR के साथ satellite imagery integration.",
     "connectors": "100+ Data Connectors",
@@ -225,7 +225,7 @@
     "submitContact": "Message भेजें",
     "contactSending": "भेज रहे हैं...",
     "contactSent": "Message भेजा गया। हम संपर्क करेंगे।",
-    "contactFailed": "भेजना failed. कृपया enterprise@worldmonitor.app पर email करें"
+    "contactFailed": "भेजना failed. कृपया enterprise@megabrain.market पर email करें"
   },
   "pricingTable": {
     "title": "Tiers की तुलना",
@@ -276,7 +276,7 @@
   },
   "faq": {
     "title": "अक्सर पूछे जाने वाले प्रश्न",
-    "q1": "क्या World Monitor अभी भी मुफ़्त है?",
+    "q1": "क्या MegaBrain Market अभी भी मुफ़्त है?",
     "a1": "हाँ। मुख्य प्लेटफ़ॉर्म मुफ़्त रहता है। Pro इक्विटी रिसर्च, मैक्रो एनालिटिक्स और AI ब्रीफ़िंग जोड़ता है। Enterprise टीम डिप्लॉयमेंट और TV apps जोड़ता है।",
     "q2": "Pro के लिए भुगतान क्यों करें?",
     "a2": "Pro investors, analysts और professionals के लिए है जिन्हें stock monitoring, geopolitical analysis, economy analytics और AI-powered daily briefings चाहिए — सब एक ही key के तहत।",
@@ -285,17 +285,17 @@
     "q4": "क्या मैं Pro से शुरू करके बाद में upgrade कर सकता/सकती हूँ?",
     "a4": "हाँ। Pro serious individuals के लिए काम करता है। Team और deployment needs बढ़ने पर Enterprise मौजूद है।",
     "q5": "क्या यह सिर्फ़ conflict monitoring के लिए है?",
-    "a5": "नहीं। World Monitor मुख्य रूप से global intelligence platform है जो stock markets, macroeconomics, geopolitical analysis, energy, infrastructure और बहुत कुछ cover करता है। Conflict tracking कई capabilities में से एक है — focus नहीं।",
+    "a5": "नहीं। MegaBrain Market मुख्य रूप से global intelligence platform है जो stock markets, macroeconomics, geopolitical analysis, energy, infrastructure और बहुत कुछ cover करता है। Conflict tracking कई capabilities में से एक है — focus नहीं।",
     "q6": "मुख्य प्लेटफ़ॉर्म को मुफ़्त क्यों रखें?",
     "a6": "क्योंकि सार्वजनिक एक्सेस मायने रखता है। पेड प्लान गंभीर उपयोगकर्ताओं और संगठनों के लिए गहरे workflows को support करते हैं।",
     "q7": "क्या मैं अपने API keys इस्तेमाल कर सकता/सकती हूँ?",
     "a7": "हाँ। Bring-your-own-keys हमेशा काम करता है। Pro का मतलब बस यह है कि आपको 20+ अलग services के लिए register नहीं करना पड़ता।",
     "q8": "MCP क्या है?",
-    "a8": "MCP AI agents — Claude, GPT, custom LLMs — को WorldMonitor को tool की तरह use करने देता है, जिससे वे सभी 30+ services query कर सकते हैं। Pro में शामिल। Enterprise private MCP servers और custom deployments जोड़ता है।",
+    "a8": "MCP AI agents — Claude, GPT, custom LLMs — को MegaBrainMarket को tool की तरह use करने देता है, जिससे वे सभी 30+ services query कर सकते हैं। Pro में शामिल। Enterprise private MCP servers और custom deployments जोड़ता है।",
     "q9": "क्या मैं अपने panels बना सकता/सकती हूँ?",
     "a9": "हाँ। Pro में Custom Widget Builder शामिल है — HTML, CSS और JavaScript से panels बनाएं, AI-assisted modification के साथ।",
-    "q10": "क्या मैं Claude या GPT को WorldMonitor से connect कर सकता/सकती हूँ?",
-    "a10": "हाँ। MCP Pro में शामिल है — WorldMonitor को Claude, GPT या किसी भी MCP-compatible LLM में live tool की तरह plug करें।",
+    "q10": "क्या मैं Claude या GPT को MegaBrainMarket से connect कर सकता/सकती हूँ?",
+    "a10": "हाँ। MCP Pro में शामिल है — MegaBrainMarket को Claude, GPT या किसी भी MCP-compatible LLM में live tool की तरह plug करें।",
     "q11": "Digest कितना personalized है?",
     "a11": "अपना cadence चुनें — daily, twice-daily या weekly. हम हर tracked story को आपके alert rules और watchlist के हिसाब से re-score करते हैं, 500+ sources से dedupe करते हैं, और AI Assessment व आपके context के लिए लिखे Signals to watch के साथ 30 तक ranked items भेजते हैं। Critical events के लिए real-time alerts भी उपलब्ध हैं।",
     "q12": "Refresh rate क्या है?",
@@ -305,7 +305,7 @@
   },
   "finalCta": {
     "title": "Pro से शुरू करें। Enterprise तक scale करें।",
-    "subtitle": "World Monitor को मुफ़्त इस्तेमाल करते रहें, या equity research, macro analytics और AI briefings के लिए upgrade करें। अगर आपकी organization को team access, TV apps या API support चाहिए, हमसे बात करें।",
+    "subtitle": "MegaBrain Market को मुफ़्त इस्तेमाल करते रहें, या equity research, macro analytics और AI briefings के लिए upgrade करें। अगर आपकी organization को team access, TV apps या API support चाहिए, हमसे बात करें।",
     "getPro": "अपना शुरुआती एक्सेस आरक्षित करें",
     "talkToSales": "Sales से बात करें"
   },
@@ -329,16 +329,16 @@
     "linkedin": "LinkedIn",
     "whatsapp": "WhatsApp",
     "telegram": "Telegram",
-    "shareText": "मैं अभी World Monitor Pro waitlist में शामिल हुआ/हुई — stock monitoring, geopolitical analysis और AI daily briefings एक platform में। मेरे साथ join करें:",
-    "joinWaitlistShare": "World Monitor Pro waitlist join करें:",
+    "shareText": "मैं अभी MegaBrain Market Pro waitlist में शामिल हुआ/हुई — stock monitoring, geopolitical analysis और AI daily briefings एक platform में। मेरे साथ join करें:",
+    "joinWaitlistShare": "MegaBrain Market Pro waitlist join करें:",
     "youreIn": "आप शामिल हो गए!",
     "invitedBanner": "आपको invite किया गया है — waitlist join करें"
   },
   "soonBadge": "जल्द",
   "meta": {
-    "title": "World Monitor Pro — AI Analyst, Personal Intelligence Desk, Claude और GPT के लिए MCP",
+    "title": "MegaBrain Market Pro — AI Analyst, Personal Intelligence Desk, Claude और GPT के लिए MCP",
     "description": "भू-राजनीतिक AI परत। इससे सवाल पूछें, इसकी सदस्यता लें, इस पर निर्माण करें। 30+ लाइव सेवाओं पर WM Analyst chat, Slack, Discord, Telegram, ईमेल या webhook पर दैनिक, दिन में दो बार या साप्ताहिक मिलने वाला AI डाइजेस्ट, custom widget builder (HTML/CSS/JS + AI), और Claude, GPT व custom LLMs के लिए MCP connectors.",
-    "ogTitle": "World Monitor Pro — Geopolitical AI Layer",
+    "ogTitle": "MegaBrain Market Pro — Geopolitical AI Layer",
     "ogDescription": "इससे सवाल पूछें, इसकी सदस्यता लें, इस पर निर्माण करें। WM Analyst chat, आपके schedule पर AI डाइजेस्ट (दैनिक, दिन में दो बार या साप्ताहिक), custom widget builder, और Claude/GPT के लिए MCP — 30+ लाइव सेवाएँ एक key के तहत।"
   },
   "pricing": {

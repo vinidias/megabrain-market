@@ -3,7 +3,7 @@ import { t } from '@/services/i18n';
 import type { StockAnalysisResult } from '@/services/stock-analysis';
 import { isAnalyzableSymbol } from '@/services/stock-analysis';
 import { getMarketWatchlistEntries } from '@/services/market-watchlist';
-import type { AnalystConsensus, PriceTarget, UpgradeDowngrade } from '@/generated/client/worldmonitor/market/v1/service_client';
+import type { AnalystConsensus, PriceTarget, UpgradeDowngrade } from '@/generated/client/megabrain-market/market/v1/service_client';
 import type { InsiderTransactionsResult } from '@/services/insider-transactions';
 import { escapeHtml, sanitizeUrl, unsafeRawHtml } from '@/utils/sanitize';
 import type { StockAnalysisHistory } from '@/services/stock-analysis-history';

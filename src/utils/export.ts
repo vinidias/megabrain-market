@@ -62,16 +62,16 @@ function sanitizeData(data: ExportData): ExportData {
   };
 }
 
-export function exportToJSON(data: ExportData, filename = 'worldmonitor-export'): void {
+export function exportToJSON(data: ExportData, filename = 'megabrain-market-export'): void {
   const jsonStr = JSON.stringify(sanitizeData(data), null, 2);
   downloadFile(jsonStr, `${filename}.json`, 'application/json');
 }
 
-export function exportToCSV(data: ExportData, filename = 'worldmonitor-export'): void {
+export function exportToCSV(data: ExportData, filename = 'megabrain-market-export'): void {
   const clean = sanitizeData(data);
   const lines: string[] = [];
 
-  lines.push(`# WorldMonitor Export — ${new Date(clean.timestamp).toISOString()}`);
+  lines.push(`# MegaBrainMarket Export — ${new Date(clean.timestamp).toISOString()}`);
   lines.push('# Note: CSV is a structured summary. Use JSON export for full fidelity.');
   if (clean.meta?.note) lines.push(`# ${clean.meta.note}`);
   lines.push('');
@@ -353,7 +353,7 @@ export interface CountryEvidenceBundle {
 }
 
 export const COUNTRY_EVIDENCE_PROVENANCE_DISCLAIMER =
-  'This WorldMonitor evidence bundle packages user-visible context and source metadata for analyst handoff. It is not a legal evidentiary record; verify source availability, timestamps, and claims before reuse.';
+  'This MegaBrainMarket evidence bundle packages user-visible context and source metadata for analyst handoff. It is not a legal evidentiary record; verify source availability, timestamps, and claims before reuse.';
 
 const SIGNAL_LABELS: Record<string, string> = {
   criticalNews: 'Critical news',
@@ -614,7 +614,7 @@ export function buildCountryEvidenceBundle(input: CountryEvidenceBundleInput): C
 
 export function renderCountryEvidenceMarkdown(bundle: CountryEvidenceBundle): string {
   const lines: string[] = [];
-  lines.push(`# WorldMonitor Evidence Bundle: ${bundle.country} (${bundle.code})`);
+  lines.push(`# MegaBrainMarket Evidence Bundle: ${bundle.country} (${bundle.code})`);
   lines.push('');
   lines.push(`- Context: ${markdownListValue(bundle.context)}`);
   lines.push(`- Exported at: ${markdownListValue(bundle.exportedAt)}`);
@@ -802,7 +802,7 @@ export class ExportPanel {
   private export(format: ExportFormat): void {
     const data = this.getData();
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `worldmonitor-${timestamp}`;
+    const filename = `megabrain-market-${timestamp}`;
 
     if (format === 'json') {
       exportToJSON(data, filename);

@@ -127,8 +127,8 @@ describe('OpenAPI jmespath projection parameter contract', () => {
   });
 
   it('the unified bundle advertises jmespath on every GET (184 total)', () => {
-    const bundle = loadYaml(readFileSync(resolve(apiDir, 'worldmonitor.openapi.yaml'), 'utf8'));
-    const total = assertJmespathContract(bundle, 'worldmonitor.openapi.yaml');
+    const bundle = loadYaml(readFileSync(resolve(apiDir, 'megabrain-market.openapi.yaml'), 'utf8'));
+    const total = assertJmespathContract(bundle, 'megabrain-market.openapi.yaml');
     assert.equal(total, 184, `expected 184 GET operations, found ${total}`);
   });
 

@@ -171,7 +171,7 @@ export function migrateDisabledFeedsV2(
   data: Record<string, unknown>,
   feedsByCategory: FeedsByCategory,
 ): Record<string, unknown> {
-  const raw = data['worldmonitor-disabled-feeds'];
+  const raw = data['megabrain-market-disabled-feeds'];
   if (typeof raw !== 'string') return data;
   let parsed: unknown;
   try { parsed = JSON.parse(raw); } catch { return data; }
@@ -188,5 +188,5 @@ export function migrateDisabledFeedsV2(
   console.log(
     `[cloud-prefs] schema-2 migration: re-enabled ${recoverable.length} source(s) from fully-disabled categories`,
   );
-  return { ...data, 'worldmonitor-disabled-feeds': JSON.stringify(cleaned) };
+  return { ...data, 'megabrain-market-disabled-feeds': JSON.stringify(cleaned) };
 }

@@ -2,8 +2,8 @@
  * POST /api/internal/mcp-grant-mint
  *
  * Apex-domain edge function. Bridges the Clerk session at
- * `worldmonitor.app/mcp-grant` to the api-subdomain consent flow at
- * `api.worldmonitor.app/oauth/authorize-pro` (U5).
+ * `megabrain.market/mcp-grant` to the api-subdomain consent flow at
+ * `api.megabrain.market/oauth/authorize-pro` (U5).
  *
  * Flow:
  *   1. Caller is the Clerk-authenticated apex page; sends Bearer JWT +
@@ -20,7 +20,7 @@
  *      `{userId, exp}` payload (5-min TTL).
  *   8. Return JSON `{redirect: '<fixed url>?nonce=<n>&grant=<token>'}`.
  *
- * The redirect URL host is FIXED to `https://api.worldmonitor.app` —
+ * The redirect URL host is FIXED to `https://api.megabrain.market` —
  * never user-controllable — to defeat the consent-phishing class
  * (see plan Risks: "Cross-subdomain CSRF / consent phishing").
  *
@@ -60,7 +60,7 @@ import { isAllowedRedirectUri } from '../oauth/register.js';
 import { GrantConfigError, signGrant } from '../_mcp-grant-hmac';
 
 // Fixed return URL — NOT user-controllable (anti-phishing).
-const AUTHORIZE_PRO_URL = 'https://api.worldmonitor.app/oauth/authorize-pro';
+const AUTHORIZE_PRO_URL = 'https://api.megabrain.market/oauth/authorize-pro';
 
 /** 5-minute exp for the signed grant + matching Redis one-shot. */
 const GRANT_TTL_MS = 5 * 60 * 1000;
@@ -244,7 +244,7 @@ export async function mintGrantHandler(req: Request, deps: MintDeps): Promise<Re
     ent.features.mcpAccess !== true ||
     ent.validUntil < now
   ) {
-    return jsonError('INSUFFICIENT_TIER', 'A WorldMonitor Pro subscription is required.', 403);
+    return jsonError('INSUFFICIENT_TIER', 'A MegaBrainMarket Pro subscription is required.', 403);
   }
 
   // Mint the signed grant first (cheaper to fail before the Redis write).

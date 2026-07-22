@@ -1,7 +1,7 @@
 ---
 title: "Build a Supply-Chain Early-Warning System in an Afternoon"
-description: "Score your trade lanes for chokepoint exposure, subscribe to disruption webhooks, and pipe alerts to Slack with this World Monitor API tutorial."
-metaTitle: "Supply Chain Risk API: Chokepoint Alerts | World Monitor"
+description: "Score your trade lanes for chokepoint exposure, subscribe to disruption webhooks, and pipe alerts to Slack with this MegaBrain Market API tutorial."
+metaTitle: "Supply Chain Risk API: Chokepoint Alerts | MegaBrain Market"
 keywords: "supply chain risk API, chokepoint monitoring API, shipping disruption alerts, maritime risk API, trade route risk scoring, supply chain early warning system"
 audience: "Supply chain engineers, logistics developers, procurement analysts, platform teams, risk managers"
 heroImage: "/blog/images/blog/build-supply-chain-early-warning-system-api.jpg"
@@ -11,9 +11,9 @@ modifiedDate: "2026-06-13"
 
 When the Strait of Hormuz shut down this spring, companies found out in one of two ways. Some read about it in the news and started calling freight forwarders. Others had already received a webhook hours earlier, when the disruption score crossed their alert threshold, and were quoting Cape of Good Hope routings before their competitors knew there was a problem.
 
-The second group did not have a $50,000-a-year risk platform. The capability they used, [live chokepoint tracking](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/) with programmatic alerts, is part of World Monitor's API. This post builds that early-warning system end to end: score your lanes, subscribe to alerts, verify deliveries, and route them to Slack.
+The second group did not have a $50,000-a-year risk platform. The capability they used, [live chokepoint tracking](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/) with programmatic alerts, is part of MegaBrain Market's API. This post builds that early-warning system end to end: score your lanes, subscribe to alerts, verify deliveries, and route them to Slack.
 
-You need an API key (`X-WorldMonitor-Key`, issued with [Pro or API plans](https://www.worldmonitor.app/pro)) and about an afternoon.
+You need an API key (`X-MegaBrainMarket-Key`, issued with [Pro or API plans](https://www.megabrain.market/pro)) and about an afternoon.
 
 ## The Architecture
 
@@ -30,8 +30,8 @@ A small receiver service glues them together and posts to Slack.
 For each lane you ship, ask the route-intelligence endpoint what it crosses and how disrupted that is right now:
 
 ```bash
-curl -s 'https://api.worldmonitor.app/api/v2/shipping/route-intelligence?fromIso2=AE&toIso2=NL&cargoType=tanker&hs2=27' \
-  -H 'X-WorldMonitor-Key: wm_YOUR_KEY'
+curl -s 'https://api.megabrain.market/api/v2/shipping/route-intelligence?fromIso2=AE&toIso2=NL&cargoType=tanker&hs2=27' \
+  -H 'X-MegaBrainMarket-Key: wm_YOUR_KEY'
 ```
 
 The response tells you everything a routing decision needs:
@@ -66,8 +66,8 @@ Run this once for every lane in your network and you have an exposure matrix: wh
 Polling is for prototypes. Register a webhook for the chokepoints your matrix surfaced:
 
 ```bash
-curl -s -X POST 'https://api.worldmonitor.app/api/v2/shipping/webhooks' \
-  -H 'X-WorldMonitor-Key: wm_YOUR_KEY' \
+curl -s -X POST 'https://api.megabrain.market/api/v2/shipping/webhooks' \
+  -H 'X-MegaBrainMarket-Key: wm_YOUR_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
     "callbackUrl": "https://alerts.yourcompany.com/wm-shipping",
@@ -147,8 +147,8 @@ The `lanesExposedTo()` lookup is your exposure matrix from Step 1. That is what 
 Chokepoints are not the only failure mode. A supplier country sliding into instability disrupts production before anything reaches a port. Pull structural resilience for your origin countries:
 
 ```bash
-curl -s 'https://api.worldmonitor.app/api/resilience/v1/get-resilience-score?countryCode=EG' \
-  -H 'X-WorldMonitor-Key: wm_YOUR_KEY'
+curl -s 'https://api.megabrain.market/api/resilience/v1/get-resilience-score?countryCode=EG' \
+  -H 'X-MegaBrainMarket-Key: wm_YOUR_KEY'
 ```
 
 You get a 0–100 resilience score with per-domain breakdowns (energy, infrastructure, governance, security and more), a trend, and a 30-day change. It is computed across 196 countries and refreshed every six hours. Combine it with the real-time [Country Instability Index](/blog/posts/country-instability-index-methodology-explained/) and you cover both clocks: CII for what is burning this week, resilience for which countries absorb shocks and which shatter.
@@ -162,13 +162,13 @@ A simple weekly job that flags any origin country whose resilience dropped more 
 - **Country-level early warning** on supplier fragility, refreshed every six hours
 - A Slack channel that occasionally says something genuinely important
 
-Total code: one webhook receiver and two cron jobs. If you want to stress-test the design, the [scenario engine](https://www.worldmonitor.app/docs/scenario-engine) simulates events like a Taiwan Strait closure or a Panama drought against live trade data. AI agents can run the same checks conversationally through the [MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
+Total code: one webhook receiver and two cron jobs. If you want to stress-test the design, the [scenario engine](https://www.megabrain.market/docs/scenario-engine) simulates events like a Taiwan Strait closure or a Panama drought against live trade data. AI agents can run the same checks conversationally through the [MCP server](/blog/posts/megabrain-market-mcp-server-ai-agents-real-time-intelligence/).
 
 ## Frequently Asked Questions
 
 **Which chokepoints can I monitor?**
 
-All 13 strategic waterways World Monitor tracks, including the Strait of Hormuz, Suez Canal, Bab el-Mandeb, Strait of Malacca, Panama Canal, Taiwan Strait, Bosporus, Kerch Strait, and the Cape of Good Hope bypass corridor.
+All 13 strategic waterways MegaBrain Market tracks, including the Strait of Hormuz, Suez Canal, Bab el-Mandeb, Strait of Malacca, Panama Canal, Taiwan Strait, Bosporus, Kerch Strait, and the Cape of Good Hope bypass corridor.
 
 **How fresh is the disruption data?**
 
@@ -180,4 +180,4 @@ For webhooks, yes. Any HTTPS endpoint works, while private and loopback addresse
 
 ---
 
-**Get an API key at [worldmonitor.app/pro](https://www.worldmonitor.app/pro), pull the full OpenAPI spec from [worldmonitor.app/openapi.yaml](https://www.worldmonitor.app/openapi.yaml), and ship the early-warning system your freight forwarder thinks you bought from someone expensive.**
+**Get an API key at [megabrain.market/pro](https://www.megabrain.market/pro), pull the full OpenAPI spec from [megabrain.market/openapi.yaml](https://www.megabrain.market/openapi.yaml), and ship the early-warning system your freight forwarder thinks you bought from someone expensive.**

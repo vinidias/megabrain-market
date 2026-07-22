@@ -2,7 +2,7 @@
 
 import { fileURLToPath } from 'node:url';
 
-const DEFAULT_HEALTH_URL = 'https://api.worldmonitor.app/api/health?compact=1';
+const DEFAULT_HEALTH_URL = 'https://api.megabrain.market/api/health?compact=1';
 
 export function validateCompactHealthPayload(payload) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
@@ -31,7 +31,7 @@ export function findStaleSeedProblems(payload) {
 async function main() {
   const healthUrl = process.env.HEALTH_URL || DEFAULT_HEALTH_URL;
   const response = await fetch(healthUrl, {
-    headers: { 'User-Agent': 'worldmonitor-seed-freshness-monitor/1.0' },
+    headers: { 'User-Agent': 'megabrain-market-seed-freshness-monitor/1.0' },
     signal: AbortSignal.timeout(20_000),
   });
   if (!response.ok) {

@@ -3,7 +3,7 @@ import type {
     GetCarrierOpsRequest,
     GetCarrierOpsResponse,
     CarrierOpsSummary,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { cachedFetchJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
 import { parseStringArray, DEFAULT_WATCHED_AIRPORTS } from './_shared';
@@ -26,7 +26,7 @@ export async function getCarrierOps(
         const result = await cachedFetchJson<{ carriers: CarrierOpsSummary[]; source: 'aviationstack' }>(
             cacheKey, CACHE_TTL, async () => {
                 // Fetch flights for each airport
-                type FI = import('../../../../src/generated/server/worldmonitor/aviation/v1/service_server').FlightInstance;
+                type FI = import('../../../../src/generated/server/megabrain-market/aviation/v1/service_server').FlightInstance;
                 const allFlights: FI[] = [];
                 const flightAirportMap = new Map<FI, string>();
                 const childUnavailableSources = new Set<string>();
@@ -72,7 +72,7 @@ export async function getCarrierOps(
 
                 // Group by carrier.iataCode + airport
                 const groups = new Map<string, {
-                    carrier: import('../../../../src/generated/server/worldmonitor/aviation/v1/service_server').Carrier;
+                    carrier: import('../../../../src/generated/server/megabrain-market/aviation/v1/service_server').Carrier;
                     airport: string;
                     flights: FI[];
                 }>();

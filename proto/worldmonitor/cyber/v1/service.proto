@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.cyber.v1;
+package megabrain-market.cyber.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/cyber/v1/list_cyber_threats.proto";
+import "megabrain-market/cyber/v1/list_cyber_threats.proto";
 
 // CyberService provides APIs for cyber threat intelligence aggregated from
 // Feodo, URLhaus, OTX, AbuseIPDB, and C2Intel.

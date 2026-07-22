@@ -8,7 +8,7 @@ import type {
   ServerContext,
   ListEarthquakesRequest,
   ListEarthquakesResponse,
-} from '../../../../src/generated/server/worldmonitor/seismology/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/seismology/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 

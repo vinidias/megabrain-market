@@ -1,31 +1,31 @@
 syntax = "proto3";
 
-package worldmonitor.market.v1;
+package megabrain-market.market.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/market/v1/list_market_quotes.proto";
-import "worldmonitor/market/v1/list_crypto_quotes.proto";
-import "worldmonitor/market/v1/list_commodity_quotes.proto";
-import "worldmonitor/market/v1/get_sector_summary.proto";
-import "worldmonitor/market/v1/list_stablecoin_markets.proto";
-import "worldmonitor/market/v1/list_etf_flows.proto";
-import "worldmonitor/market/v1/get_country_stock_index.proto";
-import "worldmonitor/market/v1/list_gulf_quotes.proto";
-import "worldmonitor/market/v1/analyze_stock.proto";
-import "worldmonitor/market/v1/backtest_stock.proto";
-import "worldmonitor/market/v1/get_stock_analysis_history.proto";
-import "worldmonitor/market/v1/list_stored_stock_backtests.proto";
-import "worldmonitor/market/v1/list_crypto_sectors.proto";
-import "worldmonitor/market/v1/list_defi_tokens.proto";
-import "worldmonitor/market/v1/list_ai_tokens.proto";
-import "worldmonitor/market/v1/list_other_tokens.proto";
-import "worldmonitor/market/v1/get_fear_greed_index.proto";
-import "worldmonitor/market/v1/list_earnings_calendar.proto";
-import "worldmonitor/market/v1/get_cot_positioning.proto";
-import "worldmonitor/market/v1/get_insider_transactions.proto";
-import "worldmonitor/market/v1/get_market_breadth_history.proto";
-import "worldmonitor/market/v1/get_gold_intelligence.proto";
-import "worldmonitor/market/v1/get_hyperliquid_flow.proto";
+import "megabrain-market/market/v1/list_market_quotes.proto";
+import "megabrain-market/market/v1/list_crypto_quotes.proto";
+import "megabrain-market/market/v1/list_commodity_quotes.proto";
+import "megabrain-market/market/v1/get_sector_summary.proto";
+import "megabrain-market/market/v1/list_stablecoin_markets.proto";
+import "megabrain-market/market/v1/list_etf_flows.proto";
+import "megabrain-market/market/v1/get_country_stock_index.proto";
+import "megabrain-market/market/v1/list_gulf_quotes.proto";
+import "megabrain-market/market/v1/analyze_stock.proto";
+import "megabrain-market/market/v1/backtest_stock.proto";
+import "megabrain-market/market/v1/get_stock_analysis_history.proto";
+import "megabrain-market/market/v1/list_stored_stock_backtests.proto";
+import "megabrain-market/market/v1/list_crypto_sectors.proto";
+import "megabrain-market/market/v1/list_defi_tokens.proto";
+import "megabrain-market/market/v1/list_ai_tokens.proto";
+import "megabrain-market/market/v1/list_other_tokens.proto";
+import "megabrain-market/market/v1/get_fear_greed_index.proto";
+import "megabrain-market/market/v1/list_earnings_calendar.proto";
+import "megabrain-market/market/v1/get_cot_positioning.proto";
+import "megabrain-market/market/v1/get_insider_transactions.proto";
+import "megabrain-market/market/v1/get_market_breadth_history.proto";
+import "megabrain-market/market/v1/get_gold_intelligence.proto";
+import "megabrain-market/market/v1/get_hyperliquid_flow.proto";
 
 // MarketService provides APIs for financial market data from Finnhub, Yahoo Finance, and CoinGecko.
 service MarketService {

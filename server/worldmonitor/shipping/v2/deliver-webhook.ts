@@ -157,7 +157,7 @@ export async function deliverShippingV2Webhook(
   const signature = createHmac('sha256', record.secret).update(body).digest('hex');
   const headers = {
     'content-type': 'application/json',
-    'user-agent': 'WorldMonitor-ShippingV2-Webhooks/1.0',
+    'user-agent': 'MegaBrainMarket-ShippingV2-Webhooks/1.0',
     'x-wm-signature': `sha256=${signature}`,
     'x-wm-delivery-id': options.deliveryId ?? makeDeliveryId(),
     'x-wm-event': options.event ?? 'chokepoint.disruption',

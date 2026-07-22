@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.wildfire.v1;
+package megabrain-market.wildfire.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/wildfire/v1/fire_detection.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/wildfire/v1/fire_detection.proto";
 
 // ListFireDetectionsRequest specifies filters for retrieving fire detections from NASA FIRMS.
 message ListFireDetectionsRequest {
@@ -39,7 +39,7 @@ message ListFireDetectionsResponse {
   // The list of fire detections.
   repeated FireDetection fire_detections = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
   // Time the seed snapshot was fetched, as Unix epoch milliseconds. A value of
   // 0 means the snapshot is unavailable/degraded, not that there are confirmed
   // zero active fires.

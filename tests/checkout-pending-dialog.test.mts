@@ -77,8 +77,8 @@ function installBrowserGlobals(): void {
       setInterval: () => 1,
       clearInterval: () => {},
       location: {
-        href: 'https://worldmonitor.app/dashboard',
-        origin: 'https://worldmonitor.app',
+        href: 'https://megabrain.market/dashboard',
+        origin: 'https://megabrain.market',
         pathname: '/dashboard',
         search: '',
         hash: '',

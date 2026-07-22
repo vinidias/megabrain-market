@@ -1,4 +1,4 @@
-import type { ResilienceDomain } from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
+import type { ResilienceDomain } from '../../../../src/generated/server/megabrain-market/resilience/v1/service_server';
 import type { ResilienceDomainId } from './_dimension-scorers';
 
 export type ResiliencePillarId = 'structural-readiness' | 'live-shock-exposure' | 'recovery-capacity';

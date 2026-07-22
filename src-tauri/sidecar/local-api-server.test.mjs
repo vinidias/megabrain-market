@@ -385,8 +385,8 @@ test('signs desktop register-interest cloud fallback when shared secret is confi
       appVersion: '2.8.0',
     }, {
       'Content-Encoding': 'gzip',
-      'X-WorldMonitor-Desktop-Timestamp': '1',
-      'X-WorldMonitor-Desktop-Signature': 'sha256=bad',
+      'X-MegaBrainMarket-Desktop-Timestamp': '1',
+      'X-MegaBrainMarket-Desktop-Signature': 'sha256=bad',
     });
     assert.equal(response.status, 200);
     assert.equal(remote.requests.length, 1);
@@ -394,8 +394,8 @@ test('signs desktop register-interest cloud fallback when shared secret is confi
     const request = remote.requests[0];
     assert.equal(request.path, '/api/leads/v1/register-interest');
     assert.equal(request.json.source, 'desktop-settings');
-    const timestamp = request.headers['x-worldmonitor-desktop-timestamp'];
-    const signature = request.headers['x-worldmonitor-desktop-signature'];
+    const timestamp = request.headers['x-megabrain-market-desktop-timestamp'];
+    const signature = request.headers['x-megabrain-market-desktop-signature'];
     assert.equal(request.headers['content-encoding'], undefined);
     assert.match(request.headers['user-agent'], /Chrome\/131\.0\.0\.0/);
     assert.match(timestamp, /^\d+$/);
@@ -1010,8 +1010,8 @@ test('uses canonical app origin when proxying to cloud fallback (cloudFallback e
     assert.equal(response.status, 200);
     const body = await response.json();
     assert.equal(body.source, 'remote');
-    assert.equal(body.origin, 'https://worldmonitor.app');
-    assert.equal(remote.origins[0], 'https://worldmonitor.app');
+    assert.equal(body.origin, 'https://megabrain.market');
+    assert.equal(remote.origins[0], 'https://megabrain.market');
   } finally {
     await app.close();
     await localApi.cleanup();

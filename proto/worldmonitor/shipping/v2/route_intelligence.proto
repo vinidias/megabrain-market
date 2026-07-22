@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.shipping.v2;
+package megabrain-market.shipping.v2;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";

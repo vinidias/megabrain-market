@@ -54,7 +54,7 @@ test('buildCountryStockIndexSnapshotFromCloses filters malformed closes before c
 
 test('the Railway market seed maintains the China cache alongside its public stock bootstrap contract', () => {
   const source = readFileSync(new URL('../scripts/seed-market-quotes.mjs', import.meta.url), 'utf8');
-  const handlerSource = readFileSync(new URL('../server/worldmonitor/market/v1/get-country-stock-index.ts', import.meta.url), 'utf8');
+  const handlerSource = readFileSync(new URL('../server/megabrain-market/market/v1/get-country-stock-index.ts', import.meta.url), 'utf8');
 
   assert.match(source, /CHINA_COUNTRY_STOCK_INDEX_KEY/);
   assert.match(source, /writeChinaCountryStockIndex/);

@@ -3,7 +3,7 @@ import type {
   ServerContext,
   GetBootstrapDataRequest,
   GetBootstrapDataResponse,
-} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/infrastructure/v1/service_server';
 import { BOOTSTRAP_CACHE_KEYS, BOOTSTRAP_TIERS } from '../../../_shared/cache-keys';
 import { getCachedJsonBatch } from '../../../_shared/redis';
 

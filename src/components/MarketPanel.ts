@@ -257,7 +257,7 @@ type CommoditiesTab = 'commodities' | 'fx' | 'xau';
 import type {
   GetHyperliquidFlowResponse,
   HyperliquidAssetFlow,
-} from '@/generated/client/worldmonitor/market/v1/service_client';
+} from '@/generated/client/megabrain-market/market/v1/service_client';
 
 function parseFiniteNumber(s: string): number | null {
   if (typeof s !== 'string' || s === '') return null;
@@ -478,7 +478,7 @@ export class CommoditiesPanel extends Panel {
     // Metals/Commodities tab — exclude FX and spot gold symbols from the display grid.
     // Require a finite numeric price: the feed sometimes omits `price` (undefined),
     // and `d.price !== null` lets undefined through to `formatPrice(c.price!)`
-    // (WORLDMONITOR-SH). A finite-price guard also keeps the adjacent `c.change!`
+    // (MEGABRAIN_MARKET-SH). A finite-price guard also keeps the adjacent `c.change!`
     // row meaningful (a record with no price carries no usable change either).
     const validData = this._commodityData.filter(
       (d) => typeof d.price === 'number' && Number.isFinite(d.price) && !d.symbol?.endsWith('=X'),

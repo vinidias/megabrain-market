@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.market.v1;
+package megabrain-market.market.v1;
 
 // GulfQuote represents a Gulf region market quote (index, currency, or oil).
 message GulfQuote {

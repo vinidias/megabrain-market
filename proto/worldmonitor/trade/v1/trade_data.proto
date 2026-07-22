@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.trade.v1;
+package megabrain-market.trade.v1;
 
 // Quantitative restriction or export control measure notified to WTO.
 message TradeRestriction {

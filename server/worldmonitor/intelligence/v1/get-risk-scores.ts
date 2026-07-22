@@ -6,7 +6,7 @@ import type {
   StrategicRisk,
   TrendDirection,
   SeverityLevel,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 import iso3ToIso2Json from '../../../../shared/iso3-to-iso2.json';
 import { getCachedJson, setCachedJson, cachedFetchJsonWithMeta } from '../../../_shared/redis';
@@ -1594,7 +1594,7 @@ export async function getRiskScores(
       // fetch by the true in-process leader so /api/health.riskScores
       // stays green from real user traffic, independent of the ais-relay
       // CII warm-ping. Pre-2026-05-02 the warm-ping was the SOLE writer of
-      // this seed-meta — when the relay → api.worldmonitor.app auth path
+      // this seed-meta — when the relay → api.megabrain.market auth path
       // broke (all warm-ping types started returning HTTP 401 simultaneously),
       // riskScores was the only key that flipped STALE because cable-health
       // and chokepoints had RPC-side seed-meta writes keeping them fresh

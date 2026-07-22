@@ -1,5 +1,5 @@
 /**
- * Regression tests for koala73/worldmonitor#3800.
+ * Regression tests for vinidias/megabrain-market#3800.
  *
  * Root cause: src/services/cached-risk-scores.ts fabricated `lastUpdated` /
  * `computedAt` as `new Date().toISOString()` in four places, making cached or
@@ -163,7 +163,7 @@ async function loadAdapter(options: { storageValue?: string | null } = {}) {
       'const TIER1_COUNTRIES: Record<string, string> = { US: "United States", CN: "China", RU: "Russia", LB: "Lebanon", IQ: "Iraq", AF: "Afghanistan", KR: "South Korea", EG: "Egypt", JP: "Japan", QA: "Qatar" };',
     )
     .replace(
-      /import\s*\{[^}]*IntelligenceServiceClient[^}]*\}\s*from\s*'@\/generated\/client\/worldmonitor\/intelligence\/v1\/service_client';/,
+      /import\s*\{[^}]*IntelligenceServiceClient[^}]*\}\s*from\s*'@\/generated\/client\/megabrain-market\/intelligence\/v1\/service_client';/,
       'class IntelligenceServiceClient { constructor(..._args: any[]) {} async getRiskScores(_: any) { return { ciiScores: [], strategicRisks: [] }; } }',
     )
     .replace(

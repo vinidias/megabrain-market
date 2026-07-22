@@ -1,10 +1,10 @@
-# Pricing - World Monitor
+# Pricing - MegaBrain Market
 
 Last updated: July 6, 2026
 
-World Monitor has a free public dashboard and paid tiers for analyst workflows, API access and organization deployments.
+MegaBrain Market has a free public dashboard and paid tiers for analyst workflows, API access and organization deployments.
 
-Live tier/price/product-ID data (JSON): `GET https://www.worldmonitor.app/api/product-catalog` — public, no key required. Send a descriptive `User-Agent` (for example `mytool/1.0 (+https://yoursite.example)`); default HTTP-library user agents may be challenged by the edge firewall.
+Live tier/price/product-ID data (JSON): `GET https://www.megabrain.market/api/product-catalog` — public, no key required. Send a descriptive `User-Agent` (for example `mytool/1.0 (+https://yoursite.example)`); default HTTP-library user agents may be challenged by the edge firewall.
 
 ## Free
 
@@ -29,7 +29,7 @@ Live tier/price/product-ID data (JSON): `GET https://www.worldmonitor.app/api/pr
 - Price: $99.99/month
 - Annual price: $999/year
 - Annual savings: about 17 percent versus monthly billing
-- Best for: Developers and teams that want programmatic access to World Monitor intelligence data
+- Best for: Developers and teams that want programmatic access to MegaBrain Market intelligence data
 - Includes: REST API access, license / API key creation (the `wm_` key used by the desktop app and API), structured JSON, cache headers, OpenAPI docs, real-time data streams, webhook notifications and custom data exports
 - Starter limit: 1,000 requests/day
 - Starter webhooks: 5 webhook rules
@@ -40,12 +40,12 @@ Live tier/price/product-ID data (JSON): `GET https://www.worldmonitor.app/api/pr
 - Best for: Teams with high-volume programmatic workloads that outgrow the Starter quota
 - Includes: Everything in API Starter and priority support
 - Limits: 300 requests/minute, 10,000 requests/day
-- Upgrading from Starter: manage the switch from the billing portal (prorated immediately); new customers can subscribe directly at https://worldmonitor.app/pro
+- Upgrading from Starter: manage the switch from the billing portal (prorated immediately); new customers can subscribe directly at https://megabrain.market/pro
 
 ## Enterprise
 
 - Price: Custom
-- Contact: enterprise@worldmonitor.app
+- Contact: enterprise@megabrain.market
 - Best for: Governments, institutions, trading desks, SOCs, risk consultancies and organizations that need shared monitoring or deployment control
 - Includes: Everything in Pro and API, team workspaces, SSO/MFA/RBAC, dedicated support, white-label and embeddable panels, Android TV app, SIEM/connectors, bulk export and managed deployment options
 - Deployment options: Cloud, dedicated cloud tenant, on-premises or air-gapped
@@ -54,16 +54,16 @@ Live tier/price/product-ID data (JSON): `GET https://www.worldmonitor.app/api/pr
 ## Limits & Overage
 
 - Rate limits are hard limits by default: exceeding a plan quota returns HTTP `429` with a `Retry-After` header and `X-RateLimit-*` headers on API responses. Usage above the quota is rejected — never silently charged; if opt-in metered overage is introduced for API plans it will be documented here first.
-- Per-endpoint request budgets are documented at https://www.worldmonitor.app/docs/usage-rate-limits (also fetchable as markdown at https://www.worldmonitor.app/docs/usage-rate-limits.md).
-- Need a higher limit? Upgrade at https://worldmonitor.app/pro or contact enterprise@worldmonitor.app for custom quotas.
+- Per-endpoint request budgets are documented at https://www.megabrain.market/docs/usage-rate-limits (also fetchable as markdown at https://www.megabrain.market/docs/usage-rate-limits.md).
+- Need a higher limit? Upgrade at https://megabrain.market/pro or contact enterprise@megabrain.market for custom quotas.
 
 ## Machine-Readable Summary
 
 ```json
 {
-  "product": "World Monitor",
-  "url": "https://www.worldmonitor.app/",
-  "pricing_url": "https://www.worldmonitor.app/pro#pricing",
+  "product": "MegaBrain Market",
+  "url": "https://www.megabrain.market/",
+  "pricing_url": "https://www.megabrain.market/pro#pricing",
   "plans": [
     {
       "name": "Free",
@@ -91,7 +91,7 @@ Live tier/price/product-ID data (JSON): `GET https://www.worldmonitor.app/api/pr
     {
       "name": "Enterprise",
       "price": "Custom",
-      "contact": "enterprise@worldmonitor.app",
+      "contact": "enterprise@megabrain.market",
       "features": ["SSO/MFA/RBAC", "team workspaces", "white-label", "on-premises", "air-gapped", "dedicated support"]
     }
   ]

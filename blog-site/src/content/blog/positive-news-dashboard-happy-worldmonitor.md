@@ -1,16 +1,16 @@
 ---
 title: "The Good News Dashboard: Positive News with an Intelligence Engine"
-description: "happy.worldmonitor.app runs 27 curated positive feeds through WorldMonitor's real intelligence pipeline: conservation wins, breakthroughs, clean energy, and live progress counters."
-metaTitle: "Positive News Dashboard | World Monitor Happy"
+description: "happy.megabrain.market runs 27 curated positive feeds through MegaBrainMarket's real intelligence pipeline: conservation wins, breakthroughs, clean energy, and live progress counters."
+metaTitle: "Positive News Dashboard | MegaBrain Market Happy"
 keywords: "positive news website, good news dashboard, uplifting news aggregator, human progress tracker, conservation wins, science breakthrough news"
 audience: "General readers, educators, parents, mental-health-conscious news consumers, optimists who want evidence"
-heroImage: "/blog/og/positive-news-dashboard-happy-worldmonitor.png"
+heroImage: "/blog/og/positive-news-dashboard-happy-megabrain-market.png"
 pubDate: "2026-07-21"
 ---
 
 The news industry has a structural bias, not a conspiracy: bad news is sudden and good news is gradual. A pipeline explosion is an event; a species recovering is a decade. Feeds optimized for events will always overweight catastrophe — which is how you end up with an audience that knows every disaster and none of the progress.
 
-WorldMonitor's answer isn't a filter that hides the bad news. It's a sixth dashboard with the polarity reversed: **happy.worldmonitor.app**, the same intelligence engine pointed at what's improving.
+MegaBrainMarket's answer isn't a filter that hides the bad news. It's a sixth dashboard with the polarity reversed: **happy.megabrain.market**, the same intelligence engine pointed at what's improving.
 
 ## Same engine, inverted filter
 
@@ -36,7 +36,7 @@ Two reasons. The honest one: sustained doom consumption degrades judgment. Analy
 
 The structural one: positive events are intelligence. Peace agreements, humanitarian aid flows, and diplomatic breakthroughs are state actions with consequences, and the `get_positive_events` MCP tool exposes them — diplomatic agreements, aid commitments, peace initiatives — to the same agents that consume conflict data. A model of the world built only from negatives is simply wrong.
 
-The Happy variant is one of [six dashboards on the platform](/blog/posts/five-dashboards-one-platform-worldmonitor-variants/), and like the others it's free, no login, and switchable in one click — same account, same infrastructure, same [21-language support](/blog/posts/worldmonitor-in-21-languages-global-intelligence-for-everyone/).
+The Happy variant is one of [six dashboards on the platform](/blog/posts/five-dashboards-one-platform-megabrain-market-variants/), and like the others it's free, no login, and switchable in one click — same account, same infrastructure, same [21-language support](/blog/posts/megabrain-market-in-21-languages-global-intelligence-for-everyone/).
 
 ## Limits
 
@@ -46,7 +46,7 @@ Curation is editorial: 27 feeds chosen for credibility and signal, which means j
 
 **Is the Happy dashboard free?**
 
-Yes — free and login-free like the other WorldMonitor variants. It's at happy.worldmonitor.app.
+Yes — free and login-free like the other MegaBrainMarket variants. It's at happy.megabrain.market.
 
 **Is this just filtered regular news?**
 

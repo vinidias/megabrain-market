@@ -15,7 +15,7 @@ import type { CheckoutEvent } from 'dodopayments-checkout';
 import { ensureClerk, type LoadedClerk } from './clerk';
 export { ensureClerk } from './clerk';
 
-const API_BASE = 'https://api.worldmonitor.app/api';
+const API_BASE = 'https://api.megabrain.market/api';
 const DODO_PORTAL_FALLBACK_URL = 'https://customer.dodopayments.com';
 const ACTIVE_SUBSCRIPTION_EXISTS = 'ACTIVE_SUBSCRIPTION_EXISTS';
 const PAYMENT_IN_PROGRESS = 'PAYMENT_IN_PROGRESS';
@@ -509,7 +509,7 @@ async function doCheckout(
 
     // Transient CF/origin 502s on this POST are retried once with an
     // Idempotency-Key (server dedupes replays — api/_idempotency.ts).
-    // WORLDMONITOR-Q4: without this, every transient was a lost checkout.
+    // MEGABRAIN_MARKET-Q4: without this, every transient was a lost checkout.
     const resp = await postCreateCheckout(createDefaultCheckoutTransportDeps(), {
       url: `${API_BASE}/create-checkout`,
       token,

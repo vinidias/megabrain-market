@@ -9,7 +9,7 @@ import type {
   GetPopulationExposureRequest,
   GetPopulationExposureResponse,
   CountryPopulationEntry,
-} from '../../../../src/generated/server/worldmonitor/displacement/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/displacement/v1/service_server';
 
 // ---------- Population exposure data ----------
 

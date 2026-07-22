@@ -47,11 +47,11 @@ const panelIndicatorsText = readFileSync(
   'utf8',
 );
 const digestSrc = readFileSync(
-  resolve(repoRoot, 'server/worldmonitor/news/v1/list-feed-digest.ts'),
+  resolve(repoRoot, 'server/megabrain-market/news/v1/list-feed-digest.ts'),
   'utf8',
 );
 const classifierSrc = readFileSync(
-  resolve(repoRoot, 'server/worldmonitor/news/v1/_classifier.ts'),
+  resolve(repoRoot, 'server/megabrain-market/news/v1/_classifier.ts'),
   'utf8',
 );
 const breakingAlertsSrc = readFileSync(
@@ -59,11 +59,11 @@ const breakingAlertsSrc = readFileSync(
   'utf8',
 );
 const summarizeSrc = readFileSync(
-  resolve(repoRoot, 'server/worldmonitor/news/v1/summarize-article.ts'),
+  resolve(repoRoot, 'server/megabrain-market/news/v1/summarize-article.ts'),
   'utf8',
 );
 const feedsSrc = readFileSync(
-  resolve(repoRoot, 'server/worldmonitor/news/v1/_feeds.ts'),
+  resolve(repoRoot, 'server/megabrain-market/news/v1/_feeds.ts'),
   'utf8',
 );
 const cacheKeysSrc = readFileSync(
@@ -143,15 +143,15 @@ const weeklyBriefSrc = readFileSync(
   'utf8',
 );
 const protoText = readFileSync(
-  resolve(repoRoot, 'proto/worldmonitor/news/v1/list_feed_digest.proto'),
+  resolve(repoRoot, 'proto/megabrain-market/news/v1/list_feed_digest.proto'),
   'utf8',
 );
 const newsItemProtoText = readFileSync(
-  resolve(repoRoot, 'proto/worldmonitor/news/v1/news_item.proto'),
+  resolve(repoRoot, 'proto/megabrain-market/news/v1/news_item.proto'),
   'utf8',
 );
 const summarizeArticleProtoText = readFileSync(
-  resolve(repoRoot, 'proto/worldmonitor/news/v1/summarize_article.proto'),
+  resolve(repoRoot, 'proto/megabrain-market/news/v1/summarize_article.proto'),
   'utf8',
 );
 const newsServiceOpenApiText = readFileSync(
@@ -162,8 +162,8 @@ const newsServiceOpenApiYaml = readFileSync(
   resolve(repoRoot, 'docs/api/NewsService.openapi.yaml'),
   'utf8',
 );
-const worldmonitorOpenApiYaml = readFileSync(
-  resolve(repoRoot, 'docs/api/worldmonitor.openapi.yaml'),
+const megabrain-marketOpenApiYaml = readFileSync(
+  resolve(repoRoot, 'docs/api/megabrain-market.openapi.yaml'),
   'utf8',
 );
 const newsServiceOpenApi = JSON.parse(newsServiceOpenApiText);
@@ -429,15 +429,15 @@ describe('news digest methodology parity', () => {
 
     const headlineDescription = openApiDescription('SummarizeArticleRequest', 'headlines');
     const newsServiceRequestYaml = extractYamlSchemaBlock(newsServiceOpenApiYaml, 'SummarizeArticleRequest');
-    const worldmonitorRequestYaml = extractYamlSchemaBlock(
-      worldmonitorOpenApiYaml,
-      'worldmonitor_news_v1_SummarizeArticleRequest',
+    const megabrain-marketRequestYaml = extractYamlSchemaBlock(
+      megabrain-marketOpenApiYaml,
+      'megabrain-market_news_v1_SummarizeArticleRequest',
     );
     for (const surface of [
       summarizeArticleProtoText,
       headlineDescription,
       newsServiceRequestYaml,
-      worldmonitorRequestYaml,
+      megabrain-marketRequestYaml,
     ]) {
       assert.ok(
         surface.includes(`Up to ${rawHeadlineLimit} raw headlines`),
@@ -460,7 +460,7 @@ describe('news digest methodology parity', () => {
 
   it('documents the server news feed inventory in public data-source docs', () => {
     assert.ok(
-      dataSourcesText.includes('source-backed from `server/worldmonitor/news/v1/_feeds.ts`'),
+      dataSourcesText.includes('source-backed from `server/megabrain-market/news/v1/_feeds.ts`'),
       'data sources page must identify _feeds.ts as the server inventory source of truth',
     );
 
@@ -627,15 +627,15 @@ describe('news digest methodology parity', () => {
 
     const importanceDescription = openApiDescription('NewsItem', 'importanceScore');
     const newsServiceNewsItemYaml = extractYamlSchemaBlock(newsServiceOpenApiYaml, 'NewsItem');
-    const worldmonitorNewsItemYaml = extractYamlSchemaBlock(
-      worldmonitorOpenApiYaml,
-      'worldmonitor_news_v1_NewsItem',
+    const megabrain-marketNewsItemYaml = extractYamlSchemaBlock(
+      megabrain-marketOpenApiYaml,
+      'megabrain-market_news_v1_NewsItem',
     );
     for (const surface of [
       newsItemProtoText,
       importanceDescription,
       newsServiceNewsItemYaml,
-      worldmonitorNewsItemYaml,
+      megabrain-marketNewsItemYaml,
     ]) {
       assert.ok(
         surface.includes(`${diplomacyBoost}-point diplomacy/flashpoint boost`),
@@ -678,15 +678,15 @@ describe('news digest methodology parity', () => {
 
     const sourceDescription = openApiDescription('ThreatClassification', 'source');
     const newsServiceThreatYaml = extractYamlSchemaBlock(newsServiceOpenApiYaml, 'ThreatClassification');
-    const worldmonitorThreatYaml = extractYamlSchemaBlock(
-      worldmonitorOpenApiYaml,
-      'worldmonitor_news_v1_ThreatClassification',
+    const megabrain-marketThreatYaml = extractYamlSchemaBlock(
+      megabrain-marketOpenApiYaml,
+      'megabrain-market_news_v1_ThreatClassification',
     );
     for (const surface of [
       newsItemProtoText,
       sourceDescription,
       newsServiceThreatYaml,
-      worldmonitorThreatYaml,
+      megabrain-marketThreatYaml,
     ]) {
       for (const classSource of classSources) {
         assert.ok(

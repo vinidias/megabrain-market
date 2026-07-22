@@ -5,7 +5,7 @@ import {
   computeHeadlineEligible,
   computeLowConfidence,
   computeOverallCoverage,
-} from '../server/worldmonitor/resilience/v1/_shared.ts';
+} from '../server/megabrain-market/resilience/v1/_shared.ts';
 
 type TestDimension = {
   id: string;

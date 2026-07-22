@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.military.v1;
+package megabrain-market.military.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/geo.proto";
+import "megabrain-market/core/v1/geo.proto";
 
 // MilitaryFlight represents a tracked military aircraft from OpenSky or Wingbits.
 message MilitaryFlight {
@@ -31,7 +31,7 @@ message MilitaryFlight {
   // Country operating the aircraft (ISO 3166-1 alpha-2).
   string operator_country = 8;
   // Current position.
-  worldmonitor.core.v1.GeoCoordinates location = 9;
+  megabrain-market.core.v1.GeoCoordinates location = 9;
   // Altitude in feet.
   double altitude = 10;
   // Heading in degrees.
@@ -87,7 +87,7 @@ message MilitaryFlightCluster {
   // Descriptive name of the cluster.
   string name = 2;
   // Cluster centroid location.
-  worldmonitor.core.v1.GeoCoordinates location = 3;
+  megabrain-market.core.v1.GeoCoordinates location = 3;
   // Number of flights in the cluster.
   int32 flight_count = 4;
   // The flights in this cluster.

@@ -4,11 +4,11 @@ import type {
   RouteIntelligenceResponse,
   ChokepointExposure,
   BypassOption,
-} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
+} from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
 import {
   ApiError,
   ValidationError,
-} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
+} from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
 
 import { isCallerPremium } from '../../../_shared/premium-check';
 import { getCachedJson } from '../../../_shared/redis';

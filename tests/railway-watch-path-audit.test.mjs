@@ -14,7 +14,7 @@ function service({
   rootDirectory = 'scripts',
   startCommand = 'node seed-example.mjs',
   watchPatterns = [],
-  repo = 'koala73/worldmonitor',
+  repo = 'vinidias/megabrain-market',
   dockerfilePath,
 } = {}) {
   return {
@@ -25,7 +25,7 @@ function service({
 }
 
 describe('Railway watch-path audit', () => {
-  it('flags WorldMonitor seeders that enumerate files without both broad paths', () => {
+  it('flags MegaBrainMarket seeders that enumerate files without both broad paths', () => {
     const watchesEverythingByOmission = service();
     delete watchesEverythingByOmission.build.watchPatterns;
     const config = {

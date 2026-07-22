@@ -22,20 +22,20 @@ const STATIC_SCRIPT_NONCE = 'wm-static-bootstrap';
 // /pro can't drift. Nonce'd to match the static-bootstrap CSP trust (otherwise
 // deploy-config.test.mjs would demand a script-src sha256 hash for it).
 const WM_SAMEAS = [
-  'https://github.com/koala73/worldmonitor',
-  'https://www.npmjs.com/package/worldmonitor',
-  'https://x.com/worldmonitorai',
+  'https://github.com/vinidias/megabrain-market',
+  'https://www.npmjs.com/package/megabrain-market',
+  'https://x.com/megabrain-marketai',
   'https://x.com/eliehabib',
   'https://discord.gg/re63kWKxaz',
-  'https://www.wired.com/story/world-monitor-elie-habib/',
+  'https://www.wired.com/story/megabrain-market-elie-habib/',
 ];
 const ORGANIZATION_JSONLD = `    <script type="application/ld+json" nonce="${STATIC_SCRIPT_NONCE}">${JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'World Monitor',
-  alternateName: 'WorldMonitor',
-  url: 'https://www.worldmonitor.app/',
-  logo: 'https://www.worldmonitor.app/favico/apple-touch-icon.png',
+  name: 'MegaBrain Market',
+  alternateName: 'MegaBrainMarket',
+  url: 'https://www.megabrain.market/',
+  logo: 'https://www.megabrain.market/favico/apple-touch-icon.png',
   description: 'Open-source real-time global intelligence platform aggregating conflicts, military movements, markets, infrastructure, and geopolitical data. Used by 2M+ people across 190+ countries.',
   founder: {
     '@type': 'Person',
@@ -53,8 +53,8 @@ const ORGANIZATION_JSONLD = `    <script type="application/ld+json" nonce="${STA
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    email: 'support@worldmonitor.app',
-    url: 'https://www.worldmonitor.app/pro',
+    email: 'support@megabrain.market',
+    url: 'https://www.megabrain.market/pro',
     availableLanguage: 'English',
   },
   address: {
@@ -63,7 +63,7 @@ const ORGANIZATION_JSONLD = `    <script type="application/ld+json" nonce="${STA
     addressCountry: 'AE',
   },
 })}</script>`;
-const DASHBOARD_SCREENSHOT_BASENAME = 'worldmonitor-7-mar-2026';
+const DASHBOARD_SCREENSHOT_BASENAME = 'megabrain-market-7-mar-2026';
 const DASHBOARD_SCREENSHOT_ASSETS = [
   { filenamePrefix: DASHBOARD_SCREENSHOT_BASENAME, extension: '.jpg' },
   { filenamePrefix: DASHBOARD_SCREENSHOT_BASENAME + '-640', extension: '.avif' },
@@ -214,7 +214,7 @@ const HIDE_SCRIPT = `<script>(function(){try{var s=document.getElementById('seo-
 
 const indexContent = `
 <div id="seo-prerender" lang="en">
-  <h1>World Monitor Pro — From ${en.hero.noiseWord} to ${en.hero.signalWord}</h1>
+  <h1>MegaBrain Market Pro — From ${en.hero.noiseWord} to ${en.hero.signalWord}</h1>
   <p>${en.hero.valueProps}</p>
   <p>${en.hero.launchingDate}</p>
 
@@ -303,16 +303,16 @@ const indexContent = `
 
   <h2>Explore more</h2>
   <ul>
-    <li><a href="https://www.worldmonitor.app/dashboard">World Monitor — geopolitics &amp; intelligence dashboard</a></li>
-    <li><a href="https://tech.worldmonitor.app/">Tech Monitor — AI labs, startups, cloud</a></li>
-    <li><a href="https://finance.worldmonitor.app/">Finance Monitor — markets, central banks, forex</a></li>
-    <li><a href="https://commodity.worldmonitor.app/">Commodity Monitor — mining, energy, supply chains</a></li>
-    <li><a href="https://happy.worldmonitor.app/">Happy Monitor — positive news &amp; progress</a></li>
-    <li><a href="https://www.worldmonitor.app/blog/">World Monitor Blog — OSINT guides &amp; analysis</a></li>
-    <li><a href="https://www.worldmonitor.app/blog/posts/what-is-worldmonitor-real-time-global-intelligence/">What is World Monitor?</a></li>
-    <li><a href="https://www.worldmonitor.app/blog/posts/build-on-worldmonitor-developer-api-open-source/">Build on World Monitor — developer API &amp; MCP</a></li>
-    <li><a href="https://github.com/koala73/worldmonitor">Open source on GitHub (AGPL-3.0)</a></li>
-    <li><a href="https://www.wired.com/story/world-monitor-elie-habib/">Featured in WIRED</a></li>
+    <li><a href="https://www.megabrain.market/dashboard">MegaBrain Market — geopolitics &amp; intelligence dashboard</a></li>
+    <li><a href="https://tech.megabrain.market/">Tech Monitor — AI labs, startups, cloud</a></li>
+    <li><a href="https://finance.megabrain.market/">Finance Monitor — markets, central banks, forex</a></li>
+    <li><a href="https://commodity.megabrain.market/">Commodity Monitor — mining, energy, supply chains</a></li>
+    <li><a href="https://happy.megabrain.market/">Happy Monitor — positive news &amp; progress</a></li>
+    <li><a href="https://www.megabrain.market/blog/">MegaBrain Market Blog — OSINT guides &amp; analysis</a></li>
+    <li><a href="https://www.megabrain.market/blog/posts/what-is-megabrain-market-real-time-global-intelligence/">What is MegaBrain Market?</a></li>
+    <li><a href="https://www.megabrain.market/blog/posts/build-on-megabrain-market-developer-api-open-source/">Build on MegaBrain Market — developer API &amp; MCP</a></li>
+    <li><a href="https://github.com/vinidias/megabrain-market">Open source on GitHub (AGPL-3.0)</a></li>
+    <li><a href="https://www.wired.com/story/megabrain-market-elie-habib/">Featured in WIRED</a></li>
   </ul>
 </div>
 ${HIDE_SCRIPT}`;
@@ -320,7 +320,7 @@ ${HIDE_SCRIPT}`;
 const welcomeContent = await renderWelcomeRoot();
 
 // Wired feature link, reused below.
-const WIRED_STORY_URL = 'https://www.wired.com/story/world-monitor-elie-habib/';
+const WIRED_STORY_URL = 'https://www.wired.com/story/megabrain-market-elie-habib/';
 
 // Crawler-facing prose block for welcome.html (served at the apex `/`). Unlike
 // index.html — where the React app REPLACES #root on mount, so the prose can be
@@ -368,11 +368,11 @@ const welcomeNumbers = [
 
 const welcomeSeoPrerender = `
 <div id="seo-prerender" lang="en">
-  <h2>World Monitor — free real-time global intelligence dashboard</h2>
+  <h2>MegaBrain Market — free real-time global intelligence dashboard</h2>
   <p>${en.welcome.hero.sub} It runs instantly in the browser with no signup, is used by 2M+ people across 190+ countries, and is open source under AGPL-3.0. <a href="${WIRED_STORY_URL}">Featured in WIRED</a>.</p>
 
-  <h2>What World Monitor tracks</h2>
-  <p>World Monitor fuses 56 live map layers on a dual 3D-globe and WebGL map, then scores how they move together. Everything is normalized onto one surface: you see the raw signals, understand them through a daily AI brief and the Country Instability Index, and act with custom monitors, a Scenario Engine, Route Explorer and a 39-tool MCP server for AI agents. Every panel cites its sources and timestamps inline.</p>
+  <h2>What MegaBrain Market tracks</h2>
+  <p>MegaBrain Market fuses 56 live map layers on a dual 3D-globe and WebGL map, then scores how they move together. Everything is normalized onto one surface: you see the raw signals, understand them through a daily AI brief and the Country Instability Index, and act with custom monitors, a Scenario Engine, Route Explorer and a 39-tool MCP server for AI agents. Every panel cites its sources and timestamps inline.</p>
   <h3>Conflict &amp; security</h3>
   <p>Live conflict events from ACLED and UCDP with escalation scoring, 29 scored geopolitical hotspots, military-posture and troop-movement signals, and corroborated breaking alerts that fire only when independent origin types agree.</p>
   <h3>Maritime &amp; trade</h3>
@@ -406,23 +406,23 @@ const welcomeSeoPrerender = `
   <h2>Where the data comes from</h2>
   <p>65+ named providers, live: <a href="https://acleddata.com/">ACLED</a> and <a href="https://ucdp.uu.se/">UCDP</a> for conflict, <a href="https://aisstream.io/">AISStream</a> for vessels, <a href="https://opensky-network.org/">OpenSky</a> for aircraft, <a href="https://firms.modaps.eosdis.nasa.gov/">NASA FIRMS</a> for fires, <a href="https://www.usgs.gov/programs/earthquake-hazards">USGS</a> for earthquakes, and <a href="https://www.imf.org/en/Data">IMF</a>, <a href="https://www.bis.org/">BIS</a>, <a href="https://fred.stlouisfed.org/">FRED</a> and <a href="https://finnhub.io/">Finnhub</a> for markets and macro — plus 500+ curated news feeds, all active under one key with no separate registrations.</p>
 
-  <h2>How World Monitor works</h2>
-  <p>World Monitor ingests 500+ curated feeds and 65+ named providers on independent refresh cycles, normalizes every event into a common schema, geolocates it and deduplicates it across sources. A breaking-news banner fires only when five independent origin types corroborate the same event, so alerts stay rare and real. The Country Instability Index fuses weighted signals per country, the daily AI brief cites the specific headlines behind each assessment, and the correlation engine surfaces when separate systems — geopolitics, shipping, energy and markets — start moving together. Nothing is a black box: every panel shows its sources and the timestamp of its most recent update.</p>
+  <h2>How MegaBrain Market works</h2>
+  <p>MegaBrain Market ingests 500+ curated feeds and 65+ named providers on independent refresh cycles, normalizes every event into a common schema, geolocates it and deduplicates it across sources. A breaking-news banner fires only when five independent origin types corroborate the same event, so alerts stay rare and real. The Country Instability Index fuses weighted signals per country, the daily AI brief cites the specific headlines behind each assessment, and the correlation engine surfaces when separate systems — geopolitics, shipping, energy and markets — start moving together. Nothing is a black box: every panel shows its sources and the timestamp of its most recent update.</p>
 
   <h2>Watch shipping chokepoints in real time</h2>
   <p>Thirteen shipping chokepoints — including Hormuz, Bab el-Mandeb, Suez and Malacca — are tracked with live AIS vessel counts, week-over-week transit change and disruption scoring, with density anomalies flagged against each strait's rolling baseline.</p>
 
   <h2>Built for AI agents — from any stack</h2>
-  <p>World Monitor ships a 39-tool MCP server, so Claude, GPT or any MCP-compatible agent can query live country risk scores, chokepoint status, conflicts, markets and country briefs — researching with live data instead of training-data memories. Every tool accepts a JMESPath projection so agents fetch exactly the fields they need, a single OAuth key reaches 65+ upstream providers, and the whole platform is open source under AGPL-3.0. A public REST API with 193 documented operations under one OpenAPI 3.1 spec covers custom integrations, and official zero-dependency SDKs ship on npm (worldmonitor), PyPI (worldmonitor-sdk), RubyGems (worldmonitor) and as a Go module (github.com/koala73/worldmonitor/sdk/go).</p>
+  <p>MegaBrain Market ships a 39-tool MCP server, so Claude, GPT or any MCP-compatible agent can query live country risk scores, chokepoint status, conflicts, markets and country briefs — researching with live data instead of training-data memories. Every tool accepts a JMESPath projection so agents fetch exactly the fields they need, a single OAuth key reaches 65+ upstream providers, and the whole platform is open source under AGPL-3.0. A public REST API with 193 documented operations under one OpenAPI 3.1 spec covers custom integrations, and official zero-dependency SDKs ship on npm (megabrain-market), PyPI (megabrain-market-sdk), RubyGems (megabrain-market) and as a Go module (github.com/vinidias/megabrain-market/sdk/go).</p>
   <p>Representative MCP tools include country risk, country brief and world brief; conflict events, military posture and cyber threats; maritime activity, chokepoint status and supply-chain data; market data, economic data and consumer prices; energy intelligence, commodity geography and tariff trends; natural disasters, climate and health signals; news intelligence, prediction markets, situation analysis and forecast generation — each accepting an optional JMESPath projection, with a describe_tool call that returns its full schema. Read-only resources expose country risk, chokepoint status, seed-freshness metadata and market quotes at addressable URIs, and prompt templates pre-package common workflows such as country briefings, energy-shock watch, market-open prep and route-risk checks.</p>
 
-  <h2>Who uses World Monitor</h2>
+  <h2>Who uses MegaBrain Market</h2>
   <p>Investors and analysts pricing geopolitical risk, traders watching supply-chain and energy disruptions, researchers and journalists corroborating events across independent sources, and government, defence and NGO teams tracking situational awareness — all from one live map instead of a dozen separate tools.</p>
 
   <h2>Free, Pro and open source</h2>
-  <p>The full live map — every layer, 500+ feeds, country briefs and breaking alerts, all six monitors — is free with no signup and no trial clock. World Monitor Pro ($39.99/month or $399.99/year) adds the decision layer described below, and native desktop apps for Windows, macOS and Linux plus an Android TV app for wall displays are available too.</p>
+  <p>The full live map — every layer, 500+ feeds, country briefs and breaking alerts, all six monitors — is free with no signup and no trial clock. MegaBrain Market Pro ($39.99/month or $399.99/year) adds the decision layer described below, and native desktop apps for Windows, macOS and Linux plus an Android TV app for wall displays are available too.</p>
 
-  <h2>What World Monitor Pro and Enterprise add</h2>
+  <h2>What MegaBrain Market Pro and Enterprise add</h2>
   <p>Pro turns the observatory into an operations room. WM Analyst answers questions across 30+ live services with citations; a Scenario Engine and Route Explorer let you game disruptions before they hit; a personal AI digest sends up to 30 ranked items daily, twice-daily or weekly to Slack, Discord, Telegram, Email or webhook; a custom widget builder assembles your own panels from HTML, CSS and JavaScript with AI assistance; and MCP plus a REST API expose 39 tools under one key. Enterprise adds team workspaces with SSO, MFA and RBAC; cloud, on-premises or air-gapped deployment; satellite imagery with change detection and SAR; tens of thousands of mapped infrastructure assets; and 100+ data connectors including Snowflake, Splunk and Sentinel.</p>
 
   <h2>The numbers, live in the dashboard today</h2>
@@ -438,21 +438,21 @@ ${welcomeNumbers}
     <dt>AIS (Automatic Identification System)</dt><dd>Transponder signals broadcast by ships, used to track vessel positions, port calls and chokepoint transits in real time.</dd>
     <dt>ADS-B</dt><dd>Automatic Dependent Surveillance–Broadcast, the transponder feed used to track aircraft positions and flight patterns worldwide.</dd>
     <dt>BGP anomaly</dt><dd>An irregularity in the internet's Border Gateway Protocol routing that can reveal a route hijack, leak or large-scale outage.</dd>
-    <dt>OSINT</dt><dd>Open-source intelligence — analysis assembled entirely from publicly available data, which is what World Monitor makes accessible on one map.</dd>
-    <dt>MCP (Model Context Protocol)</dt><dd>An open standard that lets AI agents call external tools; World Monitor ships a 39-tool MCP server so agents can query live data directly.</dd>
+    <dt>OSINT</dt><dd>Open-source intelligence — analysis assembled entirely from publicly available data, which is what MegaBrain Market makes accessible on one map.</dd>
+    <dt>MCP (Model Context Protocol)</dt><dd>An open standard that lets AI agents call external tools; MegaBrain Market ships a 39-tool MCP server so agents can query live data directly.</dd>
     <dt>JMESPath</dt><dd>A JSON query language agents use to project just the fields they need from a tool response, cutting token usage on every call.</dd>
-    <dt>SGP4</dt><dd>The orbital-propagation model World Monitor runs in the browser to compute live satellite positions and overhead passes.</dd>
+    <dt>SGP4</dt><dd>The orbital-propagation model MegaBrain Market runs in the browser to compute live satellite positions and overhead passes.</dd>
     <dt>SAR (Synthetic Aperture Radar)</dt><dd>All-weather, day-and-night satellite radar imaging, available on Enterprise for change detection where optical imagery cannot see.</dd>
   </dl>
 
   <h2>Six dashboards, one platform</h2>
   <ul>
-    <li><a href="https://www.worldmonitor.app/dashboard">World Monitor</a> — geopolitics, conflicts, military and infrastructure</li>
-    <li><a href="https://tech.worldmonitor.app/">Tech Monitor</a> — AI labs, startups, cloud and cybersecurity</li>
-    <li><a href="https://finance.worldmonitor.app/">Finance Monitor</a> — global markets, central banks, forex and crypto</li>
-    <li><a href="https://commodity.worldmonitor.app/">Commodity Monitor</a> — mining, energy, supply chains and freight</li>
-    <li><a href="https://happy.worldmonitor.app/">Happy Monitor</a> — positive news, breakthroughs and conservation</li>
-    <li><a href="https://energy.worldmonitor.app/">Energy Monitor</a> — oil, gas, chokepoints and energy security</li>
+    <li><a href="https://www.megabrain.market/dashboard">MegaBrain Market</a> — geopolitics, conflicts, military and infrastructure</li>
+    <li><a href="https://tech.megabrain.market/">Tech Monitor</a> — AI labs, startups, cloud and cybersecurity</li>
+    <li><a href="https://finance.megabrain.market/">Finance Monitor</a> — global markets, central banks, forex and crypto</li>
+    <li><a href="https://commodity.megabrain.market/">Commodity Monitor</a> — mining, energy, supply chains and freight</li>
+    <li><a href="https://happy.megabrain.market/">Happy Monitor</a> — positive news, breakthroughs and conservation</li>
+    <li><a href="https://energy.megabrain.market/">Energy Monitor</a> — oil, gas, chokepoints and energy security</li>
   </ul>
 
   <h2>${en.welcome.faq.title}</h2>
@@ -464,19 +464,19 @@ ${welcomeFaqEntries}
   <dl>
     <dt>How fresh is the data?</dt><dd>Feeds refresh on independent cycles ranging from seconds to minutes, and every panel shows the timestamp of its most recent update. The free tier refreshes every 5–15 minutes; Pro runs near real time.</dd>
     <dt>Can I get alerts on Slack, Telegram or email?</dt><dd>Yes. Pro delivers scheduled AI digests and real-time alerts to Slack, Discord, Telegram, Email or webhook, AES-256 encrypted, with quiet hours and per-rule triggers.</dd>
-    <dt>Does it work on mobile, desktop and TV?</dt><dd>Yes. World Monitor runs in any modern browser, with native desktop apps for Windows, macOS and Linux and an Android TV app for SOC walls and trading floors.</dd>
+    <dt>Does it work on mobile, desktop and TV?</dt><dd>Yes. MegaBrain Market runs in any modern browser, with native desktop apps for Windows, macOS and Linux and an Android TV app for SOC walls and trading floors.</dd>
     <dt>What languages does it support?</dt><dd>24 interface languages, including right-to-left scripts such as Arabic and Farsi.</dd>
-    <dt>Can I self-host World Monitor?</dt><dd>Yes. The platform is open source under AGPL-3.0 on GitHub — read the code, self-host it or build on it. Enterprise adds on-premises and air-gapped deployment.</dd>
+    <dt>Can I self-host MegaBrain Market?</dt><dd>Yes. The platform is open source under AGPL-3.0 on GitHub — read the code, self-host it or build on it. Enterprise adds on-premises and air-gapped deployment.</dd>
     <dt>Is there an API for developers?</dt><dd>Yes. A REST API spans all 30+ service domains with structured JSON, cache headers and OpenAPI 3.1 docs, authenticated per key and rate-limited per tier, alongside the 39-tool MCP server.</dd>
   </dl>
 
   <h2>Learn more</h2>
   <ul>
-    <li><a href="https://www.worldmonitor.app/pro">World Monitor Pro</a> — AI analyst, scheduled digests, MCP for Claude &amp; GPT</li>
-    <li><a href="https://www.worldmonitor.app/blog/">World Monitor Blog</a> — OSINT guides, geopolitics and market intelligence</li>
-    <li><a href="https://www.worldmonitor.app/blog/posts/what-is-worldmonitor-real-time-global-intelligence/">What is World Monitor?</a></li>
-    <li><a href="https://www.worldmonitor.app/blog/posts/osint-for-everyone-open-source-intelligence-democratized/">OSINT for everyone — open-source intelligence democratized</a></li>
-    <li><a href="https://github.com/koala73/worldmonitor">Open source on GitHub (AGPL-3.0)</a></li>
+    <li><a href="https://www.megabrain.market/pro">MegaBrain Market Pro</a> — AI analyst, scheduled digests, MCP for Claude &amp; GPT</li>
+    <li><a href="https://www.megabrain.market/blog/">MegaBrain Market Blog</a> — OSINT guides, geopolitics and market intelligence</li>
+    <li><a href="https://www.megabrain.market/blog/posts/what-is-megabrain-market-real-time-global-intelligence/">What is MegaBrain Market?</a></li>
+    <li><a href="https://www.megabrain.market/blog/posts/osint-for-everyone-open-source-intelligence-democratized/">OSINT for everyone — open-source intelligence democratized</a></li>
+    <li><a href="https://github.com/vinidias/megabrain-market">Open source on GitHub (AGPL-3.0)</a></li>
     <li><a href="${WIRED_STORY_URL}">Featured in WIRED</a></li>
   </ul>
 </div>

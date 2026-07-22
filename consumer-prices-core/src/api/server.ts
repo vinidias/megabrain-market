@@ -4,7 +4,7 @@ import { realpathSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import Fastify, { type FastifyServerOptions } from 'fastify';
 import cors from '@fastify/cors';
-import { worldmonitorRoutes } from './routes/worldmonitor.js';
+import { megabrain-marketRoutes } from './routes/megabrain-market.js';
 import { healthRoutes } from './routes/health.js';
 
 export interface ConsumerPricesServerOptions {
@@ -13,9 +13,9 @@ export interface ConsumerPricesServerOptions {
   logger?: FastifyServerOptions['logger'];
 }
 
-function requiredApiKey(apiKey = process.env.WORLDMONITOR_SNAPSHOT_API_KEY): string {
+function requiredApiKey(apiKey = process.env.MEGABRAIN_MARKET_SNAPSHOT_API_KEY): string {
   const normalized = apiKey?.trim();
-  if (!normalized) throw new Error('WORLDMONITOR_SNAPSHOT_API_KEY is required for consumer-prices-core API startup');
+  if (!normalized) throw new Error('MEGABRAIN_MARKET_SNAPSHOT_API_KEY is required for consumer-prices-core API startup');
   return normalized;
 }
 
@@ -52,7 +52,7 @@ export function createServer(options: ConsumerPricesServerOptions = {}) {
     }
   });
 
-  server.register(worldmonitorRoutes, { prefix: '/wm/consumer-prices/v1' });
+  server.register(megabrain-marketRoutes, { prefix: '/wm/consumer-prices/v1' });
   server.register(healthRoutes, { prefix: '/health' });
 
   return server;

@@ -286,11 +286,11 @@ function defineBrowserGlobals(): MiniDocument {
   };
   windowTarget.document = document;
   windowTarget.location = {
-    origin: 'https://worldmonitor.test',
+    origin: 'https://megabrain-market.test',
     pathname: '/',
     search: '',
-    href: 'https://worldmonitor.test/',
-    hostname: 'worldmonitor.test',
+    href: 'https://megabrain-market.test/',
+    hostname: 'megabrain-market.test',
   };
   windowTarget.innerWidth = 1440;
   windowTarget.innerHeight = 900;
@@ -1143,8 +1143,8 @@ describe('mission preset shell integration', () => {
     assert.deepEqual(callbacks.appliedOrders[0]?.slice(0, 3), ['supply-chain', 'hormuz-tracker', 'cascade']);
     assert.equal(localStorage.getItem(MISSION_PRESET_STORAGE_KEY), 'supply-chain-risk');
     assert.deepEqual(readJsonStorage<string[]>('panel-order'), callbacks.appliedOrders[0]);
-    assert.equal(readJsonStorage<MapLayers>('worldmonitor-layers').tradeRoutes, true);
-    assert.equal(readJsonStorage<MapLayers>('worldmonitor-layers').resilienceScore, true);
+    assert.equal(readJsonStorage<MapLayers>('megabrain-market-layers').tradeRoutes, true);
+    assert.equal(readJsonStorage<MapLayers>('megabrain-market-layers').resilienceScore, true);
     assert.deepEqual(ctx.map.calls.setView.at(-1), { view: 'global', zoom: 2.3 });
     assert.equal(ctx.map.calls.setTimeRange.at(-1), '7d');
     assert.equal(callbacks.waitForAisCalls, 1, 'AIS layer enable should initialize the AIS stream path');
@@ -1163,7 +1163,7 @@ describe('mission preset shell integration', () => {
     assert.deepEqual(enabledWorkspacePanelKeys(ctx.panelSettings), baselineWorkspace);
     assert.deepEqual(activeLayers(ctx.mapLayers), baselineLayers);
     assert.deepEqual(readJsonStorage<string[]>('panel-order'), VARIANT_DEFAULTS.full.filter((key) => key !== 'map'));
-    assert.deepEqual(activeLayers(readJsonStorage<MapLayers>('worldmonitor-layers')), baselineLayers);
+    assert.deepEqual(activeLayers(readJsonStorage<MapLayers>('megabrain-market-layers')), baselineLayers);
     assert.deepEqual(callbacks.appliedOrders.at(-1), VARIANT_DEFAULTS.full.filter((key) => key !== 'map'));
     assert.deepEqual(ctx.map.calls.setView.at(-1), { view: 'global', zoom: undefined });
     assert.equal(ctx.map.calls.setTimeRange.at(-1), '7d');
@@ -1184,7 +1184,7 @@ describe('mission preset shell integration', () => {
     await waitForMissionTimers();
 
     assert.equal(ctx.mapLayers.resilienceScore, false);
-    assert.equal(readJsonStorage<MapLayers>('worldmonitor-layers').resilienceScore, false);
+    assert.equal(readJsonStorage<MapLayers>('megabrain-market-layers').resilienceScore, false);
     assert.equal(ctx.mapLayers.tradeRoutes, true);
     assert.ok(callbacks.loadDataForLayer.includes('tradeRoutes'));
     assert.equal(callbacks.loadDataForLayer.includes('resilienceScore'), false);
@@ -1199,7 +1199,7 @@ describe('mission preset shell integration', () => {
     await waitForMissionTimers();
 
     assert.equal(ctx.mapLayers.ais, false);
-    assert.equal(readJsonStorage<MapLayers>('worldmonitor-layers').ais, false);
+    assert.equal(readJsonStorage<MapLayers>('megabrain-market-layers').ais, false);
     assert.equal(callbacks.waitForAisCalls, 0);
     assert.deepEqual((globalThis as { __missionAis?: string[] }).__missionAis, undefined);
     assert.equal((latestUrl().searchParams.get('layers') ?? '').split(',').includes('ais'), false);

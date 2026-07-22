@@ -4,7 +4,7 @@ import type {
   ListPipelinesRequest,
   ListPipelinesResponse,
   PipelineEntry,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 import { derivePublicBadge } from './_pipeline-evidence';
 import { pickNewerClassifierVersion, pickNewerIsoTimestamp } from '../../../../src/shared/pipeline-evidence';
 

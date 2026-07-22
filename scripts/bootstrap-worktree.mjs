@@ -16,7 +16,7 @@ import {
 } from './check-local-secret-dumps.mjs';
 
 const LOCAL_ENV_FILES = ['.env.local', '.env'];
-const DEFAULT_NPM_CACHE = '/tmp/worldmonitor-npm-cache';
+const DEFAULT_NPM_CACHE = '/tmp/megabrain-market-npm-cache';
 
 export function parseArgs(argv = []) {
   const options = {
@@ -77,7 +77,7 @@ export function parseArgs(argv = []) {
 export function printHelp() {
   console.log(`Usage: node scripts/bootstrap-worktree.mjs [options]
 
-Bootstrap ignored local state for a fresh WorldMonitor worktree.
+Bootstrap ignored local state for a fresh MegaBrainMarket worktree.
 
 Options:
   --env-source <dir>  Source repo root for .env.local/.env links.

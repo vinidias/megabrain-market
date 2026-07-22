@@ -1,4 +1,4 @@
-import type { ListWebcamsRequest, ListWebcamsResponse, WebcamEntry, WebcamCluster, ServerContext } from '../../../../src/generated/server/worldmonitor/webcam/v1/service_server';
+import type { ListWebcamsRequest, ListWebcamsResponse, WebcamEntry, WebcamCluster, ServerContext } from '../../../../src/generated/server/megabrain-market/webcam/v1/service_server';
 import { geoSearchByBox, getHashFieldsBatch, getCachedJson, setCachedJson } from '../../../_shared/redis';
 
 const MAX_RESULTS = 2000;

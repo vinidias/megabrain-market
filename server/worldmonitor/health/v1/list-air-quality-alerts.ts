@@ -4,7 +4,7 @@ import type {
   ListAirQualityAlertsRequest,
   ListAirQualityAlertsResponse,
   ServerContext,
-} from '../../../../src/generated/server/worldmonitor/health/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/health/v1/service_server';
 
 import {
   normalizeAirQualityFetchedAt,

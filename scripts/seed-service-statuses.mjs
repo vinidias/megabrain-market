@@ -12,21 +12,21 @@ import { loadEnvFile, CHROME_UA, getRedisCredentials, logSeedResult, extendExist
 
 loadEnvFile(import.meta.url);
 
-const RPC_URL = 'https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses';
+const RPC_URL = 'https://api.megabrain.market/api/infrastructure/v1/list-service-statuses';
 const CANONICAL_KEY = 'infra:service-statuses:v1';
 
 // Defense-in-depth auth — see seed-infra.mjs for the same pattern + rationale.
-// Set WORLDMONITOR_RELAY_KEY on the Railway service to a value already
-// present in Vercel's WORLDMONITOR_VALID_KEYS.
-const RELAY_API_KEY = process.env.WORLDMONITOR_RELAY_KEY || '';
+// Set MEGABRAIN_MARKET_RELAY_KEY on the Railway service to a value already
+// present in Vercel's MEGABRAIN_MARKET_VALID_KEYS.
+const RELAY_API_KEY = process.env.MEGABRAIN_MARKET_RELAY_KEY || '';
 
 function warmPingHeaders() {
   const h = {
     'Content-Type': 'application/json',
     'User-Agent': CHROME_UA,
-    Origin: 'https://worldmonitor.app',
+    Origin: 'https://megabrain.market',
   };
-  if (RELAY_API_KEY) h['X-WorldMonitor-Key'] = RELAY_API_KEY;
+  if (RELAY_API_KEY) h['X-MegaBrainMarket-Key'] = RELAY_API_KEY;
   return h;
 }
 
@@ -46,7 +46,7 @@ async function warmPing() {
     });
 
     if (!resp.ok) {
-      const keyNote = RELAY_API_KEY ? '' : ' (WORLDMONITOR_RELAY_KEY not set — Origin-only auth)';
+      const keyNote = RELAY_API_KEY ? '' : ' (MEGABRAIN_MARKET_RELAY_KEY not set — Origin-only auth)';
       throw new Error(`RPC failed: HTTP ${resp.status}${keyNote}`);
     }
     data = await resp.json();

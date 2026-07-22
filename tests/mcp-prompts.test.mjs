@@ -43,7 +43,7 @@ function makeReq(method = 'POST', body = null, headers = {}) {
     method,
     headers: {
       'Content-Type': 'application/json',
-      'X-WorldMonitor-Key': VALID_KEY,
+      'X-MegaBrainMarket-Key': VALID_KEY,
       ...headers,
     },
     body: body ? JSON.stringify(body) : undefined,
@@ -56,7 +56,7 @@ let TOOL_REGISTRY;
 
 describe('api/mcp.ts — prompts capability + JMESPath-vs-schema parity', () => {
   beforeEach(async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = VALID_KEY;
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = VALID_KEY;
     delete process.env.UPSTASH_REDIS_REST_URL;
     delete process.env.UPSTASH_REDIS_REST_TOKEN;
     process.env.MCP_TELEMETRY = 'false';

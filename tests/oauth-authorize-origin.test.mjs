@@ -3,9 +3,9 @@
  *
  * The OAuth discovery metadata (PRM/AS) and the /agent/auth challenge are all
  * host-derived, so an agent can be pointed at the apex OR www OR api consent
- * page. Previously the POST handler accepted only Origin=https://api.worldmonitor.app
+ * page. Previously the POST handler accepted only Origin=https://api.megabrain.market
  * and 403'd every other first-party host, dead-ending the www/apex flow. The gate
- * now accepts any worldmonitor.app apex/subdomain origin (foreign origins still
+ * now accepts any megabrain.market apex/subdomain origin (foreign origins still
  * 403). The CSRF nonce remains the real protection.
  *
  * The origin check is the FIRST statement in the POST branch (before rate-limit
@@ -28,7 +28,7 @@ const { default: handler } = await import('../api/oauth/authorize.js');
 const postWithOrigin = (origin) => {
   const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
   if (origin !== undefined) headers.origin = origin;
-  return handler(new Request('https://www.worldmonitor.app/oauth/authorize', {
+  return handler(new Request('https://www.megabrain.market/oauth/authorize', {
     method: 'POST',
     headers,
     body: '', // no _nonce → 400 "Missing session token" once the origin gate passes
@@ -37,11 +37,11 @@ const postWithOrigin = (origin) => {
 
 describe('OAuth authorize — consent POST origin gate (P1)', () => {
   const firstPartyOrigins = [
-    'https://worldmonitor.app',          // apex — the scanned host, previously 403'd
-    'https://www.worldmonitor.app',      // canonical Vercel host
-    'https://api.worldmonitor.app',      // the only host that worked before
-    'https://tech.worldmonitor.app',     // variant subdomain
-    'https://finance.worldmonitor.app',
+    'https://megabrain.market',          // apex — the scanned host, previously 403'd
+    'https://www.megabrain.market',      // canonical Vercel host
+    'https://api.megabrain.market',      // the only host that worked before
+    'https://tech.megabrain.market',     // variant subdomain
+    'https://finance.megabrain.market',
   ];
 
   for (const origin of firstPartyOrigins) {
@@ -66,10 +66,10 @@ describe('OAuth authorize — consent POST origin gate (P1)', () => {
 
   const foreignOrigins = [
     'https://evil.example',
-    'https://worldmonitor.app.evil.example', // suffix attack — must stay anchored
-    'https://evilworldmonitor.app',          // prefix attack — no subdomain dot
-    'http://worldmonitor.app',               // non-https
-    'https://worldmonitor.app:8443',         // port smuggling
+    'https://megabrain.market.evil.example', // suffix attack — must stay anchored
+    'https://evilmegabrain.market',          // prefix attack — no subdomain dot
+    'http://megabrain.market',               // non-https
+    'https://megabrain.market:8443',         // port smuggling
   ];
 
   for (const origin of foreignOrigins) {

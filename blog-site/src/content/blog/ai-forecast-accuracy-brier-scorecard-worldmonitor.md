@@ -1,16 +1,16 @@
 ---
 title: "We Grade Our Own Forecasts: Inside the Forecast Scorecard"
-description: "WorldMonitor resolves its AI forecasts against reality and publishes the results: Brier scores, log scores, calibration buckets, and per-domain accuracy breakdowns."
-metaTitle: "AI Forecast Accuracy & Brier Scorecard | WorldMonitor"
+description: "MegaBrainMarket resolves its AI forecasts against reality and publishes the results: Brier scores, log scores, calibration buckets, and per-domain accuracy breakdowns."
+metaTitle: "AI Forecast Accuracy & Brier Scorecard | MegaBrainMarket"
 keywords: "AI forecast accuracy, Brier score forecasting, geopolitical forecast track record, forecast calibration, prediction accountability, forecast verification"
 audience: "Forecasters, superforecasting community, quant researchers, skeptical analysts, AI evaluation researchers"
-heroImage: "/blog/og/ai-forecast-accuracy-brier-scorecard-worldmonitor.png"
+heroImage: "/blog/og/ai-forecast-accuracy-brier-scorecard-megabrain-market.png"
 pubDate: "2026-07-21"
 ---
 
 Every AI product now makes predictions. Almost none of them tell you their error rate.
 
-That asymmetry is the oldest trick in forecasting: make many confident calls, showcase the hits, let the misses expire quietly. It works because nobody keeps the ledger. WorldMonitor generates [AI geopolitical and economic forecasts](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) — so we built the ledger, and we publish it.
+That asymmetry is the oldest trick in forecasting: make many confident calls, showcase the hits, let the misses expire quietly. It works because nobody keeps the ledger. MegaBrainMarket generates [AI geopolitical and economic forecasts](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) — so we built the ledger, and we publish it.
 
 ## How the scorecard works
 
@@ -29,13 +29,13 @@ The scoring runs over a rolling window with judged and pending counts visible, s
 
 Three reasons, in ascending order of importance:
 
-1. **It's the standard we hold others to.** WorldMonitor puts [Polymarket and Kalshi probabilities](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) next to its own forecasts. Prediction markets keep score by construction — their prices are public history. Publishing our own Brier scores is the price of sitting in that company.
+1. **It's the standard we hold others to.** MegaBrainMarket puts [Polymarket and Kalshi probabilities](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) next to its own forecasts. Prediction markets keep score by construction — their prices are public history. Publishing our own Brier scores is the price of sitting in that company.
 2. **It makes the forecasts usable.** A "78% probability" from a black box is decoration. The same number from a system whose calibration you can inspect is an input you can size decisions with.
 3. **It improves the system.** Scored errors are training signal. The domains where calibration drifts are the domains where the pipeline gets fixed next.
 
 ## For developers and agents
 
-The `get_forecast_scorecard` MCP tool returns the full scorecard — Brier and log scores, calibration buckets, domain breakdowns, judged and pending counts — in one structured call, and `get_forecast_predictions` returns the current forecasts it will eventually grade. An agent can do something genuinely new with that pair: weight a forecast by the demonstrated track record of its domain before acting on it. The [risk-agent tutorial](/blog/posts/build-geopolitical-risk-agent-worldmonitor-mcp/) shows the wiring; the [daily briefing workflow](/blog/posts/daily-intelligence-briefing-workflow-15-minutes/) shows where forecasts fit a human routine.
+The `get_forecast_scorecard` MCP tool returns the full scorecard — Brier and log scores, calibration buckets, domain breakdowns, judged and pending counts — in one structured call, and `get_forecast_predictions` returns the current forecasts it will eventually grade. An agent can do something genuinely new with that pair: weight a forecast by the demonstrated track record of its domain before acting on it. The [risk-agent tutorial](/blog/posts/build-geopolitical-risk-agent-megabrain-market-mcp/) shows the wiring; the [daily briefing workflow](/blog/posts/daily-intelligence-briefing-workflow-15-minutes/) shows where forecasts fit a human routine.
 
 ## Limits
 
@@ -53,7 +53,7 @@ No. Once a forecast enters the resolution ledger, its probability and claim are 
 
 **Where can I see or query the scorecard?**
 
-In the forecast panel on the dashboard, and programmatically via the `get_forecast_scorecard` MCP tool or the forecast REST endpoints in the [API reference](https://www.worldmonitor.app/docs/api-reference).
+In the forecast panel on the dashboard, and programmatically via the `get_forecast_scorecard` MCP tool or the forecast REST endpoints in the [API reference](https://www.megabrain.market/docs/api-reference).
 
 ---
 

@@ -22,7 +22,7 @@ export const UPSTREAM_TIMEOUT_MS = 25_000;
 // high/critical via the LLM classifier. See PR for U4 of
 // docs/plans/2026-04-26-001-fix-brief-static-page-contamination-plan.md.
 // Three sites read/write this prefix: this canonical writer, the digest
-// reader at server/worldmonitor/news/v1/list-feed-digest.ts (now uses
+// reader at server/megabrain-market/news/v1/list-feed-digest.ts (now uses
 // buildClassifyCacheKey), and scripts/ais-relay.cjs (independent inline
 // helper — cannot import from .ts). All three are kept in lockstep by
 // the news-classify-cache-prefix-audit static-analysis test.

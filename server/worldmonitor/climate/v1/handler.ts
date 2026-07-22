@@ -1,4 +1,4 @@
-import type { ClimateServiceHandler } from '../../../../src/generated/server/worldmonitor/climate/v1/service_server';
+import type { ClimateServiceHandler } from '../../../../src/generated/server/megabrain-market/climate/v1/service_server';
 
 import { getCo2Monitoring } from './get-co2-monitoring';
 import { getOceanIceData } from './get-ocean-ice-data';

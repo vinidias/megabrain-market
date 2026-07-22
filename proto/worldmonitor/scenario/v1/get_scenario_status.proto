@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.scenario.v1;
+package megabrain-market.scenario.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";

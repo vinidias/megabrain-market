@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.forecast.v1;
+package megabrain-market.forecast.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/forecast/v1/forecast.proto";
+import "megabrain-market/forecast/v1/forecast.proto";
 
 message GetForecastsRequest {
   // Forecast domain to retrieve, such as geopolitics, markets, or climate.

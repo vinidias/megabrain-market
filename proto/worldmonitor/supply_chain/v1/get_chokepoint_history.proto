@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.supply_chain.v1;
+package megabrain-market.supply_chain.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/supply_chain/v1/supply_chain_data.proto";
+import "megabrain-market/supply_chain/v1/supply_chain_data.proto";
 
 // GetChokepointHistory returns the transit-count history for a single
 // chokepoint. Loaded lazily on card expand so the main chokepoint-status

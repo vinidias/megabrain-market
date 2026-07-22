@@ -11,7 +11,7 @@ import {
   type ListPredictionMarketsRequest,
   type ListPredictionMarketsResponse,
   type PredictionMarket,
-} from '../../../../src/generated/server/worldmonitor/prediction/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/prediction/v1/service_server';
 
 import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
 import { clampInt } from '../../../_shared/constants';

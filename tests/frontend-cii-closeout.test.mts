@@ -9,7 +9,7 @@ import ts from 'typescript';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 const countryInstabilityPath = resolve(root, 'src/services/country-instability.ts');
-const serverRiskScoresPath = resolve(root, 'server/worldmonitor/intelligence/v1/get-risk-scores.ts');
+const serverRiskScoresPath = resolve(root, 'server/megabrain-market/intelligence/v1/get-risk-scores.ts');
 const crossModulePath = resolve(root, 'src/services/cross-module-integration.ts');
 const cachedRiskScoresPath = resolve(root, 'src/services/cached-risk-scores.ts');
 
@@ -247,7 +247,7 @@ describe('frontend CII closeout regressions', () => {
     );
     const serverMap = extractTopLevelStringArrayRecord(
       serverRiskScoresSource,
-      'server/worldmonitor/intelligence/v1/get-risk-scores.ts',
+      'server/megabrain-market/intelligence/v1/get-risk-scores.ts',
       'ZONE_COUNTRY_MAP',
     );
 

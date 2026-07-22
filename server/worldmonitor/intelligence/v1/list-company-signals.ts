@@ -5,7 +5,7 @@
  * mappings and keyword co-occurrence in third-party discussion threads. The
  * upstream sources verified neither ownership nor authorship, so outputs were
  * structurally indistinguishable from fabricated intelligence. See issues
- * #3754 and #3755 (koala73/worldmonitor) for the full diagnosis.
+ * #3754 and #3755 (vinidias/megabrain-market) for the full diagnosis.
  *
  * The route is preserved (proto contract, OpenAPI op, gateway entry) so
  * existing callers keep working. The handler now returns an empty envelope.
@@ -18,8 +18,8 @@ import type {
   ServerContext,
   ListCompanySignalsRequest,
   ListCompanySignalsResponse,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
-import { ValidationError } from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
+import { ValidationError } from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 export async function listCompanySignals(
   _ctx: ServerContext,

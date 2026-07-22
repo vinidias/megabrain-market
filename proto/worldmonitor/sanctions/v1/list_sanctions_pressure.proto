@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package worldmonitor.sanctions.v1;
+package megabrain-market.sanctions.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/sanctions/v1/country_sanctions_pressure.proto";
-import "worldmonitor/sanctions/v1/program_sanctions_pressure.proto";
-import "worldmonitor/sanctions/v1/sanctions_entry.proto";
+import "megabrain-market/sanctions/v1/country_sanctions_pressure.proto";
+import "megabrain-market/sanctions/v1/program_sanctions_pressure.proto";
+import "megabrain-market/sanctions/v1/sanctions_entry.proto";
 
 // ListSanctionsPressureRequest retrieves recent OFAC sanctions pressure state.
 message ListSanctionsPressureRequest {

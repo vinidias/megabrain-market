@@ -2,8 +2,8 @@ import type {
   ServerContext,
   TriggerSimulationRequest,
   TriggerSimulationResponse,
-} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
-import { ApiError } from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
+import { ApiError } from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
 
 import { isCallerPremium } from '../../../_shared/premium-check';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
@@ -135,7 +135,7 @@ export async function triggerSimulation(
   // shape (auth_kind in the log line) lets a follow-up dashboard / Sentry
   // filter separate team-test traffic from external Pro callers.
   const authHeader = ctx.request.headers.get('authorization') ?? '';
-  const apiKeyHeader = ctx.request.headers.get('x-api-key') || ctx.request.headers.get('x-worldmonitor-key') || '';
+  const apiKeyHeader = ctx.request.headers.get('x-api-key') || ctx.request.headers.get('x-megabrain-market-key') || '';
   const authKind = apiKeyHeader
     ? (apiKeyHeader.startsWith('wm_') ? 'user_api_key' : 'enterprise_api_key')
     : (authHeader ? 'clerk_jwt' : 'unknown');

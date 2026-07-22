@@ -2,7 +2,7 @@ import type {
     ServerContext,
     DeductSituationRequest,
     DeductSituationResponse,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 import { cachedFetchJson, getCachedJson } from '../../../_shared/redis';
 import { sha256Hex } from './_shared';
@@ -84,7 +84,7 @@ function buildPredictionContext(query: string, bootstrap: PredictionBootstrap): 
 // the platform kills the invocation: the previous 120s budget was
 // unreachable (7d of Axiom route telemetry shows no success past 23.6s),
 // so every slower run surfaced as a client 504 with the LLM spend wasted
-// and nothing cached (WORLDMONITOR-VP, #5147). 22s keeps the budget above
+// and nothing cached (MEGABRAIN_MARKET-VP, #5147). 22s keeps the budget above
 // the observed reasoning p95 (~17.5s) while leaving a 3s guard band for
 // pre-LLM context assembly and response serialization.
 const VERCEL_INITIAL_RESPONSE_LIMIT_MS = 25_000;

@@ -1,7 +1,7 @@
 import { afterEach, describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { getChinaMacroSnapshot } from '../server/worldmonitor/economic/v1/get-china-macro-snapshot';
+import { getChinaMacroSnapshot } from '../server/megabrain-market/economic/v1/get-china-macro-snapshot';
 
 const ORIGINAL_FETCH = globalThis.fetch;
 const ORIGINAL_ENV = {

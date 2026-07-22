@@ -69,7 +69,7 @@ const EXCLUDED_FROM_MCP = new Map([
   ['military:forecast-inputs:stale:v1',
     'intermediate: seed-to-seed pipeline key, only populated after seed-military-flights runs (matches api/health.js:463 ON_DEMAND_KEYS rationale).'],
   ['intelligence:military-cii:v1',
-    'intermediate: per-country military-presence aggregate (own/foreign flights+vessels, AIS disruption buckets) read by server/worldmonitor/intelligence/v1/get-risk-scores.ts to feed the CII Security component; surfaces transitively via the country-risk score returned by get_country_risk. Not a queryable MCP slice on its own.'],
+    'intermediate: per-country military-presence aggregate (own/foreign flights+vessels, AIS disruption buckets) read by server/megabrain-market/intelligence/v1/get-risk-scores.ts to feed the CII Security component; surfaces transitively via the country-risk score returned by get_country_risk. Not a queryable MCP slice on its own.'],
   ['weather:hko-warnings:v1',
     'intermediate: dedicated HKO warning snapshot is independently health-monitored, while its warning events are merged into natural:events:v1 and exposed by get_natural_disasters. The raw side snapshot has no separate MCP schema or filter surface.'],
 

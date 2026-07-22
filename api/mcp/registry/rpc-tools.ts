@@ -246,7 +246,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const url = `${base}/api/economic/v1/list-global-tenders?${query}`;
       const auth = await buildAuthHeaders(context, 'GET', url, null);
       const response = await fetch(url, {
-        headers: { ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         signal: AbortSignal.timeout(8_000),
       });
       if (!response.ok) throw new Error(`list-global-tenders HTTP ${response.status}`);
@@ -309,7 +309,7 @@ export const RPC_TOOLS: ToolDef[] = [
     // truth — the ui:// resource is registered in ../ui/registry.ts.
     _uiResourceUri: WORLD_BRIEF_UI_URI,
     _execute: async (params, base, context) => {
-      const UA = 'worldmonitor-mcp-edge/1.0';
+      const UA = 'megabrain-market-mcp-edge/1.0';
       // Step 1: fetch current geopolitical headlines (budget: 6 s, leaves ~24 s for LLM).
       // `full` is the documented geopolitical/default digest variant.
       const digestUrl = `${base}/api/news/v1/list-feed-digest?variant=full&lang=en`;
@@ -405,7 +405,7 @@ export const RPC_TOOLS: ToolDef[] = [
     // ui:// app shell. Single source of truth — registered in ../ui/registry.ts.
     _uiResourceUri: COUNTRY_BRIEF_UI_URI,
     _execute: async (params, base, context) => {
-      const UA = 'worldmonitor-mcp-edge/1.0';
+      const UA = 'megabrain-market-mcp-edge/1.0';
       const countryCode = String(params.country_code ?? '').toUpperCase().slice(0, 2);
 
       // Fetch current geopolitical headlines to ground the LLM (budget: 2 s — cached endpoint).
@@ -527,7 +527,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const url = `${base}/api/intelligence/v1/get-country-risk?country_code=${encodeURIComponent(code)}`;
       const auth = await buildAuthHeaders(context, 'GET', url, null);
       const res = await fetch(url, {
-        headers: { ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         signal: AbortSignal.timeout(8_000),
       });
       if (!res.ok) throw new Error(`get-country-risk HTTP ${res.status}`);
@@ -732,7 +732,7 @@ export const RPC_TOOLS: ToolDef[] = [
       if (!bbox) return { error: `Unknown country code: ${code}. Use ISO 3166-1 alpha-2 (e.g. "AE", "US", "GB").` };
       const [sw_lat, sw_lon, ne_lat, ne_lon] = bbox;
       const type = String(params.type ?? 'all');
-      const UA = 'worldmonitor-mcp-edge/1.0';
+      const UA = 'megabrain-market-mcp-edge/1.0';
       const bboxQ = `sw_lat=${sw_lat}&sw_lon=${sw_lon}&ne_lat=${ne_lat}&ne_lon=${ne_lon}`;
 
       type CivilianResp = {
@@ -849,7 +849,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const [sw_lat, sw_lon, ne_lat, ne_lon] = bbox;
       // Deliberately NO bbox on the inner fetch: the handler rejects any bbox
       // dimension >10° (BboxValidationError → HTTP 400), and 67 of the 167
-      // COUNTRY_BBOXES exceed that (US, JP, AU, BR, …) — WORLDMONITOR-T8.
+      // COUNTRY_BBOXES exceed that (US, JP, AU, BR, …) — MEGABRAIN_MARKET-T8.
       // The relay's density/disruption sets are global regardless of bbox
       // (bbox only scopes tanker/candidate reports, which this tool never
       // requests), so we take the cached global snapshot and filter to the
@@ -870,7 +870,7 @@ export const RPC_TOOLS: ToolDef[] = [
       };
 
       const res = await fetch(url, {
-        headers: { ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         signal: AbortSignal.timeout(8_000),
       });
       if (!res.ok) {
@@ -963,7 +963,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const auth = await buildAuthHeaders(context, 'POST', url, body);
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { 'Content-Type': 'application/json', ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         body,
         signal: AbortSignal.timeout(25_000),
       });
@@ -1006,7 +1006,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const auth = await buildAuthHeaders(context, 'POST', url, body);
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { 'Content-Type': 'application/json', ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         body,
         signal: AbortSignal.timeout(25_000),
       });
@@ -1070,7 +1070,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const url = `${base}/api/aviation/v1/search-google-flights?${qs}`;
       const auth = await buildAuthHeaders(context, 'GET', url, null);
       const res = await fetch(url, {
-        headers: { ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         signal: AbortSignal.timeout(25_000),
       });
       if (!res.ok) throw new Error(`search-google-flights HTTP ${res.status}`);
@@ -1128,7 +1128,7 @@ export const RPC_TOOLS: ToolDef[] = [
       const url = `${base}/api/aviation/v1/search-google-dates?${qs}`;
       const auth = await buildAuthHeaders(context, 'GET', url, null);
       const res = await fetch(url, {
-        headers: { ...auth, 'User-Agent': 'worldmonitor-mcp-edge/1.0' },
+        headers: { ...auth, 'User-Agent': 'megabrain-market-mcp-edge/1.0' },
         signal: AbortSignal.timeout(25_000),
       });
       if (!res.ok) throw new Error(`search-google-dates HTTP ${res.status}`);

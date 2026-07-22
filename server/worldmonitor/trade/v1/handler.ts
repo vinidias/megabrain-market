@@ -1,4 +1,4 @@
-import type { TradeServiceHandler } from '../../../../src/generated/server/worldmonitor/trade/v1/service_server';
+import type { TradeServiceHandler } from '../../../../src/generated/server/megabrain-market/trade/v1/service_server';
 
 import { getTradeRestrictions } from './get-trade-restrictions';
 import { getTariffTrends } from './get-tariff-trends';

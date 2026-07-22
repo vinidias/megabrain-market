@@ -4,7 +4,7 @@ import type {
   GetRegimeHistoryRequest,
   GetRegimeHistoryResponse,
   RegimeTransition,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 const KEY_PREFIX = 'intelligence:regime-history:v1:';
 

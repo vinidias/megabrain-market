@@ -4,7 +4,7 @@ import type {
   ServerContext,
   GetForecastsRequest,
   GetForecastsResponse,
-} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
 import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
 import { getRawJson } from '../../../_shared/redis';
 import { markNoStoreFallbackResponse } from '../../../_shared/response-headers';

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.economic.v1;
+package megabrain-market.economic.v1;
 
 import "buf/validate/validate.proto";
-import "worldmonitor/economic/v1/economic_data.proto";
+import "megabrain-market/economic/v1/economic_data.proto";
 
 // GetFredSeriesBatchRequest looks up multiple FRED series in a single call.
 message GetFredSeriesBatchRequest {

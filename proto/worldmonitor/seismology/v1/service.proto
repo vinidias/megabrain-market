@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.seismology.v1;
+package megabrain-market.seismology.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/seismology/v1/list_earthquakes.proto";
+import "megabrain-market/seismology/v1/list_earthquakes.proto";
 
 // SeismologyService provides APIs for earthquake monitoring data sourced from USGS.
 service SeismologyService {

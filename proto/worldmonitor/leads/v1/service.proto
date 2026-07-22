@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.leads.v1;
+package megabrain-market.leads.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/leads/v1/register_interest.proto";
-import "worldmonitor/leads/v1/submit_contact.proto";
+import "megabrain-market/leads/v1/register_interest.proto";
+import "megabrain-market/leads/v1/submit_contact.proto";
 
 // LeadsService handles public-facing lead capture: enterprise contact and Pro-waitlist signups.
 service LeadsService {

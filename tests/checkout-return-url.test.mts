@@ -6,15 +6,15 @@ import { buildDashboardCheckoutReturnUrl } from '../src/services/checkout-return
 describe('buildDashboardCheckoutReturnUrl', () => {
   it('routes Dodo full-page returns to the dashboard instead of the root welcome page', () => {
     assert.equal(
-      buildDashboardCheckoutReturnUrl('https://worldmonitor.app'),
-      'https://worldmonitor.app/dashboard?wm_checkout=return',
+      buildDashboardCheckoutReturnUrl('https://megabrain.market'),
+      'https://megabrain.market/dashboard?wm_checkout=return',
     );
   });
 
   it('preserves the active origin so preview and variant hosts return to their own dashboard', () => {
     assert.equal(
-      buildDashboardCheckoutReturnUrl('https://tech.worldmonitor.app'),
-      'https://tech.worldmonitor.app/dashboard?wm_checkout=return',
+      buildDashboardCheckoutReturnUrl('https://tech.megabrain.market'),
+      'https://tech.megabrain.market/dashboard?wm_checkout=return',
     );
   });
 });

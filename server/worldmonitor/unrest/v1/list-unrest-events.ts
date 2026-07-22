@@ -8,7 +8,7 @@ import type {
   ListUnrestEventsRequest,
   ListUnrestEventsResponse,
   UnrestEvent,
-} from '../../../../src/generated/server/worldmonitor/unrest/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/unrest/v1/service_server';
 
 import { sortBySeverityAndRecency } from './_shared';
 import { getCachedJson } from '../../../_shared/redis';

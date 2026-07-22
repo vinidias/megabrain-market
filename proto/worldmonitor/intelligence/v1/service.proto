@@ -1,32 +1,32 @@
 syntax = "proto3";
-package worldmonitor.intelligence.v1;
+package megabrain-market.intelligence.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/intelligence/v1/classify_event.proto";
-import "worldmonitor/intelligence/v1/deduct_situation.proto";
-import "worldmonitor/intelligence/v1/get_company_enrichment.proto";
-import "worldmonitor/intelligence/v1/get_country_facts.proto";
-import "worldmonitor/intelligence/v1/get_country_intel_brief.proto";
-import "worldmonitor/intelligence/v1/get_country_risk.proto";
-import "worldmonitor/intelligence/v1/get_pizzint_status.proto";
-import "worldmonitor/intelligence/v1/get_risk_scores.proto";
-import "worldmonitor/intelligence/v1/list_security_advisories.proto";
-import "worldmonitor/intelligence/v1/list_company_signals.proto";
-import "worldmonitor/intelligence/v1/list_gps_interference.proto";
-import "worldmonitor/intelligence/v1/list_oref_alerts.proto";
-import "worldmonitor/intelligence/v1/list_satellites.proto";
-import "worldmonitor/intelligence/v1/list_telegram_feed.proto";
-import "worldmonitor/intelligence/v1/search_gdelt_documents.proto";
-import "worldmonitor/intelligence/v1/get_gdelt_topic_timeline.proto";
-import "worldmonitor/intelligence/v1/list_cross_source_signals.proto";
-import "worldmonitor/intelligence/v1/list_market_implications.proto";
-import "worldmonitor/intelligence/v1/get_social_velocity.proto";
-import "worldmonitor/intelligence/v1/get_country_energy_profile.proto";
-import "worldmonitor/intelligence/v1/compute_energy_shock.proto";
-import "worldmonitor/intelligence/v1/get_country_port_activity.proto";
-import "worldmonitor/intelligence/v1/get_regional_snapshot.proto";
-import "worldmonitor/intelligence/v1/get_regime_history.proto";
-import "worldmonitor/intelligence/v1/get_regional_brief.proto";
+import "megabrain-market/intelligence/v1/classify_event.proto";
+import "megabrain-market/intelligence/v1/deduct_situation.proto";
+import "megabrain-market/intelligence/v1/get_company_enrichment.proto";
+import "megabrain-market/intelligence/v1/get_country_facts.proto";
+import "megabrain-market/intelligence/v1/get_country_intel_brief.proto";
+import "megabrain-market/intelligence/v1/get_country_risk.proto";
+import "megabrain-market/intelligence/v1/get_pizzint_status.proto";
+import "megabrain-market/intelligence/v1/get_risk_scores.proto";
+import "megabrain-market/intelligence/v1/list_security_advisories.proto";
+import "megabrain-market/intelligence/v1/list_company_signals.proto";
+import "megabrain-market/intelligence/v1/list_gps_interference.proto";
+import "megabrain-market/intelligence/v1/list_oref_alerts.proto";
+import "megabrain-market/intelligence/v1/list_satellites.proto";
+import "megabrain-market/intelligence/v1/list_telegram_feed.proto";
+import "megabrain-market/intelligence/v1/search_gdelt_documents.proto";
+import "megabrain-market/intelligence/v1/get_gdelt_topic_timeline.proto";
+import "megabrain-market/intelligence/v1/list_cross_source_signals.proto";
+import "megabrain-market/intelligence/v1/list_market_implications.proto";
+import "megabrain-market/intelligence/v1/get_social_velocity.proto";
+import "megabrain-market/intelligence/v1/get_country_energy_profile.proto";
+import "megabrain-market/intelligence/v1/compute_energy_shock.proto";
+import "megabrain-market/intelligence/v1/get_country_port_activity.proto";
+import "megabrain-market/intelligence/v1/get_regional_snapshot.proto";
+import "megabrain-market/intelligence/v1/get_regime_history.proto";
+import "megabrain-market/intelligence/v1/get_regional_brief.proto";
 
 // IntelligenceService provides APIs for technical and strategic intelligence.
 service IntelligenceService {

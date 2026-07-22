@@ -43,7 +43,7 @@ calibration and independent validation windows pass every gate below. The servin
 7. Enable `BOOTSTRAP_R2_SHADOW_MEASURE=1` in Vercel production.
 
 DebugBear documents five programmatic numeric metric slots and five string tag slots through its
-snippet API. The public WorldMonitor snippet inspected on 2026-07-14 reported no configured custom
+snippet API. The public MegaBrainMarket snippet inspected on 2026-07-14 reported no configured custom
 mappings. Adding the six bootstrap values does not add a request, user, or device ID to the
 page-level custom fields. That is not sufficient by itself: the collector's project-level session
 setting applies to the resulting page view. Record proof that sessions are disabled before treating

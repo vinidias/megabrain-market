@@ -89,7 +89,7 @@ export async function executeTool(
     } catch (err) {
       // Same minified-frame over-grouping guard as the tool-execution catch
       // below — key on step + tool + error type so a post-filter bug in one
-      // tool doesn't merge into the shared api/mcp catch-all (WORLDMONITOR-T8).
+      // tool doesn't merge into the shared api/mcp catch-all (MEGABRAIN_MARKET-T8).
       captureSilentError(err, {
         tags: { route: 'api/mcp', step: 'post-filter', tool: tool.name },
         fingerprint: mcpErrorFingerprint('post-filter', tool.name, err),
@@ -266,7 +266,7 @@ export async function dispatchToolsCall(
     captureSilentError(err, {
       tags: { route: 'api/mcp', step: 'tool-execution', tool: tool.name },
       ctx,
-      // Split the api/mcp catch-all (WORLDMONITOR-T8) into per-tool,
+      // Split the api/mcp catch-all (MEGABRAIN_MARKET-T8) into per-tool,
       // per-status groups — see api/mcp/error-fingerprint.ts.
       fingerprint: mcpErrorFingerprint('tool-execution', tool.name, err),
       ...(isClient4xx ? { level: 'warning' as const } : {}),

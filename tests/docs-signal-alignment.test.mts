@@ -191,7 +191,7 @@ test('public Escalation Monitor docs publish the current adapter weights and gat
 });
 
 test('public algorithms docs publish current temporal anomaly severities', () => {
-  const temporalCode = readRepo('server/worldmonitor/infrastructure/v1/_shared.ts');
+  const temporalCode = readRepo('server/megabrain-market/infrastructure/v1/_shared.ts');
   const algorithmsDoc = readRepo('docs/algorithms.mdx');
 
   assert.match(temporalCode, /export const Z_THRESHOLD_LOW = 1\.5;/);

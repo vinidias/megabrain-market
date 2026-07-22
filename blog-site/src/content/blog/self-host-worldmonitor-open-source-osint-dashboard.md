@@ -1,14 +1,14 @@
 ---
-title: "Self-Host WorldMonitor: Run an Open Source OSINT Dashboard Locally"
-description: "A practical overview of self-hosting WorldMonitor with Docker or Podman, required secrets, Redis, seeders, optional API keys, and AGPL responsibilities."
-metaTitle: "Self-Host WorldMonitor OSINT Dashboard"
-keywords: "self host WorldMonitor, open source OSINT dashboard, Docker OSINT dashboard, geopolitical dashboard self hosted, AGPL intelligence dashboard"
+title: "Self-Host MegaBrainMarket: Run an Open Source OSINT Dashboard Locally"
+description: "A practical overview of self-hosting MegaBrainMarket with Docker or Podman, required secrets, Redis, seeders, optional API keys, and AGPL responsibilities."
+metaTitle: "Self-Host MegaBrainMarket OSINT Dashboard"
+keywords: "self host MegaBrainMarket, open source OSINT dashboard, Docker OSINT dashboard, geopolitical dashboard self hosted, AGPL intelligence dashboard"
 audience: "Developers, OSINT builders, platform teams, security researchers"
-heroImage: "/blog/og/self-host-worldmonitor-open-source-osint-dashboard.png"
+heroImage: "/blog/og/self-host-megabrain-market-open-source-osint-dashboard.png"
 pubDate: "2026-06-13"
 ---
 
-WorldMonitor is open source, but "open source" does not automatically mean "safe to run on the public internet with defaults." A serious self-hosted intelligence dashboard needs secrets, seeders, Redis, source keys, and a clear understanding of which feeds are public, optional, or paid.
+MegaBrainMarket is open source, but "open source" does not automatically mean "safe to run on the public internet with defaults." A serious self-hosted intelligence dashboard needs secrets, seeders, Redis, source keys, and a clear understanding of which feeds are public, optional, or paid.
 
 The good news: the local stack is designed to run with Docker or Podman. You can bring up the dashboard, seed Redis, and open a browser at `http://localhost:3000`.
 
@@ -33,10 +33,10 @@ The Docker stack contains four core services:
 
 | Service | Purpose |
 |---|---|
-| `worldmonitor` | nginx plus the Node.js API surface |
-| `worldmonitor-redis` | Redis data store |
-| `worldmonitor-redis-rest` | Upstash-compatible REST proxy |
-| `worldmonitor-ais-relay` | AISStream relay for vessel tracking when configured |
+| `megabrain-market` | nginx plus the Node.js API surface |
+| `megabrain-market-redis` | Redis data store |
+| `megabrain-market-redis-rest` | Upstash-compatible REST proxy |
+| `megabrain-market-ais-relay` | AISStream relay for vessel tracking when configured |
 
 The runtime route is simple: the browser hits `localhost:3000`, nginx serves the Vite app and proxies `/api/*` to the Node API, the API talks to the Redis REST proxy, and seed scripts populate Redis.
 
@@ -76,7 +76,7 @@ If you remove volumes with `docker compose down -v`, Redis data is lost and you 
 
 ## API keys: what unlocks more data
 
-WorldMonitor works with many public sources, but some feeds need keys.
+MegaBrainMarket works with many public sources, but some feeds need keys.
 
 Examples of optional or source-specific keys include:
 
@@ -120,9 +120,9 @@ For production-like deployment, you need to think beyond "does it start?":
 - update cadence for upstream schema changes
 - public exposure and network policy
 
-WorldMonitor is a real-time intelligence dashboard with many external dependencies. That means operational hygiene matters.
+MegaBrainMarket is a real-time intelligence dashboard with many external dependencies. That means operational hygiene matters.
 
-For developer context before you deploy, read the [developer API and open-source guide](/blog/posts/build-on-worldmonitor-developer-api-open-source/) and the [MCP server guide](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
+For developer context before you deploy, read the [developer API and open-source guide](/blog/posts/build-on-megabrain-market-developer-api-open-source/) and the [MCP server guide](/blog/posts/megabrain-market-mcp-server-ai-agents-real-time-intelligence/).
 
 ## Source transparency
 
@@ -132,7 +132,7 @@ That distinction is important for demos. If a panel is empty, check whether the 
 
 ## Frequently Asked Questions
 
-**Can I run WorldMonitor entirely offline?**
+**Can I run MegaBrainMarket entirely offline?**
 
 Not meaningfully. The application can run locally, but most intelligence value comes from fetching upstream public or authenticated sources into Redis.
 
@@ -146,4 +146,4 @@ You can, but read the AGPL license and upstream source terms carefully. Network 
 
 ---
 
-**Self-hosting WorldMonitor is not about cloning a website. It is about owning the data path, the secrets, and the operational tradeoffs behind your intelligence workspace.**
+**Self-hosting MegaBrainMarket is not about cloning a website. It is about owning the data path, the secrets, and the operational tradeoffs behind your intelligence workspace.**

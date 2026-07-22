@@ -1,5 +1,5 @@
 // #4859 — /mcp must accept customer-issued wm_ API keys (Convex userApiKeys)
-// on X-WorldMonitor-Key, with the owner's mcpAccess entitlement gating data
+// on X-MegaBrainMarket-Key, with the owner's mcpAccess entitlement gating data
 // methods exactly like the Pro OAuth path (a user_key context must NEVER
 // bypass the entitlement pre-check — see the #4859 fix-design comment).
 // #4860 — a rejecting validateProMcpToken must surface a structured 503,
@@ -17,7 +17,7 @@ import {
 const originalFetch = globalThis.fetch;
 const originalEnv = { ...process.env };
 
-// Canonical dashboard key shape (wm_ + 40 hex) — NOT in WORLDMONITOR_VALID_KEYS.
+// Canonical dashboard key shape (wm_ + 40 hex) — NOT in MEGABRAIN_MARKET_VALID_KEYS.
 const USER_KEY = `wm_${'ab12'.repeat(10)}`;
 const USER_KEY_USER_ID = 'user_apiplan_abc';
 const ENV_KEY = 'wm_env_operator_key_999';
@@ -40,7 +40,7 @@ function userKeyReq(body, headers = {}) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-WorldMonitor-Key': USER_KEY,
+      'X-MegaBrainMarket-Key': USER_KEY,
       ...headers,
     },
     body: JSON.stringify(body),
@@ -51,7 +51,7 @@ describe('api/mcp — user API keys on /mcp (#4859) + pre-check hardening (#4860
   let mcpHandler;
 
   beforeEach(async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = ENV_KEY;
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = ENV_KEY;
     delete process.env.UPSTASH_REDIS_REST_URL;
     delete process.env.UPSTASH_REDIS_REST_TOKEN;
     process.env.MCP_INTERNAL_HMAC_SECRET = HMAC_SECRET;
@@ -137,7 +137,7 @@ describe('api/mcp — user API keys on /mcp (#4859) + pre-check hardening (#4860
 
   it('unknown wm_ key (not env, not a user key) → 401 -32001 Invalid API key', async () => {
     const { deps } = makeUserKeyDeps();
-    const res = await mcpHandler(userKeyReq(callBody('describe_tool', { tool_name: 'get_market_data' }), { 'X-WorldMonitor-Key': 'wm_totally_unknown_key' }), deps);
+    const res = await mcpHandler(userKeyReq(callBody('describe_tool', { tool_name: 'get_market_data' }), { 'X-MegaBrainMarket-Key': 'wm_totally_unknown_key' }), deps);
     assert.equal(res.status, 401);
     const body = await res.json();
     assert.equal(body.error?.code, -32001);
@@ -159,7 +159,7 @@ describe('api/mcp — user API keys on /mcp (#4859) + pre-check hardening (#4860
     const { deps } = makeUserKeyDeps({
       validateUserApiKey: async () => { userKeyCalls += 1; return null; },
     });
-    const res = await mcpHandler(userKeyReq(callBody('describe_tool', { tool_name: 'get_market_data' }), { 'X-WorldMonitor-Key': ENV_KEY }), deps);
+    const res = await mcpHandler(userKeyReq(callBody('describe_tool', { tool_name: 'get_market_data' }), { 'X-MegaBrainMarket-Key': ENV_KEY }), deps);
     assert.equal(res.status, 200);
     assert.equal(userKeyCalls, 0, 'env-key hit must short-circuit before the Convex-backed resolver');
   });
@@ -178,7 +178,7 @@ describe('api/mcp — user API keys on /mcp (#4859) + pre-check hardening (#4860
     const apiFetches = captured.filter((r) => new URL(r.url).pathname.startsWith('/api/'));
     assert.ok(apiFetches.length > 0, 'RPC tool must fetch the downstream REST endpoint');
     for (const dsReq of apiFetches) {
-      assert.equal(dsReq.headers.get('x-worldmonitor-key'), USER_KEY, 'downstream must authenticate as the key owner');
+      assert.equal(dsReq.headers.get('x-megabrain-market-key'), USER_KEY, 'downstream must authenticate as the key owner');
       assert.equal(dsReq.headers.get('x-wm-mcp-internal'), null, 'internal HMAC headers are pro-context only');
     }
   });

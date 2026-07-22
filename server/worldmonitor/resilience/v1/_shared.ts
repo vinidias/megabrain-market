@@ -4,7 +4,7 @@ import type {
   ResilienceDomain,
   ResilienceRankingItem,
   ScoreInterval,
-} from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/resilience/v1/service_server';
 
 
 export type { ScoreInterval };

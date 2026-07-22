@@ -109,11 +109,11 @@ describe('widget-agent relay — security', () => {
   it('SSRF guard — allowlist is checked before any fetch call in tool loop', () => {
     const allowlistCheck = relay.indexOf('isWidgetEndpointAllowed(endpoint)');
     assert.ok(allowlistCheck !== -1, 'isWidgetEndpointAllowed() check missing in tool loop');
-    // The fetch call to api.worldmonitor.app must come AFTER the check
-    const fetchCallIdx = relay.indexOf("'https://api.worldmonitor.app'", allowlistCheck);
+    // The fetch call to api.megabrain.market must come AFTER the check
+    const fetchCallIdx = relay.indexOf("'https://api.megabrain.market'", allowlistCheck);
     assert.ok(
       fetchCallIdx > allowlistCheck,
-      'fetch() to api.worldmonitor.app must appear after allowlist check',
+      'fetch() to api.megabrain.market must appear after allowlist check',
     );
   });
 
@@ -233,7 +233,7 @@ describe('widget-agent relay — security', () => {
     const corsBlock = relay.slice(widgetCorsIdx, widgetCorsIdx + 600);
     // Must NOT define a hardcoded origins array for this specific route
     assert.ok(
-      !corsBlock.includes("['https://worldmonitor.app'"),
+      !corsBlock.includes("['https://megabrain.market'"),
       'Do NOT hardcode origins for /widget-agent — reuse getCorsOrigin()',
     );
     // Must reference corsOrigin variable (set by getCorsOrigin earlier)
@@ -340,14 +340,14 @@ describe('widget-store — constants and logic', () => {
     );
   });
 
-  it('deleteWidget cleans worldmonitor-panel-spans (aggregate map)', () => {
+  it('deleteWidget cleans megabrain-market-panel-spans (aggregate map)', () => {
     assert.ok(
       store.includes('clearPanelSpanEntry(id)'),
       'deleteWidget must clean row-span entries through the shared panel storage helper',
     );
   });
 
-  it('deleteWidget cleans worldmonitor-panel-col-spans (aggregate map)', () => {
+  it('deleteWidget cleans megabrain-market-panel-col-spans (aggregate map)', () => {
     assert.ok(
       store.includes('clearPanelColSpanEntry(id)'),
       'deleteWidget must clean column-span entries through the shared panel storage helper',
@@ -778,11 +778,11 @@ describe('proxy routing — widgetAgentUrl', () => {
     );
   });
 
-  it('widgetAgentUrl targets proxy.worldmonitor.app (not toRuntimeUrl)', () => {
+  it('widgetAgentUrl targets proxy.megabrain.market (not toRuntimeUrl)', () => {
     // The URL may be in a constant above the function; search the whole file
     assert.ok(
-      proxy.includes('proxy.worldmonitor.app'),
-      'Must target proxy.worldmonitor.app directly (sidecar destroys SSE via arrayBuffer)',
+      proxy.includes('proxy.megabrain.market'),
+      'Must target proxy.megabrain.market directly (sidecar destroys SSE via arrayBuffer)',
     );
     // Verify the function itself does not use toRuntimeUrl
     const fnIdx = proxy.indexOf('function widgetAgentUrl');
@@ -794,14 +794,14 @@ describe('proxy routing — widgetAgentUrl', () => {
     );
   });
 
-  it('vite.config.ts proxies /widget-agent to proxy.worldmonitor.app', () => {
+  it('vite.config.ts proxies /widget-agent to proxy.megabrain.market', () => {
     assert.ok(
       vite.includes('/widget-agent'),
       'vite.config.ts must have proxy entry for /widget-agent',
     );
     assert.ok(
-      vite.includes('proxy.worldmonitor.app'),
-      'Vite proxy target must be proxy.worldmonitor.app',
+      vite.includes('proxy.megabrain.market'),
+      'Vite proxy target must be proxy.megabrain.market',
     );
   });
 
@@ -1299,13 +1299,13 @@ describe('PRO widget — store and sanitizer', () => {
 
   it('widget sandbox allows approved Vercel previews and rejects lookalike origins', () => {
     assert.ok(
-      sandbox.includes("url.hostname === 'worldmonitor.app'")
-        && sandbox.includes("url.hostname.endsWith('.worldmonitor.app')"),
-      'sandbox must parse hostname and allow the worldmonitor.app apex/subdomains only',
+      sandbox.includes("url.hostname === 'megabrain.market'")
+        && sandbox.includes("url.hostname.endsWith('.megabrain.market')"),
+      'sandbox must parse hostname and allow the megabrain.market apex/subdomains only',
     );
     assert.ok(
-      !sandbox.includes("endsWith('worldmonitor.app')") && !sandbox.includes('endsWith("worldmonitor.app")'),
-      'sandbox must not use raw suffix checks that allow evilworldmonitor.app',
+      !sandbox.includes("endsWith('megabrain.market')") && !sandbox.includes('endsWith("megabrain.market")'),
+      'sandbox must not use raw suffix checks that allow evilmegabrain.market',
     );
     // The sandbox must source allowed Vercel team slugs from a single named
     // list — keeps the security invariant (team-slug gating) visible and
@@ -1330,26 +1330,26 @@ describe('PRO widget — store and sanitizer', () => {
     // step with isAllowedVercelPreview in public/wm-widget-sandbox.html.
     const matchesAllowedTeam = (hostname) =>
       slugs.some((team) =>
-        new RegExp('^worldmonitor-[a-z0-9-]+-' + team + '\\.vercel\\.app$').test(hostname),
+        new RegExp('^megabrain-market-[a-z0-9-]+-' + team + '\\.vercel\\.app$').test(hostname),
       );
-    assert.equal(matchesAllowedTeam('worldmonitor-git-feature-eliewm.vercel.app'), true);
-    assert.equal(matchesAllowedTeam('worldmonitor-abc123-eliewm.vercel.app'), true);
-    assert.equal(matchesAllowedTeam('worldmonitor-feature-attacker.vercel.app'), false);
-    assert.equal(matchesAllowedTeam('worldmonitor-git-feature-eliewm.vercel.app.evil.com'), false);
-    assert.equal(matchesAllowedTeam('worldmonitor-feature-xeliewm.vercel.app'), false);
-    assert.equal(matchesAllowedTeam('evilworldmonitor.app'), false);
-    // The retired personal scope (worldmonitor-*-elie-<hash>) must no longer match.
-    assert.equal(matchesAllowedTeam('worldmonitor-feature-elie-abc123.vercel.app'), false);
+    assert.equal(matchesAllowedTeam('megabrain-market-git-feature-eliewm.vercel.app'), true);
+    assert.equal(matchesAllowedTeam('megabrain-market-abc123-eliewm.vercel.app'), true);
+    assert.equal(matchesAllowedTeam('megabrain-market-feature-attacker.vercel.app'), false);
+    assert.equal(matchesAllowedTeam('megabrain-market-git-feature-eliewm.vercel.app.evil.com'), false);
+    assert.equal(matchesAllowedTeam('megabrain-market-feature-xeliewm.vercel.app'), false);
+    assert.equal(matchesAllowedTeam('evilmegabrain.market'), false);
+    // The retired personal scope (megabrain-market-*-elie-<hash>) must no longer match.
+    assert.equal(matchesAllowedTeam('megabrain-market-feature-elie-abc123.vercel.app'), false);
     // A teammate slug added to the list must extend coverage WITHOUT
     // matching look-alike teams whose slug merely starts with the same
     // letters.
     const withTeammate = ['eliewm', 'kieran'];
     const matchesWithTeammate = (hostname) =>
       withTeammate.some((team) =>
-        new RegExp('^worldmonitor-[a-z0-9-]+-' + team + '\\.vercel\\.app$').test(hostname),
+        new RegExp('^megabrain-market-[a-z0-9-]+-' + team + '\\.vercel\\.app$').test(hostname),
       );
-    assert.equal(matchesWithTeammate('worldmonitor-feature-kieran.vercel.app'), true);
-    assert.equal(matchesWithTeammate('worldmonitor-feature-kieranfake.vercel.app'), false);
+    assert.equal(matchesWithTeammate('megabrain-market-feature-kieran.vercel.app'), true);
+    assert.equal(matchesWithTeammate('megabrain-market-feature-kieranfake.vercel.app'), false);
   });
 
   it('widget sandbox behavior accepts Vercel previews and blocks spoofed parents', () => {
@@ -1390,9 +1390,9 @@ describe('PRO widget — store and sanitizer', () => {
       return { parent, readyMessages, writes, message };
     }
 
-    const allowed = runSandbox('https://worldmonitor-git-feature-eliewm.vercel.app/dashboard');
+    const allowed = runSandbox('https://megabrain-market-git-feature-eliewm.vercel.app/dashboard');
     assert.equal(allowed.readyMessages.length, 1);
-    assert.equal(allowed.readyMessages[0].targetOrigin, 'https://worldmonitor-git-feature-eliewm.vercel.app');
+    assert.equal(allowed.readyMessages[0].targetOrigin, 'https://megabrain-market-git-feature-eliewm.vercel.app');
     assert.deepEqual(JSON.parse(JSON.stringify(allowed.readyMessages[0].payload)), {
       type: 'wm-widget-ready',
       id: 'wm-1',
@@ -1400,16 +1400,16 @@ describe('PRO widget — store and sanitizer', () => {
     });
     allowed.message({
       data: { type: 'wm-html', id: 'wm-1', token: 'test-token', html: '<p>ok</p>' },
-      origin: 'https://worldmonitor-git-feature-eliewm.vercel.app',
+      origin: 'https://megabrain-market-git-feature-eliewm.vercel.app',
       source: allowed.parent,
     });
     assert.deepEqual(allowed.writes, ['<p>ok</p>']);
 
-    const spoofed = runSandbox('https://worldmonitor-git-feature-eliewm.vercel.app.evil.com/');
+    const spoofed = runSandbox('https://megabrain-market-git-feature-eliewm.vercel.app.evil.com/');
     assert.deepEqual(spoofed.readyMessages, []);
     spoofed.message({
       data: { type: 'wm-html', id: 'wm-1', token: 'test-token', html: '<p>bad</p>' },
-      origin: 'https://worldmonitor-git-feature-eliewm.vercel.app.evil.com',
+      origin: 'https://megabrain-market-git-feature-eliewm.vercel.app.evil.com',
       source: spoofed.parent,
     });
     assert.deepEqual(spoofed.writes, []);

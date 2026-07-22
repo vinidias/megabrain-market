@@ -24,27 +24,27 @@ const fixture = `<!doctype html>
     <link rel="canonical" href="${FULL.url}" />
     <link rel="alternate" hreflang="x-default" href="${FULL.url}" />
     <link rel="alternate" hreflang="fr" href="${FULL.url}?lang=fr" />
-    <meta name="application-name" content="World Monitor" />
+    <meta name="application-name" content="MegaBrain Market" />
     <meta name="subject" content="${FULL.subject}" />
     <meta name="classification" content="${FULL.classification}" />
     <meta property="og:url" content="${FULL.url}" />
     <meta property="og:title" content="${FULL.title}" />
     <meta property="og:description" content="${FULL.description}" />
-    <meta property="og:image" content="https://www.worldmonitor.app/favico/og-image.png" />
+    <meta property="og:image" content="https://www.megabrain.market/favico/og-image.png" />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:site_name" content="World Monitor" />
+    <meta property="og:site_name" content="MegaBrain Market" />
     <meta name="twitter:url" content="${FULL.url}" />
     <meta name="twitter:title" content="${FULL.title}" />
     <meta name="twitter:description" content="${FULL.description}" />
-    <meta name="twitter:image" content="https://www.worldmonitor.app/favico/og-image.png" />
+    <meta name="twitter:image" content="https://www.megabrain.market/favico/og-image.png" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "World Monitor",
-      "alternateName": ["WorldMonitor", "World Monitor App", "WM Intelligence"],
+      "name": "MegaBrain Market",
+      "alternateName": ["MegaBrainMarket", "MegaBrain Market App", "WM Intelligence"],
       "url": "${FULL.url}",
-      "screenshot": "https://www.worldmonitor.app/favico/og-image.png",
+      "screenshot": "https://www.megabrain.market/favico/og-image.png",
       "featureList": [
         "Real-time news aggregation",
         "Stock market tracking"
@@ -55,14 +55,14 @@ const fixture = `<!doctype html>
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "World Monitor",
-      "alternateName": "WorldMonitor",
-      "url": "https://www.worldmonitor.app/"
+      "name": "MegaBrain Market",
+      "alternateName": "MegaBrainMarket",
+      "url": "https://www.megabrain.market/"
     }
     </script>
   </head>
   <body>
-    <h1 class="app-heading">World Monitor — Real-Time Global Intelligence Dashboard</h1>
+    <h1 class="app-heading">MegaBrain Market — Real-Time Global Intelligence Dashboard</h1>
     <p>Link to <a href="${FULL.url}">the main dashboard</a> stays untouched.</p>
   </body>
 </html>`;
@@ -110,14 +110,14 @@ describe('renderVariantDashboardHtml (#4996)', () => {
       'x-default alternate moves to the variant host',
     );
     assert.ok(
-      html.includes('content="https://tech.worldmonitor.app/favico/tech/og-image.png"'),
+      html.includes('content="https://tech.megabrain.market/favico/tech/og-image.png"'),
       'og/twitter image points at the variant OG asset',
     );
     assert.ok(html.includes('<meta property="og:image:width" content="1200" />'), 'og:image:width untouched');
     assert.ok(html.includes(`<h1 class="app-heading">${escHtml(tech.title)}</h1>`), 'h1');
   });
 
-  it('rewrites the WebApplication JSON-LD block but leaves the Organization block as World Monitor', () => {
+  it('rewrites the WebApplication JSON-LD block but leaves the Organization block as MegaBrain Market', () => {
     const html = renderVariantDashboardHtml(fixture, 'finance');
     const finance = VARIANT_META.finance;
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)].map(
@@ -128,10 +128,10 @@ describe('renderVariantDashboardHtml (#4996)', () => {
     const org = blocks.find((b) => b['@type'] === 'Organization');
     assert.equal(webApp.name, 'Finance Monitor');
     assert.equal(webApp.url, finance.url);
-    assert.equal(webApp.screenshot, 'https://finance.worldmonitor.app/favico/finance/og-image.png');
+    assert.equal(webApp.screenshot, 'https://finance.megabrain.market/favico/finance/og-image.png');
     assert.deepEqual(webApp.featureList, finance.features);
-    assert.equal(org.name, 'World Monitor', 'variant isPartOf World Monitor — org identity stays');
-    assert.equal(org.url, 'https://www.worldmonitor.app/');
+    assert.equal(org.name, 'MegaBrain Market', 'variant isPartOf MegaBrain Market — org identity stays');
+    assert.equal(org.url, 'https://www.megabrain.market/');
   });
 
   it('leaves body links to the main dashboard untouched', () => {

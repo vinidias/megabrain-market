@@ -9,9 +9,9 @@ import {
   WILDFIRE_DASHBOARD_DETECTION_LIMIT,
   listFireDetections,
   limitFireDetectionsForDashboard,
-} from '../server/worldmonitor/wildfire/v1/list-fire-detections.ts';
+} from '../server/megabrain-market/wildfire/v1/list-fire-detections.ts';
 import { resolveFireDetectionTotalCount } from '../src/services/wildfires/payload.ts';
-import type { FireDetection } from '../src/generated/server/worldmonitor/wildfire/v1/service_server';
+import type { FireDetection } from '../src/generated/server/megabrain-market/wildfire/v1/service_server';
 
 const REGIONS = ['Ukraine', 'Russia', 'Iran', 'Israel/Gaza', 'Syria', 'Taiwan', 'North Korea', 'Saudi Arabia', 'Turkey'];
 const SATELLITES = ['VIIRS_SNPP_NRT', 'VIIRS_NOAA20_NRT', 'VIIRS_NOAA21_NRT'];

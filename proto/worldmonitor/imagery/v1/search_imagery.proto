@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.imagery.v1;
+package megabrain-market.imagery.v1;
 
 import "sebuf/http/annotations.proto";
 

@@ -5,7 +5,7 @@
  * The sebuf OpenAPI generator currently preserves request-schema `required`
  * arrays, but many matching query parameter objects are still emitted as
  * `required: false`. It also cannot infer runtime-required fields that are
- * expressed with WorldMonitor's local `(sebuf.http.query).required` annotation
+ * expressed with MegaBrainMarket's local `(sebuf.http.query).required` annotation
  * until the generated artifacts have been post-processed.
  *
  * This step is intentionally formatting-preserving for YAML artifacts and uses
@@ -18,8 +18,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const apiDir = resolve(root, 'docs/api');
-const bundlePath = resolve(apiDir, 'worldmonitor.openapi.yaml');
-const protoWorldmonitorDir = resolve(root, 'proto/worldmonitor');
+const bundlePath = resolve(apiDir, 'megabrain-market.openapi.yaml');
+const protoWorldmonitorDir = resolve(root, 'proto/megabrain-market');
 const CHECK = process.argv.includes('--check');
 const HTTP_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch', 'options', 'head']);
 
@@ -501,10 +501,10 @@ try {
   const { text, changed } = injectYaml(bundleRaw, bundleContracts);
   if (changed) {
     wouldChange++;
-    touched.push('worldmonitor.openapi.yaml');
+    touched.push('megabrain-market.openapi.yaml');
     if (!CHECK) writeFileSync(bundlePath, text);
   }
-  const failures = yamlContractFailures(text, bundleContracts, 'worldmonitor.openapi.yaml');
+  const failures = yamlContractFailures(text, bundleContracts, 'megabrain-market.openapi.yaml');
   contractFailures.push(...failures);
   if (!CHECK) failYamlContracts(failures);
 } catch (err) {

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.displacement.v1;
+package megabrain-market.displacement.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/displacement/v1/get_displacement_summary.proto";
-import "worldmonitor/displacement/v1/get_population_exposure.proto";
+import "megabrain-market/displacement/v1/get_displacement_summary.proto";
+import "megabrain-market/displacement/v1/get_population_exposure.proto";
 
 // DisplacementService provides APIs for global displacement and refugee data from UNHCR.
 service DisplacementService {

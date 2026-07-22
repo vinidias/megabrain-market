@@ -1,5 +1,5 @@
 {
-  "name": "worldmonitor-docker-runtime",
+  "name": "megabrain-market-docker-runtime",
   "private": true,
   "type": "module",
   "dependencies": {

@@ -95,10 +95,10 @@ export const MONITOR_COLORS = [
 
 // Storage keys - shared
 export const STORAGE_KEYS = {
-  panels: 'worldmonitor-panels',
-  monitors: 'worldmonitor-monitors',
-  mapLayers: 'worldmonitor-layers',
-  disabledFeeds: 'worldmonitor-disabled-feeds',
+  panels: 'megabrain-market-panels',
+  monitors: 'megabrain-market-monitors',
+  mapLayers: 'megabrain-market-layers',
+  disabledFeeds: 'megabrain-market-disabled-feeds',
   // Schema version for the disabledFeeds set. Bumped on each migration that
   // mutates the set in a backwards-incompatible way. Currently:
   //   missing/0 → pre-2026-05-01 alphabetical-cap state. Eligible for
@@ -106,11 +106,11 @@ export const STORAGE_KEYS = {
   //   1 → recovery has run; the set is post-migration and must NOT be
   //       re-recovered on subsequent loads (otherwise user-explicit
   //       full-category disabling would be silently undone forever).
-  disabledFeedsSchema: 'worldmonitor-disabled-feeds-schema',
-  liveChannels: 'worldmonitor-live-channels',
-  mapMode: 'worldmonitor-map-mode',          // 'flat' | 'globe'
-  activeChannel: 'worldmonitor-active-channel',
-  webcamPrefs: 'worldmonitor-webcam-prefs',
+  disabledFeedsSchema: 'megabrain-market-disabled-feeds-schema',
+  liveChannels: 'megabrain-market-live-channels',
+  mapMode: 'megabrain-market-map-mode',          // 'flat' | 'globe'
+  activeChannel: 'megabrain-market-active-channel',
+  webcamPrefs: 'megabrain-market-webcam-prefs',
 } as const;
 
 export type MapModePreference = 'flat' | 'globe';

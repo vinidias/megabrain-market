@@ -1,10 +1,10 @@
 ---
 title: "What the Data Showed 72 Hours Before a Geopolitical Shock"
 description: "A reusable 72-hour retro template for investigating whether signals were visible before a chokepoint, conflict, market, cyber, or humanitarian event escalated."
-metaTitle: "72-Hour Geopolitical Event Retro Template | WorldMonitor"
+metaTitle: "72-Hour Geopolitical Event Retro Template | MegaBrainMarket"
 keywords: "geopolitical event retro, intelligence after action review, 72 hour crisis analysis, early warning template, OSINT workflow"
 audience: "Analysts, risk teams, OSINT researchers, security leads, editorial teams"
-heroImage: "/blog/og/72-hour-geopolitical-event-retro-template-worldmonitor.png"
+heroImage: "/blog/og/72-hour-geopolitical-event-retro-template-megabrain-market.png"
 pubDate: "2026-06-13"
 ---
 
@@ -45,7 +45,7 @@ Better boundary:
 
 The boundary needs a time, a decision, and a reason. Without that, every signal can be backfilled into the story.
 
-For WorldMonitor data, possible event boundaries include:
+For MegaBrainMarket data, possible event boundaries include:
 
 - chokepoint score crossing red
 - forecast probability crossing a review threshold
@@ -169,11 +169,11 @@ Next review date:
 
 Keep the final document short. The point is to update the monitoring system, not create a museum piece.
 
-For the pre-event side of this workflow, pair the retro with the [supply-chain scenario engine](/blog/posts/stress-test-supply-chain-scenario-engine-worldmonitor/) and the [country risk monitoring workflow](/blog/posts/country-risk-monitoring-workflow-for-analysts/).
+For the pre-event side of this workflow, pair the retro with the [supply-chain scenario engine](/blog/posts/stress-test-supply-chain-scenario-engine-megabrain-market/) and the [country risk monitoring workflow](/blog/posts/country-risk-monitoring-workflow-for-analysts/).
 
 ## Source transparency
 
-WorldMonitor can support retros through chokepoint status, Scenario Engine templates, country risk, forecasts, market implications, disease and disaster panels, displacement summaries, security advisories, and news context. But the retro owner still needs to record which data was actually visible at the time.
+MegaBrainMarket can support retros through chokepoint status, Scenario Engine templates, country risk, forecasts, market implications, disease and disaster panels, displacement summaries, security advisories, and news context. But the retro owner still needs to record which data was actually visible at the time.
 
 Retros become dangerous when they turn hindsight into certainty. The better habit is humility: what was visible, what was missing, what was stale, and what threshold will make the next review less subjective?
 

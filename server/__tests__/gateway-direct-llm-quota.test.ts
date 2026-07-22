@@ -87,7 +87,7 @@ function makeGateway(handlerCalls: Record<string, number>) {
 }
 
 function req(path: string, init: RequestInit = {}) {
-  return new Request(`https://www.worldmonitor.app${path}`, init);
+  return new Request(`https://www.megabrain.market${path}`, init);
 }
 
 beforeEach(() => {
@@ -119,7 +119,7 @@ describe("gateway direct LLM quota", () => {
 
     const res = await makeGateway(calls)(
       req(`${CLASSIFY_PATH}?title=Novel%20headline`, {
-        headers: { "X-WorldMonitor-Key": "wms_anonymous" },
+        headers: { "X-MegaBrainMarket-Key": "wms_anonymous" },
       }),
       { waitUntil: () => {} },
     );
@@ -180,7 +180,7 @@ describe("gateway direct LLM quota", () => {
 
     const res = await makeGateway(calls)(
       req(`${CACHE_PATH}?cache_key=summary:v1:test`, {
-        headers: { "X-WorldMonitor-Key": "wms_anonymous" },
+        headers: { "X-MegaBrainMarket-Key": "wms_anonymous" },
       }),
       { waitUntil: () => {} },
     );

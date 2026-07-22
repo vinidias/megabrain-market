@@ -10,7 +10,7 @@ import { createCircuitBreaker, toUniqueSortedLowercase } from '@/utils';
 import { getRpcBaseUrl } from '@/services/rpc-client';
 import { dataFreshness } from './data-freshness';
 import { isFeatureAvailable } from './runtime-config';
-import type { AircraftDetails, WingbitsLiveFlight } from '@/generated/client/worldmonitor/military/v1/service_client';
+import type { AircraftDetails, WingbitsLiveFlight } from '@/generated/client/megabrain-market/military/v1/service_client';
 import { MilitaryServiceClient } from '@/services/generated-rpc-clients';
 
 export type { WingbitsLiveFlight };

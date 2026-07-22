@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetCountryFactsRequest,
   GetCountryFactsResponse,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 import { cachedFetchJson } from '../../../_shared/redis';
 import { CHROME_UA } from '../../../_shared/constants';

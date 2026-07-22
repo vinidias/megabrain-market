@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.aviation.v1;
+package megabrain-market.aviation.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/aviation/v1/carrier.proto";
+import "megabrain-market/aviation/v1/carrier.proto";
 
 // FlightInstanceStatus represents the operational status of a flight occurrence.
 enum FlightInstanceStatus {

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.trade.v1;
+package megabrain-market.trade.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/trade/v1/trade_data.proto";
+import "megabrain-market/trade/v1/trade_data.proto";
 
 // Request for quantitative restriction data.
 message GetTradeRestrictionsRequest {

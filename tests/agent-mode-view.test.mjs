@@ -27,7 +27,7 @@ describe('agent-mode view (/?mode=agent)', () => {
       assert.ok(key in view, `agent-view.json missing ${key}`);
     }
     assert.ok(Array.isArray(view.capabilities) && view.capabilities.length >= 5);
-    assert.ok(view.authentication.apiKey.header === 'X-WorldMonitor-Key');
+    assert.ok(view.authentication.apiKey.header === 'X-MegaBrainMarket-Key');
     assert.ok(view.authentication.oauth2.scope === 'mcp');
     assert.match(view.authentication.summary, /Authentication/);
   });
@@ -36,7 +36,7 @@ describe('agent-mode view (/?mode=agent)', () => {
     assert.equal(view.endpoints.mcp.url, serverCard.url);
     assert.equal(view.endpoints.mcp.tools, serverCard.tools.length);
     assert.equal(view.endpoints.a2a.url, agentCard.url);
-    assert.equal(view.endpoints.nlweb.url, 'https://www.worldmonitor.app/ask');
+    assert.equal(view.endpoints.nlweb.url, 'https://www.megabrain.market/ask');
   });
 
   it('vercel.json serves it for /?mode=agent ahead of the welcome rewrite', () => {
@@ -59,11 +59,11 @@ describe('agent-mode view (/?mode=agent)', () => {
   it('every discovery URL it advertises resolves to a tracked file or a live rewrite', () => {
     // Static, repo-tracked surfaces — a typo here ships a dead link to agents.
     const trackedPaths = {
-      'https://worldmonitor.app/.well-known/agent-skills/index.json':
+      'https://megabrain.market/.well-known/agent-skills/index.json':
         'public/.well-known/agent-skills/index.json',
-      'https://worldmonitor.app/.well-known/api-catalog': 'public/.well-known/api-catalog',
-      'https://worldmonitor.app/.well-known/ai-catalog.json': 'public/.well-known/ai-catalog.json',
-      'https://worldmonitor.app/llms.txt': 'public/llms.txt',
+      'https://megabrain.market/.well-known/api-catalog': 'public/.well-known/api-catalog',
+      'https://megabrain.market/.well-known/ai-catalog.json': 'public/.well-known/ai-catalog.json',
+      'https://megabrain.market/llms.txt': 'public/llms.txt',
     };
     for (const [url, path] of Object.entries(trackedPaths)) {
       assert.equal(

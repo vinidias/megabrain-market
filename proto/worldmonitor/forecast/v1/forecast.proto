@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.forecast.v1;
+package megabrain-market.forecast.v1;
 
 import "sebuf/http/annotations.proto";
 
@@ -32,7 +32,7 @@ message Perspectives {
 // Machine-checkable resolution spec — makes a forecast a scoreable *bet*.
 // Every forecast carries exactly one spec, either "hard" or "judged":
 //   - "hard":   auto-resolvable by a free metric comparison against a
-//               WorldMonitor feed the detector already scored from. Sets
+//               MegaBrainMarket feed the detector already scored from. Sets
 //               metric_key (feed + path expression), operator, threshold,
 //               window, and source_feed (a RESOLUTION_FEED_KEYS allowlist
 //               member). baseline_value is set only when operator is

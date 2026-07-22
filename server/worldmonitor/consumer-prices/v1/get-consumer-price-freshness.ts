@@ -1,7 +1,7 @@
 import type {
   GetConsumerPriceFreshnessRequest,
   GetConsumerPriceFreshnessResponse,
-} from '../../../../src/generated/server/worldmonitor/consumer_prices/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/consumer_prices/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 

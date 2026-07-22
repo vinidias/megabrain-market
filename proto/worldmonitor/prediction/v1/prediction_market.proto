@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.prediction.v1;
+package megabrain-market.prediction.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";

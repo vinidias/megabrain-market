@@ -19,25 +19,25 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
   };
 
   it('returns blob unchanged when disabledFeeds key is missing', () => {
-    const blob = { 'worldmonitor-panels': '{"foo":1}' };
+    const blob = { 'megabrain-market-panels': '{"foo":1}' };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
     assert.equal(result, blob, 'unchanged blob must be returned by reference (no copy)');
   });
 
   it('returns blob unchanged when disabledFeeds is not a string', () => {
-    const blob = { 'worldmonitor-disabled-feeds': 42 as unknown as string };
+    const blob = { 'megabrain-market-disabled-feeds': 42 as unknown as string };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
     assert.equal(result, blob);
   });
 
   it('returns blob unchanged when disabledFeeds is malformed JSON', () => {
-    const blob = { 'worldmonitor-disabled-feeds': 'not json {' };
+    const blob = { 'megabrain-market-disabled-feeds': 'not json {' };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
     assert.equal(result, blob);
   });
 
   it('returns blob unchanged when disabledFeeds is an empty array', () => {
-    const blob = { 'worldmonitor-disabled-feeds': '[]' };
+    const blob = { 'megabrain-market-disabled-feeds': '[]' };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
     assert.equal(result, blob);
   });
@@ -45,7 +45,7 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
   it('returns blob unchanged when no category is 100% disabled', () => {
     // Partial disable in two categories — explicit user prefs, must be preserved.
     const blob = {
-      'worldmonitor-disabled-feeds': JSON.stringify(['Layoffs.fyi', 'IPO News']),
+      'megabrain-market-disabled-feeds': JSON.stringify(['Layoffs.fyi', 'IPO News']),
     };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
     assert.equal(result, blob, 'partial disabling is a real user pref — must not be touched');
@@ -56,13 +56,13 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
     // which alphabetically lands after position 80 → got disabled by v1
     // cap → now the entire panel reads "All sources disabled".
     const blob = {
-      'worldmonitor-disabled-feeds': JSON.stringify(['Product Hunt']),
-      'worldmonitor-panels': '{"keep":"this"}',
+      'megabrain-market-disabled-feeds': JSON.stringify(['Product Hunt']),
+      'megabrain-market-panels': '{"keep":"this"}',
     };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
-    const newDisabled = JSON.parse(result['worldmonitor-disabled-feeds'] as string);
+    const newDisabled = JSON.parse(result['megabrain-market-disabled-feeds'] as string);
     assert.deepEqual(newDisabled, [], 'Product Hunt must be removed from disabled');
-    assert.equal(result['worldmonitor-panels'], '{"keep":"this"}', 'other blob keys must be preserved');
+    assert.equal(result['megabrain-market-panels'], '{"keep":"this"}', 'other blob keys must be preserved');
   });
 
   it('REGRESSION: production-shape — multiple late-alphabet categories all recovered at once', () => {
@@ -74,9 +74,9 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
       'SEC Filings', 'VC News', 'Seed & Pre-Seed', 'Startup Funding',
       'Product Hunt',
     ];
-    const blob = { 'worldmonitor-disabled-feeds': JSON.stringify(allDisabled) };
+    const blob = { 'megabrain-market-disabled-feeds': JSON.stringify(allDisabled) };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
-    const newDisabled = JSON.parse(result['worldmonitor-disabled-feeds'] as string);
+    const newDisabled = JSON.parse(result['megabrain-market-disabled-feeds'] as string);
     assert.deepEqual(newDisabled, [], 'all 11 entries must be recovered');
   });
 
@@ -84,13 +84,13 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
     // User explicitly disabled CNN. Migration must NOT undo this — a real
     // pref (single source, not a 100%-disabled category).
     const blob = {
-      'worldmonitor-disabled-feeds': JSON.stringify([
+      'megabrain-market-disabled-feeds': JSON.stringify([
         'BBC World',  // 1 of 3 in `politics` → not 100%
         'Layoffs.fyi', 'TechCrunch Layoffs', 'Layoffs News',  // 100% of layoffs → recover
       ]),
     };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
-    const newDisabled = new Set(JSON.parse(result['worldmonitor-disabled-feeds'] as string));
+    const newDisabled = new Set(JSON.parse(result['megabrain-market-disabled-feeds'] as string));
     assert.ok(newDisabled.has('BBC World'), 'explicit single disable must be preserved');
     assert.equal(newDisabled.has('Layoffs.fyi'), false);
     assert.equal(newDisabled.has('TechCrunch Layoffs'), false);
@@ -99,12 +99,12 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
 
   it('returns a NEW object on mutation (does not mutate input)', () => {
     const blob = {
-      'worldmonitor-disabled-feeds': JSON.stringify(['Product Hunt']),
+      'megabrain-market-disabled-feeds': JSON.stringify(['Product Hunt']),
     };
-    const inputJson = blob['worldmonitor-disabled-feeds'];
+    const inputJson = blob['megabrain-market-disabled-feeds'];
     const result = migrateDisabledFeedsV2(blob, FEEDS);
     assert.notEqual(result, blob, 'result must be a new object on mutation');
-    assert.equal(blob['worldmonitor-disabled-feeds'], inputJson, 'input blob must not be mutated');
+    assert.equal(blob['megabrain-market-disabled-feeds'], inputJson, 'input blob must not be mutated');
   });
 
   it('REGRESSION (PR #3524 review): the same migration applied to LOCAL blob produces clean data', () => {
@@ -116,23 +116,23 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
     // sites) clears the same poisoning regardless of which side (cloud
     // or local) it originated from.
     const poisonedLocalBlob = {
-      'worldmonitor-disabled-feeds': JSON.stringify([
+      'megabrain-market-disabled-feeds': JSON.stringify([
         'Layoffs.fyi', 'TechCrunch Layoffs', 'Layoffs News', // 100% of layoffs
         'BBC World',                                          // explicit single-source pref
       ]),
-      'worldmonitor-panels': '{"some":"panel-state"}',
+      'megabrain-market-panels': '{"some":"panel-state"}',
     };
     const result = migrateDisabledFeedsV2(poisonedLocalBlob, FEEDS);
-    const cleaned = JSON.parse(result['worldmonitor-disabled-feeds'] as string);
+    const cleaned = JSON.parse(result['megabrain-market-disabled-feeds'] as string);
     assert.deepEqual(cleaned, ['BBC World'], 'layoffs sources recovered, BBC World preserved as explicit pref');
-    assert.equal(result['worldmonitor-panels'], '{"some":"panel-state"}', 'unrelated blob keys preserved');
+    assert.equal(result['megabrain-market-panels'], '{"some":"panel-state"}', 'unrelated blob keys preserved');
   });
 
   it('handles non-string entries in the disabledFeeds array defensively', () => {
     // Malformed cloud data — an entry that's not a string. Skip it instead
     // of throwing; recover whatever else is recoverable.
     const blob = {
-      'worldmonitor-disabled-feeds': JSON.stringify([
+      'megabrain-market-disabled-feeds': JSON.stringify([
         null,
         42,
         'Product Hunt',
@@ -140,7 +140,7 @@ describe('cloud-prefs schema-2 migration: re-enable fully-disabled categories', 
       ]),
     };
     const result = migrateDisabledFeedsV2(blob, FEEDS);
-    const newDisabled = JSON.parse(result['worldmonitor-disabled-feeds'] as string);
+    const newDisabled = JSON.parse(result['megabrain-market-disabled-feeds'] as string);
     // Product Hunt is recovered; the malformed entries pass through untouched.
     // (We don't try to clean them — that's not this migration's job.)
     assert.equal(newDisabled.includes('Product Hunt'), false);
@@ -192,13 +192,13 @@ describe('applyMigrationChain', () => {
     };
     const migrations = buildMigrations(productionLikeFeeds);
     const blob = {
-      'worldmonitor-disabled-feeds': JSON.stringify([
+      'megabrain-market-disabled-feeds': JSON.stringify([
         'Layoffs.fyi', 'TechCrunch Layoffs', 'Layoffs News', // 100% layoffs
         'BBC World',                                           // 50% politics
       ]),
     };
     const result = applyMigrationChain(blob, 1, 2, migrations);
-    const cleaned = JSON.parse(result['worldmonitor-disabled-feeds'] as string);
+    const cleaned = JSON.parse(result['megabrain-market-disabled-feeds'] as string);
     // Layoffs sources recovered; BBC World preserved (partial-disable safety)
     assert.deepEqual(cleaned, ['BBC World']);
   });

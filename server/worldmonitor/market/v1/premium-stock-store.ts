@@ -1,7 +1,7 @@
 import type {
   AnalyzeStockResponse,
   BacktestStockResponse,
-} from '../../../../src/generated/server/worldmonitor/market/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/market/v1/service_server';
 import { getCachedJsonBatch, runRedisPipeline, setCachedJson } from '../../../_shared/redis';
 import { sanitizeSymbol } from './_shared';
 

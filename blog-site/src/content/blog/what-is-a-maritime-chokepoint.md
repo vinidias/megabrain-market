@@ -1,7 +1,7 @@
 ---
 title: "What Is a Maritime Chokepoint?"
-description: "A plain-English explainer for maritime chokepoints, how WorldMonitor tracks 13 waterways, why only seven publish live flow estimates today, and how to read status scores."
-metaTitle: "What Is a Maritime Chokepoint? | WorldMonitor"
+description: "A plain-English explainer for maritime chokepoints, how MegaBrainMarket tracks 13 waterways, why only seven publish live flow estimates today, and how to read status scores."
+metaTitle: "What Is a Maritime Chokepoint? | MegaBrainMarket"
 keywords: "maritime chokepoint, shipping chokepoint, Strait of Hormuz, Suez Canal, supply chain risk, chokepoint monitoring"
 audience: "Logistics teams, maritime analysts, commodity traders, students, geopolitical risk readers"
 heroImage: "/blog/og/what-is-a-maritime-chokepoint.png"
@@ -16,7 +16,7 @@ The familiar examples are the Strait of Hormuz, Suez Canal, Panama Canal, Bab el
 
 > Is the passage strategically concentrated, exposed to disruption, and connected to a trade or energy flow that matters?
 
-That is the question WorldMonitor's chokepoint model tries to make visible.
+That is the question MegaBrainMarket's chokepoint model tries to make visible.
 
 ## Why chokepoints matter
 
@@ -36,7 +36,7 @@ A chokepoint does not need to close completely to matter. A credible threat, nav
 
 ## The 13 monitored waterways
 
-WorldMonitor's canonical chokepoint registry currently monitors 13 waterways:
+MegaBrainMarket's canonical chokepoint registry currently monitors 13 waterways:
 
 | Canonical id | Public name |
 |---|---|
@@ -60,7 +60,7 @@ Only seven of those 13 currently publish live oil/gas flow estimates backed by E
 
 That distinction prevents a common analytics mistake: showing a missing flow estimate as if it were zero traffic. Missing modeled flow is not the same thing as no flow.
 
-## How WorldMonitor scores chokepoint status
+## How MegaBrainMarket scores chokepoint status
 
 The public status badge is a traffic-light score: green, yellow, or red. It is not a literal closure label.
 
@@ -77,7 +77,7 @@ That design matters because chokepoint risk has multiple modes. A normal route w
 
 ## How live flow estimates work
 
-For the seven energy-baseline-backed waterways, WorldMonitor computes live flow by comparing recent PortWatch observations with a prior rolling baseline. The model uses tanker deadweight tonnage when coverage is good enough; otherwise it can use tanker counts. It publishes current million-barrels-per-day estimates by multiplying the observed flow ratio by the annual EIA baseline.
+For the seven energy-baseline-backed waterways, MegaBrainMarket computes live flow by comparing recent PortWatch observations with a prior rolling baseline. The model uses tanker deadweight tonnage when coverage is good enough; otherwise it can use tanker counts. It publishes current million-barrels-per-day estimates by multiplying the observed flow ratio by the annual EIA baseline.
 
 The ratio can range up to 150 percent of baseline after clamping. A separate `disrupted` boolean is true only when the latest three individual days are all below 85 percent of the same baseline window.
 
@@ -94,11 +94,11 @@ When a chokepoint turns yellow or red, ask four questions:
 
 For operational decisions, the fourth question is often the most important. A disruption with a cheap alternate route is different from one that forces ships around a continent or cuts off a specialized cargo flow.
 
-For operational follow-through, connect this explainer to the [supply-chain scenario engine](/blog/posts/stress-test-supply-chain-scenario-engine-worldmonitor/) and the [global trade route monitoring guide](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/).
+For operational follow-through, connect this explainer to the [supply-chain scenario engine](/blog/posts/stress-test-supply-chain-scenario-engine-megabrain-market/) and the [global trade route monitoring guide](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/).
 
 ## Source transparency
 
-WorldMonitor's chokepoint status combines Redis-backed transit summaries, flow estimates, navigational warnings, AIS disruption matching, and a static threat taxonomy. Upstream gaps are surfaced as unavailable data rather than silently turned into calm conditions.
+MegaBrainMarket's chokepoint status combines Redis-backed transit summaries, flow estimates, navigational warnings, AIS disruption matching, and a static threat taxonomy. Upstream gaps are surfaced as unavailable data rather than silently turned into calm conditions.
 
 The model has known limits. AIS coverage can degrade near conflict zones or regions with jamming. Only the seven energy-baseline waterways have live oil/gas flow estimates today. Baseline values are used to convert observed ratios into flow estimates; they are not a promise that live observations perfectly capture every vessel.
 

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.conflict.v1;
+package megabrain-market.conflict.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/conflict/v1/acled_event.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/conflict/v1/acled_event.proto";
 
 // ListAcledEventsRequest specifies filters for retrieving ACLED conflict events.
 message ListAcledEventsRequest {
@@ -27,5 +27,5 @@ message ListAcledEventsResponse {
   // The list of ACLED conflict events.
   repeated AcledConflictEvent events = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

@@ -118,7 +118,7 @@ function keyReq(
 ) {
   const headers = new Headers(extraHeaders);
   headers.set("X-Api-Key", key);
-  return new Request(`https://www.worldmonitor.app${path}`, { method, headers });
+  return new Request(`https://www.megabrain.market${path}`, { method, headers });
 }
 
 const ctx = { waitUntil: () => {} };
@@ -139,7 +139,7 @@ beforeEach(() => {
   validateUserApiKey.mockClear().mockResolvedValue({ userId: "acct_lapsed", keyId: "k1", name: "t" });
   delete process.env.UPSTASH_REDIS_REST_URL;
   delete process.env.UPSTASH_REDIS_REST_TOKEN;
-  delete process.env.WORLDMONITOR_VALID_KEYS;
+  delete process.env.MEGABRAIN_MARKET_VALID_KEYS;
 });
 
 afterEach(() => {
@@ -240,7 +240,7 @@ describe("#4611 — expired wm_ key rejected on all route classes", () => {
 
   // --- enterprise operator keys are exempt ---------------------------------
   test("enterprise wm_-prefixed operator key is NOT gated (no entitlement row)", async () => {
-    process.env.WORLDMONITOR_VALID_KEYS = "wm_enterprise_legacy_relay";
+    process.env.MEGABRAIN_MARKET_VALID_KEYS = "wm_enterprise_legacy_relay";
     entitlement = DOWNGRADED; // would 403 a user key — must be ignored here
     const res = await makeGateway()(keyReq(REGULAR_PATH, "GET", "wm_enterprise_legacy_relay"), ctx);
     expect(res.status).toBe(200);

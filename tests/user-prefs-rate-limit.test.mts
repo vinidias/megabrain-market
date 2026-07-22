@@ -66,10 +66,10 @@ function makePost(body: Record<string, unknown> = {
   data: { theme: 'dark' },
   expectedSyncVersion: 1,
 }, extraHeaders: Record<string, string> = {}): Request {
-  return new Request('https://worldmonitor.app/api/user-prefs', {
+  return new Request('https://megabrain.market/api/user-prefs', {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://megabrain.market',
       Authorization: 'Bearer test-token',
       'Content-Type': 'application/json',
       ...extraHeaders,

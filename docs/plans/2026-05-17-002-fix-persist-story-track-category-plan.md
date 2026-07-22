@@ -7,7 +7,7 @@ date: 2026-05-17
 
 # fix(brief): persist category on story:track:v1 so threads card stops showing 8/8 General
 
-**Target repo:** `worldmonitor` (`/Users/eliehabib/Documents/GitHub/worldmonitor`). All paths in this plan are relative to that repo.
+**Target repo:** `megabrain-market` (`/Users/eliehabib/Documents/GitHub/megabrain-market`). All paths in this plan are relative to that repo.
 
 **Depends on:** PR #3748 (`feelgood-classifier`, merged 2026-05-17 as `2a5bf8436`) and PR #3750 (`opinion-classifier` pathname backport, merged 2026-05-17 as `8dc087bb1`). Both are on `origin/main`. The line numbers and patterns this plan cites are anchored to that post-#3748+#3750 tree.
 
@@ -15,7 +15,7 @@ date: 2026-05-17
 
 The May 17 0802 brief shipped a threads card where **all 8 entries were tagged `General`** — `[ 0] General — WHO Ebola declaration… [ 1] General — Kabuga dies… [ 2] General — Israeli airstrikes…` etc. The categories are not actually general; they're conflict, health, diplomatic, crime. The display is wrong because the value the display reads is missing from persistence.
 
-`parseRssXml` at `server/worldmonitor/news/v1/list-feed-digest.ts` (the line in `parseRssXml` that does `category: threat.category` inside the `items.push`) already stamps `item.category` from `classifyByKeyword` (whose return type `EventCategory` enumerates 14 meaningful values: `conflict | protest | disaster | diplomatic | economic | terrorism | cyber | health | environmental | military | crime | infrastructure | tech | general`). But `buildStoryTrackHsetFields` writes only 9 fields to `story:track:v1` (`title | link | severity | lang | description | publishedAt | isOpinion | lastSeen | currentScore`) — **category is computed at ingest, used briefly, and then discarded** before the row hits Redis. PR #3748 just added `isFeelGood` to that list, confirming the persistence pattern is the right surface to extend.
+`parseRssXml` at `server/megabrain-market/news/v1/list-feed-digest.ts` (the line in `parseRssXml` that does `category: threat.category` inside the `items.push`) already stamps `item.category` from `classifyByKeyword` (whose return type `EventCategory` enumerates 14 meaningful values: `conflict | protest | disaster | diplomatic | economic | terrorism | cyber | health | environmental | military | crime | infrastructure | tech | general`). But `buildStoryTrackHsetFields` writes only 9 fields to `story:track:v1` (`title | link | severity | lang | description | publishedAt | isOpinion | lastSeen | currentScore`) — **category is computed at ingest, used briefly, and then discarded** before the row hits Redis. PR #3748 just added `isFeelGood` to that list, confirming the persistence pattern is the right surface to extend.
 
 By the time `buildDigest` reads the row back and `filterTopStories` (`shared/brief-filter.js:365`) does `asTrimmedString(raw.category) || 'General'`, there's nothing to read — `'General'` is what survives, every time.
 
@@ -29,17 +29,17 @@ The brief's threads card consumes the upstream `category` value as its display t
 
 This is editorially visible: a reader scanning the threads card learns nothing about the brief's coverage shape ("8 General stories" = no signal), versus the intended "3 conflict, 1 health, 1 diplomatic, 1 crime, 2 general" mix that would communicate the brief's actual mix at a glance.
 
-The classifier (`server/worldmonitor/news/v1/_classifier.ts`) is already producing meaningful categories — `classifyByKeyword` returns one of 14 `EventCategory` values for every story. The bug is strictly the missing HSET field. No new classifier, no taxonomy decision, no model change.
+The classifier (`server/megabrain-market/news/v1/_classifier.ts`) is already producing meaningful categories — `classifyByKeyword` returns one of 14 `EventCategory` values for every story. The bug is strictly the missing HSET field. No new classifier, no taxonomy decision, no model change.
 
 ---
 
 ## Requirements Trace
 
-- **R1.** `buildStoryTrackHsetFields` (`server/worldmonitor/news/v1/list-feed-digest.ts`, function declaration around `:893`; the existing field-write block is the site to extend) MUST persist `'category', <stringified category>` on every `story:track:v1` HSET write. New rows written from now on carry the field.
+- **R1.** `buildStoryTrackHsetFields` (`server/megabrain-market/news/v1/list-feed-digest.ts`, function declaration around `:893`; the existing field-write block is the site to extend) MUST persist `'category', <stringified category>` on every `story:track:v1` HSET write. New rows written from now on carry the field.
 - **R2.** `category` MUST be written as a defensively-stringified value: `typeof item.category === 'string' ? item.category : ''`. Missing/non-string upstream values produce `''`, never the literal `'undefined'`, mirroring how `publishedAt` and `description` already defend their HSET writes.
 - **R3.** `buildDigest` (`scripts/seed-digest-notifications.mjs`) MUST read `track.category` (defensively typed: `typeof track.category === 'string' ? track.category : ''`) and pass it onto the `stories.push({...})` object alongside `title`, `link`, `severity`, `currentScore`, etc. — so the value reaches `filterTopStories` and the composer's tag-derivation site.
 - **R4.** `shared/brief-filter.js` MUST capitalize the category value **once** in `filterTopStories`'s `out.push({...})` site so every downstream consumer (threads card, story pages, public-thread stubs) sees the same Title-Case form. The source/category cap inside `filterTopStories` MUST continue to operate on the canonical lowercase value for grouping correctness (`'conflict' === 'conflict'`); only the emitted envelope value is capitalized. The `'General'` fallback from line 365 is already capitalized; the classifier output is canonically lowercase; this single boundary normalizes display while keeping storage and cap-keying canonical.
-- **R5.** Pre-PR `story:track:v1` rows that have no `category` field MUST gracefully degrade to the existing `'General'` default via `filterTopStories:365`'s existing `|| 'General'` fallback. No read-time re-classifier needed because (a) the default behavior is identical to today's (everything → General — no regression from current state), and (b) ingest-time `category` can be AI-adjusted via `enrichWithAiCache` (`server/worldmonitor/news/v1/list-feed-digest.ts:678,725`); a read-time fallback running `classifyByKeyword(track.title, variant)` would lose those AI-side adjustments. Persistence captures the AI-adjusted verdict; residue catch would silently downgrade it back to a keyword-only verdict. **Rollout-window honesty:** `buildDigest` reads `ZRANGEBYSCORE(accKey, windowStartMs, now)` (`scripts/seed-digest-notifications.mjs:463`) where `windowStartMs` is per-rule — daily users have a 24h window, weekly users have a 7d window (`tests/digest-orchestration-helpers.test.mjs:302,485,546`). The accumulator only has a whole-key `EXPIRE` at `DIGEST_ACCUMULATOR_TTL = 48h` (`server/_shared/cache-keys.ts:44`), no member-level pruning, so the residue window is bounded by the per-rule window AND the row's own `STORY_TTL = 604800s = 7d` (`:43`). Concretely: daily users see residue for up to ~24-48h; weekly users see residue for up to ~7 days (whichever is smaller of their weekly window and `STORY_TTL`). Fresh ingests overwrite the same `story:track:v1` hash key (collapsed by normalised-title), so the practical residue duration trends down as fresh mentions arrive. The ~7d weekly-user bleed is acceptable because (a) it's transient, (b) the user experience is identical to today's (8/8 General threads tags), and (c) a one-off backfill script or read-time residue catch would cost operational complexity disproportionate to a cosmetic gap that resolves itself within a week of deploy.
+- **R5.** Pre-PR `story:track:v1` rows that have no `category` field MUST gracefully degrade to the existing `'General'` default via `filterTopStories:365`'s existing `|| 'General'` fallback. No read-time re-classifier needed because (a) the default behavior is identical to today's (everything → General — no regression from current state), and (b) ingest-time `category` can be AI-adjusted via `enrichWithAiCache` (`server/megabrain-market/news/v1/list-feed-digest.ts:678,725`); a read-time fallback running `classifyByKeyword(track.title, variant)` would lose those AI-side adjustments. Persistence captures the AI-adjusted verdict; residue catch would silently downgrade it back to a keyword-only verdict. **Rollout-window honesty:** `buildDigest` reads `ZRANGEBYSCORE(accKey, windowStartMs, now)` (`scripts/seed-digest-notifications.mjs:463`) where `windowStartMs` is per-rule — daily users have a 24h window, weekly users have a 7d window (`tests/digest-orchestration-helpers.test.mjs:302,485,546`). The accumulator only has a whole-key `EXPIRE` at `DIGEST_ACCUMULATOR_TTL = 48h` (`server/_shared/cache-keys.ts:44`), no member-level pruning, so the residue window is bounded by the per-rule window AND the row's own `STORY_TTL = 604800s = 7d` (`:43`). Concretely: daily users see residue for up to ~24-48h; weekly users see residue for up to ~7 days (whichever is smaller of their weekly window and `STORY_TTL`). Fresh ingests overwrite the same `story:track:v1` hash key (collapsed by normalised-title), so the practical residue duration trends down as fresh mentions arrive. The ~7d weekly-user bleed is acceptable because (a) it's transient, (b) the user experience is identical to today's (8/8 General threads tags), and (c) a one-off backfill script or read-time residue catch would cost operational complexity disproportionate to a cosmetic gap that resolves itself within a week of deploy.
 
 ---
 
@@ -61,9 +61,9 @@ The classifier (`server/worldmonitor/news/v1/_classifier.ts`) is already produci
 
 This is a direct sibling fix to PR #3748's `isFeelGood` persistence pattern. All four sites mirror PR #3748 + PR #3690 exactly:
 
-- `server/worldmonitor/news/v1/list-feed-digest.ts` (the line in `parseRssXml` that does `category: threat.category` inside the `items.push`) — `parseRssXml` already does `category: threat.category` from `classifyByKeyword`. No change needed; the value is being computed correctly.
-- `server/worldmonitor/news/v1/list-feed-digest.ts` `ParsedItem` type (around `:145`) — already declares `category: string`. No change needed.
-- `server/worldmonitor/news/v1/list-feed-digest.ts:~911` (`buildStoryTrackHsetFields`) — currently persists 9 fields (post-#3748: 10 with `isFeelGood`). Add `'category', <stringified value>` as a sibling.
+- `server/megabrain-market/news/v1/list-feed-digest.ts` (the line in `parseRssXml` that does `category: threat.category` inside the `items.push`) — `parseRssXml` already does `category: threat.category` from `classifyByKeyword`. No change needed; the value is being computed correctly.
+- `server/megabrain-market/news/v1/list-feed-digest.ts` `ParsedItem` type (around `:145`) — already declares `category: string`. No change needed.
+- `server/megabrain-market/news/v1/list-feed-digest.ts:~911` (`buildStoryTrackHsetFields`) — currently persists 9 fields (post-#3748: 10 with `isFeelGood`). Add `'category', <stringified value>` as a sibling.
 - `scripts/seed-digest-notifications.mjs` (`buildDigest`, around the `stories.push` site post-`isOpinion`/`isFeelGood` filter blocks) — currently passes `title | link | severity | currentScore | mentionCount | phase | sources | description`. Add `category` to that object.
 - `shared/brief-filter.js:365-416` — the envelope-build site. Line 365 already reads `raw.category` with the `|| 'General'` fallback (allows graceful degradation for pre-PR rows per R5). The source/category cap (~lines 376, 415) keys on this canonical lowercase value — leave it untouched. The `out.push({...})` site (~line 415) is where the emitted envelope `category` value should be Title-Cased so every downstream consumer sees one normalized form.
 - `scripts/lib/brief-compose.mjs:812` — the threads-card tag-derivation site. Will receive the already-capitalized envelope value once R4 lands. **Three stale comment sites in the same file** that document the digest shape as not carrying category become wrong post-U2 — update or remove all three: `:543` (the `digestStoryToSynthesisShape` JSDoc says `'category' / 'country' default to 'General' / 'Global' ... because story:track:v1 carries neither field` — half of that becomes obsolete), `:585-586`, and `:625-627`.
@@ -125,7 +125,7 @@ This is a direct sibling fix to PR #3748's `isFeelGood` persistence pattern. All
 **Dependencies:** None — leaf change.
 
 **Files:**
-- Modify: `server/worldmonitor/news/v1/list-feed-digest.ts` — add `'category', <defensive expression>` to `buildStoryTrackHsetFields`'s returned array.
+- Modify: `server/megabrain-market/news/v1/list-feed-digest.ts` — add `'category', <defensive expression>` to `buildStoryTrackHsetFields`'s returned array.
 - Modify: `server/_shared/cache-keys.ts` — three fixes in the same block (`:14-26`) + one constant removal:
   1. Add `category` to the documented HSET field list for `story:track:v1` (sibling to `description` / `isOpinion` / `isFeelGood`).
   2. **Correct the stale TTL claim** at `:14` ("TTL for all story tracking keys (48 hours)") and `:26` ("TTL for all: 172800s (48h)"). The actual story:track:v1 row uses `STORY_TTL = 604800` (7d) at `:43`; only the accumulator (`DIGEST_ACCUMULATOR_TTL = 172800` at `:44`) is 48h.
@@ -156,7 +156,7 @@ This is a direct sibling fix to PR #3748's `isFeelGood` persistence pattern. All
 
 **Verification:**
 - `npx tsx --test tests/news-story-track-description-persistence.test.mts` — all green.
-- `grep -nE "'category'" server/worldmonitor/news/v1/list-feed-digest.ts` returns exactly one new occurrence in `buildStoryTrackHsetFields` (in addition to any pre-existing comment mentions).
+- `grep -nE "'category'" server/megabrain-market/news/v1/list-feed-digest.ts` returns exactly one new occurrence in `buildStoryTrackHsetFields` (in addition to any pre-existing comment mentions).
 
 ---
 
@@ -283,14 +283,14 @@ This is a direct sibling fix to PR #3748's `isFeelGood` persistence pattern. All
 - PR #3697 — threads-from-walk — the PR that exposed the latent gap by reading `digest.threads[].category` for display. Not changed by this PR; this PR makes the value it tries to read actually exist.
 - PR #3748 — feelgood-classifier — sibling pattern for adding a new field to `story:track:v1`. The most recent precedent; mechanical mirror.
 - PR #3690 — opinion-classifier — original precedent.
-- `server/worldmonitor/news/v1/_classifier.ts` — the `EventCategory` enum and `classifyByKeyword` already producing meaningful values.
-- `server/worldmonitor/news/v1/list-feed-digest.ts` — `parseRssXml` stamps `category: threat.category` inside its `items.push`; `buildStoryTrackHsetFields` is declared around `:893`; `ParsedItem.category: string` is around `:145`.
+- `server/megabrain-market/news/v1/_classifier.ts` — the `EventCategory` enum and `classifyByKeyword` already producing meaningful values.
+- `server/megabrain-market/news/v1/list-feed-digest.ts` — `parseRssXml` stamps `category: threat.category` inside its `items.push`; `buildStoryTrackHsetFields` is declared around `:893`; `ParsedItem.category: string` is around `:145`.
 - `scripts/seed-digest-notifications.mjs` — `buildDigest`'s `stories.push` site.
 - `shared/brief-filter.js:365-416` — envelope-build site (R4 normalization happens at `out.push`, ~`:415`; cap-keying stays on canonical lowercase at `:376`).
 - `scripts/lib/brief-compose.mjs:812` — threads-card tag consumer (post-fix: receives Title-Case from envelope).
 - `server/_shared/brief-render.js:653` — magazine story-page category render (already HTML-escaped at `:565,653`; post-fix: shows Title-Case).
 - `server/_shared/brief-render.js:1296-1302` — public-thread fallback stub (post-fix: same Title-Case form).
 - `server/_shared/cache-keys.ts:43-44` — `STORY_TTL = 604800` (7d) + `DIGEST_ACCUMULATOR_TTL = 172800` (48h) constants that bound the rollout window.
-- `server/worldmonitor/news/v1/_classifier.ts:346` — `classifyByKeyword(title, variant)` signature (relevant to the rejected read-time-residue alternative).
-- `server/worldmonitor/news/v1/list-feed-digest.ts:678,725` — `enrichWithAiCache` overrides of `item.category` (the AI-verdict preservation reason for choosing persistence over residue catch).
+- `server/megabrain-market/news/v1/_classifier.ts:346` — `classifyByKeyword(title, variant)` signature (relevant to the rejected read-time-residue alternative).
+- `server/megabrain-market/news/v1/list-feed-digest.ts:678,725` — `enrichWithAiCache` overrides of `item.category` (the AI-verdict preservation reason for choosing persistence over residue catch).
 - Codex review round 1 (gpt-5.4): identified the single-display-site problem and the TTL / residue-rationale errors. This plan revision addresses all 4 findings.

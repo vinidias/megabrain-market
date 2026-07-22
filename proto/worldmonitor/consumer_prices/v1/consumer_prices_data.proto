@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.consumer_prices.v1;
+package megabrain-market.consumer_prices.v1;
 
 // CategorySnapshot holds price index data for a single product category.
 message CategorySnapshot {

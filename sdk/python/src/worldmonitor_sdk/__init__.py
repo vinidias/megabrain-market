@@ -1,15 +1,15 @@
-"""Official Python SDK for the World Monitor global-intelligence API.
+"""Official Python SDK for the MegaBrain Market global-intelligence API.
 
 Dependency-free (stdlib only), MCP-first — the same design as the
-``worldmonitor`` npm CLI this mirrors (``cli/`` in the main repository).
-The MCP server (https://worldmonitor.app/mcp) is the live, documented agent
+``megabrain-market`` npm CLI this mirrors (``cli/`` in the main repository).
+The MCP server (https://megabrain.market/mcp) is the live, documented agent
 surface: ``tools/list`` is public, and ``tools/call`` (used by the curated
 helpers) authenticates with a user API key. A small REST escape hatch
 (``get``/``health``) rounds it out for host-relative and self-hosted use.
 
-    from worldmonitor_sdk import Client
+    from megabrain-market_sdk import Client
 
-    client = Client(api_key="wm_...")       # or env WORLDMONITOR_API_KEY
+    client = Client(api_key="wm_...")       # or env MEGABRAIN_MARKET_API_KEY
     client.country_risk("IR")               # MCP tools/call get_country_risk
     client.call_tool("get_market_data", asset_class="crypto")
     client.get("/api/health")               # raw REST GET
@@ -29,30 +29,30 @@ __version__ = "0.1.1"
 
 # Cloudflare's WAF challenges generic library User-Agents (python-requests,
 # python-urllib, curl, empty) on the API edge, so we always identify ourselves.
-USER_AGENT = "worldmonitor-python/%s (+https://worldmonitor.app)" % __version__
+USER_AGENT = "megabrain-market-python/%s (+https://megabrain.market)" % __version__
 
-DEFAULT_BASE_URL = "https://api.worldmonitor.app"
-DEFAULT_MCP_URL = "https://worldmonitor.app/mcp"
+DEFAULT_BASE_URL = "https://api.megabrain.market"
+DEFAULT_MCP_URL = "https://megabrain.market/mcp"
 
 # Header the API accepts for a user-issued key (alias: X-Api-Key).
-API_KEY_HEADER = "X-WorldMonitor-Key"
+API_KEY_HEADER = "X-MegaBrainMarket-Key"
 
 # JSON-RPC error code the MCP server returns when a call needs authentication.
 MCP_AUTH_ERROR_CODE = -32001
 
 AUTH_HINT = (
-    "Hint: this call needs a key - pass api_key= or set WORLDMONITOR_API_KEY "
-    "(get one at https://worldmonitor.app/pro)."
+    "Hint: this call needs a key - pass api_key= or set MEGABRAIN_MARKET_API_KEY "
+    "(get one at https://megabrain.market/pro)."
 )
 
 DEFAULT_TIMEOUT = 30.0
 
 
-class WorldMonitorError(Exception):
+class MegaBrainMarketError(Exception):
     """Base class for every error raised by this SDK."""
 
 
-class APIError(WorldMonitorError):
+class APIError(MegaBrainMarketError):
     """A REST or transport-level failure (non-2xx HTTP response)."""
 
     def __init__(self, status, body):
@@ -62,7 +62,7 @@ class APIError(WorldMonitorError):
         super().__init__("HTTP %d: %s%s" % (status, _truncate(body), hint))
 
 
-class MCPError(WorldMonitorError):
+class MCPError(MegaBrainMarketError):
     """A JSON-RPC ``error`` returned by the MCP server."""
 
     def __init__(self, code, message, data=None):
@@ -136,11 +136,11 @@ def _default_transport(request, timeout):
 
 
 class Client:
-    """Thin client for the World Monitor MCP server and REST API.
+    """Thin client for the MegaBrain Market MCP server and REST API.
 
     All keyword arguments are optional; unset values fall back to the
-    ``WORLDMONITOR_API_KEY`` (or ``WM_API_KEY``), ``WORLDMONITOR_BASE_URL``,
-    and ``WORLDMONITOR_MCP_URL`` environment variables, then to the public
+    ``MEGABRAIN_MARKET_API_KEY`` (or ``WM_API_KEY``), ``MEGABRAIN_MARKET_BASE_URL``,
+    and ``MEGABRAIN_MARKET_MCP_URL`` environment variables, then to the public
     production endpoints. ``transport`` is injectable for offline tests: a
     callable ``(request_dict, timeout) -> (status, content_type, text)``.
     """
@@ -155,9 +155,9 @@ class Client:
         env=None,
     ):
         env = os.environ if env is None else env
-        self.api_key = api_key or env.get("WORLDMONITOR_API_KEY") or env.get("WM_API_KEY")
-        self.base_url = (base_url or env.get("WORLDMONITOR_BASE_URL") or DEFAULT_BASE_URL).rstrip("/")
-        self.mcp_url = mcp_url or env.get("WORLDMONITOR_MCP_URL") or DEFAULT_MCP_URL
+        self.api_key = api_key or env.get("MEGABRAIN_MARKET_API_KEY") or env.get("WM_API_KEY")
+        self.base_url = (base_url or env.get("MEGABRAIN_MARKET_BASE_URL") or DEFAULT_BASE_URL).rstrip("/")
+        self.mcp_url = mcp_url or env.get("MEGABRAIN_MARKET_MCP_URL") or DEFAULT_MCP_URL
         self.timeout = timeout
         self._transport = transport or _default_transport
 
@@ -311,7 +311,7 @@ __all__ = [
     "MCP_AUTH_ERROR_CODE",
     "MCPError",
     "USER_AGENT",
-    "WorldMonitorError",
+    "MegaBrainMarketError",
     "parse_body",
     "__version__",
 ]

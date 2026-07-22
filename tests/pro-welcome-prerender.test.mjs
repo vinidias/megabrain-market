@@ -98,5 +98,5 @@ test('built welcome page ships the real hero in #root before JavaScript', () => 
   assert.ok(headlineIndex > 0, 'welcome headline should be in the prerendered root');
   const heroSection = rootContent.slice(0, rootContent.indexOf('<section class="py-16'));
   assert.doesNotMatch(heroSection, /opacity:0/);
-  assert.match(rootContent, /<img[^>]+src="\/pro\/assets\/worldmonitor-7-mar-2026-[^"]+\.jpg"[^>]+fetchPriority="high"/);
+  assert.match(rootContent, /<img[^>]+src="\/pro\/assets\/megabrain-market-7-mar-2026-[^"]+\.jpg"[^>]+fetchPriority="high"/);
 });

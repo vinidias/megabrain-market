@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.research.v1;
+package megabrain-market.research.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/research/v1/research_item.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/research/v1/research_item.proto";
 
 // ListArxivPapersRequest specifies filters for retrieving arXiv papers.
 message ListArxivPapersRequest {
@@ -25,5 +25,5 @@ message ListArxivPapersResponse {
   // The list of arXiv papers.
   repeated ArxivPaper papers = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

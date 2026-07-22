@@ -7,7 +7,7 @@ import type {
   ServerContext,
   ListClimateNewsRequest,
   ListClimateNewsResponse,
-} from '../../../../src/generated/server/worldmonitor/climate/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/climate/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 import { CLIMATE_NEWS_KEY } from '../../../_shared/cache-keys';

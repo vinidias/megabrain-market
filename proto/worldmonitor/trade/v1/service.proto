@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package worldmonitor.trade.v1;
+package megabrain-market.trade.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/trade/v1/get_trade_restrictions.proto";
-import "worldmonitor/trade/v1/get_tariff_trends.proto";
-import "worldmonitor/trade/v1/get_trade_flows.proto";
-import "worldmonitor/trade/v1/get_trade_barriers.proto";
-import "worldmonitor/trade/v1/get_customs_revenue.proto";
-import "worldmonitor/trade/v1/list_comtrade_flows.proto";
+import "megabrain-market/trade/v1/get_trade_restrictions.proto";
+import "megabrain-market/trade/v1/get_tariff_trends.proto";
+import "megabrain-market/trade/v1/get_trade_flows.proto";
+import "megabrain-market/trade/v1/get_trade_barriers.proto";
+import "megabrain-market/trade/v1/get_customs_revenue.proto";
+import "megabrain-market/trade/v1/list_comtrade_flows.proto";
 
 // Trade policy intelligence from WTO and US Treasury data sources.
 service TradeService {

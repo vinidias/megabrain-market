@@ -15,7 +15,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { deduplicateHeadlines } from '../server/worldmonitor/news/v1/dedup.mjs';
+import { deduplicateHeadlines } from '../server/megabrain-market/news/v1/dedup.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
@@ -28,7 +28,7 @@ const readSrc = (relPath) => readFileSync(resolve(root, relPath), 'utf-8');
 // ========================================================================
 
 describe('getHumanitarianSummary handler', () => {
-  const src = readSrc('server/worldmonitor/conflict/v1/get-humanitarian-summary.ts');
+  const src = readSrc('server/megabrain-market/conflict/v1/get-humanitarian-summary.ts');
 
   it('returns undefined when country has no ISO3 mapping (BLOCKING-1)', () => {
     // Must have early return when no ISO3 mapping (before HAPI fetch)
@@ -79,7 +79,7 @@ describe('getHumanitarianSummary handler', () => {
 // ========================================================================
 
 describe('humanitarian_summary.proto', () => {
-  const proto = readSrc('proto/worldmonitor/conflict/v1/humanitarian_summary.proto');
+  const proto = readSrc('proto/megabrain-market/conflict/v1/humanitarian_summary.proto');
 
   it('has conflict-event field names instead of humanitarian field names', () => {
     assert.match(proto, /conflict_events_total/);
@@ -105,7 +105,7 @@ describe('humanitarian_summary.proto', () => {
 // ========================================================================
 
 describe('LLM prompt political context (LOW-1)', () => {
-  const src = readSrc('server/worldmonitor/news/v1/_shared.ts');
+  const src = readSrc('server/megabrain-market/news/v1/_shared.ts');
 
   it('does not contain hardcoded "Donald Trump" reference', () => {
     assert.doesNotMatch(src, /Donald Trump/,
@@ -167,7 +167,7 @@ describe('headline deduplication', () => {
 
 describe('getCacheKey determinism', () => {
   const src = readSrc('src/utils/summary-cache-key.ts');
-  const sharedSrc = readSrc('server/worldmonitor/news/v1/_shared.ts');
+  const sharedSrc = readSrc('server/megabrain-market/news/v1/_shared.ts');
 
   it('getCacheKey function exists and builds versioned keys', () => {
     assert.match(src, /export function buildSummaryCacheKey\(/,
@@ -191,7 +191,7 @@ describe('getCacheKey determinism', () => {
 // ========================================================================
 
 describe('getVesselSnapshot caching (HIGH-1)', () => {
-  const src = readSrc('server/worldmonitor/maritime/v1/get-vessel-snapshot.ts');
+  const src = readSrc('server/megabrain-market/maritime/v1/get-vessel-snapshot.ts');
 
   it('cache is keyed by request shape (candidates, tankers, quantized bbox)', () => {
     // PR 3 (parity-push) replaced the prior `Record<'with'|'without'>` cache
@@ -272,7 +272,7 @@ describe('getVesselSnapshot caching (HIGH-1)', () => {
 // ========================================================================
 
 describe('getSimulationOutcome handler', () => {
-  const src = readSrc('server/worldmonitor/forecast/v1/get-simulation-outcome.ts');
+  const src = readSrc('server/megabrain-market/forecast/v1/get-simulation-outcome.ts');
 
   it('returns found:false (NOT_FOUND) when pointer is absent', () => {
     // The handler must define a NOT_FOUND sentinel with found: false

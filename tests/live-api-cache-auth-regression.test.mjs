@@ -14,10 +14,10 @@ import { strict as assert } from 'node:assert';
 import { describe, it } from 'node:test';
 
 const LIVE = process.env.LIVE_API_CACHE_TESTS === '1';
-const API_BASE = stripTrailingSlash(process.env.WM_LIVE_API_BASE_URL || 'https://api.worldmonitor.app');
-const WEB_BASE = stripTrailingSlash(process.env.WM_LIVE_WEB_BASE_URL || 'https://worldmonitor.app');
+const API_BASE = stripTrailingSlash(process.env.WM_LIVE_API_BASE_URL || 'https://api.megabrain.market');
+const WEB_BASE = stripTrailingSlash(process.env.WM_LIVE_WEB_BASE_URL || 'https://megabrain.market');
 const FAKE_WM_KEY = 'wm_0000000000000000000000000000000000000000';
-const USER_AGENT = 'WorldMonitor-Live-Cache-Auth-Sweep/1.0';
+const USER_AGENT = 'MegaBrainMarket-Live-Cache-Auth-Sweep/1.0';
 const LIVE_API_CACHE_TIMEOUT_MS = positiveIntegerFromEnv(process.env.LIVE_API_CACHE_TIMEOUT_MS, 15_000);
 
 function positiveIntegerFromEnv(value, fallback) {
@@ -88,7 +88,7 @@ describe(`live API cache/auth regression sweep (${LIVE ? 'ENABLED' : 'SKIPPED - 
 
   it('bootstrap rejects fake auth as dynamic no-store while anonymous weather stays cacheable', async () => {
     const fake = await fetchText(`${API_BASE}/api/bootstrap?keys=weatherAlerts`, {
-      headers: { 'X-WorldMonitor-Key': FAKE_WM_KEY },
+      headers: { 'X-MegaBrainMarket-Key': FAKE_WM_KEY },
     });
     assert.equal(fake.resp.status, 401);
     assertNoStore(fake.resp, 'bootstrap fake auth');
@@ -102,7 +102,7 @@ describe(`live API cache/auth regression sweep (${LIVE ? 'ENABLED' : 'SKIPPED - 
 
   it('generated RPCs reject fake auth as dynamic no-store while public no-auth RPCs stay cacheable', async () => {
     const fake = await fetchText(`${API_BASE}/api/market/v1/list-market-quotes?symbols=AAPL`, {
-      headers: { 'X-WorldMonitor-Key': FAKE_WM_KEY },
+      headers: { 'X-MegaBrainMarket-Key': FAKE_WM_KEY },
     });
     assert.equal(fake.resp.status, 401);
     assertNoStore(fake.resp, 'generated RPC fake auth');
@@ -116,7 +116,7 @@ describe(`live API cache/auth regression sweep (${LIVE ? 'ENABLED' : 'SKIPPED - 
 
   it('premium RPC fake auth fails closed without shared cache headers', async () => {
     const fake = await fetchText(`${API_BASE}/api/market/v1/analyze-stock?symbol=AAPL`, {
-      headers: { 'X-WorldMonitor-Key': FAKE_WM_KEY },
+      headers: { 'X-MegaBrainMarket-Key': FAKE_WM_KEY },
     });
     assert.equal(fake.resp.status, 401);
     assertNoStore(fake.resp, 'premium RPC fake auth');
@@ -164,7 +164,7 @@ describe(`live API cache/auth regression sweep (${LIVE ? 'ENABLED' : 'SKIPPED - 
         params: {
           protocolVersion: '2025-03-26',
           capabilities: {},
-          clientInfo: { name: 'worldmonitor-live-sweep', version: '1.0' },
+          clientInfo: { name: 'megabrain-market-live-sweep', version: '1.0' },
         },
       }),
     });
@@ -263,7 +263,7 @@ describe(`live API cache/auth regression sweep (${LIVE ? 'ENABLED' : 'SKIPPED - 
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        'X-WorldMonitor-Key': process.env.WM_LIVE_TEST_KEY,
+        'X-MegaBrainMarket-Key': process.env.WM_LIVE_TEST_KEY,
       },
       body: JSON.stringify({
         jsonrpc: '2.0',
@@ -272,7 +272,7 @@ describe(`live API cache/auth regression sweep (${LIVE ? 'ENABLED' : 'SKIPPED - 
         params: {
           protocolVersion: '2025-03-26',
           capabilities: {},
-          clientInfo: { name: 'worldmonitor-live-sweep', version: '1.0' },
+          clientInfo: { name: 'megabrain-market-live-sweep', version: '1.0' },
         },
       }),
     });

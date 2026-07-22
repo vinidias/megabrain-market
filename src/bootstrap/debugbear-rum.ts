@@ -2,13 +2,13 @@ export const DEBUGBEAR_RUM_SCRIPT_SRC = 'https://cdn.debugbear.com/lpMwA9KpC6pf.
 export const DEBUGBEAR_RUM_SAMPLE_RATE = 100;
 const DEBUGBEAR_RUM_SCRIPT_PATHNAME = new URL(DEBUGBEAR_RUM_SCRIPT_SRC).pathname;
 const DEBUGBEAR_RUM_HOSTS = new Set([
-  'worldmonitor.app',
-  'www.worldmonitor.app',
-  'tech.worldmonitor.app',
-  'finance.worldmonitor.app',
-  'commodity.worldmonitor.app',
-  'happy.worldmonitor.app',
-  'energy.worldmonitor.app',
+  'megabrain.market',
+  'www.megabrain.market',
+  'tech.megabrain.market',
+  'finance.megabrain.market',
+  'commodity.megabrain.market',
+  'happy.megabrain.market',
+  'energy.megabrain.market',
 ]);
 
 import type { BootstrapR2RumSample } from './bootstrap-r2-rum';

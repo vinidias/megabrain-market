@@ -3,7 +3,7 @@ import type {
   ServerContext,
   GetSimulationPackageRequest,
   GetSimulationPackageResponse,
-} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
 import { getRawJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
 import { SIMULATION_PACKAGE_LATEST_KEY } from '../../../_shared/cache-keys';

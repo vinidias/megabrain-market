@@ -225,7 +225,7 @@ export class Panel {
       headerLeft.appendChild(this.newBadgeEl);
     }
 
-    if (options.premium && !getSecretState('WORLDMONITOR_API_KEY').present) {
+    if (options.premium && !getSecretState('MEGABRAIN_MARKET_API_KEY').present) {
       const proBadge = h('span', { className: 'panel-pro-badge' }, t('premium.pro'));
       headerLeft.appendChild(proBadge);
     }
@@ -921,11 +921,11 @@ export class Panel {
 
     const ctaBtn = h('button', { type: 'button', className: 'panel-locked-cta' }, 'Upgrade to Pro');
     if (isDesktopRuntime()) {
-      ctaBtn.addEventListener('click', () => void invokeTauri<void>('open_url', { url: 'https://worldmonitor.app/pro' }).catch(() => window.open('https://worldmonitor.app/pro', '_blank', 'noopener,noreferrer')));
+      ctaBtn.addEventListener('click', () => void invokeTauri<void>('open_url', { url: 'https://megabrain.market/pro' }).catch(() => window.open('https://megabrain.market/pro', '_blank', 'noopener,noreferrer')));
     } else {
       ctaBtn.addEventListener('click', () => {
         import('@/services/checkout').then(m => import('@/config/products').then(p => m.startCheckout(p.DEFAULT_UPGRADE_PRODUCT))).catch(() => {
-          window.open('https://worldmonitor.app/pro', '_blank', 'noopener,noreferrer');
+          window.open('https://megabrain.market/pro', '_blank', 'noopener,noreferrer');
         });
       });
     }

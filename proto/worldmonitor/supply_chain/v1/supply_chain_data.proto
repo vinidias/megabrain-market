@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.supply_chain.v1;
+package megabrain-market.supply_chain.v1;
 
 message ShippingRatePoint {
   string date = 1;

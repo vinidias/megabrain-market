@@ -37,11 +37,11 @@ function appendHeader(headers, name, value) {
 
 function shouldUseSharedCookieDomain(req) {
   const host = (req.headers.get('host') || new URL(req.url).hostname).toLowerCase();
-  return host === 'worldmonitor.app' || host.endsWith('.worldmonitor.app');
+  return host === 'megabrain.market' || host.endsWith('.megabrain.market');
 }
 
 function cookieDomainAttribute(req) {
-  return shouldUseSharedCookieDomain(req) ? '; Domain=.worldmonitor.app' : '';
+  return shouldUseSharedCookieDomain(req) ? '; Domain=.megabrain.market' : '';
 }
 
 function sessionCookie(req, name, value) {
@@ -49,7 +49,7 @@ function sessionCookie(req, name, value) {
 }
 
 function clearReadableCookie(name) {
-  return `${name}=; Domain=.worldmonitor.app; Path=/; Max-Age=0; Secure; SameSite=Lax`;
+  return `${name}=; Domain=.megabrain.market; Path=/; Max-Age=0; Secure; SameSite=Lax`;
 }
 
 function normalizeLegacyKey(value) {
@@ -76,7 +76,7 @@ async function matchesEnvSecret(key, name) {
 }
 
 async function isValidEnterpriseKey(key) {
-  return timingSafeIncludes(key, envList('WORLDMONITOR_VALID_KEYS'));
+  return timingSafeIncludes(key, envList('MEGABRAIN_MARKET_VALID_KEYS'));
 }
 
 async function isValidWidgetKey(key) {

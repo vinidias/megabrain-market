@@ -14,14 +14,14 @@ const read = (p) => readFileSync(join(ROOT, p), 'utf-8');
 // workflows cross-check against the release tag — these assertions stop any
 // of that wiring from silently drifting.
 
-const HOMEPAGE = 'https://worldmonitor.app';
+const HOMEPAGE = 'https://megabrain.market';
 
-describe('Python SDK package (sdk/python → PyPI worldmonitor-sdk)', () => {
+describe('Python SDK package (sdk/python → PyPI megabrain-market-sdk)', () => {
   const pyproject = read('sdk/python/pyproject.toml');
-  const module = read('sdk/python/src/worldmonitor_sdk/__init__.py');
+  const module = read('sdk/python/src/megabrain-market_sdk/__init__.py');
 
-  it('is the worldmonitor-sdk distribution with the product-domain homepage', () => {
-    assert.match(pyproject, /^name = "worldmonitor-sdk"$/m);
+  it('is the megabrain-market-sdk distribution with the product-domain homepage', () => {
+    assert.match(pyproject, /^name = "megabrain-market-sdk"$/m);
     assert.match(pyproject, new RegExp(`^Homepage = "${HOMEPAGE}"$`, 'm'));
     assert.match(pyproject, /^license = "MIT"$/m);
   });
@@ -34,17 +34,17 @@ describe('Python SDK package (sdk/python → PyPI worldmonitor-sdk)', () => {
   });
 
   it('sends a descriptive User-Agent (Cloudflare WAF passes it, not python-urllib)', () => {
-    assert.match(module, /USER_AGENT = "worldmonitor-python\/%s \(\+https:\/\/worldmonitor\.app\)"/);
+    assert.match(module, /USER_AGENT = "megabrain-market-python\/%s \(\+https:\/\/megabrain-market\.app\)"/);
   });
 });
 
-describe('Ruby SDK package (sdk/ruby → gem worldmonitor)', () => {
-  const gemspec = read('sdk/ruby/worldmonitor.gemspec');
-  const versionRb = read('sdk/ruby/lib/worldmonitor/version.rb');
-  const lib = read('sdk/ruby/lib/worldmonitor.rb');
+describe('Ruby SDK package (sdk/ruby → gem megabrain-market)', () => {
+  const gemspec = read('sdk/ruby/megabrain-market.gemspec');
+  const versionRb = read('sdk/ruby/lib/megabrain-market/version.rb');
+  const lib = read('sdk/ruby/lib/megabrain-market.rb');
 
-  it('is the worldmonitor gem with the product-domain homepage', () => {
-    assert.match(gemspec, /spec\.name = "worldmonitor"/);
+  it('is the megabrain-market gem with the product-domain homepage', () => {
+    assert.match(gemspec, /spec\.name = "megabrain-market"/);
     assert.match(gemspec, new RegExp(`spec\\.homepage = "${HOMEPAGE}"`));
     assert.match(gemspec, new RegExp(`"homepage_uri" => "${HOMEPAGE}"`));
     assert.match(gemspec, /spec\.license = "MIT"/);
@@ -52,20 +52,20 @@ describe('Ruby SDK package (sdk/ruby → gem worldmonitor)', () => {
 
   it('declares VERSION where the gemspec and publish workflow read it', () => {
     assert.match(versionRb, /VERSION = "\d+\.\d+\.\d+"/);
-    assert.match(gemspec, /require_relative "lib\/worldmonitor\/version"/);
+    assert.match(gemspec, /require_relative "lib\/megabrain-market\/version"/);
   });
 
   it('sends a descriptive User-Agent', () => {
-    assert.match(lib, /USER_AGENT = "worldmonitor-ruby\/#\{VERSION\} \(\+https:\/\/worldmonitor\.app\)"/);
+    assert.match(lib, /USER_AGENT = "megabrain-market-ruby\/#\{VERSION\} \(\+https:\/\/megabrain-market\.app\)"/);
   });
 });
 
 describe('Go SDK module (sdk/go → pkg.go.dev)', () => {
   const gomod = read('sdk/go/go.mod');
-  const source = read('sdk/go/worldmonitor.go');
+  const source = read('sdk/go/megabrain-market.go');
 
   it('is the sdk/go submodule of this repository', () => {
-    assert.match(gomod, /^module github\.com\/koala73\/worldmonitor\/sdk\/go$/m);
+    assert.match(gomod, /^module github\.com\/koala73\/megabrain-market\/sdk\/go$/m);
   });
 
   it('declares the Version constant the publish workflow checks against the tag', () => {
@@ -73,8 +73,8 @@ describe('Go SDK module (sdk/go → pkg.go.dev)', () => {
   });
 
   it('documents the product domain and sends a descriptive User-Agent', () => {
-    assert.match(source, /https:\/\/worldmonitor\.app/);
-    assert.match(source, /const UserAgent = "worldmonitor-go\/" \+ Version \+ " \(\+https:\/\/worldmonitor\.app\)"/);
+    assert.match(source, /https:\/\/megabrain-market\.app/);
+    assert.match(source, /const UserAgent = "megabrain-market-go\/" \+ Version \+ " \(\+https:\/\/megabrain-market\.app\)"/);
   });
 });
 
@@ -106,16 +106,16 @@ describe('SDK publish workflows', () => {
 describe('SDK discovery surfaces', () => {
   it('llms.txt advertises every registry package', () => {
     const llms = read('public/llms.txt');
-    assert.match(llms, /pypi\.org\/project\/worldmonitor-sdk/);
-    assert.match(llms, /rubygems\.org\/gems\/worldmonitor/);
-    assert.match(llms, /pkg\.go\.dev\/github\.com\/koala73\/worldmonitor\/sdk\/go/);
+    assert.match(llms, /pypi\.org\/project\/megabrain-market-sdk/);
+    assert.match(llms, /rubygems\.org\/gems\/megabrain-market/);
+    assert.match(llms, /pkg\.go\.dev\/github\.com\/koala73\/megabrain-market\/sdk\/go/);
   });
 
   it('api/llms.txt advertises the SDK surface', () => {
     const llms = read('public/api/llms.txt');
-    assert.match(llms, /pip install worldmonitor-sdk/);
-    assert.match(llms, /gem install worldmonitor/);
-    assert.match(llms, /go get github\.com\/koala73\/worldmonitor\/sdk\/go/);
+    assert.match(llms, /pip install megabrain-market-sdk/);
+    assert.match(llms, /gem install megabrain-market/);
+    assert.match(llms, /go get github\.com\/koala73\/megabrain-market\/sdk\/go/);
   });
 
   it('the docs site has an SDKs page wired into navigation', () => {

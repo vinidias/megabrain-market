@@ -11,9 +11,9 @@ function sanitizeVideoId(value) {
 }
 
 const ALLOWED_ORIGINS = [
-  /^https:\/\/(.*\.)?worldmonitor\.app$/,
-  /^https:\/\/worldmonitor-[a-z0-9-]+-elie-habib-projects\.vercel\.app$/,
-  /^https:\/\/worldmonitor-[a-z0-9-]+\.vercel\.app$/,
+  /^https:\/\/(.*\.)?megabrain-market\.app$/,
+  /^https:\/\/megabrain-market-[a-z0-9-]+-elie-habib-projects\.vercel\.app$/,
+  /^https:\/\/megabrain-market-[a-z0-9-]+\.vercel\.app$/,
   /^https?:\/\/localhost(:\d+)?$/,
   /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
   /^tauri:\/\/localhost$/,
@@ -40,7 +40,7 @@ function sanitizeAllowedOrigin(raw, fallback, allowList = ALLOWED_ORIGINS) {
 }
 
 function sanitizeOrigin(raw) {
-  return sanitizeAllowedOrigin(raw, 'https://worldmonitor.app', ALLOWED_ORIGINS);
+  return sanitizeAllowedOrigin(raw, 'https://megabrain.market', ALLOWED_ORIGINS);
 }
 
 function sanitizeParentOrigin(raw, fallback) {

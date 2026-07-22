@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.economic.v1;
+package megabrain-market.economic.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/economic/v1/economic_data.proto";
+import "megabrain-market/economic/v1/economic_data.proto";
 
 // GetEnergyPricesRequest specifies which energy commodities to retrieve.
 message GetEnergyPricesRequest {

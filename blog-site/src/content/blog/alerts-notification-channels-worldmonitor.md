@@ -1,16 +1,16 @@
 ---
-title: "Six Ways WorldMonitor Reaches You When the World Changes"
-description: "Telegram, Slack, Discord, email, webhooks, and web push — WorldMonitor's alert rules deliver scoped intelligence with digest modes and quiet hours, no code required."
-metaTitle: "Intelligence Alerts: 6 Notification Channels | WorldMonitor"
+title: "Six Ways MegaBrainMarket Reaches You When the World Changes"
+description: "Telegram, Slack, Discord, email, webhooks, and web push — MegaBrainMarket's alert rules deliver scoped intelligence with digest modes and quiet hours, no code required."
+metaTitle: "Intelligence Alerts: 6 Notification Channels | MegaBrainMarket"
 keywords: "geopolitical alerts app, telegram news alerts, discord intelligence alerts, web push breaking news, alert fatigue quiet hours, intelligence notifications"
 audience: "Analysts, ops and security teams, traders, journalists, anyone who can't watch a dashboard all day"
-heroImage: "/blog/og/alerts-notification-channels-worldmonitor.png"
+heroImage: "/blog/og/alerts-notification-channels-megabrain-market.png"
 pubDate: "2026-07-21"
 ---
 
 A dashboard you have to watch is a part-time job. The whole point of monitoring infrastructure is inverted attention: you ignore the world safely because the system knows what you care about and interrupts you only when it happens.
 
-WorldMonitor's alert system is built for that inversion — no code, no webhook glue, unless you want it.
+MegaBrainMarket's alert system is built for that inversion — no code, no webhook glue, unless you want it.
 
 ## Six channels, your choice
 
@@ -27,7 +27,7 @@ The same rule can feed different channels for different severities — critical 
 
 ## Scoped rules, not firehoses
 
-An alert system that forwards everything is just a louder feed. WorldMonitor rules are scoped on three axes:
+An alert system that forwards everything is just a louder feed. MegaBrainMarket rules are scoped on three axes:
 
 - **What**: the event types you care about — not the whole stream.
 - **Where**: rules respect **Country Scope**, so "unrest events" can mean "unrest events in the four countries my team operates in," not the planet.
@@ -39,13 +39,13 @@ Then the delivery controls do the work that separates a usable system from a mut
 - **Sensitivity thresholds** — all events, high-priority only, or critical only.
 - **Quiet hours** — with three behaviors: let only critical through, silence everything, or batch alerts for delivery when you wake. That last one is the correct default for most humans: nothing lost, nothing at 3 a.m.
 
-Alert fatigue is the failure mode that kills every monitoring setup. The [alert-design guide](/blog/posts/geopolitical-risk-alerts-slack-teams-worldmonitor-api/) goes deep on the principles; the in-product rules implement them without you writing a line.
+Alert fatigue is the failure mode that kills every monitoring setup. The [alert-design guide](/blog/posts/geopolitical-risk-alerts-slack-teams-megabrain-market-api/) goes deep on the principles; the in-product rules implement them without you writing a line.
 
 ## Alerts complete the workflows
 
 Every workflow on this blog ends with the same step. The [country-risk routine](/blog/posts/country-risk-monitoring-workflow-for-analysts/) ends with "put the watchlist on continuous watch." The [15-minute briefing](/blog/posts/daily-intelligence-briefing-workflow-15-minutes/) ends with automation carrying the other 23 hours. Alert rules are that step: pin your entities, set your monitors and watchlists, scope the rules, pick the channel you actually read, and the dashboard keeps working when you close it.
 
-Developers who want full control still have it — the API path with your own scheduler and delivery logic is the [Slack/Teams tutorial](/blog/posts/geopolitical-risk-alerts-slack-teams-worldmonitor-api/). The in-product system is for everyone who wants the outcome without owning the plumbing.
+Developers who want full control still have it — the API path with your own scheduler and delivery logic is the [Slack/Teams tutorial](/blog/posts/geopolitical-risk-alerts-slack-teams-megabrain-market-api/). The in-product system is for everyone who wants the outcome without owning the plumbing.
 
 ## Limits
 

@@ -147,8 +147,8 @@ describe('OpenAPI Idempotency-Key contract', () => {
     });
   }
 
-  it('bundle (worldmonitor.openapi.yaml → /openapi.json) covers every POST', () => {
-    const bundle = loadYaml(readFileSync(resolve(apiDir, 'worldmonitor.openapi.yaml'), 'utf8'));
+  it('bundle (megabrain-market.openapi.yaml → /openapi.json) covers every POST', () => {
+    const bundle = loadYaml(readFileSync(resolve(apiDir, 'megabrain-market.openapi.yaml'), 'utf8'));
     const ops = postOps(bundle);
     assert.ok(ops.length > 0, 'bundle has POST operations');
     for (const [path, op] of ops) {

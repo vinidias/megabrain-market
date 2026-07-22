@@ -18,7 +18,7 @@ import {
   usEquityHoursApply,
   type Candle,
   type AnalystData,
-} from '../server/worldmonitor/market/v1/analyze-stock.ts';
+} from '../server/megabrain-market/market/v1/analyze-stock.ts';
 
 const originalFetch = globalThis.fetch;
 
@@ -27,7 +27,7 @@ afterEach(() => {
 });
 
 const analyzeStockSrc = readFileSync(
-  resolve(dirname(fileURLToPath(import.meta.url)), '../server/worldmonitor/market/v1/analyze-stock.ts'),
+  resolve(dirname(fileURLToPath(import.meta.url)), '../server/megabrain-market/market/v1/analyze-stock.ts'),
   'utf-8',
 );
 

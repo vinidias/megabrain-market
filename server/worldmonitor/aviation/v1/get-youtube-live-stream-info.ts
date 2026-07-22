@@ -3,7 +3,7 @@ import type {
   ServerContext,
   GetYoutubeLiveStreamInfoRequest,
   GetYoutubeLiveStreamInfoResponse,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { getRelayBaseUrl, getRelayHeaders } from './_shared';
 import { CHROME_UA } from '../../../_shared/constants';
 import { cachedFetchJson } from '../../../_shared/redis';
@@ -55,7 +55,7 @@ async function tryRelay(query: string): Promise<GetYoutubeLiveStreamInfoResponse
   if (!relayBaseUrl) return null;
   try {
     const relayResponse = await fetch(`${relayBaseUrl}/youtube-live?${query}`, {
-      headers: getRelayHeaders({ 'User-Agent': 'WorldMonitor-Server/1.0' }),
+      headers: getRelayHeaders({ 'User-Agent': 'MegaBrainMarket-Server/1.0' }),
       signal: AbortSignal.timeout(8_000),
     });
     if (!relayResponse.ok) return null;

@@ -1,10 +1,10 @@
 ---
-title: "Country Risk Due Diligence with WorldMonitor"
+title: "Country Risk Due Diligence with MegaBrainMarket"
 description: "Use CII, advisory provenance, sanctions, macro indicators, and conflict events to screen country exposure before investments, suppliers, trips, or market entry."
-metaTitle: "Country Risk Monitoring for Due Diligence | WorldMonitor"
+metaTitle: "Country Risk Monitoring for Due Diligence | MegaBrainMarket"
 keywords: "country risk monitoring, country risk API, geopolitical due diligence, country instability index, sanctions risk screening"
 audience: "Risk teams, investors, security managers, compliance analysts, consultants"
-heroImage: "/blog/og/country-risk-monitoring-due-diligence-worldmonitor.png"
+heroImage: "/blog/og/country-risk-monitoring-due-diligence-megabrain-market.png"
 pubDate: "2026-06-10"
 modifiedDate: "2026-06-13"
 ---
@@ -13,7 +13,7 @@ Country risk due diligence is the process of asking: "What could go wrong becaus
 
 Most teams answer that question with a static country report. That is useful once. It is not enough when conflict events, sanctions exposure, travel advisories, cyber activity, market stress, and public-health signals can change every day.
 
-WorldMonitor gives risk teams a more repeatable workflow: combine the Country Instability Index, advisory provenance, sanctions pressure, conflict events, macro indicators, and news intelligence into a living country-risk file. If you are starting from the scoring model itself, read the [Country Instability Index methodology](/blog/posts/country-instability-index-methodology-explained/) first; if you need the same workflow in software, pair this guide with the [developer API overview](/blog/posts/build-on-worldmonitor-developer-api-open-source/).
+MegaBrainMarket gives risk teams a more repeatable workflow: combine the Country Instability Index, advisory provenance, sanctions pressure, conflict events, macro indicators, and news intelligence into a living country-risk file. If you are starting from the scoring model itself, read the [Country Instability Index methodology](/blog/posts/country-instability-index-methodology-explained/) first; if you need the same workflow in software, pair this guide with the [developer API overview](/blog/posts/build-on-megabrain-market-developer-api-open-source/).
 
 ## When to run a country risk workflow
 
@@ -46,7 +46,7 @@ This packet creates consistency. A country can be compared against itself over t
 
 ## Use CII as a starting point, not the whole answer
 
-The [Country Instability Index methodology](https://www.worldmonitor.app/docs/methodology/cii-risk-scores) gives each country a 0-100 instability score with component-level context. Use it as a triage layer:
+The [Country Instability Index methodology](https://www.megabrain.market/docs/methodology/cii-risk-scores) gives each country a 0-100 instability score with component-level context. Use it as a triage layer:
 
 | CII band | Practical meaning |
 |---|---|
@@ -60,7 +60,7 @@ The score is useful because it is comparable. The component breakdown is useful 
 
 ## Preserve advisory provenance
 
-A country risk workflow should never hide where advisory input came from. WorldMonitor's CII score exposes advisory provenance so downstream users can distinguish:
+A country risk workflow should never hide where advisory input came from. MegaBrainMarket's CII score exposes advisory provenance so downstream users can distinguish:
 
 | Provenance | Meaning |
 |---|---|
@@ -105,7 +105,7 @@ With MCP, start with:
 }
 ```
 
-With REST, use the intelligence service from the [API reference](https://www.worldmonitor.app/docs/api-reference). For production systems, generate a typed client from the bundled OpenAPI spec and keep the response fields explicit.
+With REST, use the intelligence service from the [API reference](https://www.megabrain.market/docs/api-reference). For production systems, generate a typed client from the bundled OpenAPI spec and keep the response fields explicit.
 
 ### 3. Add live context
 
@@ -178,10 +178,10 @@ This is the difference between an intelligence workflow and a polished guess.
 Country risk monitoring is the repeated review of political, security, sanctions, macroeconomic, health, infrastructure, and market signals that could affect an organization's exposure to a country.
 
 **What is the Country Instability Index?**
-The Country Instability Index is WorldMonitor's 0-100 country-level risk score. It combines structural and live signals such as conflict, unrest, security events, information velocity, advisory input, and other risk indicators.
+The Country Instability Index is MegaBrainMarket's 0-100 country-level risk score. It combines structural and live signals such as conflict, unrest, security events, information velocity, advisory input, and other risk indicators.
 
-**Can WorldMonitor replace a human country analyst?**
-No. WorldMonitor is a data and workflow layer. It helps analysts collect consistent evidence, catch changes faster, and write clearer memos. Human judgment is still needed for decisions.
+**Can MegaBrainMarket replace a human country analyst?**
+No. MegaBrainMarket is a data and workflow layer. It helps analysts collect consistent evidence, catch changes faster, and write clearer memos. Human judgment is still needed for decisions.
 
 **What should a due diligence memo include?**
 Include the decision, exposure type, CII state, component drivers, advisory provenance, sanctions exposure, recent conflict or news signals, unknowns, and next checks.

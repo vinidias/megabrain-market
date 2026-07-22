@@ -13,7 +13,7 @@ import assert from 'node:assert/strict';
 
 process.env.UPSTASH_REDIS_REST_URL = 'https://mock-upstash.test';
 process.env.UPSTASH_REDIS_REST_TOKEN = 'mock-token';
-process.env.WORLDMONITOR_VALID_KEYS = 'test-health-admin-key';
+process.env.MEGABRAIN_MARKET_VALID_KEYS = 'test-health-admin-key';
 
 const { default: handler } = await import('../api/health.js');
 
@@ -36,7 +36,7 @@ function mockRedisPipeline() {
 
 test('compact 200 is never edge-cached (monitors must see live recovery)', async () => {
   mockRedisPipeline();
-  const res = await handler(new Request('https://api.worldmonitor.app/api/health?compact=1'));
+  const res = await handler(new Request('https://api.megabrain.market/api/health?compact=1'));
   assert.equal(res.status, 200);
   // A shared CDN entry (prior s-maxage=60) pinned a stale WARNING and kept
   // uptime monitors "down" after the seed recovered (2026-07-07). no-store
@@ -49,8 +49,8 @@ test('compact 200 is never edge-cached (monitors must see live recovery)', async
 
 test('detailed (key-authenticated) 200 stays no-store', async () => {
   mockRedisPipeline();
-  const res = await handler(new Request('https://api.worldmonitor.app/api/health', {
-    headers: { 'x-worldmonitor-key': 'test-health-admin-key' },
+  const res = await handler(new Request('https://api.megabrain.market/api/health', {
+    headers: { 'x-megabrain-market-key': 'test-health-admin-key' },
   }));
   assert.equal(res.status, 200);
   assert.match(res.headers.get('Cache-Control'), /no-store/);
@@ -59,7 +59,7 @@ test('detailed (key-authenticated) 200 stays no-store', async () => {
 
 test('keyless detailed 401 stays no-store', async () => {
   mockRedisPipeline();
-  const res = await handler(new Request('https://api.worldmonitor.app/api/health'));
+  const res = await handler(new Request('https://api.megabrain.market/api/health'));
   assert.equal(res.status, 401);
   assert.match(res.headers.get('Cache-Control'), /no-store/);
   assert.equal(res.headers.get('CDN-Cache-Control'), 'no-store');
@@ -67,7 +67,7 @@ test('keyless detailed 401 stays no-store', async () => {
 
 test('compact REDIS_DOWN 503 stays no-store', async () => {
   globalThis.fetch = async () => { throw new Error('upstash unreachable'); };
-  const res = await handler(new Request('https://api.worldmonitor.app/api/health?compact=1'));
+  const res = await handler(new Request('https://api.megabrain.market/api/health?compact=1'));
   assert.equal(res.status, 503);
   const body = await res.json();
   assert.equal(body.status, 'REDIS_DOWN');

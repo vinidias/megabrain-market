@@ -4,7 +4,7 @@ import type {
   ListFuelShortagesRequest,
   ListFuelShortagesResponse,
   FuelShortageEntry,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 
 /**
  * Raw Redis payload shape emitted by scripts/seed-fuel-shortages.mjs.

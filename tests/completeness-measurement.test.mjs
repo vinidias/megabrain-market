@@ -175,7 +175,7 @@ describe('server catalog extraction (#4920a)', () => {
 
 describe('coverage-ledger and provenance wiring (source-textual)', () => {
   it('digest counts every drop gate and publishes the ledger', () => {
-    const src = readSrc('server/worldmonitor/news/v1/list-feed-digest.ts');
+    const src = readSrc('server/megabrain-market/news/v1/list-feed-digest.ts');
     assert.match(src, /droppedFeedCap = Math\.max\(0, matches\.length - ITEMS_PER_FEED\)/);
     assert.match(src, /ledgerDrops\.perCategoryCap \+= Math\.max\(0, items\.length - MAX_ITEMS_PER_CATEGORY\)/);
     assert.match(src, /ledgerDrops\.freshnessFloor = droppedStaleTotal/);
@@ -216,7 +216,7 @@ import { getOptionalUpstashCreds } from '../scripts/_upstash-rest.mjs';
 
 describe('gn()/gnLocale() replica drift guard (#4927 review)', () => {
   it('extractServerFeeds URL builders textually match the _feeds.ts source', () => {
-    const feedsSrc = readSrc('server/worldmonitor/news/v1/_feeds.ts');
+    const feedsSrc = readSrc('server/megabrain-market/news/v1/_feeds.ts');
     const validatorSrc = readSrc('scripts/validate-rss-feeds.mjs');
     // The load-bearing template expressions must appear byte-identical in
     // both files — a change to gn()'s URL shape in _feeds.ts without the

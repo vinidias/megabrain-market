@@ -10,7 +10,7 @@ import type {
   GetDisplacementSummaryRequest,
   GetDisplacementSummaryResponse,
   GeoCoordinates,
-} from '../../../../src/generated/server/worldmonitor/displacement/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/displacement/v1/service_server';
 
 import { CHROME_UA } from '../../../_shared/constants';
 import { cachedFetchJson, getCachedJson } from '../../../_shared/redis';

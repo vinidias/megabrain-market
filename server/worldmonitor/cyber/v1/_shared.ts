@@ -19,7 +19,7 @@ import type {
   CyberThreatSource,
   CyberThreatIndicatorType,
   CriticalityLevel,
-} from '../../../../src/generated/server/worldmonitor/cyber/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/cyber/v1/service_server';
 
 import { CHROME_UA } from '../../../_shared/constants';
 

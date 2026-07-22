@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.conflict.v1;
+package megabrain-market.conflict.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/conflict/v1/humanitarian_summary.proto";
+import "megabrain-market/conflict/v1/humanitarian_summary.proto";
 
 // GetHumanitarianSummaryRequest specifies which country to retrieve the humanitarian summary for.
 message GetHumanitarianSummaryRequest {

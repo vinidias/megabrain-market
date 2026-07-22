@@ -7,7 +7,7 @@ import type {
   ThreatLevel as ProtoThreatLevel,
   StoryMeta as ProtoStoryMeta,
   StoryPhase as ProtoStoryPhase,
-} from '../../../../src/generated/server/worldmonitor/news/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/news/v1/service_server';
 import { cachedFetchJson, getCachedJson, setCachedJson, getCachedJsonBatch, runRedisPipeline } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
 import { sha256Hex } from '../../../_shared/hash';

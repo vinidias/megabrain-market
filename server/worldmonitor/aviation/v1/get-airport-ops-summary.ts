@@ -5,7 +5,7 @@ import type {
     AirportOpsSummary,
     AirportDelayAlert,
     FlightDelaySeverity,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { MONITORED_AIRPORTS } from '../../../../src/config/airports';
 import { getCachedJson } from '../../../_shared/redis';
 import {

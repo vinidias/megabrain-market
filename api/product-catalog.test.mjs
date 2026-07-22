@@ -25,7 +25,7 @@ async function importHandler({ relaySecret }) {
 function deleteRequest(authHeader) {
   const headers = new Headers();
   if (authHeader != null) headers.set('Authorization', authHeader);
-  return new Request('https://api.worldmonitor.app/api/product-catalog', {
+  return new Request('https://api.megabrain.market/api/product-catalog', {
     method: 'DELETE',
     headers,
   });

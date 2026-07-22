@@ -10,7 +10,7 @@ const originalFetch = globalThis.fetch;
 const originalEnv = { ...process.env };
 
 function makeCtx(headers = {}) {
-  const req = new Request('https://worldmonitor.app/api/leads/v1/submit-contact', {
+  const req = new Request('https://megabrain.market/api/leads/v1/submit-contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...headers },
   });
@@ -43,9 +43,9 @@ describe('LeadsService.submitContact', () => {
     process.env.VERCEL_ENV = 'production';
 
     // Handler + error classes share one module instance so `instanceof` works.
-    const mod = await import('../server/worldmonitor/leads/v1/submit-contact.ts');
+    const mod = await import('../server/megabrain-market/leads/v1/submit-contact.ts');
     submitContact = mod.submitContact;
-    const gen = await import('../src/generated/server/worldmonitor/leads/v1/service_server.ts');
+    const gen = await import('../src/generated/server/megabrain-market/leads/v1/service_server.ts');
     ValidationError = gen.ValidationError;
     ApiError = gen.ApiError;
   });

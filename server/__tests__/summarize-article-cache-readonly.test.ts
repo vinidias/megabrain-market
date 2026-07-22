@@ -7,13 +7,13 @@ vi.mock("../_shared/redis", () => ({
   getCachedJson: (...a: unknown[]) => getCachedJson(...a),
 }));
 
-import { getSummarizeArticleCache } from "../worldmonitor/news/v1/get-summarize-article-cache";
+import { getSummarizeArticleCache } from "../megabrain-market/news/v1/get-summarize-article-cache";
 
 const originalFetch = globalThis.fetch;
 
 function makeContext() {
   return {
-    request: new Request("https://www.worldmonitor.app/api/news/v1/summarize-article-cache?cache_key=summary:v1:test-key"),
+    request: new Request("https://www.megabrain.market/api/news/v1/summarize-article-cache?cache_key=summary:v1:test-key"),
     pathParams: {},
     headers: {},
   };

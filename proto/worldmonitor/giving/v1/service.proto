@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.giving.v1;
+package megabrain-market.giving.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/giving/v1/get_giving_summary.proto";
+import "megabrain-market/giving/v1/get_giving_summary.proto";
 
 // GivingService provides APIs for global personal giving and philanthropy tracking.
 service GivingService {

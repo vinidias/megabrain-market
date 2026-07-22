@@ -23,7 +23,7 @@ const jsonServiceSpecs = readdirSync(apiDir)
   .filter((f) => /Service\.openapi\.json$/.test(f))
   .sort();
 const yamlSpecs = readdirSync(apiDir)
-  .filter((f) => /Service\.openapi\.yaml$/.test(f) || f === 'worldmonitor.openapi.yaml')
+  .filter((f) => /Service\.openapi\.yaml$/.test(f) || f === 'megabrain-market.openapi.yaml')
   .sort();
 
 function openApiArtifacts() {
@@ -34,7 +34,7 @@ function openApiArtifacts() {
       entries: jsonOperationEntries(JSON.parse(readFileSync(resolve(apiDir, file), 'utf8'))),
     })),
     ...yamlSpecs.map((file) => ({
-      family: file === 'worldmonitor.openapi.yaml' ? 'bundle' : 'yaml',
+      family: file === 'megabrain-market.openapi.yaml' ? 'bundle' : 'yaml',
       file,
       entries: yamlOperationEntries(readFileSync(resolve(apiDir, file), 'utf8')),
     })),

@@ -6,7 +6,7 @@ import type {
   ServerContext,
   GetBlsSeriesRequest,
   GetBlsSeriesResponse,
-} from '../../../../src/generated/server/worldmonitor/economic/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/economic/v1/service_server';
 import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
 import { getCachedJson } from '../../../_shared/redis';
 

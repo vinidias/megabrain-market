@@ -10,7 +10,7 @@
 //
 // **Location reason**: the seed-bundle-resilience Railway service
 // runs with rootDirectory=scripts/ and only ships files under
-// scripts/ (memory: `worldmonitor-scripts-package-json-install-scope`).
+// scripts/ (memory: `megabrain-market-scripts-package-json-install-scope`).
 // PR #3435 originally placed the JSON under server/.../registries/
 // — that resolved fine locally and on Vercel but ENOENT'd at Railway
 // runtime, taking the resilience cron down. Hotfix relocated to

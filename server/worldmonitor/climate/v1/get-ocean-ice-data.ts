@@ -5,7 +5,7 @@ import type {
   GetOceanIceDataResponse,
   OceanIceData,
   IceTrendPoint,
-} from '../../../../src/generated/server/worldmonitor/climate/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/climate/v1/service_server';
 
 import { CLIMATE_OCEAN_ICE_KEY } from '../../../_shared/cache-keys';
 import { getCachedJson } from '../../../_shared/redis';

@@ -2,7 +2,7 @@ import type {
   ListStoredStockBacktestsRequest,
   ListStoredStockBacktestsResponse,
   MarketServiceHandler,
-} from '../../../../src/generated/server/worldmonitor/market/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/market/v1/service_server';
 import { parseStringArray } from './_shared';
 import { getStoredStockBacktestSnapshots } from './premium-stock-store';
 

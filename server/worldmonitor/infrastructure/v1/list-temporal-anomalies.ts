@@ -3,7 +3,7 @@ import type {
   ListTemporalAnomaliesRequest,
   ListTemporalAnomaliesResponse,
   TemporalAnomaly as TemporalAnomalyProto,
-} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/infrastructure/v1/service_server';
 
 import { getCachedJson, setCachedJson } from '../../../_shared/redis';
 import {

@@ -26,7 +26,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 import COUNTRY_PORT_CLUSTERS from '../scripts/shared/country-port-clusters.json' with { type: 'json' };
-import { computeLane } from '../server/worldmonitor/supply-chain/v1/get-route-explorer-lane.ts';
+import { computeLane } from '../server/megabrain-market/supply-chain/v1/get-route-explorer-lane.ts';
 
 const ASIAN_PORT_COUNTRIES = ['CN', 'HK', 'TW', 'JP', 'KR', 'SG', 'MY', 'ID', 'TH', 'VN', 'PH', 'IN'] as const;
 

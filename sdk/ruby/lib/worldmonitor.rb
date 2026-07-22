@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# Official Ruby SDK for the World Monitor global-intelligence API.
+# Official Ruby SDK for the MegaBrain Market global-intelligence API.
 #
-# Stdlib-only (Net::HTTP), MCP-first — the same design as the `worldmonitor`
+# Stdlib-only (Net::HTTP), MCP-first — the same design as the `megabrain-market`
 # npm CLI this mirrors (`cli/` in the main repository). The MCP server
-# (https://worldmonitor.app/mcp) is the live, documented agent surface:
+# (https://megabrain.market/mcp) is the live, documented agent surface:
 # `tools/list` is public, and `tools/call` (used by the curated helpers)
 # authenticates with a user API key. A small REST escape hatch
 # (`get`/`health`) rounds it out for host-relative and self-hosted use.
 #
-#   client = WorldMonitor::Client.new(api_key: "wm_...")
+#   client = MegaBrainMarket::Client.new(api_key: "wm_...")
 #   client.country_risk("IR")
 #   client.call_tool("get_market_data", asset_class: "crypto")
 #   client.get("/api/health")
@@ -22,24 +22,24 @@ require "json"
 require "net/http"
 require "uri"
 
-require_relative "worldmonitor/version"
+require_relative "megabrain-market/version"
 
-module WorldMonitor
+module MegaBrainMarket
   # Cloudflare's WAF challenges generic library User-Agents (Ruby, curl,
   # empty) on the API edge, so we always identify ourselves.
-  USER_AGENT = "worldmonitor-ruby/#{VERSION} (+https://worldmonitor.app)"
+  USER_AGENT = "megabrain-market-ruby/#{VERSION} (+https://megabrain.market)"
 
-  DEFAULT_BASE_URL = "https://api.worldmonitor.app"
-  DEFAULT_MCP_URL = "https://worldmonitor.app/mcp"
+  DEFAULT_BASE_URL = "https://api.megabrain.market"
+  DEFAULT_MCP_URL = "https://megabrain.market/mcp"
 
   # Header the API accepts for a user-issued key (alias: X-Api-Key).
-  API_KEY_HEADER = "X-WorldMonitor-Key"
+  API_KEY_HEADER = "X-MegaBrainMarket-Key"
 
   # JSON-RPC error code the MCP server returns when a call needs authentication.
   MCP_AUTH_ERROR_CODE = -32_001
 
   AUTH_HINT = "Hint: this call needs a key - pass api_key: or set " \
-              "WORLDMONITOR_API_KEY (get one at https://worldmonitor.app/pro)."
+              "MEGABRAIN_MARKET_API_KEY (get one at https://megabrain.market/pro)."
 
   DEFAULT_TIMEOUT = 30
 
@@ -70,11 +70,11 @@ module WorldMonitor
     end
   end
 
-  # Thin client for the World Monitor MCP server and REST API.
+  # Thin client for the MegaBrain Market MCP server and REST API.
   #
   # All keyword arguments are optional; unset values fall back to the
-  # WORLDMONITOR_API_KEY (or WM_API_KEY), WORLDMONITOR_BASE_URL, and
-  # WORLDMONITOR_MCP_URL environment variables, then to the public production
+  # MEGABRAIN_MARKET_API_KEY (or WM_API_KEY), MEGABRAIN_MARKET_BASE_URL, and
+  # MEGABRAIN_MARKET_MCP_URL environment variables, then to the public production
   # endpoints. `transport` is injectable for offline tests: a callable
   # `(request_hash, timeout) -> [status, content_type, body]`.
   class Client
@@ -82,9 +82,9 @@ module WorldMonitor
 
     def initialize(api_key: nil, base_url: nil, mcp_url: nil,
                    timeout: DEFAULT_TIMEOUT, transport: nil, env: ENV)
-      @api_key = api_key || env["WORLDMONITOR_API_KEY"] || env["WM_API_KEY"]
-      @base_url = (base_url || env["WORLDMONITOR_BASE_URL"] || DEFAULT_BASE_URL).sub(%r{/+\z}, "")
-      @mcp_url = mcp_url || env["WORLDMONITOR_MCP_URL"] || DEFAULT_MCP_URL
+      @api_key = api_key || env["MEGABRAIN_MARKET_API_KEY"] || env["WM_API_KEY"]
+      @base_url = (base_url || env["MEGABRAIN_MARKET_BASE_URL"] || DEFAULT_BASE_URL).sub(%r{/+\z}, "")
+      @mcp_url = mcp_url || env["MEGABRAIN_MARKET_MCP_URL"] || DEFAULT_MCP_URL
       @timeout = timeout
       @transport = transport || method(:http_transport)
     end

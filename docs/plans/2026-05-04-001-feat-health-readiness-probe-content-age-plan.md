@@ -399,7 +399,7 @@ The `_originalPublishedMs` is informational; the contract only needs `_published
 
 **Step 2.3 — runSeed opts (with helper-field strip via publishTransform):**
 
-`_publishedAtIsSynthetic` and `_originalPublishedMs` MUST NOT leak to clients. Cached disease data is returned directly to the browser by `server/worldmonitor/health/v1/list-disease-outbreaks.ts:16` and via `/api/bootstrap` (the `diseaseOutbreaks` cached key). Without stripping, the underscore-prefixed helpers become part of the public proto-typed response and a future schema change.
+`_publishedAtIsSynthetic` and `_originalPublishedMs` MUST NOT leak to clients. Cached disease data is returned directly to the browser by `server/megabrain-market/health/v1/list-disease-outbreaks.ts:16` and via `/api/bootstrap` (the `diseaseOutbreaks` cached key). Without stripping, the underscore-prefixed helpers become part of the public proto-typed response and a future schema change.
 
 The fix is a publishTransform that strips the helpers AFTER `contentMeta` runs but BEFORE atomicPublish writes the canonical key. This requires `runSeed` to invoke `contentMeta` on the **raw fetcher output** (with helpers intact), then apply `publishTransform` to produce the public payload:
 

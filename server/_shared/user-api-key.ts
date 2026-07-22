@@ -62,7 +62,7 @@ async function fetchFromConvex(keyHash: string): Promise<UserKeyResult | null> {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'User-Agent': 'worldmonitor-gateway/1.0',
+      'User-Agent': 'megabrain-market-gateway/1.0',
       'x-convex-shared-secret': convexSharedSecret,
     },
     body: JSON.stringify({ keyHash }),

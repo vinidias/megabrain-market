@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.aviation.v1;
+package megabrain-market.aviation.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/aviation/v1/carrier.proto";
+import "megabrain-market/aviation/v1/carrier.proto";
 
 // GetCarrierOpsRequest specifies parameters for carrier operations metrics.
 message GetCarrierOpsRequest {

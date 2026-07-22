@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to World Monitor are documented here.
+All notable changes to MegaBrain Market are documented here.
 
 ## [Unreleased]
 
@@ -69,7 +69,7 @@ All notable changes to World Monitor are documented here.
 ### Added
 
 - **Global inflation (all countries)** — the Consumer Prices panel gains a **World** tab surfacing IMF WEO official annual CPI inflation for every reporting economy (~195 countries), sorted highest-first, leading with year-over-year period-average inflation and an end-of-period secondary column, plus a country filter and severity colour bands. Reuses the already-hydrated `imfMacro` bootstrap bundle (no new network). Discoverable via CMD+K — typing "inflation", "global inflation", or "inflation by country" lands directly on the tab through the new `panel:consumer-prices@world` deep-link command.
-- **Unified OpenAPI bundle** — `docs/api/worldmonitor.openapi.yaml` is now emitted alongside per-service specs, merging every WorldMonitor RPC into a single OpenAPI 3.1 document (190 operations). Powered by sebuf v0.11.1's origin-level bundle support ([SebastienMelki/sebuf#158](https://github.com/SebastienMelki/sebuf/issues/158)). Bumps `SEBUF_VERSION` in the Makefile from v0.7.0 to v0.11.1 — rerun `make install-plugins` after pulling.
+- **Unified OpenAPI bundle** — `docs/api/megabrain-market.openapi.yaml` is now emitted alongside per-service specs, merging every MegaBrainMarket RPC into a single OpenAPI 3.1 document (190 operations). Powered by sebuf v0.11.1's origin-level bundle support ([SebastienMelki/sebuf#158](https://github.com/SebastienMelki/sebuf/issues/158)). Bumps `SEBUF_VERSION` in the Makefile from v0.7.0 to v0.11.1 — rerun `make install-plugins` after pulling.
 - **Route Explorer**: standalone full-screen modal (CMD+K) for planning shipments between any two countries. Includes Current/Alternatives/Land/Impact tabs, keyboard-first navigation, URL state sharing, strategic-product trade data, dependency flags, and free-tier blur with public route highlight (#2980, #2982, #2994, #2996, #2997, #2998)
 - US Treasury customs revenue in Trade Policy panel with monthly data, FYTD year-over-year comparison, and revenue spike highlighting (#1663)
 - Security advisories gold standard migration: Railway cron seed fetches 24 government RSS feeds hourly, Vercel reads Redis only (#1637)
@@ -90,13 +90,13 @@ All notable changes to World Monitor are documented here.
   - `/api/supply-chain/v1/country-products` → `/api/supply-chain/v1/get-country-products`
   - `/api/supply-chain/v1/multi-sector-cost-shock` → `/api/supply-chain/v1/get-multi-sector-cost-shock`
 
-  Aliases will retire at the next v1→v2 break ([#3282](https://github.com/koala73/worldmonitor/issues/3282)).
+  Aliases will retire at the next v1→v2 break ([#3282](https://github.com/vinidias/megabrain-market/issues/3282)).
 
 - `POST /api/scenario/v1/run-scenario` now returns `200 OK` instead of the pre-migration `202 Accepted` on successful enqueue. sebuf's HTTP annotations don't support per-RPC status codes. Branch on response body `status === "pending"` instead of `response.status === 202`. `statusUrl` is preserved.
 
 ### Security
 
-- CDN-Cache-Control header now only set for trusted origins (worldmonitor.app, Vercel previews, Tauri); no-origin server-side requests always reach the edge function so `validateApiKey` can run, closing a potential cache-bypass path for external scrapers
+- CDN-Cache-Control header now only set for trusted origins (megabrain.market, Vercel previews, Tauri); no-origin server-side requests always reach the edge function so `validateApiKey` can run, closing a potential cache-bypass path for external scrapers
 - **Shipping v2 webhook tenant isolation (#3242)** — `POST /api/v2/shipping/webhooks` (register) and `GET /api/v2/shipping/webhooks` (list) now enforce `validateApiKey(req, { forceKey: true })`, matching the sibling `[subscriberId]{,/[action]}` routes and the documented contract in `docs/api-shipping-v2.mdx`. Without this gate, a Clerk-authenticated pro user with no API key would fall through `callerFingerprint()` to the shared `'anon'` bucket and see/overwrite webhooks owned by other `'anon'`-bucket tenants.
 
 ### Fixed
@@ -299,7 +299,7 @@ All notable changes to World Monitor are documented here.
 - **Runtime**: route all /api/* calls through CDN edge instead of direct Vercel (#780)
 - **Desktop**: detect Linux node target from host arch (#742), harden Windows installer update path + map resize (#739), close update toast after clicking download (#738), only open valid http(s) links externally (#723)
 - **Webcams**: replace dead Tel Aviv live stream (#732), replace stale Jerusalem feed (#849)
-- Story header uses full domain WORLDMONITOR.APP (#799)
+- Story header uses full domain MEGABRAIN_MARKET.APP (#799)
 - Open variant nav links in same window instead of new tab (#721)
 - Suppress map renders during resize drag (#728)
 - Append deduction panel to DOM after async import resolves (#764)
@@ -406,7 +406,7 @@ All notable changes to World Monitor are documented here.
 ### Added
 
 - **Edge caching**: Complete Cloudflare edge cache tier coverage with degraded-response policy (#484)
-- **Edge caching**: Cloudflare edge caching for proxy.worldmonitor.app (#478) and api.worldmonitor.app (#471)
+- **Edge caching**: Cloudflare edge caching for proxy.megabrain.market (#478) and api.megabrain.market (#471)
 - **Edge caching**: Tiered edge Cache-Control aligned to upstream TTLs (#474)
 - **API migration**: Convert 52 API endpoints from POST to GET for edge caching (#468)
 - **Gateway**: Configurable VITE_WS_API_URL + harden POST-to-GET shim (#480)
@@ -622,7 +622,7 @@ All notable changes to World Monitor are documented here.
 
 ### Added
 
-- **Finance variant**: Added a dedicated market-first variant (`finance.worldmonitor.app`) with finance/trading-focused feeds, panels, and map defaults
+- **Finance variant**: Added a dedicated market-first variant (`finance.megabrain.market`) with finance/trading-focused feeds, panels, and map defaults
 - **Finance desktop profile**: Added finance-specific desktop config and build profile for Tauri packaging
 
 ### Changed
@@ -701,7 +701,7 @@ All notable changes to World Monitor are documented here.
 
 ### Security
 
-- **CORS hardening**: Tighten Vercel preview deployment regex to block origin spoofing (`worldmonitorEVIL.vercel.app`)
+- **CORS hardening**: Tighten Vercel preview deployment regex to block origin spoofing (`megabrain-marketEVIL.vercel.app`)
 - **Sidecar auth bypass**: Move `/api/local-env-update` behind `LOCAL_API_TOKEN` auth check
 - **Env key allowlist**: Restrict sidecar env mutations to 18 known secret keys (matching `SUPPORTED_SECRET_KEYS`)
 - **postMessage validation**: Add `origin` and `source` checks on incoming messages in LiveNewsPanel

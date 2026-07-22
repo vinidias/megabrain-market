@@ -4,7 +4,7 @@ import type {
   SanctionEntityMatch,
   SanctionsServiceHandler,
   ServerContext,
-} from '../../../../src/generated/server/worldmonitor/sanctions/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/sanctions/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 
@@ -80,7 +80,7 @@ async function searchOpenSanctions(q: string, limit: number): Promise<{ results:
 
   const resp = await fetch(url.toString(), {
     headers: {
-      'User-Agent': 'WorldMonitor/1.0 sanctions-search',
+      'User-Agent': 'MegaBrainMarket/1.0 sanctions-search',
       Accept: 'application/json',
     },
     signal: AbortSignal.timeout(OPENSANCTIONS_TIMEOUT_MS),

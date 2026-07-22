@@ -10,8 +10,8 @@ import type {
   ServerContext,
   SubmitContactRequest,
   SubmitContactResponse,
-} from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
-import { ApiError, ValidationError } from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/leads/v1/service_server';
+import { ApiError, ValidationError } from '../../../../src/generated/server/megabrain-market/leads/v1/service_server';
 import { getClientIp, verifyTurnstile } from '../../../_shared/turnstile';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -58,7 +58,7 @@ async function sendNotificationEmail(
     console.error('[contact] RESEND_API_KEY not set — lead stored in Convex but notification NOT sent');
     return false;
   }
-  const notifyEmail = process.env.CONTACT_NOTIFY_EMAIL || 'elie@worldmonitor.app';
+  const notifyEmail = process.env.CONTACT_NOTIFY_EMAIL || 'elie@megabrain.market';
   const emailDomain = (email.split('@')[1] || '').toLowerCase();
   try {
     const res = await fetch('https://api.resend.com/emails', {
@@ -68,7 +68,7 @@ async function sendNotificationEmail(
         'Authorization': `Bearer ${resendKey}`,
       },
       body: JSON.stringify({
-        from: 'World Monitor <noreply@worldmonitor.app>',
+        from: 'MegaBrain Market <noreply@megabrain.market>',
         to: [notifyEmail],
         subject: `[WM Enterprise] ${sanitizeForSubject(name)} from ${sanitizeForSubject(organization)}`,
         html: `
@@ -84,7 +84,7 @@ async function sendNotificationEmail(
               <tr><td style="padding: 8px; font-weight: bold; color: #666;">IP</td><td style="padding: 8px; font-family: monospace;">${escapeHtml(ip || 'unknown')}</td></tr>
               ${country ? `<tr><td style="padding: 8px; font-weight: bold; color: #666;">Country</td><td style="padding: 8px;">${escapeHtml(country)}</td></tr>` : ''}
             </table>
-            <p style="color: #999; font-size: 12px; margin-top: 24px;">Sent from worldmonitor.app enterprise contact form</p>
+            <p style="color: #999; font-size: 12px; margin-top: 24px;">Sent from megabrain.market enterprise contact form</p>
           </div>`,
       }),
     });

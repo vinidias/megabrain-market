@@ -341,7 +341,7 @@ function normalizeRemoteSubscription(
  * right portal regardless of how many other Clerk accounts share the
  * same Dodo customer. No Clerk REST lookup needed.
  *
- * WORLDMONITOR-R5: the original opaque `[Request ID: X] Server Error`
+ * MEGABRAIN_MARKET-R5: the original opaque `[Request ID: X] Server Error`
  * came from this path throwing on a missing customers row when both
  * the rawPayload and a same-user customers row still held the answer.
  */
@@ -376,14 +376,14 @@ export async function createCustomerPortalUrlForUser(
     // response, or a transport failure) when the portal-session create
     // fails. Convex's action runtime then masks any NON-ConvexError throw
     // as an opaque `[Request ID: X] Server Error`, dropping the real cause
-    // from the wire — the exact opacity WORLDMONITOR-R5 fought for the
+    // from the wire — the exact opacity MEGABRAIN_MARKET-R5 fought for the
     // missing-customer path above (this was the last unwrapped throw site).
     // Re-throw as a structured ConvexError so the client receives
     // `err.data.kind === 'DODO_PORTAL_ERROR'` for proper Sentry
     // classification (browser → `extractBillingErrorKind` → tag
     // `billing_error_kind`; the user still falls back to the generic Dodo
     // portal), and log the underlying cause here so it survives in the
-    // Convex function logs for server-side triage. WORLDMONITOR-ST.
+    // Convex function logs for server-side triage. MEGABRAIN_MARKET-ST.
     const cause = err instanceof Error ? err.message : String(err);
     console.error(
       `[billing] Dodo customer-portal create failed for customer ${dodoCustomerId}:`,
@@ -464,7 +464,7 @@ export const getSubscriptionForUser = query({
 /**
  * Internal query to retrieve a customer record by userId.
  *
- * NOTE: As of WORLDMONITOR-R5 follow-up, this is no longer used by the
+ * NOTE: As of MEGABRAIN_MARKET-R5 follow-up, this is no longer used by the
  * Manage Billing flow — see `getDodoCustomerIdForUserPortal` below for
  * the rationale. Still consumed by callers that legitimately want the
  * customers row (broadcast paid-set membership, comp-grant lookups,
@@ -1569,7 +1569,7 @@ export const repairCustomerFromSubscriptionPayload = internalMutation({
  * Idempotent — re-running after a successful pass is a no-op because every
  * affected user now has a customers row.
  *
- * WORLDMONITOR-R5 surfaced this gap for one user; the backfill is the
+ * MEGABRAIN_MARKET-R5 surfaced this gap for one user; the backfill is the
  * "find everyone else" sweep.
  */
 export const backfillMissingCustomers = internalMutation({
@@ -1809,8 +1809,8 @@ export const STUCK_PAYMENT_CUSTOMER_EMAIL_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 2
 const MAX_STUCK_PAYMENT_RECONCILIATION_BATCH_SIZE = 100;
 const MAX_STUCK_PAYMENT_RECONCILIATION_SCAN_ROWS = 500;
 const RESEND_EMAILS_URL = "https://api.resend.com/emails";
-const STUCK_PAYMENT_EMAIL_FROM = "World Monitor <noreply@worldmonitor.app>";
-const STUCK_PAYMENT_SUPPORT_EMAIL = "support@worldmonitor.app";
+const STUCK_PAYMENT_EMAIL_FROM = "MegaBrain Market <noreply@megabrain.market>";
+const STUCK_PAYMENT_SUPPORT_EMAIL = "support@megabrain.market";
 // Bound the Resend POST so a hung socket can't stall the batch (a known repo
 // failure class — a network read with no timeout drains the event loop).
 const STUCK_PAYMENT_RESEND_TIMEOUT_MS = 10 * 1000;
@@ -1923,13 +1923,13 @@ async function sendStuckPaymentEmail(
     return "ops_notified";
   }
 
-  const planName = planKey ? PRODUCT_CATALOG[planKey]?.displayName ?? "World Monitor" : "World Monitor";
+  const planName = planKey ? PRODUCT_CATALOG[planKey]?.displayName ?? "MegaBrain Market" : "MegaBrain Market";
   const safePlanName = escapeHtml(planName);
   const safeCheckoutUrl = escapeHtml(checkoutUrl);
   const safeSupportEmail = escapeHtml(STUCK_PAYMENT_SUPPORT_EMAIL);
   const html = `
     <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111; line-height: 1.5;">
-      <h1 style="font-size: 20px;">Your World Monitor checkout still needs action</h1>
+      <h1 style="font-size: 20px;">Your MegaBrain Market checkout still needs action</h1>
       <p>Your ${safePlanName} payment is still waiting for bank or card verification.</p>
       <p>You can safely continue checkout here:</p>
       <p><a href="${safeCheckoutUrl}" style="display: inline-block; background: #111; color: #fff; padding: 10px 14px; text-decoration: none;">Continue checkout</a></p>
@@ -1945,7 +1945,7 @@ async function sendStuckPaymentEmail(
     body: JSON.stringify({
       from: STUCK_PAYMENT_EMAIL_FROM,
       to: [email],
-      subject: "Complete your World Monitor checkout",
+      subject: "Complete your MegaBrain Market checkout",
       html,
       reply_to: STUCK_PAYMENT_SUPPORT_EMAIL,
     }),
@@ -2550,7 +2550,7 @@ export const internalGetCustomerPortalUrl = internalAction({
  * server-side during checkout creation; a leaked bare UUID is not sufficient
  * ownership proof.
  *
- * @see https://github.com/koala73/worldmonitor/issues/2078
+ * @see https://github.com/vinidias/megabrain-market/issues/2078
  */
 export const claimSubscription = mutation({
   args: { anonId: v.string(), claimToken: v.optional(v.string()) },

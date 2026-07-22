@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.resilience.v1;
+package megabrain-market.resilience.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/resilience/v1/resilience.proto";
+import "megabrain-market/resilience/v1/resilience.proto";
 
 message GetResilienceScoreRequest {
   // ISO 3166-1 alpha-2 country code to score.

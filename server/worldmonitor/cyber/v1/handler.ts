@@ -1,4 +1,4 @@
-import type { CyberServiceHandler } from '../../../../src/generated/server/worldmonitor/cyber/v1/service_server';
+import type { CyberServiceHandler } from '../../../../src/generated/server/megabrain-market/cyber/v1/service_server';
 
 import { listCyberThreats } from './list-cyber-threats';
 

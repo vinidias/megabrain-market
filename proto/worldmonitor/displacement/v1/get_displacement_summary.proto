@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.displacement.v1;
+package megabrain-market.displacement.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
-import "worldmonitor/displacement/v1/displacement.proto";
+import "megabrain-market/displacement/v1/displacement.proto";
 
 // GetDisplacementSummaryRequest specifies parameters for retrieving displacement data.
 message GetDisplacementSummaryRequest {

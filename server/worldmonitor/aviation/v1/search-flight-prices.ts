@@ -2,7 +2,7 @@ import type {
     ServerContext,
     SearchFlightPricesRequest,
     SearchFlightPricesResponse,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { generateDemoPrices } from './_providers/demo_prices';
 import { searchPricesTravelpayouts } from './_providers/travelpayouts_data';
 

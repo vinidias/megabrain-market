@@ -5,8 +5,8 @@ import type {
   ChokepointInfo,
   MultiSectorCostShock,
   WarRiskTier,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
-import { ValidationError } from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
+import { ValidationError } from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 
 import { isCallerPremium } from '../../../_shared/premium-check';
 import { getCachedJson } from '../../../_shared/redis';

@@ -20,19 +20,19 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { listCompanySignals } from '../server/worldmonitor/intelligence/v1/list-company-signals';
-import { getCompanyEnrichment } from '../server/worldmonitor/intelligence/v1/get-company-enrichment';
-import { ValidationError } from '../src/generated/server/worldmonitor/intelligence/v1/service_server';
+import { listCompanySignals } from '../server/megabrain-market/intelligence/v1/list-company-signals';
+import { getCompanyEnrichment } from '../server/megabrain-market/intelligence/v1/get-company-enrichment';
+import { ValidationError } from '../src/generated/server/megabrain-market/intelligence/v1/service_server';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
 const signalsSrc = readFileSync(
-  resolve(root, 'server/worldmonitor/intelligence/v1/list-company-signals.ts'),
+  resolve(root, 'server/megabrain-market/intelligence/v1/list-company-signals.ts'),
   'utf-8',
 );
 const enrichmentSrc = readFileSync(
-  resolve(root, 'server/worldmonitor/intelligence/v1/get-company-enrichment.ts'),
+  resolve(root, 'server/megabrain-market/intelligence/v1/get-company-enrichment.ts'),
   'utf-8',
 );
 

@@ -3,8 +3,8 @@ import type {
   ServerContext,
   GetResilienceScoreRequest,
   GetResilienceScoreResponse,
-} from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
-import { ValidationError } from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/resilience/v1/service_server';
+import { ValidationError } from '../../../../src/generated/server/megabrain-market/resilience/v1/service_server';
 
 import { ensureResilienceScoreCached } from './_shared';
 

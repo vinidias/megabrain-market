@@ -935,7 +935,7 @@ const COMMODITY_MOBILE_MAP_LAYERS: MapLayers = {
 };
 
 // ============================================
-// ENERGY variant — energy.worldmonitor.app
+// ENERGY variant — energy.megabrain.market
 // Pipelines, storage, chokepoints, fuel shortages, disruption timeline.
 // See docs/internal/global-energy-flow-parity-and-surpass.md (not committed).
 // ============================================
@@ -1230,7 +1230,7 @@ export function isPanelEntitled(key: string, config: PanelConfig, isPro = false)
   if (isEntitled()) return true;
   const apiKeyPanels = ['stock-analysis', 'stock-backtest', 'daily-market-brief', 'market-implications', 'regional-intelligence', 'deduction', 'chat-analyst', 'wsb-ticker-scanner', 'trade-policy', 'global-procurement'];
   if (apiKeyPanels.includes(key)) {
-    return getSecretState('WORLDMONITOR_API_KEY').present || isPro;
+    return getSecretState('MEGABRAIN_MARKET_API_KEY').present || isPro;
   }
   if (config.premium === 'locked') {
     return isDesktopRuntime();
@@ -1514,8 +1514,8 @@ export const MONITOR_COLORS = [
 ];
 
 export const STORAGE_KEYS = {
-  panels: 'worldmonitor-panels',
-  monitors: 'worldmonitor-monitors',
-  mapLayers: 'worldmonitor-layers',
-  disabledFeeds: 'worldmonitor-disabled-feeds',
+  panels: 'megabrain-market-panels',
+  monitors: 'megabrain-market-monitors',
+  mapLayers: 'megabrain-market-layers',
+  disabledFeeds: 'megabrain-market-disabled-feeds',
 } as const;

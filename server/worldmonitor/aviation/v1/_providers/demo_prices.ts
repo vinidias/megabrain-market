@@ -3,7 +3,7 @@
  * No API keys required. Always sets isIndicative = true.
  */
 
-import type { PriceQuote, CabinClass, Carrier } from '../../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+import type { PriceQuote, CabinClass, Carrier } from '../../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 
 // Haversine distance
 const AIRPORT_COORDS: Record<string, [number, number]> = {

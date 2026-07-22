@@ -24,7 +24,7 @@ export async function upstashCommand(creds, command) {
     headers: {
       Authorization: `Bearer ${creds.token}`,
       'Content-Type': 'application/json',
-      'User-Agent': 'worldmonitor-ops/1.0 (+https://worldmonitor.app)',
+      'User-Agent': 'megabrain-market-ops/1.0 (+https://megabrain.market)',
     },
     body: JSON.stringify(command),
     signal: AbortSignal.timeout(15_000),

@@ -35,7 +35,7 @@ export const BLOCKED_METADATA_HOSTNAMES = new Set([
 
 const DNS_RESOLUTION_TIMEOUT_MS = 3_000;
 const DNS_JSON_ENDPOINT = 'https://cloudflare-dns.com/dns-query';
-const TEST_RESOLVER_KEY = Symbol.for('worldmonitor.shippingV2.resolveWebhookHostnameForTest');
+const TEST_RESOLVER_KEY = Symbol.for('megabrain-market.shippingV2.resolveWebhookHostnameForTest');
 
 type ResolveHostname = (hostname: string) => Promise<string[]>;
 
@@ -92,7 +92,7 @@ async function defaultResolveHostname(hostname: string): Promise<string[]> {
     const response = await fetch(url, {
       headers: {
         Accept: 'application/dns-json',
-        'User-Agent': 'WorldMonitor-ShippingV2-Webhooks/1.0',
+        'User-Agent': 'MegaBrainMarket-ShippingV2-Webhooks/1.0',
       },
       signal: AbortSignal.timeout(DNS_RESOLUTION_TIMEOUT_MS),
     });
@@ -157,7 +157,7 @@ export function ownerIndexKey(ownerHash: string): string {
 /** SHA-256 hash of the caller's API key — used as ownerTag and owner index key. Never secret. */
 export async function callerFingerprint(req: Request): Promise<string> {
   const key =
-    req.headers.get('X-WorldMonitor-Key') ??
+    req.headers.get('X-MegaBrainMarket-Key') ??
     req.headers.get('X-Api-Key') ??
     '';
   if (!key) return 'anon';

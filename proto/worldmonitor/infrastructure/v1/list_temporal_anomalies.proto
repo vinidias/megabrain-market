@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.infrastructure.v1;
+package megabrain-market.infrastructure.v1;
 
 
 message ListTemporalAnomaliesRequest {

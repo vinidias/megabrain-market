@@ -3,7 +3,7 @@ import type {
   ListComtradeFlowsRequest,
   ListComtradeFlowsResponse,
   ComtradeFlowRecord,
-} from '../../../../src/generated/server/worldmonitor/trade/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/trade/v1/service_server';
 import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
 import strategicProductMetadata from '../../../../scripts/shared/comtrade-strategic-products.json';
 import { getCachedJsonBatch } from '../../../_shared/redis';

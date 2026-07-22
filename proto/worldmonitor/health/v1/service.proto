@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.health.v1;
+package megabrain-market.health.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/health/v1/list_air_quality_alerts.proto";
-import "worldmonitor/health/v1/list_disease_outbreaks.proto";
+import "megabrain-market/health/v1/list_air_quality_alerts.proto";
+import "megabrain-market/health/v1/list_disease_outbreaks.proto";
 
 service HealthService {
   option (sebuf.http.service_config) = {base_path: "/api/health/v1"};

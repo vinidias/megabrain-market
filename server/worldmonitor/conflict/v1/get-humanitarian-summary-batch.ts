@@ -3,7 +3,7 @@ import type {
   GetHumanitarianSummaryBatchRequest,
   GetHumanitarianSummaryBatchResponse,
   HumanitarianCountrySummary,
-} from '../../../../src/generated/server/worldmonitor/conflict/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/conflict/v1/service_server';
 
 import { getCachedJsonBatch, cachedFetchJson } from '../../../_shared/redis';
 import { CHROME_UA } from '../../../_shared/constants';
@@ -31,7 +31,7 @@ async function fetchSingleHapiSummary(countryCode: string): Promise<Humanitarian
     const iso3 = ISO2_TO_ISO3[countryCode.toUpperCase()];
     if (!iso3) return undefined;
 
-    const appId = btoa('worldmonitor:monitor@worldmonitor.app');
+    const appId = btoa('megabrain-market:monitor@megabrain.market');
     const url = `https://hapi.humdata.org/api/v2/coordination-context/conflict-events?output_format=json&limit=1000&offset=0&app_identifier=${appId}&location_code=${iso3}`;
 
     const response = await fetch(url, {

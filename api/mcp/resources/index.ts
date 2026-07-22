@@ -77,7 +77,7 @@ async function readMarketFreshness(): Promise<string> {
 // ---------------------------------------------------------------------------
 export const PUBLIC_RESOURCE_REGISTRY: PublicResourceDef[] = [
   {
-    uri: 'worldmonitor://seed-meta/freshness',
+    uri: 'megabrain-market://seed-meta/freshness',
     name: 'Seed-Meta Freshness',
     description: 'Cache-freshness probe for the high-cadence market-data bootstrap pipeline. Returns ONLY the envelope (cached_at + stale) — no quote payload, no auth, no quota. Use this as a cheap health check to detect a stuck seeder. v1 covers market freshness only; an aggregate freshness resource spanning energy + maritime + risk feeds is a follow-up if customers ask.',
     mimeType: 'application/json',
@@ -96,7 +96,7 @@ export const PUBLIC_RESOURCE_REGISTRY: PublicResourceDef[] = [
 // the URI resolves cleanly to synthetic tools/call arguments.
 export const TEMPLATE_RESOURCE_REGISTRY: TemplateResourceDef[] = [
   {
-    uriTemplate: 'worldmonitor://countries/{iso2}/risk',
+    uriTemplate: 'megabrain-market://countries/{iso2}/risk',
     name: 'Country Risk',
     description: 'Composite Instability Index (CII) score 0–100 with unrest/conflict/security/news components, travel-advisory level, and OFAC sanctions exposure for a single ISO 3166-1 alpha-2 country. URI param {iso2} is lowercase alpha-2 (e.g. "de", "us", "ir").',
     mimeType: 'application/json',
@@ -105,32 +105,32 @@ export const TEMPLATE_RESOURCE_REGISTRY: TemplateResourceDef[] = [
     // risk-scores seed-meta key (30min budget matches the upstream cadence).
     freshnessWrap: { seedMetaKey: 'seed-meta:intelligence:risk-scores', maxStaleMin: 30 },
     paramExtractor: (uri: string) => {
-      if (!uri.startsWith('worldmonitor://countries/')) return null;
-      const m = /^worldmonitor:\/\/countries\/([a-z]{2})\/risk$/.exec(uri);
+      if (!uri.startsWith('megabrain-market://countries/')) return null;
+      const m = /^megabrain-market:\/\/countries\/([a-z]{2})\/risk$/.exec(uri);
       const iso2 = m?.[1];
       if (!iso2) {
         return {
           ok: false,
-          reason: 'Expected worldmonitor://countries/{iso2}/risk where {iso2} is lowercase ISO 3166-1 alpha-2.',
+          reason: 'Expected megabrain-market://countries/{iso2}/risk where {iso2} is lowercase ISO 3166-1 alpha-2.',
         };
       }
       return { ok: true, args: { country_code: iso2.toUpperCase() } };
     },
   },
   {
-    uriTemplate: 'worldmonitor://chokepoints/{slug}/status',
+    uriTemplate: 'megabrain-market://chokepoints/{slug}/status',
     name: 'Chokepoint Status',
     description: 'Maritime chokepoint transit summary: today total / tanker / cargo counts, week-over-week change, risk level, incident count, disruption percentage, and risk narrative. URI param {slug} is one of the hand-curated kebab-case identifiers (suez, strait-of-malacca, strait-of-hormuz, bab-el-mandeb, panama-canal, taiwan-strait, cape-of-good-hope, strait-of-gibraltar, bosphorus, korea-strait, dover-strait, kerch-strait, lombok-strait).',
     mimeType: 'application/json',
     tool: 'get_chokepoint_status',
     paramExtractor: (uri: string) => {
-      if (!uri.startsWith('worldmonitor://chokepoints/')) return null;
-      const m = /^worldmonitor:\/\/chokepoints\/([a-z][a-z0-9-]*)\/status$/.exec(uri);
+      if (!uri.startsWith('megabrain-market://chokepoints/')) return null;
+      const m = /^megabrain-market:\/\/chokepoints\/([a-z][a-z0-9-]*)\/status$/.exec(uri);
       const slug = m?.[1];
       if (!slug) {
         return {
           ok: false,
-          reason: 'Expected worldmonitor://chokepoints/{slug}/status where {slug} is a hand-curated kebab-case identifier.',
+          reason: 'Expected megabrain-market://chokepoints/{slug}/status where {slug} is a hand-curated kebab-case identifier.',
         };
       }
       const matcher = CHOKEPOINT_SLUGS[slug];
@@ -146,23 +146,23 @@ export const TEMPLATE_RESOURCE_REGISTRY: TemplateResourceDef[] = [
     },
   },
   {
-    uriTemplate: 'worldmonitor://markets/{symbol}/quote',
+    uriTemplate: 'megabrain-market://markets/{symbol}/quote',
     name: 'Market Quote',
     description: 'Single-symbol quote slice from the market-data bootstrap cache. URI param {symbol} is the uppercase ticker (e.g. "AAPL", "GC=F", "BTC-USD"). Matches equity / commodity / crypto / Gulf / sector / ETF-flow tickers — same case-insensitive matcher as get_market_data({symbols: [...]}).',
     mimeType: 'application/json',
     tool: 'get_market_data',
     paramExtractor: (uri: string) => {
-      if (!uri.startsWith('worldmonitor://markets/')) return null;
+      if (!uri.startsWith('megabrain-market://markets/')) return null;
       // Symbol grammar: leading uppercase letter, then up to 15 more
       // uppercase letters / digits / dash / equals / dot. Covers AAPL,
       // BTC-USD, GC=F, BRK.B. Lowercase tickers are explicitly invalid —
       // canonical wire shape from the bootstrap cache is uppercase.
-      const m = /^worldmonitor:\/\/markets\/([A-Z][A-Z0-9.=-]{0,15})\/quote$/.exec(uri);
+      const m = /^megabrain-market:\/\/markets\/([A-Z][A-Z0-9.=-]{0,15})\/quote$/.exec(uri);
       const symbol = m?.[1];
       if (!symbol) {
         return {
           ok: false,
-          reason: 'Expected worldmonitor://markets/{symbol}/quote where {symbol} is an uppercase ticker (e.g. "AAPL", "GC=F", "BTC-USD").',
+          reason: 'Expected megabrain-market://markets/{symbol}/quote where {symbol} is an uppercase ticker (e.g. "AAPL", "GC=F", "BTC-USD").',
         };
       }
       return { ok: true, args: { symbols: [symbol], asset_class: ['equity', 'commodity', 'crypto', 'gulf', 'etf', 'sectors'] } };

@@ -6,7 +6,7 @@ import type {
   ServerContext,
   GetTradeRestrictionsRequest,
   GetTradeRestrictionsResponse,
-} from '../../../../src/generated/server/worldmonitor/trade/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/trade/v1/service_server';
 import { getCachedJson } from '../../../_shared/redis';
 
 const SEED_CACHE_KEY = 'trade:restrictions:v1:tariff-overview:50';

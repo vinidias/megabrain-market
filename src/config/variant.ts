@@ -8,7 +8,7 @@ const buildVariant = (() => {
 
 function loadStoredVariant(): string | null {
   try {
-    return localStorage.getItem('worldmonitor-variant');
+    return localStorage.getItem('megabrain-market-variant');
   } catch {
     return null;
   }

@@ -5,7 +5,7 @@ import type {
   CableHealthRecord,
   CableHealthEvidence,
   CableHealthStatus,
-} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/infrastructure/v1/service_server';
 
 import { cachedFetchJson, setCachedJson } from '../../../_shared/redis';
 import { UPSTREAM_TIMEOUT_MS } from './_shared';

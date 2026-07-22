@@ -77,9 +77,9 @@ function appendNotificationError(rowEl: HTMLElement, message: string): void {
 
 function getTelegramBotUsername(): string {
   try {
-    return import.meta.env.VITE_TELEGRAM_BOT_USERNAME || 'WorldMonitorBot';
+    return import.meta.env.VITE_TELEGRAM_BOT_USERNAME || 'MegaBrainMarketBot';
   } catch {
-    return 'WorldMonitorBot';
+    return 'MegaBrainMarketBot';
   }
 }
 
@@ -112,12 +112,12 @@ export function renderNotificationsSettings(host: NotificationsSettingsHost): No
           upgradeBtn.addEventListener('click', () => {
             if (!host.isSignedIn) {
               import('@/services/clerk').then(m => m.openSignIn()).catch(() => {
-                window.open('https://worldmonitor.app/pro', '_blank', 'noopener,noreferrer');
+                window.open('https://megabrain.market/pro', '_blank', 'noopener,noreferrer');
               });
               return;
             }
             import('@/services/checkout').then(m => import('@/config/products').then(p => m.startCheckout(p.DEFAULT_UPGRADE_PRODUCT))).catch(() => {
-              window.open('https://worldmonitor.app/pro', '_blank', 'noopener,noreferrer');
+              window.open('https://megabrain.market/pro', '_blank', 'noopener,noreferrer');
             });
           }, { signal });
         }
@@ -459,7 +459,7 @@ export function renderNotificationsSettings(host: NotificationsSettingsHost): No
       // Fire-and-forget settings writes MUST NOT surface as unhandled promise
       // rejections. A debounced auto-save that 401s (expired Clerk session) or
       // hits a transient network error is expected and non-fatal — swallow it
-      // here so it never reaches window.onunhandledrejection (WORLDMONITOR-SN).
+      // here so it never reaches window.onunhandledrejection (MEGABRAIN_MARKET-SN).
       // Logged for local debugging only; the setting simply isn't persisted.
       function fireForgetSave(p: Promise<unknown>, label: string): void {
         void p.catch((err) => {
@@ -1059,9 +1059,9 @@ export function renderNotificationsSettings(host: NotificationsSettingsHost): No
 
       const onMessage = (e: MessageEvent): void => {
         const trustedOrigin = e.origin === window.location.origin ||
-          e.origin === 'https://worldmonitor.app' ||
-          e.origin === 'https://www.worldmonitor.app' ||
-          e.origin.endsWith('.worldmonitor.app');
+          e.origin === 'https://megabrain.market' ||
+          e.origin === 'https://www.megabrain.market' ||
+          e.origin.endsWith('.megabrain.market');
         const fromSlack = slackOAuthPopup !== null && e.source === slackOAuthPopup;
         const fromDiscord = discordOAuthPopup !== null && e.source === discordOAuthPopup;
         if (!trustedOrigin || (!fromSlack && !fromDiscord)) return;

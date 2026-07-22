@@ -4,7 +4,7 @@
  *
  * Flags catch blocks in api/ and convex/ that log via console.error /
  * console.warn but don't surface to Sentry — i.e., the silent-swallow
- * pattern that hid the canary OCC bug (Sentry issue WORLDMONITOR-PA)
+ * pattern that hid the canary OCC bug (Sentry issue MEGABRAIN_MARKET-PA)
  * for hours and made the post-mortem impossible.
  *
  * Heuristic: for each file under api/ or convex/, find catch blocks

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.radiation.v1;
+package megabrain-market.radiation.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/radiation/v1/radiation_observation.proto";
+import "megabrain-market/radiation/v1/radiation_observation.proto";
 
 // ListRadiationObservationsRequest specifies optional result limits.
 message ListRadiationObservationsRequest {

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.radiation.v1;
+package megabrain-market.radiation.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/radiation/v1/list_radiation_observations.proto";
+import "megabrain-market/radiation/v1/list_radiation_observations.proto";
 
 // RadiationService provides normalized environmental radiation readings.
 service RadiationService {

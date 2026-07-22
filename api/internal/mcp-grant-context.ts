@@ -105,7 +105,7 @@ export async function grantContextHandler(req: Request, deps: ContextDeps): Prom
     ent.features.mcpAccess !== true ||
     ent.validUntil < deps.now()
   ) {
-    return jsonError('INSUFFICIENT_TIER', 'A WorldMonitor Pro subscription is required.', 403);
+    return jsonError('INSUFFICIENT_TIER', 'A MegaBrainMarket Pro subscription is required.', 403);
   }
 
   // F2 (U7+U8 review pass): if `mcp-grant:<n>` exists with a userId that

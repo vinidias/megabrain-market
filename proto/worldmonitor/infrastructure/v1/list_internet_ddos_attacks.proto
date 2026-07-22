@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.infrastructure.v1;
+package megabrain-market.infrastructure.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/infrastructure/v1/infrastructure.proto";
+import "megabrain-market/infrastructure/v1/infrastructure.proto";
 
 // ListInternetDdosAttacksRequest specifies filters for retrieving DDoS attack summaries.
 message ListInternetDdosAttacksRequest {}

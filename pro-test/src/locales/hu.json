@@ -26,12 +26,12 @@
     "asFeaturedIn": "Megjelent itt"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "MegaBrain Market Pro",
     "proDesc": "Az Ön AI-elemzője. Személyes hírszerzési desk. Platform, amelyre építhet. Egy kulcs több mint 30 élő szolgáltatáshoz.",
     "proF1": "WM Analyst chat — kérdezzen társalgási formában mind a 30+ szolgáltatástól",
     "proF2": "AI digest — naponta, naponta kétszer vagy hetente — Slackre, Discordra, Telegramra, e-mailre vagy webhookra",
     "proF3": "Custom Widget Builder — HTML/CSS/JS AI-asszisztált módosítással",
-    "proF4": "MCP-csatlakozók — kösse a WorldMonitort Claude-hoz, GPT-hez vagy saját LLM-ekhez",
+    "proF4": "MCP-csatlakozók — kösse a MegaBrainMarkett Claude-hoz, GPT-hez vagy saját LLM-ekhez",
     "proF5": "Részvénykutatás, részvényelemzés és backtesting",
     "proF6": "Repülőjárat-keresés és ár-összehasonlítás",
     "proF7": "Riasztási szabálymotor — egyéni triggerek, csendes órák, AES-256-tal titkosított csatornák",
@@ -39,7 +39,7 @@
     "proF9": "AI Market Implications és Regional Intelligence (hamarosan: orbitális megfigyelés, prémium térképrétegek, hosszabb előzmények)",
     "proCta": "Korai hozzáférés lefoglalása",
     "choosePlan": "Válasszon csomagot",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "MegaBrain Market Enterprise",
     "entDesc": "Csapatoknak, amelyeknek közös monitoring, API-hozzáférés, telepítési opciók, TV-alkalmazások és közvetlen támogatás kell.",
     "entF1": "Minden a Pro csomagban, plusz:",
     "entF2": "Live-edge + műholdképek és SAR",
@@ -82,10 +82,10 @@
     "channels": "Slack · Discord · Telegram · E-mail · Webhook · AES-256 titkosítás · Csendes órák"
   },
   "livePreview": {
-    "windowTitle": "worldmonitor.app — Élő irányítópult",
+    "windowTitle": "megabrain.market — Élő irányítópult",
     "openFullScreen": "Megnyitás teljes képernyőn",
     "tryLiveDashboard": "Próbálja ki az élő irányítópultot",
-    "iframeTitle": "World Monitor — Élő hírszerzési irányítópult",
+    "iframeTitle": "MegaBrain Market — Élő hírszerzési irányítópult",
     "description": "3D WebGL földgömb · 50+ interaktív térképréteg · Valós idejű piaci, makró, geopolitikai, energia- és infrastruktúraadatok"
   },
   "socialProof": {
@@ -113,7 +113,7 @@
     "teamsDesc": "Lépjen túl az egyéni használaton: közös munkafolyamatok, API-hozzáférés, TV-appok és menedzselt telepítések."
   },
   "dataCoverage": {
-    "title": "Mit követ a World Monitor",
+    "title": "Mit követ a MegaBrain Market",
     "subtitle": "30+ szolgáltatási domén párhuzamos feldolgozása. Piacok, makró, geopolitika, energia, infrastruktúra — minden normalizálva és WebGL földgömbön megjelenítve.",
     "markets": "Pénzügyi piacok és részvények",
     "marketsDesc": "Globális részvényelemzés, árupiacok, kripto, ETF-áramlások, elemzői célárak és FRED makróadatok",
@@ -177,7 +177,7 @@
   "apiSection": {
     "apiTier": "API SZINT",
     "title": "Programozható intelligencia",
-    "subtitle": "Fejlesztőknek, elemzőknek és csapatoknak, akik World Monitor adatokra építenek. Különálló a Pro csomagtól — használhatja mindkettőt vagy bármelyiket.",
+    "subtitle": "Fejlesztőknek, elemzőknek és csapatoknak, akik MegaBrain Market adatokra építenek. Különálló a Pro csomagtól — használhatja mindkettőt vagy bármelyiket.",
     "restApi": "REST API mind a 30+ szolgáltatási doménen át — hivatalos SDK-k: JavaScript, Python, Ruby, Go",
     "authenticated": "Kulcsonként hitelesített, csomagonként rate-limitált",
     "structured": "Strukturált JSON cache fejlécekkel és OpenAPI 3.1 dokumentációval",
@@ -196,7 +196,7 @@
     "security": "Kormányzati szintű biztonság",
     "securityDesc": "Air-gapped telepítés, on-premises Docker, dedikált cloud tenant, SOC 2 Type II útvonal, SSO/MFA és teljes audit trail.",
     "aiAgents": "AI-ügynökök és MCP",
-    "aiAgentsDesc": "Autonóm hírszerzési ügynökök befektetői personákkal. Csatlakoztassa a World Monitort eszközként Claude-hoz, GPT-hez vagy saját LLM-ekhez MCP-n keresztül.",
+    "aiAgentsDesc": "Autonóm hírszerzési ügynökök befektetői personákkal. Csatlakoztassa a MegaBrain Markett eszközként Claude-hoz, GPT-hez vagy saját LLM-ekhez MCP-n keresztül.",
     "dataLayers": "Bővített adatrétegek",
     "dataLayersDesc": "Tízezernyi infrastrukturális eszköz globálisan feltérképezve. Műholdkép-integráció változásdetektálással és SAR-ral.",
     "connectors": "100+ adatcsatlakozó",
@@ -225,7 +225,7 @@
     "submitContact": "Üzenet küldése",
     "contactSending": "Küldés...",
     "contactSent": "Az üzenet elküldve. Jelentkezünk.",
-    "contactFailed": "A küldés sikertelen. Írjon az enterprise@worldmonitor.app címre"
+    "contactFailed": "A küldés sikertelen. Írjon az enterprise@megabrain.market címre"
   },
   "pricingTable": {
     "title": "Csomagok összehasonlítása",
@@ -276,7 +276,7 @@
   },
   "faq": {
     "title": "Gyakori kérdések",
-    "q1": "A World Monitor továbbra is ingyenes?",
+    "q1": "A MegaBrain Market továbbra is ingyenes?",
     "a1": "Igen. Az alapplatform ingyenes marad. A Pro részvénykutatást, makróanalitikát és AI-briefeket ad hozzá. Az Enterprise csapatszintű telepítéseket és TV-appokat ad.",
     "q2": "Miért érdemes a Pro csomagért fizetni?",
     "a2": "A Pro befektetőknek, elemzőknek és szakembereknek készült, akik részvényfigyelést, geopolitikai elemzést, gazdasági analitikát és AI-alapú napi briefeket szeretnének — mindezt egy kulcs alatt.",
@@ -285,17 +285,17 @@
     "q4": "Kezdhetek Pro csomaggal, és később frissíthetek?",
     "a4": "Igen. A Pro komoly egyéni felhasználóknak működik jól. Az Enterprise akkor lép be, amikor nőnek a csapat- és telepítési igények.",
     "q5": "Ez csak konfliktusmonitoringra való?",
-    "a5": "Nem. A World Monitor elsősorban globális hírszerzési platform, amely részvénypiacokat, makrogazdaságot, geopolitikai elemzést, energiát, infrastruktúrát és még sok mást fed le. A konfliktuskövetés csak egy a sok képesség közül — nem ez a fókusz.",
+    "a5": "Nem. A MegaBrain Market elsősorban globális hírszerzési platform, amely részvénypiacokat, makrogazdaságot, geopolitikai elemzést, energiát, infrastruktúrát és még sok mást fed le. A konfliktuskövetés csak egy a sok képesség közül — nem ez a fókusz.",
     "q6": "Miért marad ingyenes az alapplatform?",
     "a6": "Mert a nyilvános hozzáférés számít. A fizetős csomagok mélyebb munkafolyamatokat finanszíroznak komoly felhasználóknak és szervezeteknek.",
     "q7": "Továbbra is használhatom a saját API-kulcsaimat?",
     "a7": "Igen. A bring-your-own-keys mindig működik. A Pro csak azt jelenti, hogy nem kell 20+ külön szolgáltatásra regisztrálnia.",
     "q8": "Mi az MCP?",
-    "a8": "Az MCP lehetővé teszi, hogy AI-ügynökök — Claude, GPT, saját LLM-ek — eszközként használják a WorldMonitort, és lekérdezzék mind a 30+ szolgáltatást. A Pro része. Az Enterprise privát MCP-szervereket és egyedi telepítéseket ad.",
+    "a8": "Az MCP lehetővé teszi, hogy AI-ügynökök — Claude, GPT, saját LLM-ek — eszközként használják a MegaBrainMarkett, és lekérdezzék mind a 30+ szolgáltatást. A Pro része. Az Enterprise privát MCP-szervereket és egyedi telepítéseket ad.",
     "q9": "Építhetek saját paneleket?",
     "a9": "Igen. A Pro tartalmazza a Custom Widget Buildert — építsen paneleket HTML-ből, CSS-ből és JavaScriptből, AI-asszisztált módosítással.",
-    "q10": "Csatlakoztathatom Claude-ot vagy GPT-t a WorldMonitorhoz?",
-    "a10": "Igen. Az MCP benne van a Pro csomagban — kösse a WorldMonitort Claude-hoz, GPT-hez vagy bármely MCP-kompatibilis LLM-hez élő eszközként.",
+    "q10": "Csatlakoztathatom Claude-ot vagy GPT-t a MegaBrainMarkethoz?",
+    "a10": "Igen. Az MCP benne van a Pro csomagban — kösse a MegaBrainMarkett Claude-hoz, GPT-hez vagy bármely MCP-kompatibilis LLM-hez élő eszközként.",
     "q11": "Mennyire személyre szabott a digest?",
     "a11": "Válasszon ütemezést — napi, napi kétszeri vagy heti. Minden követett történetet újrapontozunk az Ön riasztási szabályai és watchlistje alapján, 500+ forrásból deduplikáljuk, és legfeljebb 30 rangsorolt elemet küldünk AI Assessmenttel és az Ön kontextusához írt Signals to watch résszel. Kritikus eseményekhez valós idejű riasztások is elérhetők.",
     "q12": "Milyen gyakori a frissítés?",
@@ -305,7 +305,7 @@
   },
   "finalCta": {
     "title": "Kezdje a Pro csomaggal. Skálázzon Enterprise-ra.",
-    "subtitle": "Használja tovább ingyen a World Monitort, vagy frissítsen részvénykutatásért, makróanalitikáért és AI-briefekért. Ha szervezetének csapathozzáférésre, TV-appokra vagy API-támogatásra van szüksége, beszéljen velünk.",
+    "subtitle": "Használja tovább ingyen a MegaBrain Markett, vagy frissítsen részvénykutatásért, makróanalitikáért és AI-briefekért. Ha szervezetének csapathozzáférésre, TV-appokra vagy API-támogatásra van szüksége, beszéljen velünk.",
     "getPro": "Korai hozzáférés lefoglalása",
     "talkToSales": "Beszéljen az értékesítéssel"
   },
@@ -329,16 +329,16 @@
     "linkedin": "LinkedIn",
     "whatsapp": "WhatsApp",
     "telegram": "Telegram",
-    "shareText": "Most csatlakoztam a World Monitor Pro várólistához — részvényfigyelés, geopolitikai elemzés és AI napi briefek egy platformon. Csatlakozz hozzám:",
-    "joinWaitlistShare": "Csatlakozzon a World Monitor Pro várólistához:",
+    "shareText": "Most csatlakoztam a MegaBrain Market Pro várólistához — részvényfigyelés, geopolitikai elemzés és AI napi briefek egy platformon. Csatlakozz hozzám:",
+    "joinWaitlistShare": "Csatlakozzon a MegaBrain Market Pro várólistához:",
     "youreIn": "Bent van!",
     "invitedBanner": "Meghívást kapott — csatlakozzon a várólistához"
   },
   "soonBadge": "Hamarosan",
   "meta": {
-    "title": "World Monitor Pro — AI-elemző, személyes hírszerzési desk, MCP Claude-hoz és GPT-hez",
+    "title": "MegaBrain Market Pro — AI-elemző, személyes hírszerzési desk, MCP Claude-hoz és GPT-hez",
     "description": "A geopolitikai AI-réteg. Kérdezze, iratkozzon fel rá, építsen rá. WM Analyst chat 30+ élő szolgáltatáson át, AI digest napi, napi kétszeri vagy heti kézbesítéssel Slackre, Discordra, Telegramra, e-mailre vagy webhookra, custom widget builder (HTML/CSS/JS + AI) és MCP-csatlakozók Claude-hoz, GPT-hez és saját LLM-ekhez.",
-    "ogTitle": "World Monitor Pro — A geopolitikai AI-réteg",
+    "ogTitle": "MegaBrain Market Pro — A geopolitikai AI-réteg",
     "ogDescription": "Kérdezze, iratkozzon fel rá, építsen rá. WM Analyst chat, AI digest az Ön ütemezése szerint (napi, napi kétszeri vagy heti), custom widget builder és MCP Claude/GPT-hez — 30+ élő szolgáltatáson át, egy kulcs alatt."
   },
   "pricing": {

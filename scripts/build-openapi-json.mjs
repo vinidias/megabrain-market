@@ -3,7 +3,7 @@
  * Emit a JSON copy of the unified OpenAPI bundle at public/openapi.json.
  *
  * The sebuf generator only produces a YAML bundle
- * (docs/api/worldmonitor.openapi.yaml). `build:openapi` copies that to
+ * (docs/api/megabrain-market.openapi.yaml). `build:openapi` copies that to
  * public/openapi.yaml, and the site advertises it via the `service-desc`
  * Link header + /.well-known/api-catalog. But some agent-readiness scanners
  * (e.g. ora.ai / orank) fetch the spec and run it straight through a JSON
@@ -33,7 +33,7 @@ import { parse as parseYaml } from 'yaml';
 import { dedupeErrorResponses } from './openapi-dedup-responses.mjs';
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
-const yamlPath = resolve(scriptDir, '../docs/api/worldmonitor.openapi.yaml');
+const yamlPath = resolve(scriptDir, '../docs/api/megabrain-market.openapi.yaml');
 const jsonPath = resolve(scriptDir, '../public/openapi.json');
 
 const spec = parseYaml(readFileSync(yamlPath, 'utf8'));

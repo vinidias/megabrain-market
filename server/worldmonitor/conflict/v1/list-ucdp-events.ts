@@ -3,7 +3,7 @@ import type {
   ListUcdpEventsRequest,
   ListUcdpEventsResponse,
   UcdpViolenceEvent,
-} from '../../../../src/generated/server/worldmonitor/conflict/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/conflict/v1/service_server';
 import { getCachedJson } from '../../../_shared/redis';
 import { markNoStoreFallbackResponse } from '../../../_shared/response-headers';
 

@@ -2,7 +2,7 @@ import type {
   ServerContext,
   ListIranEventsRequest,
   ListIranEventsResponse,
-} from '../../../../src/generated/server/worldmonitor/conflict/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/conflict/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.climate.v1;
+package megabrain-market.climate.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/climate/v1/climate_disaster.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/climate/v1/climate_disaster.proto";
 
 // ListClimateDisastersRequest specifies filters for retrieving climate disasters.
 message ListClimateDisastersRequest {
@@ -19,5 +19,5 @@ message ListClimateDisastersResponse {
   // The list of disasters.
   repeated ClimateDisaster disasters = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

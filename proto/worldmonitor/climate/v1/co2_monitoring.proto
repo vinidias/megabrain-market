@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package worldmonitor.climate.v1;
+package megabrain-market.climate.v1;
 
 message Co2Monitoring {
   double current_ppm = 1;

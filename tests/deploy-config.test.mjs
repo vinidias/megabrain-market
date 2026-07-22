@@ -37,7 +37,7 @@ const dockerignoreSource = readFileSync(resolve(__dirname, '../.dockerignore'), 
 const vercelIgnoreSource = readFileSync(resolve(__dirname, '../scripts/vercel-ignore.sh'), 'utf-8');
 const SPA_HTML_CACHE_SOURCE = '/((?!api|mcp|a2a|ask|oauth|assets|blog|docs|countries|chokepoints|reference|changelog|embed|embed\\.html|favico|map-styles|data|textures|pro|sw\\.js|workbox-[a-f0-9]+\\.js|manifest\\.webmanifest|offline\\.html|robots\\.txt|sitemap\\.xml|llms\\.txt|llms-full\\.txt|openapi\\.yaml|openapi\\.json|auth\\.md|pricing\\.md|support\\.md|ai-search\\.md|agents\\.md|developers\\.md|mcp-server\\.md|openapi\\.md|sdks\\.md|agent\\.txt|\\.well-known|wm-widget-sandbox\\.html|mcp-grant\\.html|mcp-grant).*)';
 const GLOBAL_SECURITY_HEADER_SOURCE = '/((?!docs|embed|embed\\.html).*)';
-const APP_ROOT_HOST_PATTERN = '^(?:(?:www|tech|finance|commodity|happy|energy)\\.)?worldmonitor\\.app$';
+const APP_ROOT_HOST_PATTERN = '^(?:(?:www|tech|finance|commodity|happy|energy)\\.)?megabrain-market\\.app$';
 const GLOBAL_CSP_INLINE_SCRIPT_HTML_FILES = [
   'index.html',
   'settings.html',
@@ -275,9 +275,9 @@ describe('crawlable content corpus deployment contracts', () => {
   });
 
   it('keeps robots.txt advertising root, blog, and Mintlify docs sitemaps', () => {
-    assert.match(robotsSource, /^Sitemap: https:\/\/www\.worldmonitor\.app\/sitemap\.xml$/m);
-    assert.match(robotsSource, /^Sitemap: https:\/\/www\.worldmonitor\.app\/blog\/sitemap-index\.xml$/m);
-    assert.match(robotsSource, /^Sitemap: https:\/\/www\.worldmonitor\.app\/docs\/sitemap\.xml$/m);
+    assert.match(robotsSource, /^Sitemap: https:\/\/www\.megabrain-market\.app\/sitemap\.xml$/m);
+    assert.match(robotsSource, /^Sitemap: https:\/\/www\.megabrain-market\.app\/blog\/sitemap-index\.xml$/m);
+    assert.match(robotsSource, /^Sitemap: https:\/\/www\.megabrain-market\.app\/docs\/sitemap\.xml$/m);
   });
 
   it('keeps a generated-content marker in the root sitemap', () => {
@@ -292,39 +292,39 @@ describe('crawlable content corpus deployment contracts', () => {
       writeFixturePage(
         publicDir,
         'countries/ukraine/index.html',
-        '<link rel="canonical" href="https://www.worldmonitor.app/countries/ukraine/" /><meta name="lastmod" content="2026-07-08" />'
+        '<link rel="canonical" href="https://www.megabrain.market/countries/ukraine/" /><meta name="lastmod" content="2026-07-08" />'
       );
       writeFixturePage(
         publicDir,
         'chokepoints/suez-canal/index.html',
-        '<link rel="canonical" href="https://www.worldmonitor.app/chokepoints/suez-canal/" />'
+        '<link rel="canonical" href="https://www.megabrain.market/chokepoints/suez-canal/" />'
       );
       writeFixturePage(
         publicDir,
         'reference/changelog/page/1/index.html',
-        '<link rel="canonical" href="https://www.worldmonitor.app/reference/changelog/page/1/" /><link rel="next" href="https://www.worldmonitor.app/reference/changelog/page/2/" />'
+        '<link rel="canonical" href="https://www.megabrain.market/reference/changelog/page/1/" /><link rel="next" href="https://www.megabrain.market/reference/changelog/page/2/" />'
       );
       writeFixturePage(
         publicDir,
         'reference/changelog/page/2/index.html',
-        '<link rel="canonical" href="https://www.worldmonitor.app/reference/changelog/page/2/" /><link rel="prev" href="https://www.worldmonitor.app/reference/changelog/page/1/" />'
+        '<link rel="canonical" href="https://www.megabrain.market/reference/changelog/page/2/" /><link rel="prev" href="https://www.megabrain.market/reference/changelog/page/1/" />'
       );
 
       const pages = discoverContentCorpusPages({ publicDir });
       const locations = pages.map((page) => page.loc).sort();
       assert.deepEqual(locations, [
-        'https://www.worldmonitor.app/reference/changelog/page/1/',
-        'https://www.worldmonitor.app/reference/changelog/page/2/',
-        'https://www.worldmonitor.app/chokepoints/suez-canal/',
-        'https://www.worldmonitor.app/countries/ukraine/',
+        'https://www.megabrain.market/reference/changelog/page/1/',
+        'https://www.megabrain.market/reference/changelog/page/2/',
+        'https://www.megabrain.market/chokepoints/suez-canal/',
+        'https://www.megabrain.market/countries/ukraine/',
       ].sort());
 
       const block = buildContentCorpusSitemapBlock(pages);
-      assert.match(block, /<loc>https:\/\/www\.worldmonitor\.app\/countries\/ukraine\/<\/loc>/);
+      assert.match(block, /<loc>https:\/\/www\.megabrain-market\.app\/countries\/ukraine\/<\/loc>/);
       assert.match(block, /<lastmod>2026-07-08<\/lastmod>/);
 
       const injected = injectContentCorpusSitemapBlock(
-        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://www.worldmonitor.app/</loc></url>\n</urlset>\n',
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://www.megabrain.market/</loc></url>\n</urlset>\n',
         pages
       );
       assert.match(injected, /<!-- content-corpus:start -->[\s\S]*\/countries\/ukraine\/[\s\S]*<!-- content-corpus:end -->/);
@@ -336,7 +336,7 @@ describe('crawlable content corpus deployment contracts', () => {
       writeFixturePage(
         publicDir,
         'reference/changelog/page/3/index.html',
-        '<link rel="canonical" href="https://www.worldmonitor.app/reference/changelog/page/3/" />'
+        '<link rel="canonical" href="https://www.megabrain.market/reference/changelog/page/3/" />'
       );
       assert.throws(
         () => discoverContentCorpusPages({ publicDir }),
@@ -403,7 +403,7 @@ describe('deploy/cache configuration guardrails', () => {
       'public, max-age=31536000, immutable'
     );
     assert.equal(
-      effectiveCacheControl('/pro/assets/worldmonitor-7-mar-2026-abc.jpg'),
+      effectiveCacheControl('/pro/assets/megabrain-market-7-mar-2026-abc.jpg'),
       'public, max-age=31536000, immutable'
     );
     // HTML entries under /pro keep revalidating.
@@ -488,9 +488,9 @@ const DASHBOARD_HTML_DESTINATION = '/dashboard.html';
 // Root marketing landing page — a second HTML entry in the pro-test bundle
 // (vite rollupOptions.input), served from public/pro/welcome.html on the full
 // site and app variant roots. Variant dashboards live at /dashboard so the root
-// welcome route is consistent across worldmonitor.app, finance.worldmonitor.app,
-// tech.worldmonitor.app, commodity.worldmonitor.app, happy.worldmonitor.app, and
-// energy.worldmonitor.app.
+// welcome route is consistent across megabrain.market, finance.megabrain.market,
+// tech.megabrain.market, commodity.megabrain.market, happy.megabrain.market, and
+// energy.megabrain.market.
 // The dashboard source template remains index.html, but the web build renames
 // its output to dashboard.html so Vercel's filesystem cannot shadow the /
 // rewrite. /welcome and /index.html redirect to root so crawlers and humans do
@@ -547,11 +547,11 @@ describe('welcome landing page routing', () => {
   });
 
   it('routes app roots to welcome and leaves non-app roots on the dashboard catch-all', () => {
-    assert.equal(rootDestinationForHost('worldmonitor.app'), '/pro/welcome.html');
-    assert.equal(rootDestinationForHost('www.worldmonitor.app'), '/pro/welcome.html');
-    assert.equal(rootDestinationForHost('worldmonitor.app.evil.example'), DASHBOARD_HTML_DESTINATION);
+    assert.equal(rootDestinationForHost('megabrain.market'), '/pro/welcome.html');
+    assert.equal(rootDestinationForHost('www.megabrain.market'), '/pro/welcome.html');
+    assert.equal(rootDestinationForHost('megabrain.market.evil.example'), DASHBOARD_HTML_DESTINATION);
 
-    const variantHosts = getVariantHosts().filter((host) => host !== 'www.worldmonitor.app');
+    const variantHosts = getVariantHosts().filter((host) => host !== 'www.megabrain.market');
     for (const host of variantHosts) {
       assert.equal(
         rootDestinationForHost(host),
@@ -563,7 +563,7 @@ describe('welcome landing page routing', () => {
 
   it('keeps variant canonicals aligned with the /dashboard routing strategy', () => {
     const variantUrls = getVariantUrls();
-    assert.equal(variantUrls.full, 'https://www.worldmonitor.app/dashboard');
+    assert.equal(variantUrls.full, 'https://www.megabrain.market/dashboard');
 
     const nonFullUrls = Object.entries(variantUrls).filter(([variant]) => variant !== 'full');
     assert.ok(nonFullUrls.length >= 5, 'expected non-full variant metadata entries');
@@ -708,18 +708,18 @@ describe('welcome landing page routing', () => {
   it('sitemap lists dashboard routes and does not list legacy /welcome', () => {
     const sitemap = readFileSync(resolve(__dirname, '../public/sitemap.xml'), 'utf-8');
     assert.ok(
-      sitemap.includes('<loc>https://www.worldmonitor.app/dashboard</loc>'),
-      'public/sitemap.xml must list https://www.worldmonitor.app/dashboard'
+      sitemap.includes('<loc>https://www.megabrain.market/dashboard</loc>'),
+      'public/sitemap.xml must list https://www.megabrain.market/dashboard'
     );
     for (const host of ['tech', 'finance', 'commodity', 'happy', 'energy']) {
       assert.ok(
-        sitemap.includes(`<loc>https://${host}.worldmonitor.app/dashboard</loc>`),
-        `public/sitemap.xml must list https://${host}.worldmonitor.app/dashboard`
+        sitemap.includes(`<loc>https://${host}.megabrain.market/dashboard</loc>`),
+        `public/sitemap.xml must list https://${host}.megabrain.market/dashboard`
       );
     }
     assert.ok(
-      !sitemap.includes('<loc>https://www.worldmonitor.app/welcome</loc>'),
-      'public/sitemap.xml must not list legacy https://www.worldmonitor.app/welcome'
+      !sitemap.includes('<loc>https://www.megabrain.market/welcome</loc>'),
+      'public/sitemap.xml must not list legacy https://www.megabrain.market/welcome'
     );
   });
 
@@ -728,27 +728,27 @@ describe('welcome landing page routing', () => {
     const generatedWelcomeHtml = readFileSync(resolve(__dirname, '../public/pro/welcome.html'), 'utf-8');
     const dashboardHtml = readFileSync(resolve(__dirname, '../index.html'), 'utf-8');
     assert.ok(
-      welcomeHtml.includes('<link rel="canonical" href="https://www.worldmonitor.app/" />'),
+      welcomeHtml.includes('<link rel="canonical" href="https://www.megabrain.market/" />'),
       'welcome source must canonicalize to root'
     );
     assert.ok(
-      !welcomeHtml.includes('https://www.worldmonitor.app/welcome'),
+      !welcomeHtml.includes('https://www.megabrain.market/welcome'),
       'welcome source must not emit legacy /welcome SEO URLs'
     );
     assert.ok(
-      generatedWelcomeHtml.includes('<link rel="canonical" href="https://www.worldmonitor.app/" />'),
+      generatedWelcomeHtml.includes('<link rel="canonical" href="https://www.megabrain.market/" />'),
       'generated welcome HTML must canonicalize to root'
     );
     assert.ok(
-      !generatedWelcomeHtml.includes('https://www.worldmonitor.app/welcome'),
+      !generatedWelcomeHtml.includes('https://www.megabrain.market/welcome'),
       'generated welcome HTML must not emit legacy /welcome SEO URLs'
     );
     assert.ok(
-      generatedWelcomeHtml.includes('https://www.worldmonitor.app/dashboard'),
+      generatedWelcomeHtml.includes('https://www.megabrain.market/dashboard'),
       'generated welcome HTML must launch the dashboard at /dashboard'
     );
     assert.ok(
-      dashboardHtml.includes('<link rel="canonical" href="https://www.worldmonitor.app/dashboard" />'),
+      dashboardHtml.includes('<link rel="canonical" href="https://www.megabrain.market/dashboard" />'),
       'dashboard shell must canonicalize to /dashboard'
     );
   });
@@ -761,7 +761,7 @@ describe('welcome landing page routing', () => {
 
     const generatedWelcomeAsset = readFileSync(resolve(__dirname, '../public/pro', welcomeAssetPath), 'utf-8');
     const rootWelcomeLaunchLink = /href\s*[:=]\s*["'`]\/\?ref=welcome-/;
-    const variantRootWelcomeLaunchLink = /https:\/\/(?:tech|finance|commodity|happy|energy)\.worldmonitor\.app\/\?ref=welcome-/;
+    const variantRootWelcomeLaunchLink = /https:\/\/(?:tech|finance|commodity|happy|energy)\.megabrain-market\.app\/\?ref=welcome-/;
     assert.doesNotMatch(
       welcomeMomentsSource,
       rootWelcomeLaunchLink,
@@ -1120,7 +1120,7 @@ describe('security header guardrails', () => {
     const csp = getHeaderValue('Content-Security-Policy');
     const frameSrc = csp.match(/frame-src\s+([^;]+)/)?.[1] ?? '';
     assert.ok(
-      frameSrc.includes('clerk.accounts.dev') || frameSrc.includes('clerk.worldmonitor.app'),
+      frameSrc.includes('clerk.accounts.dev') || frameSrc.includes('clerk.megabrain.market'),
       'CSP frame-src must include Clerk origin for sign-in modal'
     );
   });
@@ -1134,7 +1134,7 @@ describe('security header guardrails', () => {
     assert.ok(nginxCsp, 'nginx-security-headers.conf must have a Content-Security-Policy header');
     const frameSrc = nginxCsp.match(/frame-src\s+([^;]+)/)?.[1] ?? '';
     assert.ok(
-      frameSrc.includes('clerk.accounts.dev') || frameSrc.includes('clerk.worldmonitor.app'),
+      frameSrc.includes('clerk.accounts.dev') || frameSrc.includes('clerk.megabrain.market'),
       'docker/nginx CSP frame-src must include Clerk origin for the self-hosted sign-in modal'
     );
   });
@@ -1433,10 +1433,10 @@ describe('agent readiness: api-catalog + openapi build', () => {
   const pkg = JSON.parse(readFileSync(resolve(__dirname, '../package.json'), 'utf-8'));
 
   const catalogEntry = apiCatalog.linkset[0];
-  const apiEntry = apiCatalog.linkset.find((entry) => entry.anchor === 'https://api.worldmonitor.app/');
+  const apiEntry = apiCatalog.linkset.find((entry) => entry.anchor === 'https://api.megabrain.market/');
 
   it('linkset[0] is the catalog anchor and enumerates each API via RFC 9727 item links', () => {
-    assert.equal(catalogEntry.anchor, 'https://worldmonitor.app/.well-known/api-catalog');
+    assert.equal(catalogEntry.anchor, 'https://megabrain.market/.well-known/api-catalog');
     assert.ok(Array.isArray(catalogEntry.item), 'linkset[0] must carry an "item" array (RFC 9727 §4)');
     assert.ok(catalogEntry.item.length > 0, 'linkset[0].item must enumerate at least one API');
     // Each item MUST resolve to a linkset context object that describes that API.
@@ -1449,10 +1449,10 @@ describe('agent readiness: api-catalog + openapi build', () => {
       );
     }
     const itemHrefs = catalogEntry.item.map((i) => i.href);
-    assert.ok(itemHrefs.includes('https://api.worldmonitor.app/'), 'item list must enumerate the REST API host root');
-    assert.ok(itemHrefs.includes('https://worldmonitor.app/mcp'), 'item list must enumerate the MCP server');
+    assert.ok(itemHrefs.includes('https://api.megabrain.market/'), 'item list must enumerate the REST API host root');
+    assert.ok(itemHrefs.includes('https://megabrain.market/mcp'), 'item list must enumerate the MCP server');
     assert.ok(
-      itemHrefs.includes('https://www.worldmonitor.app/docs/mcp'),
+      itemHrefs.includes('https://www.megabrain.market/docs/mcp'),
       'item list must enumerate the docs MCP server (#4958 — it ran unadvertised for weeks)'
     );
   });
@@ -1462,7 +1462,7 @@ describe('agent readiness: api-catalog + openapi build', () => {
   // advertisement anywhere. Every agent-facing discovery surface must name it
   // so multi-surface MCP coverage is discoverable.
   it('advertises the docs MCP server on every discovery surface', () => {
-    const docsMcpUrl = 'https://www.worldmonitor.app/docs/mcp';
+    const docsMcpUrl = 'https://www.megabrain.market/docs/mcp';
     for (const surface of ['llms.txt', 'agents.md', 'api/llms.txt']) {
       const content = readFileSync(resolve(__dirname, `../public/${surface}`), 'utf-8');
       assert.ok(content.includes(docsMcpUrl), `public/${surface} must advertise the docs MCP server`);
@@ -1470,12 +1470,12 @@ describe('agent readiness: api-catalog + openapi build', () => {
   });
 
   it('the docs MCP anchor describes itself with the first-party server-card (service-desc parity with product MCP)', () => {
-    const docsAnchor = apiCatalog.linkset.find((e) => e.anchor === 'https://www.worldmonitor.app/docs/mcp');
+    const docsAnchor = apiCatalog.linkset.find((e) => e.anchor === 'https://www.megabrain.market/docs/mcp');
     assert.ok(docsAnchor, 'api-catalog must carry a context object anchored at the docs MCP endpoint');
     const desc = docsAnchor['service-desc'] ?? [];
     // Must be the first-party card, NOT Mintlify's card (whose url 404s) — #4964 review.
     assert.ok(
-      desc.some((d) => d.href === 'https://www.worldmonitor.app/.well-known/mcp/docs-server-card.json'),
+      desc.some((d) => d.href === 'https://www.megabrain.market/.well-known/mcp/docs-server-card.json'),
       'docs MCP anchor must advertise the first-party server-card as service-desc'
     );
     assert.ok(
@@ -1486,13 +1486,13 @@ describe('agent readiness: api-catalog + openapi build', () => {
 
   it('the first-party docs server-card advertises the working /docs/mcp endpoint, not the dead mintlify url', () => {
     // The whole point of #4964's fix: a card-following agent must land on an
-    // endpoint that actually initializes. worldmonitor.mintlify.dev/mcp 404s;
-    // www.worldmonitor.app/docs/mcp returns 200. The committed card must carry
+    // endpoint that actually initializes. megabrain-market.mintlify.dev/mcp 404s;
+    // www.megabrain.market/docs/mcp returns 200. The committed card must carry
     // the working facade URL and must not smuggle the mintlify.dev host.
     const card = JSON.parse(
       readFileSync(resolve(__dirname, '../public/.well-known/mcp/docs-server-card.json'), 'utf-8')
     );
-    const WORKING = 'https://www.worldmonitor.app/docs/mcp';
+    const WORKING = 'https://www.megabrain.market/docs/mcp';
     assert.equal(card.url, WORKING, 'docs card url must be the working /docs/mcp facade');
     assert.equal(card.serverUrl, WORKING, 'docs card serverUrl must be the working /docs/mcp facade');
     assert.ok(
@@ -1503,7 +1503,7 @@ describe('agent readiness: api-catalog + openapi build', () => {
   });
 
   it('the api host root has its own context object', () => {
-    assert.ok(apiEntry, 'linkset must contain a context object anchored at https://api.worldmonitor.app/');
+    assert.ok(apiEntry, 'linkset must contain a context object anchored at https://api.megabrain.market/');
   });
 
   it('status href points at the KEYLESS compact form of /api/health', () => {
@@ -1517,12 +1517,12 @@ describe('agent readiness: api-catalog + openapi build', () => {
     //       and flagged the whole status surface as broken).
     const statusHref = apiEntry.status[0].href;
     assert.ok(
-      statusHref.startsWith('https://api.worldmonitor.app'),
-      `status href must be on api.worldmonitor.app, got: ${statusHref}`
+      statusHref.startsWith('https://api.megabrain.market'),
+      `status href must be on api.megabrain.market, got: ${statusHref}`
     );
     assert.equal(
       statusHref,
-      'https://api.worldmonitor.app/api/health?compact=1',
+      'https://api.megabrain.market/api/health?compact=1',
       'status href must be the keyless compact health form'
     );
   });
@@ -1550,18 +1550,18 @@ describe('agent readiness: api-catalog + openapi build', () => {
     const meta = apiEntry['service-meta'];
     assert.ok(Array.isArray(meta) && meta.length > 0, 'api context must carry service-meta entries');
     const hrefs = meta.map((entry) => entry.href);
-    assert.ok(hrefs.includes('https://worldmonitor.app/pricing.md'), 'service-meta must advertise pricing.md');
+    assert.ok(hrefs.includes('https://megabrain.market/pricing.md'), 'service-meta must advertise pricing.md');
     assert.ok(
-      hrefs.includes('https://www.worldmonitor.app/api/product-catalog'),
+      hrefs.includes('https://www.megabrain.market/api/product-catalog'),
       'service-meta must advertise the live product-catalog JSON endpoint'
     );
-    assert.ok(hrefs.includes('https://worldmonitor.app/support.md'), 'service-meta must advertise support.md');
-    assert.ok(hrefs.includes('https://worldmonitor.app/agents.md'), 'service-meta must advertise agents.md (#4952)');
+    assert.ok(hrefs.includes('https://megabrain.market/support.md'), 'service-meta must advertise support.md');
+    assert.ok(hrefs.includes('https://megabrain.market/agents.md'), 'service-meta must advertise agents.md (#4952)');
     // The Commerce spec lives outside the root openapi bundle (size budget,
     // #4853) — without this link no advertised descriptor reaches it
     // (post-#4867 review finding); Mintlify serves the raw YAML at this URL.
     const commerceSpec = meta.find(
-      (entry) => entry.href === 'https://www.worldmonitor.app/docs/openapi/CommerceService.openapi.yaml'
+      (entry) => entry.href === 'https://www.megabrain.market/docs/openapi/CommerceService.openapi.yaml'
     );
     assert.ok(commerceSpec, 'service-meta must link the Commerce OpenAPI spec');
     assert.equal(commerceSpec.type, 'application/vnd.oai.openapi');
@@ -1581,7 +1581,7 @@ describe('agent readiness: api-catalog + openapi build', () => {
     // through a JSON parser; YAML input trips them ("found but failed to
     // parse"). The JSON mirror is a second service-desc so those scanners
     // have a parseable spec. YAML stays at [0] (human-readable canonical).
-    // Read from apiEntry (the api.worldmonitor.app context object), not
+    // Read from apiEntry (the api.megabrain.market context object), not
     // linkset[0] — since #4691 added the RFC 9727 catalog anchor, linkset[0]
     // is the catalog itself (item enumeration, no service-desc). The sibling
     // /openapi.yaml assertion above already uses apiEntry for the same reason.
@@ -1595,8 +1595,8 @@ describe('agent readiness: api-catalog + openapi build', () => {
   });
 
   it('has a second anchor for the MCP server-card', () => {
-    const mcpEntry = apiCatalog.linkset.find((entry) => entry.anchor === 'https://worldmonitor.app/mcp');
-    assert.ok(mcpEntry, 'linkset must contain an anchor for https://worldmonitor.app/mcp');
+    const mcpEntry = apiCatalog.linkset.find((entry) => entry.anchor === 'https://megabrain.market/mcp');
+    assert.ok(mcpEntry, 'linkset must contain an anchor for https://megabrain.market/mcp');
     const mcpServiceDesc = mcpEntry['service-desc']?.[0];
     assert.ok(mcpServiceDesc, 'mcp anchor must have a service-desc entry');
     assert.ok(
@@ -1609,8 +1609,8 @@ describe('agent readiness: api-catalog + openapi build', () => {
     const buildOpenapi = pkg.scripts['build:openapi'];
     assert.ok(buildOpenapi, 'package.json must define scripts["build:openapi"]');
     assert.ok(
-      buildOpenapi.includes('docs/api/worldmonitor.openapi.yaml'),
-      `build:openapi must reference docs/api/worldmonitor.openapi.yaml, got: ${buildOpenapi}`
+      buildOpenapi.includes('docs/api/megabrain-market.openapi.yaml'),
+      `build:openapi must reference docs/api/megabrain-market.openapi.yaml, got: ${buildOpenapi}`
     );
     assert.ok(
       buildOpenapi.includes('public/openapi.yaml'),
@@ -1662,14 +1662,14 @@ describe('agent readiness: api-catalog + openapi build', () => {
     assert.ok(pkg.scripts.prebuild, 'package.json must define scripts["prebuild"] (default build path uses it)');
   });
 
-  it('openapi source exists at docs/api/worldmonitor.openapi.yaml', () => {
+  it('openapi source exists at docs/api/megabrain-market.openapi.yaml', () => {
     // Catches the class of regression where someone cleans generated
     // artifacts and forgets to regenerate before committing — the
     // prebuild step would then fail silently at deploy time.
-    const openapiPath = resolve(__dirname, '../docs/api/worldmonitor.openapi.yaml');
+    const openapiPath = resolve(__dirname, '../docs/api/megabrain-market.openapi.yaml');
     assert.ok(
       existsSync(openapiPath),
-      `docs/api/worldmonitor.openapi.yaml must exist — without it, build:openapi fails at deploy time`
+      `docs/api/megabrain-market.openapi.yaml must exist — without it, build:openapi fails at deploy time`
     );
   });
 });
@@ -1693,7 +1693,7 @@ describe('agent readiness: MCP/OAuth origin alignment', () => {
     const handler = mod.default;
     assert.equal(typeof handler, 'function', 'handler must be the default export');
 
-    const hosts = ['worldmonitor.app', 'www.worldmonitor.app', 'api.worldmonitor.app'];
+    const hosts = ['megabrain.market', 'www.megabrain.market', 'api.megabrain.market'];
     for (const host of hosts) {
       const req = new Request(`https://${host}/.well-known/oauth-protected-resource`, {
         headers: { host },
@@ -1717,7 +1717,7 @@ describe('agent readiness: MCP/OAuth origin alignment', () => {
     const u = new URL(mcpCard.authentication.resource);
     assert.equal(u.protocol, 'https:');
     assert.ok(
-      ['worldmonitor.app', 'www.worldmonitor.app', 'api.worldmonitor.app'].includes(u.host),
+      ['megabrain.market', 'www.megabrain.market', 'api.megabrain.market'].includes(u.host),
       `unexpected host: ${u.host}`
     );
   });
@@ -1734,9 +1734,9 @@ describe('agent readiness: MCP/OAuth origin alignment', () => {
       + readFileSync(resolve(__dirname, '../api/mcp/auth.ts'), 'utf-8');
     // Must NOT contain a hardcoded apex or api URL for resource_metadata —
     // that regressed once (PR #3351 review: apex pointer emitted from
-    // api.worldmonitor.app/mcp 401s) and the grep-only test didn't catch it.
+    // api.megabrain.market/mcp 401s) and the grep-only test didn't catch it.
     assert.ok(
-      !/resource_metadata="https:\/\/(?:api\.)?worldmonitor\.app\/\.well-known\//.test(source),
+      !/resource_metadata="https:\/\/(?:api\.)?megabrain-market\.app\/\.well-known\//.test(source),
       'api/mcp.ts must not hardcode resource_metadata URL — derive from request host'
     );
     // Must contain a template-literal construction that uses a host variable.
@@ -1771,7 +1771,7 @@ describe('agent readiness: MCP/OAuth origin alignment', () => {
     const handler = mod.default;
     assert.equal(typeof handler, 'function', 'handler must be the default export');
 
-    const hosts = ['worldmonitor.app', 'www.worldmonitor.app', 'api.worldmonitor.app'];
+    const hosts = ['megabrain.market', 'www.megabrain.market', 'api.megabrain.market'];
     for (const host of hosts) {
       const req = new Request(`https://${host}/.well-known/oauth-authorization-server`, {
         headers: { host },
@@ -1832,36 +1832,36 @@ describe('agent readiness: MCP/OAuth origin alignment', () => {
     const as = (await import('../api/oauth-authorization-server.ts')).default;
 
     // Spoofed / unrecognized Host → apex fallback, never reflected.
-    for (const host of ['evil.com', 'worldmonitor.app.evil.com', 'evilworldmonitor.app', 'x.y.worldmonitor.app']) {
-      const prmRes = await prm(new Request('https://worldmonitor.app/.well-known/oauth-protected-resource', { headers: { host } }));
+    for (const host of ['evil.com', 'megabrain.market.evil.com', 'evilmegabrain.market', 'x.y.megabrain.market']) {
+      const prmRes = await prm(new Request('https://megabrain.market/.well-known/oauth-protected-resource', { headers: { host } }));
       const prmJson = await prmRes.json();
-      assert.equal(prmJson.resource, 'https://worldmonitor.app', `PRM must not reflect spoofed host ${host}`);
-      assert.deepEqual(prmJson.authorization_servers, ['https://worldmonitor.app']);
+      assert.equal(prmJson.resource, 'https://megabrain.market', `PRM must not reflect spoofed host ${host}`);
+      assert.deepEqual(prmJson.authorization_servers, ['https://megabrain.market']);
 
-      const asRes = await as(new Request('https://worldmonitor.app/.well-known/oauth-authorization-server', { headers: { host } }));
+      const asRes = await as(new Request('https://megabrain.market/.well-known/oauth-authorization-server', { headers: { host } }));
       const asJson = await asRes.json();
-      assert.equal(asJson.issuer, 'https://worldmonitor.app', `AS must not reflect spoofed host ${host}`);
-      assert.equal(asJson.token_endpoint, 'https://worldmonitor.app/oauth/token', `AS token_endpoint must not carry spoofed host ${host}`);
-      assert.equal(asJson.agent_auth.register_uri, 'https://worldmonitor.app/oauth/register');
-      assert.equal(asJson.agent_auth.claim_uri, 'https://worldmonitor.app/oauth/authorize', `AS claim_uri must not carry spoofed host ${host}`);
-      assert.equal(asJson.agent_auth.anonymous.claim_uri, 'https://worldmonitor.app/oauth/authorize');
+      assert.equal(asJson.issuer, 'https://megabrain.market', `AS must not reflect spoofed host ${host}`);
+      assert.equal(asJson.token_endpoint, 'https://megabrain.market/oauth/token', `AS token_endpoint must not carry spoofed host ${host}`);
+      assert.equal(asJson.agent_auth.register_uri, 'https://megabrain.market/oauth/register');
+      assert.equal(asJson.agent_auth.claim_uri, 'https://megabrain.market/oauth/authorize', `AS claim_uri must not carry spoofed host ${host}`);
+      assert.equal(asJson.agent_auth.anonymous.claim_uri, 'https://megabrain.market/oauth/authorize');
     }
 
     // Legit subdomain still self-describes.
-    const variant = await as(new Request('https://tech.worldmonitor.app/.well-known/oauth-authorization-server', { headers: { host: 'tech.worldmonitor.app' } }));
-    assert.equal((await variant.json()).issuer, 'https://tech.worldmonitor.app');
+    const variant = await as(new Request('https://tech.megabrain.market/.well-known/oauth-authorization-server', { headers: { host: 'tech.megabrain.market' } }));
+    assert.equal((await variant.json()).issuer, 'https://tech.megabrain.market');
 
     // Method guard: OPTIONS → 204 preflight, other verbs → 405 + Allow, GET → 200.
     for (const handler of [prm, as]) {
-      const opt = await handler(new Request('https://worldmonitor.app/x', { method: 'OPTIONS', headers: { host: 'worldmonitor.app' } }));
+      const opt = await handler(new Request('https://megabrain.market/x', { method: 'OPTIONS', headers: { host: 'megabrain.market' } }));
       assert.equal(opt.status, 204, 'OPTIONS is a CORS preflight');
       assert.equal(opt.headers.get('access-control-allow-methods'), 'GET, HEAD, OPTIONS');
 
-      const post = await handler(new Request('https://worldmonitor.app/x', { method: 'POST', headers: { host: 'worldmonitor.app' } }));
+      const post = await handler(new Request('https://megabrain.market/x', { method: 'POST', headers: { host: 'megabrain.market' } }));
       assert.equal(post.status, 405, 'non-GET/HEAD is rejected');
       assert.equal(post.headers.get('allow'), 'GET, HEAD, OPTIONS');
 
-      const get = await handler(new Request('https://worldmonitor.app/x', { headers: { host: 'worldmonitor.app' } }));
+      const get = await handler(new Request('https://megabrain.market/x', { headers: { host: 'megabrain.market' } }));
       assert.equal(get.status, 200, 'GET is served');
     }
   });
@@ -1925,7 +1925,7 @@ describe('agent readiness: auth.md walkthrough', () => {
   it('advertises a register endpoint that resolves (matches the agent_auth register_uri path)', () => {
     assert.match(
       authMd,
-      /https:\/\/(?:api\.)?worldmonitor\.app\/oauth\/register/,
+      /https:\/\/(?:api\.)?megabrain-market\.app\/oauth\/register/,
       'auth.md must document the reachable /oauth/register endpoint so the discovery chain is not stale'
     );
   });
@@ -1981,7 +1981,7 @@ describe('agent readiness: auth.md walkthrough', () => {
     assert.ok(SPA_HTML_CACHE_SOURCE.includes('|agent\\.txt|'), 'HTML cache catch-all must exclude /agent.txt');
     const agentTxt = readFileSync(resolve(__dirname, '../public/agent.txt'), 'utf-8');
     assert.match(agentTxt, /When to use/i, 'agent.txt must carry when-to-use guidance');
-    assert.ok(agentTxt.includes('https://worldmonitor.app/mcp'), 'agent.txt must point at the MCP server');
+    assert.ok(agentTxt.includes('https://megabrain.market/mcp'), 'agent.txt must point at the MCP server');
   });
 });
 
@@ -2061,7 +2061,7 @@ describe('agent readiness: homepage Link headers', () => {
       // anchored to /docs/mcp (the card describes the docs endpoint). We
       // advertise a FIRST-PARTY card (/.well-known/mcp/docs-server-card.json),
       // NOT Mintlify's /docs/.well-known/mcp/server-card.json, because that
-      // card's url points at worldmonitor.mintlify.dev/mcp which 404s on
+      // card's url points at megabrain-market.mintlify.dev/mcp which 404s on
       // initialize — a card-following agent would land on a dead endpoint
       // (#4964 review). The first-party card advertises the working
       // /docs/mcp facade.
@@ -2302,7 +2302,7 @@ describe('vercel deployment excludes api test files', () => {
   // Vercel deploys every non-underscore file under api/ as a live serverless
   // function. A deployed *.test.mjs is a public endpoint that executes its
   // whole node:test suite (with production env + Sentry) on every request —
-  // WORLDMONITOR-VD flooded Sentry with "Upstash Redis is not configured"
+  // MEGABRAIN_MARKET-VD flooded Sentry with "Upstash Redis is not configured"
   // because wm-session.test.mjs deletes the Upstash env vars to exercise the
   // fail-closed path, and something polls /api/wm-session.test every ~2 min.
   const vercelignore = readFileSync(resolve(__dirname, '../.vercelignore'), 'utf-8');
@@ -2361,8 +2361,8 @@ describe('agent readiness: registry branding + ARD catalog', () => {
     assert.ok(serverCard.description, 'server-card must have a description');
     assert.match(
       serverCard.icon ?? '',
-      /^https:\/\/(www\.)?worldmonitor\.app\//,
-      'server-card icon must be an absolute worldmonitor.app URL'
+      /^https:\/\/(www\.)?megabrain-market\.app\//,
+      'server-card icon must be an absolute megabrain.market URL'
     );
     const iconPath = new URL(serverCard.icon).pathname;
     assert.ok(
@@ -2371,10 +2371,10 @@ describe('agent readiness: registry branding + ARD catalog', () => {
     );
   });
 
-  it('ai-catalog.json declares the World Monitor host identity', () => {
+  it('ai-catalog.json declares the MegaBrain Market host identity', () => {
     assert.strictEqual(aiCatalog.specVersion, '1.0');
-    assert.strictEqual(aiCatalog.host?.displayName, 'World Monitor');
-    assert.strictEqual(aiCatalog.host?.identifier, 'did:web:worldmonitor.app');
+    assert.strictEqual(aiCatalog.host?.displayName, 'MegaBrain Market');
+    assert.strictEqual(aiCatalog.host?.identifier, 'did:web:megabrain.market');
     assert.ok(Array.isArray(aiCatalog.entries) && aiCatalog.entries.length >= 2);
   });
 
@@ -2383,7 +2383,7 @@ describe('agent readiness: registry branding + ARD catalog', () => {
       const label = `ai-catalog entry ${entry.identifier}`;
       assert.match(
         entry.identifier ?? '',
-        /^urn:air:worldmonitor\.app:[a-z-]+:[a-z0-9-]+$/,
+        /^urn:air:megabrain-market\.app:[a-z-]+:[a-z0-9-]+$/,
         `${label} must be a domain-anchored urn:air URN`
       );
       assert.ok(entry.displayName, `${label} needs a displayName`);
@@ -2391,12 +2391,12 @@ describe('agent readiness: registry branding + ARD catalog', () => {
       assert.ok(entry.description, `${label} needs a description`);
       assert.match(
         entry.url ?? '',
-        /^https:\/\/(www\.)?worldmonitor\.app\//,
+        /^https:\/\/(www\.)?megabrain-market\.app\//,
         `${label} URL must be same-origin`
       );
       assert.strictEqual(
         entry.trustManifest?.identity,
-        'did:web:worldmonitor.app',
+        'did:web:megabrain.market',
         `${label} trust identity must be the domain DID`
       );
     }
@@ -2428,11 +2428,11 @@ describe('variant subdomain dashboard SEO (#4996)', () => {
     .filter((r) => r.has)
     .map((r) => {
       const host = (r.has ?? []).find((h) => h.type === 'host')?.value ?? '';
-      return host.replace('.worldmonitor.app', '');
+      return host.replace('.megabrain.market', '');
     })
     .sort();
 
-  const middlewareVariants = [...middlewareSource.matchAll(/'([a-z]+)\.worldmonitor\.app': '([a-z]+)'/g)]
+  const middlewareVariants = [...middlewareSource.matchAll(/'([a-z]+)\.megabrain-market\.app': '([a-z]+)'/g)]
     .map((m) => m[2])
     .sort();
 
@@ -2458,8 +2458,8 @@ describe('variant subdomain dashboard SEO (#4996)', () => {
   it('each variant host rewrite targets its generated variant file', () => {
     for (const rule of dashboardRewrites.filter((r) => r.has)) {
       const host = (rule.has ?? []).find((h) => h.type === 'host')?.value ?? '';
-      const variant = host.replace('.worldmonitor.app', '');
-      assert.match(host, /^[a-z]+\.worldmonitor\.app$/, `unexpected host condition shape: ${host}`);
+      const variant = host.replace('.megabrain.market', '');
+      assert.match(host, /^[a-z]+\.megabrain-market\.app$/, `unexpected host condition shape: ${host}`);
       assert.strictEqual(
         rule.destination,
         `/dashboard-${variant}.html`,
@@ -2489,7 +2489,7 @@ describe('variant subdomain dashboard SEO (#4996)', () => {
 });
 
 describe('docs host scoping — Mintlify proxy is www-only (#5345)', () => {
-  // The /docs rewrite proxies worldmonitor.mintlify.dev with no host condition,
+  // The /docs rewrite proxies megabrain-market.mintlify.dev with no host condition,
   // so every variant subdomain served the full docs site and Googlebot crawled
   // the duplicates. Redirects run before rewrites on Vercel, so a host-scoped
   // redirect entry is what keeps subdomain /docs requests from reaching the
@@ -2504,7 +2504,7 @@ describe('docs host scoping — Mintlify proxy is www-only (#5345)', () => {
 
   it('redirects subdomain /docs/* to www permanently', () => {
     assert.ok(docsHostRedirect, 'expected a host-conditioned redirect for /docs/:match*');
-    assert.equal(docsHostRedirect.destination, 'https://www.worldmonitor.app/docs/:match*');
+    assert.equal(docsHostRedirect.destination, 'https://www.megabrain.market/docs/:match*');
     assert.equal(docsHostRedirect.permanent, true);
   });
 
@@ -2512,10 +2512,10 @@ describe('docs host scoping — Mintlify proxy is www-only (#5345)', () => {
     const hostValue = (docsHostRedirect?.has ?? []).find((h) => h.type === 'host')?.value ?? '';
     const hostRe = new RegExp(hostValue);
     assert.ok(variantHosts.length > 0, 'variant host extraction from /dashboard rewrites found nothing');
-    for (const host of [...variantHosts, 'api.worldmonitor.app']) {
+    for (const host of [...variantHosts, 'api.megabrain.market']) {
       assert.match(host, hostRe, `${host} must be caught by the docs host redirect`);
     }
-    assert.ok(!hostRe.test('www.worldmonitor.app'), 'www must keep serving the docs proxy');
+    assert.ok(!hostRe.test('www.megabrain.market'), 'www must keep serving the docs proxy');
   });
 
   it('redirects prefix-less /api-reference/* (Googlebot fetches Mintlify RSC route strings) into /docs on www', () => {
@@ -2525,7 +2525,7 @@ describe('docs host scoping — Mintlify proxy is www-only (#5345)', () => {
     // catch-all excludes ^api), flooding GSC.
     const redirect = vercelConfig.redirects.find((r) => r.source === '/api-reference/:match*');
     assert.ok(redirect, 'expected a redirect for /api-reference/:match*');
-    assert.equal(redirect.destination, 'https://www.worldmonitor.app/docs/api-reference/:match*');
+    assert.equal(redirect.destination, 'https://www.megabrain.market/docs/api-reference/:match*');
     assert.equal(redirect.permanent, true);
     assert.equal(redirect.has, undefined, 'must apply on every host, www included');
   });
@@ -2533,7 +2533,7 @@ describe('docs host scoping — Mintlify proxy is www-only (#5345)', () => {
   it('the www docs proxy rewrite itself is untouched', () => {
     const proxy = vercelConfig.rewrites.find((r) => r.source === '/docs/:match*');
     assert.ok(proxy, 'expected the /docs/:match* rewrite');
-    assert.equal(proxy.destination, 'https://worldmonitor.mintlify.dev/docs/:match*');
+    assert.equal(proxy.destination, 'https://megabrain-market.mintlify.dev/docs/:match*');
   });
 });
 
@@ -2548,7 +2548,7 @@ describe('markdown canonical Link headers (#4999)', () => {
     it(`${page} declares a self-referencing canonical Link header`, () => {
       assert.strictEqual(
         getHeaderValueForSource(page, 'Link'),
-        `<https://www.worldmonitor.app${page}>; rel="canonical"`,
+        `<https://www.megabrain.market${page}>; rel="canonical"`,
         `${page} must self-canonicalize on the www host via the Link header`
       );
       assert.strictEqual(
@@ -2560,7 +2560,7 @@ describe('markdown canonical Link headers (#4999)', () => {
 
   it('every sitemap-listed .md URL has the canonical Link header rule', () => {
     const sitemap = readFileSync(resolve(__dirname, '../public/sitemap.xml'), 'utf-8');
-    const mdUrls = [...sitemap.matchAll(/<loc>https:\/\/www\.worldmonitor\.app(\/[^<]+\.md)<\/loc>/g)].map((m) => m[1]);
+    const mdUrls = [...sitemap.matchAll(/<loc>https:\/\/www\.megabrain-market\.app(\/[^<]+\.md)<\/loc>/g)].map((m) => m[1]);
     assert.ok(mdUrls.length > 0, 'expected .md entries in sitemap.xml');
     for (const path of mdUrls) {
       assert.ok(MD_PAGES.includes(path), `${path} is in sitemap.xml but has no canonical Link header rule — add it to vercel.json and this test`);
@@ -2569,17 +2569,17 @@ describe('markdown canonical Link headers (#4999)', () => {
 });
 
 // #4953 — developer-resource discoverability: an agent web-searching "World
-// Monitor MCP server", "World Monitor OpenAPI", "World Monitor developer
-// portal", or "World Monitor SDK" must land on a crawlable page whose H1 names
+// Monitor MCP server", "MegaBrain Market OpenAPI", "MegaBrain Market developer
+// portal", or "MegaBrain Market SDK" must land on a crawlable page whose H1 names
 // that resource type. Each named page mirrors the auth.md/ai-search.md serving
 // pattern (static public/*.md, excluded from the SPA catch-all, advertised in
 // the discovery chain).
 describe('agent readiness: named developer-resource pages (#4953)', () => {
   const DEV_PAGES = [
-    { file: 'developers.md', path: '/developers.md', h1: '# World Monitor Developer Portal' },
-    { file: 'mcp-server.md', path: '/mcp-server.md', h1: '# World Monitor MCP Server' },
-    { file: 'openapi.md', path: '/openapi.md', h1: '# World Monitor OpenAPI Specification' },
-    { file: 'sdks.md', path: '/sdks.md', h1: '# World Monitor SDKs' },
+    { file: 'developers.md', path: '/developers.md', h1: '# MegaBrain Market Developer Portal' },
+    { file: 'mcp-server.md', path: '/mcp-server.md', h1: '# MegaBrain Market MCP Server' },
+    { file: 'openapi.md', path: '/openapi.md', h1: '# MegaBrain Market OpenAPI Specification' },
+    { file: 'sdks.md', path: '/sdks.md', h1: '# MegaBrain Market SDKs' },
   ];
 
   const spaCatchAll = () =>
@@ -2619,23 +2619,23 @@ describe('agent readiness: named developer-resource pages (#4953)', () => {
       f,
       readFileSync(resolve(__dirname, `../public/${f}`), 'utf-8'),
     ]);
-    // The sitemap and the indexed "Build on World Monitor" blog post are the two
+    // The sitemap and the indexed "Build on MegaBrain Market" blog post are the two
     // web-search discovery surfaces (candidate fixes #1/#3 of the issue) — assert
     // them directly so a dropped sitemap entry or blog cross-link is caught here,
     // not only via the reverse #4999 sitemap->MD_PAGES sweep.
     const sitemap = readFileSync(resolve(__dirname, '../public/sitemap.xml'), 'utf-8');
     const blogPost = readFileSync(
-      resolve(__dirname, '../blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md'),
+      resolve(__dirname, '../blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md'),
       'utf-8'
     );
     for (const page of DEV_PAGES) {
-      const url = `https://worldmonitor.app${page.path}`;
+      const url = `https://megabrain.market${page.path}`;
       assert.ok(catalogHrefs.includes(url), `api-catalog must advertise ${url}`);
       for (const [name, content] of surfaces) {
         assert.ok(content.includes(page.path), `public/${name} must link ${page.path}`);
       }
       assert.ok(
-        sitemap.includes(`https://www.worldmonitor.app${page.path}`),
+        sitemap.includes(`https://www.megabrain.market${page.path}`),
         `sitemap.xml must register ${page.path} on the www host`
       );
       assert.ok(blogPost.includes(page.path), `the developer blog post must cross-link ${page.path}`);

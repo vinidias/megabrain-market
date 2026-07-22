@@ -18,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DEFAULT_ROOT = resolve(__dirname, '..');
 const DEFAULT_OUT_DIR = join(DEFAULT_ROOT, 'public');
-const DEFAULT_BASE_URL = 'https://www.worldmonitor.app';
+const DEFAULT_BASE_URL = 'https://www.megabrain.market';
 const RESILIENCE_SNAPSHOT_PATH = 'docs/snapshots/resilience-ranking-2026-05-28.json';
 const COUNTRY_NAMES_PATH = 'shared/country-names.json';
 const CHOKEPOINT_REGISTRY_PATH = 'src/config/chokepoint-registry.ts';
@@ -483,7 +483,7 @@ function pageDocument({
     <meta property="og:title" content="${escapeHtml(title)}">
     <meta property="og:description" content="${escapeHtml(description)}">
     <meta property="og:url" content="${escapeHtml(canonical)}">
-    <meta property="og:site_name" content="World Monitor">
+    <meta property="og:site_name" content="MegaBrain Market">
     ${ld.map((entry) => `<script type="application/ld+json">${escapeJsonScript(entry)}</script>`).join('\n    ')}
     <style>
       :root { color-scheme: dark; --bg: #050807; --panel: #0c1210; --text: #eef8f0; --muted: #a8b8ad; --line: #1b2b22; --accent: #4ade80; }
@@ -516,7 +516,7 @@ function pageDocument({
   <body>
     <header>
       <nav aria-label="Primary">
-        <a href="/">World Monitor</a>
+        <a href="/">MegaBrain Market</a>
         <a href="/countries/">Countries</a>
         <a href="/chokepoints/">Chokepoints</a>
         <a href="/reference/changelog/">Changelog</a>
@@ -526,7 +526,7 @@ function pageDocument({
     <main>
 ${body}
     </main>
-    <footer>World Monitor static reference corpus. Built from committed methodology and data snapshots.</footer>
+    <footer>MegaBrain Market static reference corpus. Built from committed methodology and data snapshots.</footer>
   </body>
 </html>
 `;
@@ -534,7 +534,7 @@ ${body}
 
 function renderCountriesIndex({ countries, baseUrl, capturedAt }) {
   const path = '/countries/';
-  const description = `Country risk and resilience pages built from World Monitor's committed ${capturedAt} resilience ranking snapshot.`;
+  const description = `Country risk and resilience pages built from MegaBrain Market's committed ${capturedAt} resilience ranking snapshot.`;
   const body = `      <p class="eyebrow">Country corpus</p>
       <h1>Country risk and resilience</h1>
       <p class="lede">${escapeHtml(description)}</p>
@@ -545,7 +545,7 @@ ${countries.map((country) => `        <a class="card" href="/countries/${country
   return pageDocument({
     baseUrl,
     path,
-    title: 'Country Risk and Resilience | World Monitor',
+    title: 'Country Risk and Resilience | MegaBrain Market',
     description,
     lastmod: capturedAt,
     jsonLd: {
@@ -567,7 +567,7 @@ ${countries.map((country) => `        <a class="card" href="/countries/${country
 function renderCountryPage({ country, baseUrl, capturedAt, methodologyFormula }) {
   const path = `/countries/${country.slug}/`;
   const rankText = country.rank == null ? 'not ranked in the headline table' : `ranked #${country.rank}`;
-  const description = `${country.name} is ${rankText} in the ${capturedAt} World Monitor Country Resilience Index snapshot.`;
+  const description = `${country.name} is ${rankText} in the ${capturedAt} MegaBrain Market Country Resilience Index snapshot.`;
   const mapUrl = absoluteUrl(baseUrl, `/?country=${encodeURIComponent(country.code)}&expanded=1`);
   const body = `      <p class="eyebrow">Country &middot; ${escapeHtml(country.code)}</p>
       <h1>${escapeHtml(country.name)} country risk and resilience</h1>
@@ -580,13 +580,13 @@ function renderCountryPage({ country, baseUrl, capturedAt, methodologyFormula })
         <div class="metric"><span>Confidence</span><strong>${country.lowConfidence ? 'Low' : 'Standard'}</strong></div>
       </section>
       <h2>How to read this page</h2>
-      <p>World Monitor's Country Resilience Index is a 0-100 structural resilience score. This page records the committed ${escapeHtml(prettyDate(capturedAt))} snapshot using the ${escapeHtml(methodologyFormula)} methodology tag.</p>
+      <p>MegaBrain Market's Country Resilience Index is a 0-100 structural resilience score. This page records the committed ${escapeHtml(prettyDate(capturedAt))} snapshot using the ${escapeHtml(methodologyFormula)} methodology tag.</p>
       <p>Use it as a crawlable reference and stable landing page. For the current live picture — active alerts, conflict events, market and energy signals — open ${escapeHtml(country.name)} on the live map above.</p>
       <p class="source">Source: ${RESILIENCE_SNAPSHOT_PATH}. Captured ${escapeHtml(capturedAt)}.</p>`;
   return pageDocument({
     baseUrl,
     path,
-    title: `${country.name} Country Risk and Resilience | World Monitor`,
+    title: `${country.name} Country Risk and Resilience | MegaBrain Market`,
     description,
     lastmod: capturedAt,
     jsonLd: {
@@ -603,7 +603,7 @@ function renderCountryPage({ country, baseUrl, capturedAt, methodologyFormula })
       },
       mainEntity: {
         '@type': 'Dataset',
-        name: `World Monitor Country Resilience snapshot for ${country.name}`,
+        name: `MegaBrain Market Country Resilience snapshot for ${country.name}`,
         datePublished: capturedAt,
         measurementTechnique: methodologyFormula,
       },
@@ -619,7 +619,7 @@ function renderCountryPage({ country, baseUrl, capturedAt, methodologyFormula })
 
 function renderChokepointsIndex({ chokepoints, baseUrl, lastmod }) {
   const path = '/chokepoints/';
-  const description = 'The maritime chokepoints and waterways World Monitor tracks — the narrow straits and canals where a disruption removes optionality from global trade, energy and food flows.';
+  const description = 'The maritime chokepoints and waterways MegaBrain Market tracks — the narrow straits and canals where a disruption removes optionality from global trade, energy and food flows.';
   const body = `      <p class="eyebrow">Maritime corpus</p>
       <h1>Chokepoints and waterways</h1>
       <p class="lede">${escapeHtml(description)}</p>
@@ -633,7 +633,7 @@ ${chokepoints.map((cp) => {
   return pageDocument({
     baseUrl,
     path,
-    title: 'Maritime Chokepoints | World Monitor',
+    title: 'Maritime Chokepoints | MegaBrain Market',
     description,
     lastmod,
     jsonLd: {
@@ -656,7 +656,7 @@ function renderChokepointPage({ chokepoint, baseUrl, lastmod, tradeRoutesById })
   const path = `/chokepoints/${chokepoint.slug}/`;
   const content = CHOKEPOINT_CONTENT[chokepoint.id] || {};
   const blurb = content.blurb
-    || `${chokepoint.displayName} is one of the 13 canonical maritime chokepoints tracked by World Monitor.`;
+    || `${chokepoint.displayName} is one of the 13 canonical maritime chokepoints tracked by MegaBrain Market.`;
   const description = metaDescription(blurb);
   const mapUrl = absoluteUrl(baseUrl, `/?chokepoint=${encodeURIComponent(chokepoint.id)}`);
 
@@ -670,7 +670,7 @@ ${routes.map((route) => {
     return `        <li>${escapeHtml(route.name)} <span class="vol">&middot; ${escapeHtml(route.volumeDesc)}${category ? ` &middot; ${escapeHtml(category)}` : ''}</span></li>`;
   }).join('\n')}
       </ul>`
-    : `<p>${escapeHtml(chokepoint.displayName)} is tracked as a strategic waterway reference. It is not currently mapped to one of World Monitor's modelled trade-route corridors, but its vessel traffic and disruption signals are still monitored on the live map.</p>`;
+    : `<p>${escapeHtml(chokepoint.displayName)} is tracked as a strategic waterway reference. It is not currently mapped to one of MegaBrain Market's modelled trade-route corridors, but its vessel traffic and disruption signals are still monitored on the live map.</p>`;
 
   const tiles = [
     content.region ? metricTile('Connects', content.region) : null,
@@ -701,7 +701,7 @@ ${relatedItems.map((item) => `        <li>${item}</li>`).join('\n')}
   return pageDocument({
     baseUrl,
     path,
-    title: `${chokepoint.displayName} Chokepoint | World Monitor`,
+    title: `${chokepoint.displayName} Chokepoint | MegaBrain Market`,
     description,
     lastmod,
     jsonLd: {
@@ -750,11 +750,11 @@ function renderChangelogPage({ releases, pageIndex, totalPages, baseUrl, lastmod
     pageIndex + 1 < totalPages ? { rel: 'next', path: changelogPagePath(pageIndex + 1) } : null,
   ].filter(Boolean);
   const title = pageIndex === 0
-    ? 'World Monitor Changelog | World Monitor'
-    : `World Monitor Changelog Page ${pageIndex + 1} | World Monitor`;
-  const description = 'Paginated static release notes for World Monitor, built from the committed CHANGELOG.md file.';
+    ? 'MegaBrain Market Changelog | MegaBrain Market'
+    : `MegaBrain Market Changelog Page ${pageIndex + 1} | MegaBrain Market`;
+  const description = 'Paginated static release notes for MegaBrain Market, built from the committed CHANGELOG.md file.';
   const body = `      <p class="eyebrow">Release notes</p>
-      <h1>World Monitor changelog</h1>
+      <h1>MegaBrain Market changelog</h1>
       <p class="lede">${escapeHtml(description)}</p>
 ${releases.map((release) => `      <article class="card">
         <h2>${escapeHtml(release.label)}${release.date ? ` <small>${escapeHtml(release.date)}</small>` : ''}</h2>
@@ -778,13 +778,13 @@ ${release.bullets.map((bullet) => `          <li>${escapeHtml(bullet)}</li>`).jo
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'World Monitor changelog',
+      name: 'MegaBrain Market changelog',
       description,
       url: absoluteUrl(baseUrl, path),
       inLanguage: 'en-US',
       isPartOf: {
         '@type': 'CreativeWorkSeries',
-        name: 'World Monitor release notes',
+        name: 'MegaBrain Market release notes',
       },
     },
     breadcrumbs: breadcrumbLd(baseUrl, [

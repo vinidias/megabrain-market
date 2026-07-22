@@ -1,4 +1,4 @@
-import type { UnrestServiceHandler } from '../../../../src/generated/server/worldmonitor/unrest/v1/service_server';
+import type { UnrestServiceHandler } from '../../../../src/generated/server/megabrain-market/unrest/v1/service_server';
 
 import { listUnrestEvents } from './list-unrest-events';
 

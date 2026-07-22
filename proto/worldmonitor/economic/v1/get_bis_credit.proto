@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package worldmonitor.economic.v1;
+package megabrain-market.economic.v1;
 
-import "worldmonitor/economic/v1/bis_data.proto";
+import "megabrain-market/economic/v1/bis_data.proto";
 
 // GetBisCreditRequest requests credit-to-GDP ratio data.
 message GetBisCreditRequest {}

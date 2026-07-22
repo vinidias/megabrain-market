@@ -1,5 +1,5 @@
-// Offline tests for the worldmonitor Go SDK (httptest server, no network).
-package worldmonitor
+// Offline tests for the megabrain-market Go SDK (httptest server, no network).
+package megabrain-market
 
 import (
 	"context"
@@ -144,7 +144,7 @@ func TestMCPErrorWinsOverHTTP200(t *testing.T) {
 	if mcpErr.Code != MCPAuthErrorCode {
 		t.Fatalf("code = %d", mcpErr.Code)
 	}
-	if !strings.Contains(mcpErr.Error(), "WORLDMONITOR_API_KEY") {
+	if !strings.Contains(mcpErr.Error(), "MEGABRAIN_MARKET_API_KEY") {
 		t.Fatalf("auth hint missing: %s", mcpErr.Error())
 	}
 }
@@ -204,16 +204,16 @@ func TestNon2xxReturnsAPIError(t *testing.T) {
 	if apiErr.Status != http.StatusUnauthorized {
 		t.Fatalf("status = %d", apiErr.Status)
 	}
-	if !strings.Contains(apiErr.Error(), "WORLDMONITOR_API_KEY") {
+	if !strings.Contains(apiErr.Error(), "MEGABRAIN_MARKET_API_KEY") {
 		t.Fatalf("auth hint missing: %s", apiErr.Error())
 	}
 }
 
 func TestUserAgentCarriesVersion(t *testing.T) {
-	if !strings.HasPrefix(UserAgent, "worldmonitor-go/") || !strings.Contains(UserAgent, Version) {
+	if !strings.HasPrefix(UserAgent, "megabrain-market-go/") || !strings.Contains(UserAgent, Version) {
 		t.Fatalf("UserAgent = %q", UserAgent)
 	}
-	if !strings.Contains(UserAgent, "+https://worldmonitor.app") {
+	if !strings.Contains(UserAgent, "+https://megabrain.market") {
 		t.Fatalf("UserAgent must reference the product domain: %q", UserAgent)
 	}
 }

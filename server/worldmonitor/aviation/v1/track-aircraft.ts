@@ -3,7 +3,7 @@ import type {
     TrackAircraftRequest,
     TrackAircraftResponse,
     PositionSample,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { getRelayBaseUrl, getRelayHeaders } from './_shared';
 import { cachedFetchJson } from '../../../_shared/redis';
 import { CHROME_UA } from '../../../_shared/constants';

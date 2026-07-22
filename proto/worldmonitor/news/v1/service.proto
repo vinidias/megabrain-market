@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package worldmonitor.news.v1;
+package megabrain-market.news.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/news/v1/summarize_article.proto";
-import "worldmonitor/news/v1/get_summarize_article_cache.proto";
-import "worldmonitor/news/v1/list_feed_digest.proto";
+import "megabrain-market/news/v1/summarize_article.proto";
+import "megabrain-market/news/v1/get_summarize_article_cache.proto";
+import "megabrain-market/news/v1/list_feed_digest.proto";
 
 // NewsService provides AI-powered article summarization and feed aggregation.
 service NewsService {

@@ -3,8 +3,8 @@ import type {
   ListWebhooksRequest,
   ListWebhooksResponse,
   WebhookSummary,
-} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
-import { ApiError } from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
+} from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
+import { ApiError } from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
 
 // @ts-expect-error — JS module, no declaration file
 import { validateApiKey } from '../../../../api/_api-key.js';

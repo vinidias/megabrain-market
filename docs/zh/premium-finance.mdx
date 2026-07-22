@@ -1,8 +1,8 @@
 ---
 title: "高级金融"
-description: "高级金融是 World Monitor 中提供股票分析能力的金融变体层，最初灵感来源于一个独立的 daily_stock_analysis 项目，现已完全集成 —— 在同一面板内提供股票代码、目标价、历史回测、分析师信号与新闻情绪聚合，帮助投资者与研究员在宏观情报之上叠加个股层面的量化视角。"
+description: "高级金融是 MegaBrain Market 中提供股票分析能力的金融变体层，最初灵感来源于一个独立的 daily_stock_analysis 项目，现已完全集成 —— 在同一面板内提供股票代码、目标价、历史回测、分析师信号与新闻情绪聚合，帮助投资者与研究员在宏观情报之上叠加个股层面的量化视角。"
 ---
-高级金融是 World Monitor 中提供股票分析能力的金融变体层。这些功能最初灵感来源于一个独立的 `daily_stock_analysis` 项目，现已完全集成到 World Monitor 代码库中。
+高级金融是 MegaBrain Market 中提供股票分析能力的金融变体层。这些功能最初灵感来源于一个独立的 `daily_stock_analysis` 项目，现已完全集成到 MegaBrain Market 代码库中。
 
 该层被有意拆分为：
 
@@ -42,7 +42,7 @@ description: "高级金融是 World Monitor 中提供股票分析能力的金融
 
 1. 金融高级面板通过常规应用外壳和面板加载器加载。
 2. 高级股票 RPC 通过 `MarketService` 调用。
-3. 高级端点在服务端需要 `WORLDMONITOR_API_KEY`，而非仅 UI 层面的锁定。
+3. 高级端点在服务端需要 `MEGABRAIN_MARKET_API_KEY`，而非仅 UI 层面的锁定。
 4. 结果持久化到基于 Redis 的共享存储中。
 5. 面板优先使用已存储的共享结果，再重新计算新的分析或回测。
 
@@ -50,41 +50,41 @@ description: "高级金融是 World Monitor 中提供股票分析能力的金融
 
 主要处理器：
 
-- [analyze-stock.ts](https://github.com/koala73/worldmonitor/blob/main/server/worldmonitor/market/v1/analyze-stock.ts)
-- [get-stock-analysis-history.ts](https://github.com/koala73/worldmonitor/blob/main/server/worldmonitor/market/v1/get-stock-analysis-history.ts)
-- [backtest-stock.ts](https://github.com/koala73/worldmonitor/blob/main/server/worldmonitor/market/v1/backtest-stock.ts)
-- [list-stored-stock-backtests.ts](https://github.com/koala73/worldmonitor/blob/main/server/worldmonitor/market/v1/list-stored-stock-backtests.ts)
-- [premium-stock-store.ts](https://github.com/koala73/worldmonitor/blob/main/server/worldmonitor/market/v1/premium-stock-store.ts)
+- [analyze-stock.ts](https://github.com/vinidias/megabrain-market/blob/main/server/megabrain-market/market/v1/analyze-stock.ts)
+- [get-stock-analysis-history.ts](https://github.com/vinidias/megabrain-market/blob/main/server/megabrain-market/market/v1/get-stock-analysis-history.ts)
+- [backtest-stock.ts](https://github.com/vinidias/megabrain-market/blob/main/server/megabrain-market/market/v1/backtest-stock.ts)
+- [list-stored-stock-backtests.ts](https://github.com/vinidias/megabrain-market/blob/main/server/megabrain-market/market/v1/list-stored-stock-backtests.ts)
+- [premium-stock-store.ts](https://github.com/vinidias/megabrain-market/blob/main/server/megabrain-market/market/v1/premium-stock-store.ts)
 
 主要契约：
 
-- [analyze_stock.proto](https://github.com/koala73/worldmonitor/blob/main/proto/worldmonitor/market/v1/analyze_stock.proto)
-- [get_stock_analysis_history.proto](https://github.com/koala73/worldmonitor/blob/main/proto/worldmonitor/market/v1/get_stock_analysis_history.proto)
-- [backtest_stock.proto](https://github.com/koala73/worldmonitor/blob/main/proto/worldmonitor/market/v1/backtest_stock.proto)
-- [list_stored_stock_backtests.proto](https://github.com/koala73/worldmonitor/blob/main/proto/worldmonitor/market/v1/list_stored_stock_backtests.proto)
-- [service.proto](https://github.com/koala73/worldmonitor/blob/main/proto/worldmonitor/market/v1/service.proto)
+- [analyze_stock.proto](https://github.com/vinidias/megabrain-market/blob/main/proto/megabrain-market/market/v1/analyze_stock.proto)
+- [get_stock_analysis_history.proto](https://github.com/vinidias/megabrain-market/blob/main/proto/megabrain-market/market/v1/get_stock_analysis_history.proto)
+- [backtest_stock.proto](https://github.com/vinidias/megabrain-market/blob/main/proto/megabrain-market/market/v1/backtest_stock.proto)
+- [list_stored_stock_backtests.proto](https://github.com/vinidias/megabrain-market/blob/main/proto/megabrain-market/market/v1/list_stored_stock_backtests.proto)
+- [service.proto](https://github.com/vinidias/megabrain-market/blob/main/proto/megabrain-market/market/v1/service.proto)
 
 ### 前端接口
 
 面板：
 
-- [StockAnalysisPanel.ts](https://github.com/koala73/worldmonitor/blob/main/src/components/StockAnalysisPanel.ts)
-- [StockBacktestPanel.ts](https://github.com/koala73/worldmonitor/blob/main/src/components/StockBacktestPanel.ts)
-- [DailyMarketBriefPanel.ts](https://github.com/koala73/worldmonitor/blob/main/src/components/DailyMarketBriefPanel.ts)
+- [StockAnalysisPanel.ts](https://github.com/vinidias/megabrain-market/blob/main/src/components/StockAnalysisPanel.ts)
+- [StockBacktestPanel.ts](https://github.com/vinidias/megabrain-market/blob/main/src/components/StockBacktestPanel.ts)
+- [DailyMarketBriefPanel.ts](https://github.com/vinidias/megabrain-market/blob/main/src/components/DailyMarketBriefPanel.ts)
 
 服务和加载：
 
-- [stock-analysis.ts](https://github.com/koala73/worldmonitor/blob/main/src/services/stock-analysis.ts)
-- [stock-analysis-history.ts](https://github.com/koala73/worldmonitor/blob/main/src/services/stock-analysis-history.ts)
-- [stock-backtest.ts](https://github.com/koala73/worldmonitor/blob/main/src/services/stock-backtest.ts)
-- [daily-market-brief.ts](https://github.com/koala73/worldmonitor/blob/main/src/services/daily-market-brief.ts)
-- [data-loader.ts](https://github.com/koala73/worldmonitor/blob/main/src/app/data-loader.ts)
+- [stock-analysis.ts](https://github.com/vinidias/megabrain-market/blob/main/src/services/stock-analysis.ts)
+- [stock-analysis-history.ts](https://github.com/vinidias/megabrain-market/blob/main/src/services/stock-analysis-history.ts)
+- [stock-backtest.ts](https://github.com/vinidias/megabrain-market/blob/main/src/services/stock-backtest.ts)
+- [daily-market-brief.ts](https://github.com/vinidias/megabrain-market/blob/main/src/services/daily-market-brief.ts)
+- [data-loader.ts](https://github.com/vinidias/megabrain-market/blob/main/src/app/data-loader.ts)
 
 ---
 
 ## 股票分析
 
-高级股票分析引擎最初是独立项目核心逻辑的 TypeScript 移植版本，现已完全原生于 World Monitor。
+高级股票分析引擎最初是独立项目核心逻辑的 TypeScript 移植版本，现已完全原生于 MegaBrain Market。
 
 它计算：
 
@@ -113,7 +113,7 @@ description: "高级金融是 World Monitor 中提供股票分析能力的金融
 
 ## 共享存储
 
-World Monitor 仍缺少通用的关系型后端，因此高级金融当前使用 Redis 作为后端拥有的数据来源。
+MegaBrain Market 仍缺少通用的关系型后端，因此高级金融当前使用 Redis 作为后端拥有的数据来源。
 
 ### Redis 存储的内容
 
@@ -144,7 +144,7 @@ Redis 用作：
 
 ## 回测
 
-World Monitor 中的回测有意与已存储的分析记录关联，而非仅仅是原始信号回放。
+MegaBrain Market 中的回测有意与已存储的分析记录关联，而非仅仅是原始信号回放。
 
 当前流程：
 
@@ -168,7 +168,7 @@ World Monitor 中的回测有意与已存储的分析记录关联，而非仅仅
 - 缓存简报
 - 在下一个本地早晨计划之前避免不必要的重新生成
 
-这是 World Monitor 原生功能，并非原始项目调度器/自动化系统的直接移植。
+这是 MegaBrain Market 原生功能，并非原始项目调度器/自动化系统的直接移植。
 
 ---
 
@@ -178,8 +178,8 @@ World Monitor 中的回测有意与已存储的分析记录关联，而非仅仅
 
 高级 RPC 路径在以下文件中进行门控：
 
-- [gateway.ts](https://github.com/koala73/worldmonitor/blob/main/server/gateway.ts)
-- [api/_api-key.js](https://github.com/koala73/worldmonitor/blob/main/api/_api-key.js)
+- [gateway.ts](https://github.com/vinidias/megabrain-market/blob/main/server/gateway.ts)
+- [api/_api-key.js](https://github.com/vinidias/megabrain-market/blob/main/api/_api-key.js)
 
 这很重要，因为仅 UI 层面的锁定仍会允许从受信任的浏览器来源直接调用 API。
 
@@ -190,9 +190,9 @@ World Monitor 中的回测有意与已存储的分析记录关联，而非仅仅
 核心高级金融当前依赖于：
 
 - Yahoo Finance 图表/历史端点
-- Finnhub，提供 World Monitor 其他地方已使用的更广泛市场数据
+- Finnhub，提供 MegaBrain Market 其他地方已使用的更广泛市场数据
 - Google News RSS，作为基准股票新闻后备
-- [llm.ts](https://github.com/koala73/worldmonitor/blob/main/server/_shared/llm.ts) 中的共享 LLM 提供商链
+- [llm.ts](https://github.com/vinidias/megabrain-market/blob/main/server/_shared/llm.ts) 中的共享 LLM 提供商链
 
 由提供商支持的定向股票新闻层在 [PREMIUM_FINANCE_SEARCH.md](/zh/premium-finance-search) 中单独文档说明。
 
@@ -233,7 +233,7 @@ World Monitor 中的回测有意与已存储的分析记录关联，而非仅仅
 
 ## 当前边界
 
-该功能在 World Monitor 当前架构内有效且可用于生产环境，但一些边界仍然明确：
+该功能在 MegaBrain Market 当前架构内有效且可用于生产环境，但一些边界仍然明确：
 
 - Redis 目前是规范存储
 - 没有独立的金融数据库
@@ -241,4 +241,4 @@ World Monitor 中的回测有意与已存储的分析记录关联，而非仅仅
 - 原始项目中更广泛的提供商堆栈未被迁移
 - 面向中国的市场数据/搜索层被有意排除
 
-这些边界使该功能与 World Monitor 的架构保持一致。
+这些边界使该功能与 MegaBrain Market 的架构保持一致。

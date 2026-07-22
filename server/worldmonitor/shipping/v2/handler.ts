@@ -1,4 +1,4 @@
-import type { ShippingV2ServiceHandler } from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
+import type { ShippingV2ServiceHandler } from '../../../../src/generated/server/megabrain-market/shipping/v2/service_server';
 
 import { routeIntelligence } from './route-intelligence';
 import { registerWebhook } from './register-webhook';

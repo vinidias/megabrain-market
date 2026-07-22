@@ -2,7 +2,7 @@ import type {
   ServerContext,
   SearchGoogleFlightsRequest,
   SearchGoogleFlightsResponse,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import { getRelayBaseUrl, getRelayHeaders } from '../../../_shared/relay';
 import { parseStringArray } from '../../../_shared/parse-string-array';
 import { cachedFetchJson } from '../../../_shared/redis';

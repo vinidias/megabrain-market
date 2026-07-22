@@ -207,7 +207,7 @@ function validateIndexLanguageMetadata(stats, html = read('index.html')) {
 // crashing the whole gate. Returns null only when the value is not a URL at all.
 function hrefSearchParams(href) {
   try {
-    return new URL(href, 'https://www.worldmonitor.app').searchParams;
+    return new URL(href, 'https://www.megabrain.market').searchParams;
   } catch {
     return null;
   }
@@ -284,13 +284,13 @@ function computeStats() {
   const protoServices = protoFiles
     .map((f) => (read(f).match(/^service\s+\w+/gm) || []).length)
     .reduce((a, b) => a + b, 0);
-  const protoDomainFolders = dirsIn('proto/worldmonitor').length;
+  const protoDomainFolders = dirsIn('proto/megabrain-market').length;
 
   // ---- Generated OpenAPI service specs (docs/api/*Service.openapi.yaml) ----
   const openapiServiceSpecs = filesIn('docs/api').filter((f) => /Service\.openapi\.yaml$/.test(f)).length;
 
-  // ---- Server domain handlers (server/worldmonitor/*/) ----
-  const serverDomains = dirsIn('server/worldmonitor').length;
+  // ---- Server domain handlers (server/megabrain-market/*/) ----
+  const serverDomains = dirsIn('server/megabrain-market').length;
 
   // ---- User-facing locales (src/locales/*.json, excluding shell fragments) ----
   const localeCodes = filesIn('src/locales')
@@ -452,7 +452,7 @@ function claims(s) {
 
     { file: 'docs/mcp-overview.mdx', re: /same (\d+)\s+tools/, value: s.mcpToolCount },
     { file: 'docs/mcp-apps.mdx', re: /current fleet ships (\d+)\s+MCP Apps/, value: s.mcpAppCount },
-    { file: 'docs/mcp-quickstart.mdx', re: /WorldMonitor exposes (\d+)\s+live tools/, value: s.mcpToolCount },
+    { file: 'docs/mcp-quickstart.mdx', re: /MegaBrainMarket exposes (\d+)\s+live tools/, value: s.mcpToolCount },
     { file: 'docs/mcp-quickstart.mdx', re: /receives (\d+)\s+compressed tool descriptions/, value: s.mcpToolCount },
     { file: 'public/mcp-server.md', re: /server ships \*\*(\d+)\s+tools\*\*/, value: s.mcpToolCount },
 
@@ -480,20 +480,20 @@ function claims(s) {
     { file: 'docs/algorithms.mdx', re: /and (\d+)\s+tracked world-leader names/, value: s.leaderNames },
 
     // ---- Blog posts (blog-site/) — capability counts quoted in evergreen developer/overview posts ----
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /typed API: (\d+)\s+services/, value: s.protoServices },
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /typed API: \d+\s+services, (\d+)\s+proto files/, value: s.protoFiles },
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /\*\*(\d+)\s+proto files\*\* defining/, value: s.protoFiles },
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /\*\*(\d+)\s+typed service domains\*\*/, value: s.protoServices },
-    // Heading labels the table below it, which is enumerated from server/worldmonitor/* dirs → pin to serverDomains (not protoServices; the two equal 34 today but a domain with two `service` blocks would diverge them).
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /##\s+(\d+)\s+Service Domains/, value: s.serverDomains },
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /Protocol Buffers \((\d+)\s+files\)/, value: s.protoFiles },
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /worldmonitor\)\. (\d+)\s+services, \d+\s+proto files, and a global/, value: s.protoServices },
-    { file: 'blog-site/src/content/blog/build-on-worldmonitor-developer-api-open-source.md', re: /worldmonitor\)\. \d+\s+services, (\d+)\s+proto files, and a global/, value: s.protoFiles },
-    { file: 'blog-site/src/content/blog/what-is-worldmonitor-real-time-global-intelligence.md', re: /typed APIs \((\d+)\s+proto files, \d+\s+services\)/, value: s.protoFiles },
-    { file: 'blog-site/src/content/blog/what-is-worldmonitor-real-time-global-intelligence.md', re: /typed APIs \(\d+\s+proto files, (\d+)\s+services\)/, value: s.protoServices },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /typed API: (\d+)\s+services/, value: s.protoServices },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /typed API: \d+\s+services, (\d+)\s+proto files/, value: s.protoFiles },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /\*\*(\d+)\s+proto files\*\* defining/, value: s.protoFiles },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /\*\*(\d+)\s+typed service domains\*\*/, value: s.protoServices },
+    // Heading labels the table below it, which is enumerated from server/megabrain-market/* dirs → pin to serverDomains (not protoServices; the two equal 34 today but a domain with two `service` blocks would diverge them).
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /##\s+(\d+)\s+Service Domains/, value: s.serverDomains },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /Protocol Buffers \((\d+)\s+files\)/, value: s.protoFiles },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /megabrain-market\)\. (\d+)\s+services, \d+\s+proto files, and a global/, value: s.protoServices },
+    { file: 'blog-site/src/content/blog/build-on-megabrain-market-developer-api-open-source.md', re: /megabrain-market\)\. \d+\s+services, (\d+)\s+proto files, and a global/, value: s.protoFiles },
+    { file: 'blog-site/src/content/blog/what-is-megabrain-market-real-time-global-intelligence.md', re: /typed APIs \((\d+)\s+proto files, \d+\s+services\)/, value: s.protoFiles },
+    { file: 'blog-site/src/content/blog/what-is-megabrain-market-real-time-global-intelligence.md', re: /typed APIs \(\d+\s+proto files, (\d+)\s+services\)/, value: s.protoServices },
     { file: 'blog-site/src/content/blog/ai-powered-intelligence-without-the-cloud.md', re: /architecture \((\d+)\s+proto files, \d+\s+typed services\)/, value: s.protoFiles },
     { file: 'blog-site/src/content/blog/ai-powered-intelligence-without-the-cloud.md', re: /architecture \(\d+\s+proto files, (\d+)\s+typed services\)/, value: s.protoServices },
-    { file: 'blog-site/src/content/blog/worldmonitor-vs-traditional-intelligence-tools.md', re: /using the (\d+)\s+typed API services/, value: s.protoServices },
+    { file: 'blog-site/src/content/blog/megabrain-market-vs-traditional-intelligence-tools.md', re: /using the (\d+)\s+typed API services/, value: s.protoServices },
   ];
 }
 

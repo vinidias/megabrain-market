@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetCountryChokepointIndexRequest,
   GetCountryChokepointIndexResponse,
-} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/supply_chain/v1/service_server';
 
 import { getCachedJson, setCachedJson } from '../../../_shared/redis';
 import { isCallerPremium } from '../../../_shared/premium-check';

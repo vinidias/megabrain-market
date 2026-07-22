@@ -1,4 +1,4 @@
-import type { ForecastServiceHandler } from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+import type { ForecastServiceHandler } from '../../../../src/generated/server/megabrain-market/forecast/v1/service_server';
 import { getForecastScorecard } from './get-forecast-scorecard';
 import { getForecasts } from './get-forecasts';
 import { getSimulationPackage } from './get-simulation-package';

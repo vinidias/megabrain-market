@@ -157,7 +157,7 @@ export function classifySyntheticCheckoutError(
  * carries enough information to identify whether Cloudflare, Vercel,
  * or our own app emitted it.
  *
- * Originating triage: WORLDMONITOR-RN — a 403 on /api/create-checkout
+ * Originating triage: MEGABRAIN_MARKET-RN — a 403 on /api/create-checkout
  * had no signal beyond status code because the old failure path called
  * `resp.json().catch(() => ({}))` and discarded both the response body
  * (Cloudflare 403 pages are HTML and silently became `{}`) AND the

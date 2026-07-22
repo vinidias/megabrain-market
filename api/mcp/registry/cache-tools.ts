@@ -44,7 +44,7 @@ export const CACHE_TOOLS: ToolDef[] = [
   {
     name: 'get_market_data',
     _outputBudgetBytes: 131072,
-    description: 'Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from WorldMonitor\'s curated bootstrap cache.',
+    description: 'Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from MegaBrainMarket\'s curated bootstrap cache.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -269,7 +269,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     _maxStaleMin: 30,
     // NOTE: `GET /api/intelligence/v1/get-risk-scores` is NOT covered here.
     // The audit-time hint matched only this tool's conflict/risk cache keys,
-    // but the handler at server/worldmonitor/intelligence/v1/get-risk-scores.ts
+    // but the handler at server/megabrain-market/intelligence/v1/get-risk-scores.ts
     // reads a broader cross-domain set (infra outages, climate anomalies,
     // cyber threats, wildfires, GPS jamming, OREF history, security
     // advisories, displacement, news insights, news threats, aviation,
@@ -331,7 +331,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     name: 'get_news_intelligence',
     _uiResourceUri: NEWS_INTELLIGENCE_UI_URI,
     _outputBudgetBytes: 131072,
-    description: 'AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from WorldMonitor\'s intelligence layer.',
+    description: 'AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from MegaBrainMarket\'s intelligence layer.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -541,7 +541,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     _seedMetaKey: 'seed-meta:intelligence:risk-scores',
     _maxStaleMin: 120,
     // CASCADE-MIRROR EQUIVALENCE: the API handler at
-    // server/worldmonitor/military/v1/get-theater-posture.ts:23 reads 3 cascade
+    // server/megabrain-market/military/v1/get-theater-posture.ts:23 reads 3 cascade
     // variants (live + stale + backup) and returns the freshest available.
     // This MCP tool reads only the stale variant; PR #3658's U7 already
     // documents `theater-posture:sebuf:v1` and `theater-posture:sebuf:backup:v1`
@@ -1833,7 +1833,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     name: 'get_forecast_predictions',
     _uiResourceUri: FORECASTS_UI_URI,
     _outputBudgetBytes: 131072,
-    description: 'AI-generated geopolitical and economic forecasts from WorldMonitor\'s predictive models. Covers upcoming risk events and probability assessments.',
+    description: 'AI-generated geopolitical and economic forecasts from MegaBrainMarket\'s predictive models. Covers upcoming risk events and probability assessments.',
     inputSchema: {
       type: 'object',
       properties: {

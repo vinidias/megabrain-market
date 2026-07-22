@@ -1,17 +1,17 @@
 ---
-title: "Give Your AI Agent Eyes on the World: The World Monitor MCP Server"
+title: "Give Your AI Agent Eyes on the World: The MegaBrain Market MCP Server"
 description: "Connect Claude, Cursor, or any MCP client to 39 live geopolitical intelligence tools. Real-time country risk, conflicts, chokepoints, and markets for AI agents."
-metaTitle: "Real-Time Intelligence MCP Server | World Monitor"
+metaTitle: "Real-Time Intelligence MCP Server | MegaBrain Market"
 keywords: "MCP server real-time data, Claude MCP server, Model Context Protocol geopolitics, AI agent live data, geopolitical data for LLMs, real-time intelligence API for AI"
 audience: "AI engineers, agent builders, Claude power users, developers, intelligence analysts automating workflows"
-heroImage: "/blog/images/blog/worldmonitor-mcp-server-ai-agents-real-time-intelligence.jpg"
+heroImage: "/blog/images/blog/megabrain-market-mcp-server-ai-agents-real-time-intelligence.jpg"
 pubDate: "2026-06-10"
 modifiedDate: "2026-06-13"
 ---
 
 Ask any LLM what is happening in the Strait of Hormuz right now and you get a polite version of "my training data ends months ago." Large language models are brilliant reasoners with no eyes. They cannot see today's vessel traffic, this morning's conflict events, or the country risk score that moved overnight.
 
-The Model Context Protocol (MCP) fixes the plumbing problem: it gives AI assistants a standard way to call live tools. World Monitor fixes the data problem: it exposes the entire intelligence platform, the same one behind the [free real-time dashboard](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/), as an MCP server with **39 live tools**.
+The Model Context Protocol (MCP) fixes the plumbing problem: it gives AI assistants a standard way to call live tools. MegaBrain Market fixes the data problem: it exposes the entire intelligence platform, the same one behind the [free real-time dashboard](/blog/posts/what-is-megabrain-market-real-time-global-intelligence/), as an MCP server with **39 live tools**.
 
 Connect the two and your agent can answer questions like "Which of my supplier countries got riskier this week, and why?" with real numbers instead of vibes.
 
@@ -20,7 +20,7 @@ Connect the two and your agent can answer questions like "Which of my supplier c
 The endpoint is a single URL:
 
 ```
-https://worldmonitor.app/mcp
+https://megabrain.market/mcp
 ```
 
 It speaks streamable HTTP (JSON-RPC 2.0), handles OAuth automatically on first connection, and serves 39 tools across six domains. The flagship ones:
@@ -45,22 +45,22 @@ The rest cover sanctions, cyber threats, energy intelligence, displacement, natu
 ```json
 {
   "mcpServers": {
-    "worldmonitor": { "url": "https://worldmonitor.app/mcp" }
+    "megabrain-market": { "url": "https://megabrain.market/mcp" }
   }
 }
 ```
 
-**Claude web (claude.ai):** Settings → Connectors → Add custom connector → name it WorldMonitor, paste `https://worldmonitor.app/mcp`.
+**Claude web (claude.ai):** Settings → Connectors → Add custom connector → name it MegaBrainMarket, paste `https://megabrain.market/mcp`.
 
 **Cursor:** same JSON shape in `~/.cursor/mcp.json`.
 
 **Anything else:** test the connection with the MCP Inspector:
 
 ```bash
-npx @modelcontextprotocol/inspector https://worldmonitor.app/mcp
+npx @modelcontextprotocol/inspector https://megabrain.market/mcp
 ```
 
-On first use, the client walks you through "Sign in with WorldMonitor Pro." MCP access requires a [Pro account](https://www.worldmonitor.app/pro); API Starter and Enterprise keys (`X-WorldMonitor-Key`) also work for server-to-server agents. OAuth clients do not need copied keys because the protocol handles token exchange and refresh.
+On first use, the client walks you through "Sign in with MegaBrainMarket Pro." MCP access requires a [Pro account](https://www.megabrain.market/pro); API Starter and Enterprise keys (`X-MegaBrainMarket-Key`) also work for server-to-server agents. OAuth clients do not need copied keys because the protocol handles token exchange and refresh.
 
 ## Six Pre-Built Workflows
 
@@ -81,7 +81,7 @@ A practical pattern: schedule your agent to run `country-briefing` for your watc
 
 Live intelligence payloads are big. A full market data response can be tens of kilobytes, most of it fields your agent does not need and all of it billed as context tokens.
 
-Every World Monitor tool accepts an optional `jmespath` argument. The server applies the expression server-side and returns only the projection:
+Every MegaBrain Market tool accepts an optional `jmespath` argument. The server applies the expression server-side and returns only the projection:
 
 ```json
 {
@@ -98,14 +98,14 @@ If you have ever watched an agent blow its context window on one verbose API res
 
 ## Built for Agent Discovery
 
-World Monitor treats autonomous agents as first-class clients. From the root URL, an agent can discover everything by itself:
+MegaBrain Market treats autonomous agents as first-class clients. From the root URL, an agent can discover everything by itself:
 
 - `/llms.txt`: LLM-friendly markdown briefing of the whole platform
 - `/.well-known/api-catalog`: RFC 9727 linkset bundling every discovery URL
 - `/.well-known/mcp/server-card.json`: transport, endpoint, OAuth scopes, capability flags
 - `/openapi.yaml`: one bundled OpenAPI 3.1 spec covering all 34 REST services
 
-So an agent that has never heard of World Monitor can start from `https://worldmonitor.app/`, read the Link headers, and wire itself up without a human in the loop. If you prefer raw REST over MCP, the same data is available through the [developer API](/blog/posts/build-on-worldmonitor-developer-api-open-source/), and the two share authentication.
+So an agent that has never heard of MegaBrain Market can start from `https://megabrain.market/`, read the Link headers, and wire itself up without a human in the loop. If you prefer raw REST over MCP, the same data is available through the [developer API](/blog/posts/build-on-megabrain-market-developer-api-open-source/), and the two share authentication.
 
 ## Quotas, Honestly
 
@@ -129,7 +129,7 @@ Fifty calls sounds tight until you use JMESPath and the prompt templates: a comp
 
 The Model Context Protocol is an open standard that lets AI assistants call external tools over a uniform interface. An MCP server exposes capabilities (tools, prompts, resources); clients like Claude, Cursor, and custom agents discover and invoke them automatically.
 
-**Does the World Monitor MCP server work with ChatGPT or other non-Claude clients?**
+**Does the MegaBrain Market MCP server work with ChatGPT or other non-Claude clients?**
 
 Any client that implements MCP over streamable HTTP with OAuth can connect. The server is client-agnostic. Claude Desktop, claude.ai connectors, Cursor, and the MCP Inspector are documented paths; custom agents can use an API key instead of OAuth.
 
@@ -139,4 +139,4 @@ MCP requires a Pro subscription ($20/month) or an API plan. The dashboard itself
 
 ---
 
-**Add `https://worldmonitor.app/mcp` to your MCP client and ask your agent what changed in the world today. Setup docs at [worldmonitor.app/docs/mcp-quickstart](https://www.worldmonitor.app/docs/mcp-quickstart).**
+**Add `https://megabrain.market/mcp` to your MCP client and ask your agent what changed in the world today. Setup docs at [megabrain.market/docs/mcp-quickstart](https://www.megabrain.market/docs/mcp-quickstart).**

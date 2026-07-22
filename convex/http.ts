@@ -6,8 +6,8 @@ import { resendWebhookHandler } from "./resendWebhookHandler";
 import { USER_PREFS_WRITE_RATE_LIMIT } from "./constants";
 
 const TRUSTED = [
-  "https://worldmonitor.app",
-  "*.worldmonitor.app",
+  "https://megabrain.market",
+  "*.megabrain.market",
   "http://localhost:3000",
 ];
 
@@ -356,10 +356,10 @@ http.route({
     if (claimed.ok && botToken) {
       await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "User-Agent": "worldmonitor-convex/1.0" },
+        headers: { "Content-Type": "application/json", "User-Agent": "megabrain-market-convex/1.0" },
         body: JSON.stringify({
           chat_id: chatId,
-          text: "✅ WorldMonitor connected! You'll receive breaking news alerts here.",
+          text: "✅ MegaBrainMarket connected! You'll receive breaking news alerts here.",
         }),
         signal: AbortSignal.timeout(8000),
       }).catch((err: unknown) => {

@@ -27,10 +27,10 @@ function overrideGlobal(name, value) {
 
 function installBrowserEnv() {
   const location = {
-    hostname: 'worldmonitor.app',
+    hostname: 'megabrain.market',
     protocol: 'https:',
-    host: 'worldmonitor.app',
-    origin: 'https://worldmonitor.app',
+    host: 'megabrain.market',
+    origin: 'https://megabrain.market',
   };
   const navigator = { userAgent: 'node-test', onLine: true };
   const window = { location, navigator };

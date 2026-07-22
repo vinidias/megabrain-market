@@ -1,7 +1,7 @@
 /**
  * GlobeMap - 3D interactive globe using globe.gl
  *
- * Matches World Monitor's MapContainer API so it can be used as a drop-in
+ * Matches MegaBrain Market's MapContainer API so it can be used as a drop-in
  * replacement within MapContainer when the user enables globe mode.
  *
  * Architecture mirrors Sentinel (sentinel.axonia.us):
@@ -55,12 +55,12 @@ import type { DisplacementFlow } from '@/services/displacement';
 import type { ClimateAnomaly } from '@/services/climate';
 import type { GpsJamHex } from '@/services/gps-interference';
 import type { SatellitePosition } from '@/services/satellites';
-import type { ImageryScene } from '@/generated/server/worldmonitor/imagery/v1/service_server';
+import type { ImageryScene } from '@/generated/server/megabrain-market/imagery/v1/service_server';
 import { isAllowedPreviewUrl } from '@/utils/imagery-preview';
 import { getCategoryStyle } from '@/services/webcams';
 import { pinWebcam, isPinned } from '@/services/webcams/pinned-store';
-import type { WebcamEntry, WebcamCluster } from '@/generated/client/worldmonitor/webcam/v1/service_client';
-import type { TrafficAnomaly as ProtoTrafficAnomaly, DdosLocationHit } from '@/generated/client/worldmonitor/infrastructure/v1/service_client';
+import type { WebcamEntry, WebcamCluster } from '@/generated/client/megabrain-market/webcam/v1/service_client';
+import type { TrafficAnomaly as ProtoTrafficAnomaly, DdosLocationHit } from '@/generated/client/megabrain-market/infrastructure/v1/service_client';
 import type { RadiationObservation } from '@/services/radiation';
 import type { ScenarioVisualState } from '@/config/scenario-templates';
 import { setTrustedHtml, trustedHtml } from '@/utils/dom-utils';
@@ -687,7 +687,7 @@ export class GlobeMap {
     this.controls = controls;
     // three r183 OrbitControls only position-tracks touch pointers but reads the
     // surviving/second pointer's position in mixed mouse|pen + touch gestures —
-    // crashes reading undefined.x on touchscreen laptops (WORLDMONITOR-QD).
+    // crashes reading undefined.x on touchscreen laptops (MEGABRAIN_MARKET-QD).
     guardOrbitControlsPointerTracking(controls);
     controls.autoRotate = !desktop;
     controls.autoRotateSpeed = 0.3;
@@ -1922,7 +1922,7 @@ export class GlobeMap {
 
   private createLayerToggles(): void {
     const layerDefs = getLayersForVariant((SITE_VARIANT || 'full') as MapVariant, 'globe');
-    const _wmKey = getSecretState('WORLDMONITOR_API_KEY').present;
+    const _wmKey = getSecretState('MEGABRAIN_MARKET_API_KEY').present;
     const layers = layerDefs.map(def => ({
       key: def.key,
       label: resolveLayerLabel(def, t),

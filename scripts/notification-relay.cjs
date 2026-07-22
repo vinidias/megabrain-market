@@ -27,7 +27,7 @@ const CONVEX_SITE_URL = process.env.CONVEX_SITE_URL ?? CONVEX_URL.replace('.conv
 const RELAY_SECRET = process.env.RELAY_SHARED_SECRET ?? '';
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? '';
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? '';
-const RESEND_FROM = process.env.RESEND_FROM_EMAIL ?? 'WorldMonitor <alerts@worldmonitor.app>';
+const RESEND_FROM = process.env.RESEND_FROM_EMAIL ?? 'MegaBrainMarket <alerts@megabrain.market>';
 // When QUIET_HOURS_BATCH_ENABLED=0, treat batch_on_wake as critical_only.
 // Useful during relay rollout to disable queued batching before drainBatchOnWake is fully tested.
 const QUIET_HOURS_BATCH_ENABLED = process.env.QUIET_HOURS_BATCH_ENABLED !== '0';
@@ -49,7 +49,7 @@ const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 // nothing rather than fan out on a stale/partial rule set).
 async function fetchEnabledRules(enabled = true) {
   const res = await fetch(`${CONVEX_SITE_URL}/relay/enabled-rules?enabled=${enabled}`, {
-    headers: { Authorization: `Bearer ${RELAY_SECRET}`, 'User-Agent': 'worldmonitor-relay/1.0' },
+    headers: { Authorization: `Bearer ${RELAY_SECRET}`, 'User-Agent': 'megabrain-market-relay/1.0' },
     signal: AbortSignal.timeout(10000),
   });
   if (!res.ok) throw new Error(`enabled-rules HTTP ${res.status}`);
@@ -61,7 +61,7 @@ async function fetchEnabledRules(enabled = true) {
 async function upstashRest(...args) {
   const res = await fetch(`${UPSTASH_URL}/${args.map(encodeURIComponent).join('/')}`, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${UPSTASH_TOKEN}`, 'User-Agent': 'worldmonitor-relay/1.0' },
+    headers: { Authorization: `Bearer ${UPSTASH_TOKEN}`, 'User-Agent': 'megabrain-market-relay/1.0' },
   });
   if (!res.ok) {
     console.warn(`[relay] Upstash error ${res.status} for command ${args[0]}`);
@@ -75,7 +75,7 @@ async function upstashDedupSetNx(key) {
   try {
     const res = await fetch(`${UPSTASH_URL}/${['SET', key, '1', 'NX', 'EX', String(DEDUP_TTL_SECONDS)].map(encodeURIComponent).join('/')}`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}`, 'User-Agent': 'worldmonitor-relay/1.0' },
+      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}`, 'User-Agent': 'megabrain-market-relay/1.0' },
       signal: AbortSignal.timeout(10000),
     });
     if (!res.ok) return 'error';
@@ -114,7 +114,7 @@ async function deactivateChannel(userId, channelType) {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${RELAY_SECRET}`,
-        'User-Agent': 'worldmonitor-relay/1.0',
+        'User-Agent': 'megabrain-market-relay/1.0',
       },
       body: JSON.stringify({ userId, channelType }),
       signal: AbortSignal.timeout(10000),
@@ -169,7 +169,7 @@ async function isUserPro(userId) {
   try {
     const res = await fetch(`${CONVEX_SITE_URL}/relay/entitlement`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RELAY_SECRET}`, 'User-Agent': 'worldmonitor-relay/1.0' },
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RELAY_SECRET}`, 'User-Agent': 'megabrain-market-relay/1.0' },
       body: JSON.stringify({ userId }),
       signal: AbortSignal.timeout(5000),
     });
@@ -233,19 +233,19 @@ async function drainHeldForUser(userId, variant, allowedChannelTypes) {
   const events = items.map(i => { try { return JSON.parse(i); } catch { return null; } }).filter(Boolean);
   if (events.length === 0) { await upstashRest('DEL', key); return; }
 
-  const lines = [`WorldMonitor — ${events.length} held alert${events.length !== 1 ? 's' : ''} from quiet hours`, ''];
+  const lines = [`MegaBrainMarket — ${events.length} held alert${events.length !== 1 ? 's' : ''} from quiet hours`, ''];
   for (const ev of events) {
     lines.push(`[${(ev.severity ?? 'high').toUpperCase()}] ${ev.payload?.title ?? ev.eventType}`);
   }
-  lines.push('', 'View full dashboard → worldmonitor.app');
+  lines.push('', 'View full dashboard → megabrain.market');
   const text = lines.join('\n');
-  const subject = `WorldMonitor — ${events.length} held alert${events.length !== 1 ? 's' : ''}`;
+  const subject = `MegaBrainMarket — ${events.length} held alert${events.length !== 1 ? 's' : ''}`;
 
   let channels = [];
   try {
     const chRes = await fetch(`${CONVEX_SITE_URL}/relay/channels`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RELAY_SECRET}`, 'User-Agent': 'worldmonitor-relay/1.0' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RELAY_SECRET}`, 'User-Agent': 'megabrain-market-relay/1.0' },
       body: JSON.stringify({ userId }),
       signal: AbortSignal.timeout(10000),
     });
@@ -277,9 +277,9 @@ async function drainHeldForUser(userId, variant, allowedChannelTypes) {
       });
       else if (ch.channelType === 'web_push' && ch.endpoint && ch.p256dh && ch.auth) {
         ok = await sendWebPush(userId, ch, {
-          title: `WorldMonitor · ${events.length} held alert${events.length === 1 ? '' : 's'}`,
+          title: `MegaBrainMarket · ${events.length} held alert${events.length === 1 ? '' : 's'}`,
           body: subject,
-          url: 'https://worldmonitor.app/',
+          url: 'https://megabrain.market/',
           tag: `quiet_hours_batch:${userId}`,
           eventType: 'quiet_hours_batch',
         });
@@ -356,7 +356,7 @@ async function sendTelegram(userId, chatId, text, _retryCount = 0) {
   }
   const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'User-Agent': 'worldmonitor-relay/1.0' },
+    headers: { 'Content-Type': 'application/json', 'User-Agent': 'megabrain-market-relay/1.0' },
     body: JSON.stringify({ chat_id: chatId, text }),
     signal: AbortSignal.timeout(10000),
   });
@@ -422,7 +422,7 @@ async function sendSlack(userId, webhookEnvelope, text) {
     res = await postJsonWithPinnedAddress(
       safeUrl,
       JSON.stringify({ text, unfurl_links: false }),
-      { 'Content-Type': 'application/json', 'User-Agent': 'worldmonitor-relay/1.0' },
+      { 'Content-Type': 'application/json', 'User-Agent': 'megabrain-market-relay/1.0' },
       resolvedAddresses,
     );
   } catch (err) {
@@ -472,7 +472,7 @@ async function sendDiscord(userId, webhookEnvelope, text, retryCount = 0) {
     res = await postJsonWithPinnedAddress(
       safeUrl,
       JSON.stringify({ content }),
-      { 'Content-Type': 'application/json', 'User-Agent': 'worldmonitor-relay/1.0' },
+      { 'Content-Type': 'application/json', 'User-Agent': 'megabrain-market-relay/1.0' },
       resolvedAddresses,
     );
   } catch (err) {
@@ -550,7 +550,7 @@ async function sendWebhook(userId, webhookEnvelope, event) {
     const resp = await postJsonWithPinnedAddress(
       safeUrl,
       payload,
-      { 'Content-Type': 'application/json', 'User-Agent': 'worldmonitor-relay/1.0' },
+      { 'Content-Type': 'application/json', 'User-Agent': 'megabrain-market-relay/1.0' },
       resolvedAddresses,
     );
     if (resp.status === 404 || resp.status === 410 || resp.status === 403) {
@@ -597,7 +597,7 @@ function ensureVapidConfigured(client) {
   if (webpushConfigured) return true;
   const pub = process.env.VAPID_PUBLIC_KEY;
   const priv = process.env.VAPID_PRIVATE_KEY;
-  const subject = process.env.VAPID_SUBJECT || 'mailto:support@worldmonitor.app';
+  const subject = process.env.VAPID_SUBJECT || 'mailto:support@megabrain.market';
   if (!pub || !priv) {
     if (!webpushConfigWarned) {
       console.warn('[relay] VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY not set — web_push deliveries disabled');
@@ -630,10 +630,10 @@ async function sendWebPush(userId, subscription, payload) {
   if (!ensureVapidConfigured(client)) return false;
 
   const body = JSON.stringify({
-    title: payload.title || 'WorldMonitor',
+    title: payload.title || 'MegaBrainMarket',
     body: payload.body || '',
-    url: payload.url || 'https://worldmonitor.app/',
-    tag: payload.tag || 'worldmonitor-generic',
+    url: payload.url || 'https://megabrain.market/',
+    tag: payload.tag || 'megabrain-market-generic',
     eventType: payload.eventType,
   });
 
@@ -937,7 +937,7 @@ async function processWelcome(event) {
   try {
     const chRes = await fetch(`${CONVEX_SITE_URL}/relay/channels`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RELAY_SECRET}`, 'User-Agent': 'worldmonitor-relay/1.0' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RELAY_SECRET}`, 'User-Agent': 'megabrain-market-relay/1.0' },
       body: JSON.stringify({ userId }),
       signal: AbortSignal.timeout(10000),
     });
@@ -948,13 +948,13 @@ async function processWelcome(event) {
   if (!ch) return;
 
   // Telegram welcome is sent directly by convex/http.ts after claimPairingToken succeeds.
-  const text = `✅ WorldMonitor connected! You'll receive breaking news alerts here.`;
+  const text = `✅ MegaBrainMarket connected! You'll receive breaking news alerts here.`;
   if (channelType === 'slack' && ch.webhookEnvelope) {
     await sendSlack(userId, ch.webhookEnvelope, text);
   } else if (channelType === 'discord' && ch.webhookEnvelope) {
     await sendDiscord(userId, ch.webhookEnvelope, text);
   } else if (channelType === 'email' && ch.email) {
-    await sendEmail(ch.email, 'WorldMonitor Notifications Connected', text);
+    await sendEmail(ch.email, 'MegaBrainMarket Notifications Connected', text);
   } else if (channelType === 'web_push' && ch.endpoint && ch.p256dh && ch.auth) {
     // Welcome push on first web_push connect. Short body — Chrome's
     // notification shelf clips past ~80 chars on most OSes. Click
@@ -963,9 +963,9 @@ async function processWelcome(event) {
     // in sendWebPush — a welcome past 30 minutes after subscribe is
     // noise, not value.
     await sendWebPush(userId, ch, {
-      title: 'WorldMonitor connected',
+      title: 'MegaBrainMarket connected',
       body: "You'll receive alerts here when events match your sensitivity settings.",
-      url: 'https://worldmonitor.app/',
+      url: 'https://megabrain.market/',
       tag: `channel_welcome:${userId}`,
       eventType: 'channel_welcome',
     });
@@ -1007,7 +1007,7 @@ async function shadowLogScore(event) {
       headers: {
         Authorization: `Bearer ${UPSTASH_TOKEN}`,
         'Content-Type': 'application/json',
-        'User-Agent': 'worldmonitor-relay/1.0',
+        'User-Agent': 'megabrain-market-relay/1.0',
       },
       body: JSON.stringify([
         ['ZADD', SHADOW_SCORE_LOG_KEY, String(now), member],
@@ -1171,7 +1171,7 @@ async function processEvent(event) {
   if (skippedCount > 0) console.log(`[relay] Skipping ${skippedCount} non-PRO user(s)`);
 
   const text = formatMessage(event);
-  const subject = `WorldMonitor Alert: ${event.payload?.title ?? event.eventType}`;
+  const subject = `MegaBrainMarket Alert: ${event.payload?.title ?? event.eventType}`;
   const eventSeverity = event.severity ?? 'high';
 
   for (const rule of matching) {
@@ -1229,7 +1229,7 @@ async function processEvent(event) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${RELAY_SECRET}`,
-          'User-Agent': 'worldmonitor-relay/1.0',
+          'User-Agent': 'megabrain-market-relay/1.0',
         },
         body: JSON.stringify({ userId: rule.userId }),
         signal: AbortSignal.timeout(10000),
@@ -1268,9 +1268,9 @@ async function processEvent(event) {
           // of the formatted text as the body; the click URL points
           // at the event's link if present, else the dashboard.
           const firstLine = (deliveryText || '').split('\n')[1] || '';
-          const eventUrl = event.payload?.link || event.payload?.url || 'https://worldmonitor.app/';
+          const eventUrl = event.payload?.link || event.payload?.url || 'https://megabrain.market/';
           await sendWebPush(rule.userId, ch, {
-            title: event.payload?.title || event.eventType || 'WorldMonitor',
+            title: event.payload?.title || event.eventType || 'MegaBrainMarket',
             body: firstLine,
             url: eventUrl,
             tag: `${event.eventType}:${rule.userId}`,

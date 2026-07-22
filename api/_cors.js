@@ -1,10 +1,10 @@
 const ALLOWED_ORIGIN_PATTERNS = [
-  /^https:\/\/(.*\.)?worldmonitor\.app$/,
+  /^https:\/\/(.*\.)?megabrain-market\.app$/,
   // Vercel preview deployments under the "eliewm" team scope, e.g.
-  //   worldmonitor-git-<branch>-eliewm.vercel.app  (git-branch alias)
-  //   worldmonitor-<hash>-eliewm.vercel.app        (deployment URL)
+  //   megabrain-market-git-<branch>-eliewm.vercel.app  (git-branch alias)
+  //   megabrain-market-<hash>-eliewm.vercel.app        (deployment URL)
   // Tight on purpose: never a bare *.vercel.app (this is a security allowlist).
-  /^https:\/\/worldmonitor-[a-z0-9-]+-eliewm\.vercel\.app$/,
+  /^https:\/\/megabrain-market-[a-z0-9-]+-eliewm\.vercel\.app$/,
   /^https?:\/\/tauri\.localhost(:\d+)?$/,
   /^https?:\/\/[a-z0-9-]+\.tauri\.localhost(:\d+)?$/i,
   /^tauri:\/\/localhost$/,
@@ -19,12 +19,12 @@ const ALLOWED_ORIGIN_PATTERNS = [
 const ALLOWED_HEADERS = [
   'Content-Type',
   'Authorization',
-  'X-WorldMonitor-Key',
+  'X-MegaBrainMarket-Key',
   'X-Api-Key',
   'X-Widget-Key',
   'X-Pro-Key',
-  'X-WorldMonitor-Desktop-Timestamp',
-  'X-WorldMonitor-Desktop-Signature',
+  'X-MegaBrainMarket-Desktop-Timestamp',
+  'X-MegaBrainMarket-Desktop-Signature',
   'Idempotency-Key',
   'Mcp-Session-Id',
   'MCP-Protocol-Version',
@@ -50,9 +50,9 @@ const EXPOSED_HEADERS = [
   'X-RateLimit-Limit',
   'X-RateLimit-Remaining',
   'X-RateLimit-Reset',
-  'X-WorldMonitor-Bbox',
-  'X-WorldMonitor-Bbox-Missing',
-  'X-WorldMonitor-Bbox-Invalid',
+  'X-MegaBrainMarket-Bbox',
+  'X-MegaBrainMarket-Bbox-Missing',
+  'X-MegaBrainMarket-Bbox-Invalid',
   'X-Military-Bbox',
 ].join(', ');
 
@@ -62,7 +62,7 @@ function isAllowedOrigin(origin) {
 
 export function getCorsHeaders(req, methods = 'GET, OPTIONS') {
   const origin = req.headers.get('origin') || '';
-  const allowOrigin = isAllowedOrigin(origin) ? origin : 'https://worldmonitor.app';
+  const allowOrigin = isAllowedOrigin(origin) ? origin : 'https://megabrain.market';
   return {
     'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Credentials': 'true',

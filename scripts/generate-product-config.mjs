@@ -171,10 +171,10 @@ for (const [tierGroup, entries] of tierGroups) {
     }
   } else if (!primary.selfServe && primary.priceCents === 0) {
     tier.cta = 'Get Started';
-    tier.href = 'https://worldmonitor.app/dashboard';
+    tier.href = 'https://megabrain.market/dashboard';
   } else if (!primary.selfServe && primary.priceCents === null) {
     tier.cta = 'Contact Sales';
-    tier.href = 'mailto:enterprise@worldmonitor.app';
+    tier.href = 'mailto:enterprise@megabrain.market';
   }
 
   tier.highlighted = primary.highlighted;

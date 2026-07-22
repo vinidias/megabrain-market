@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetCountryEnergyProfileRequest,
   GetCountryEnergyProfileResponse,
-} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/intelligence/v1/service_server';
 import jodiMeasurementFields from '../../../../scripts/shared/jodi-measurement-fields.json';
 
 import { getCachedJson } from '../../../_shared/redis';

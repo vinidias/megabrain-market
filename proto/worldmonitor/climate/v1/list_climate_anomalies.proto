@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.climate.v1;
+package megabrain-market.climate.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/climate/v1/climate_anomaly.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/climate/v1/climate_anomaly.proto";
 
 // ListClimateAnomaliesRequest specifies filters for retrieving climate anomaly data.
 message ListClimateAnomaliesRequest {
@@ -24,5 +24,5 @@ message ListClimateAnomaliesResponse {
   // The list of climate anomalies.
   repeated ClimateAnomaly anomalies = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.shipping.v2;
+package megabrain-market.shipping.v2;
 
 // ListWebhooksRequest has no fields — the owner is derived from the caller's
-// API-key fingerprint (SHA-256 of X-WorldMonitor-Key).
+// API-key fingerprint (SHA-256 of X-MegaBrainMarket-Key).
 message ListWebhooksRequest {}
 
 // Single webhook record in the list response. `secret` is intentionally

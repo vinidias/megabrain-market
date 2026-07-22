@@ -9,8 +9,8 @@ import type {
   ServerContext,
   RegisterInterestRequest,
   RegisterInterestResponse,
-} from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
-import { ApiError, ValidationError } from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/leads/v1/service_server';
+import { ApiError, ValidationError } from '../../../../src/generated/server/megabrain-market/leads/v1/service_server';
 import { getClientIp, verifyTurnstile } from '../../../_shared/turnstile';
 import { validateEmail } from '../../../_shared/email-validation';
 import { checkScopedRateLimit } from '../../../_shared/rate-limit';
@@ -20,8 +20,8 @@ const MAX_EMAIL_LENGTH = 320;
 const MAX_META_LENGTH = 100;
 
 const DESKTOP_SOURCES = new Set<string>(['desktop-settings']);
-export const DESKTOP_AUTH_TIMESTAMP_HEADER = 'x-worldmonitor-desktop-timestamp';
-export const DESKTOP_AUTH_SIGNATURE_HEADER = 'x-worldmonitor-desktop-signature';
+export const DESKTOP_AUTH_TIMESTAMP_HEADER = 'x-megabrain-market-desktop-timestamp';
+export const DESKTOP_AUTH_SIGNATURE_HEADER = 'x-megabrain-market-desktop-signature';
 export const DESKTOP_AUTH_WINDOW_MS = 5 * 60 * 1000;
 const DESKTOP_AUTH_SECRET_ENV = 'WM_DESKTOP_SHARED_SECRET';
 const DESKTOP_AUTH_ALLOW_LEGACY_ENV = 'WM_DESKTOP_AUTH_ALLOW_LEGACY';
@@ -128,13 +128,13 @@ async function verifyDesktopAuth(request: Request, req: RegisterInterestRequest)
 }
 
 async function sendConfirmationEmail(email: string, referralCode: string): Promise<void> {
-  const referralLink = `https://worldmonitor.app/pro?ref=${referralCode}`;
-  const shareText = encodeURIComponent("I just joined the World Monitor Pro waitlist \u2014 real-time global intelligence powered by AI. Join me:");
+  const referralLink = `https://megabrain.market/pro?ref=${referralCode}`;
+  const shareText = encodeURIComponent("I just joined the MegaBrain Market Pro waitlist \u2014 real-time global intelligence powered by AI. Join me:");
   const shareUrl = encodeURIComponent(referralLink);
   const twitterShare = `https://x.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
   const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`;
   const whatsappShare = `https://wa.me/?text=${shareText}%20${shareUrl}`;
-  const telegramShare = `https://t.me/share/url?url=${shareUrl}&text=${encodeURIComponent('Join the World Monitor Pro waitlist:')}`;
+  const telegramShare = `https://t.me/share/url?url=${shareUrl}&text=${encodeURIComponent('Join the MegaBrain Market Pro waitlist:')}`;
 
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
@@ -149,9 +149,9 @@ async function sendConfirmationEmail(email: string, referralCode: string): Promi
         'Authorization': `Bearer ${resendKey}`,
       },
       body: JSON.stringify({
-        from: 'World Monitor <noreply@worldmonitor.app>',
+        from: 'MegaBrain Market <noreply@megabrain.market>',
         to: [email],
-        subject: "You\u2019re on the World Monitor Pro waitlist",
+        subject: "You\u2019re on the MegaBrain Market Pro waitlist",
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #e0e0e0;">
             <div style="background: #4ade80; height: 4px;"></div>
@@ -159,7 +159,7 @@ async function sendConfirmationEmail(email: string, referralCode: string): Promi
               <table cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 32px;">
                 <tr>
                   <td style="width: 40px; height: 40px; vertical-align: middle;">
-                    <img src="https://www.worldmonitor.app/favico/android-chrome-192x192.png" width="40" height="40" alt="WorldMonitor" style="border-radius: 50%; display: block;" />
+                    <img src="https://www.megabrain.market/favico/android-chrome-192x192.png" width="40" height="40" alt="MegaBrainMarket" style="border-radius: 50%; display: block;" />
                   </td>
                   <td style="padding-left: 12px;">
                     <div style="font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.5px;">WORLD MONITOR</div>
@@ -250,19 +250,19 @@ async function sendConfirmationEmail(email: string, referralCode: string): Promi
                 </table>
               </div>
               <div style="text-align: center; margin-bottom: 36px;">
-                <a href="https://worldmonitor.app/dashboard" style="display: inline-block; background: #4ade80; color: #0a0a0a; padding: 14px 36px; text-decoration: none; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px;">Explore the Free Dashboard</a>
+                <a href="https://megabrain.market/dashboard" style="display: inline-block; background: #4ade80; color: #0a0a0a; padding: 14px 36px; text-decoration: none; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px;">Explore the Free Dashboard</a>
                 <p style="font-size: 12px; color: #555; margin-top: 12px;">The free dashboard stays free forever. Pro adds intelligence on top.</p>
               </div>
             </div>
             <div style="border-top: 1px solid #1a1a1a; padding: 24px 32px; text-align: center;">
               <div style="margin-bottom: 16px;">
                 <a href="https://x.com/eliehabib" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">X / Twitter</a>
-                <a href="https://github.com/koala73/worldmonitor" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">GitHub</a>
-                <a href="https://worldmonitor.app/pro" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">Pro Waitlist</a>
+                <a href="https://github.com/vinidias/megabrain-market" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">GitHub</a>
+                <a href="https://megabrain.market/pro" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">Pro Waitlist</a>
               </div>
               <p style="font-size: 11px; color: #444; margin: 0; line-height: 1.6;">
-                World Monitor \u2014 Real-time intelligence for a connected world.<br />
-                <a href="https://worldmonitor.app" style="color: #4ade80; text-decoration: none;">worldmonitor.app</a>
+                MegaBrain Market \u2014 Real-time intelligence for a connected world.<br />
+                <a href="https://megabrain.market" style="color: #4ade80; text-decoration: none;">megabrain.market</a>
               </p>
             </div>
           </div>`,

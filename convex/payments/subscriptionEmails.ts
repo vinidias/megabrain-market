@@ -12,8 +12,8 @@ import { PRODUCT_CATALOG } from "../config/productCatalog";
 import { createCustomerPortalUrlForUser } from "./billing";
 
 const RESEND_URL = "https://api.resend.com/emails";
-const FROM = "World Monitor <noreply@worldmonitor.app>";
-const ADMIN_EMAIL = "elie@worldmonitor.app";
+const FROM = "MegaBrain Market <noreply@megabrain.market>";
+const ADMIN_EMAIL = "elie@megabrain.market";
 
 const PLAN_DISPLAY: Record<string, string> = {
   free: "Free",
@@ -166,7 +166,7 @@ function userWelcomeHtml(planName: string, planKey: string): string {
     ? `Welcome to ${planName} — your intel, delivered.`
     : `Welcome to ${planName}!`;
   const ctaLabel = isPro ? "Open My Brief" : "Open Dashboard";
-  const ctaHref = isPro ? "https://worldmonitor.app/brief" : "https://worldmonitor.app";
+  const ctaHref = isPro ? "https://megabrain.market/brief" : "https://megabrain.market";
   const supportLine = isPro
     ? `<p style="font-size: 11px; color: #666; text-align: center; margin: 0 0 20px;">Questions? Reply to this email or ping <a href="mailto:${ADMIN_EMAIL}" style="color: #4ade80;">${ADMIN_EMAIL}</a>.</p>`
     : "";
@@ -177,7 +177,7 @@ function userWelcomeHtml(planName: string, planKey: string): string {
     <table cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 32px;">
       <tr>
         <td style="width: 40px; height: 40px; vertical-align: middle;">
-          <img src="https://www.worldmonitor.app/favico/android-chrome-192x192.png" width="40" height="40" alt="WorldMonitor" style="border-radius: 50%; display: block;" />
+          <img src="https://www.megabrain.market/favico/android-chrome-192x192.png" width="40" height="40" alt="MegaBrainMarket" style="border-radius: 50%; display: block;" />
         </td>
         <td style="padding-left: 12px;">
           <div style="font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.5px;">WORLD MONITOR</div>
@@ -203,11 +203,11 @@ function userWelcomeHtml(planName: string, planKey: string): string {
   <div style="border-top: 1px solid #1a1a1a; padding: 24px 32px; text-align: center;">
     <div style="margin-bottom: 16px;">
       <a href="https://x.com/eliehabib" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">X / Twitter</a>
-      <a href="https://github.com/koala73/worldmonitor" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">GitHub</a>
+      <a href="https://github.com/vinidias/megabrain-market" style="color: #666; text-decoration: none; font-size: 12px; margin: 0 12px;">GitHub</a>
     </div>
     <p style="font-size: 11px; color: #444; margin: 0; line-height: 1.6;">
-      World Monitor \u2014 Real-time intelligence for a connected world.<br />
-      <a href="https://worldmonitor.app" style="color: #4ade80; text-decoration: none;">worldmonitor.app</a>
+      MegaBrain Market \u2014 Real-time intelligence for a connected world.<br />
+      <a href="https://megabrain.market" style="color: #4ade80; text-decoration: none;">megabrain.market</a>
     </p>
   </div>
 </div>`;
@@ -319,7 +319,7 @@ export const sendSubscriptionEmails = internalAction({
     await sendEmail(
       apiKey,
       args.userEmail,
-      `Welcome to World Monitor ${planName}`,
+      `Welcome to MegaBrain Market ${planName}`,
       userWelcomeHtml(planName, args.planKey),
       ADMIN_EMAIL,
     );
@@ -375,8 +375,8 @@ export const DUNNING_DAY7_AGE_MS = 7 * DAY_MS;
 export const WINBACK_MIN_AGE_MS = 30 * DAY_MS;
 export const WINBACK_MAX_AGE_MS = 60 * DAY_MS;
 
-const DASHBOARD_URL = "https://www.worldmonitor.app/dashboard";
-const PRICING_URL = "https://www.worldmonitor.app/pro#pricing";
+const DASHBOARD_URL = "https://www.megabrain.market/dashboard";
+const PRICING_URL = "https://www.megabrain.market/pro#pricing";
 
 // Resend caps at 10 requests/second. TWO complementary layers keep dunning
 // under it:
@@ -393,7 +393,7 @@ const PRICING_URL = "https://www.worldmonitor.app/pro#pricing";
 //      >= SEND_SPACING_MS apart, so actual POSTs stay >= SEND_SPACING_MS apart
 //      regardless of portal latency.
 //
-// Original bug (WORLDMONITOR-VH): sends were scheduled at runAfter(0) and burst
+// Original bug (MEGABRAIN_MARKET-VH): sends were scheduled at runAfter(0) and burst
 // concurrently; the 11th+ threw an uncaught 429 out of sendEmail, and since the
 // throw precedes the ledger write those rows re-burst next tick and compounded.
 // The cadence is daily and non-urgent, so spreading a batch over a few seconds
@@ -532,7 +532,7 @@ function dunningEmailShell(headline: string, bodyHtml: string, ctaLabel: string,
     <table cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 32px;">
       <tr>
         <td style="width: 40px; height: 40px; vertical-align: middle;">
-          <img src="https://www.worldmonitor.app/favico/android-chrome-192x192.png" width="40" height="40" alt="WorldMonitor" style="border-radius: 50%; display: block;" />
+          <img src="https://www.megabrain.market/favico/android-chrome-192x192.png" width="40" height="40" alt="MegaBrainMarket" style="border-radius: 50%; display: block;" />
         </td>
         <td style="padding-left: 12px;">
           <div style="font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.5px;">WORLD MONITOR</div>
@@ -551,7 +551,7 @@ function dunningEmailShell(headline: string, bodyHtml: string, ctaLabel: string,
   <div style="border-top: 1px solid #1a1a1a; padding: 24px 32px; text-align: center;">
     <p style="font-size: 11px; color: #444; margin: 0; line-height: 1.6;">
       ${footerNote}<br />
-      <a href="https://worldmonitor.app" style="color: #f59e0b; text-decoration: none;">worldmonitor.app</a>
+      <a href="https://megabrain.market" style="color: #f59e0b; text-decoration: none;">megabrain.market</a>
     </p>
   </div>
 </div>`;
@@ -569,13 +569,13 @@ export function buildDunningEmail(
   switch (step) {
     case "dunning_day0":
       return {
-        subject: `Your World Monitor payment failed — access continues while you fix it`,
+        subject: `Your MegaBrain Market payment failed — access continues while you fix it`,
         html: dunningEmailShell(
           "Your latest payment didn't go through.",
           `<p style="font-size: 14px; color: #999; margin: 0; line-height: 1.5;">Your ${planName} subscription is paused because the last charge failed — usually an expired card or a bank decline. Your access continues for now: update your payment method and the subscription resumes automatically. No new checkout needed.</p>`,
           "Update payment method",
           ctaUrl,
-          "You're receiving this because a payment on your World Monitor subscription failed.",
+          "You're receiving this because a payment on your MegaBrain Market subscription failed.",
         ),
       };
     case "dunning_day3":
@@ -586,12 +586,12 @@ export function buildDunningEmail(
           `<p style="font-size: 14px; color: #999; margin: 0; line-height: 1.5;">Your ${planName} payment is still failing. Once your paid period ends, briefs, alerts and your Pro panels stop. Updating your card takes about two minutes and restores everything instantly.</p>`,
           "Update payment method",
           ctaUrl,
-          "You're receiving this because a payment on your World Monitor subscription failed.",
+          "You're receiving this because a payment on your MegaBrain Market subscription failed.",
         ),
       };
     case "dunning_day7":
       return {
-        subject: `Final notice: your World Monitor ${planName} subscription is paused`,
+        subject: `Final notice: your MegaBrain Market ${planName} subscription is paused`,
         html: dunningEmailShell(
           "Last reminder from us.",
           `<p style="font-size: 14px; color: #999; margin: 0; line-height: 1.5;">This is the last email about this — your ${planName} subscription has been paused for a week over a failed payment. Update your payment method to keep your briefs, alerts and dashboards; otherwise access ends with your paid period.</p>`,
@@ -602,11 +602,11 @@ export function buildDunningEmail(
       };
     case "winback_day30":
       return {
-        subject: `Your World Monitor ${planName} access has ended — rejoin in one click`,
+        subject: `Your MegaBrain Market ${planName} access has ended — rejoin in one click`,
         html: dunningEmailShell(
           "The map kept running. You're missed.",
           `<p style="font-size: 14px; color: #999; margin: 0; line-height: 1.5;">Your ${planName} subscription ended about a month ago. The briefs, WM Analyst and your alert rules are exactly where you left them — rejoining takes one click and your setup is restored.</p>`,
-          "Rejoin World Monitor",
+          "Rejoin MegaBrain Market",
           ctaUrl,
           "This is a one-time note — we won't send more emails about this subscription.",
         ),
@@ -652,7 +652,7 @@ export const reserveResendSlot = internalMutation({
  * UNCAPPED: a large legitimate backlog reserves proportionally distant slots, so
  * clamping the wait would let the tail — every reservation past cap/SEND_SPACING_MS
  * — wake together and re-burst, the exact collapse a fixed ceiling caused
- * (WORLDMONITOR-VH re-review P2). Safe to leave uncapped because
+ * (MEGABRAIN_MARKET-VH re-review P2). Safe to leave uncapped because
  * `counters[RESEND_SLOT_COUNTER]` is single-writer (reserveResendSlot only) and
  * only ever advances by SEND_SPACING_MS, so it can never be corruptly far in the
  * future — there is no runaway state to defend against. Exported for testing.
@@ -745,7 +745,7 @@ export const sendDunningEmail = internalAction({
     // and wait for it. This bounds the true POST rate to <= 1/SEND_SPACING_MS
     // even when portal jitter bunches start-staggered sends together, which
     // start-time staggering alone can't guarantee (review follow-up to
-    // WORLDMONITOR-VH). The wait is intentionally uncapped (see resendPacingWaitMs)
+    // MEGABRAIN_MARKET-VH). The wait is intentionally uncapped (see resendPacingWaitMs)
     // so a large backlog stays serialized instead of collapsing into a burst.
     const slotAt = await ctx.runMutation(
       internal.payments.subscriptionEmails.reserveResendSlot,

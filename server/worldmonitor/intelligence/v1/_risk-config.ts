@@ -4,7 +4,7 @@
 //
 // These constants drive the published Composite Instability Index (CII) and
 // Strategic Risk roll-up scores. They are EDITORIAL WEIGHTS authored by the
-// WorldMonitor intelligence team — NOT derived from a published academic
+// MegaBrainMarket intelligence team — NOT derived from a published academic
 // index, peer-reviewed paper, or external risk product. Treat them as
 // opinionated, not empirical.
 //

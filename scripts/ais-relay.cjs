@@ -441,7 +441,7 @@ function upstashSetNx(key, value, ttlSeconds) {
 // ─────────────────────────────────────────────────────────────
 // Boot-seed freshness guard
 //
-// ais-relay is a long-running HTTP service on proxy.worldmonitor.app that
+// ais-relay is a long-running HTTP service on proxy.megabrain.market that
 // Railway recycles frequently (deploys, crashes, OOM). Every seed loop fires an
 // IMMEDIATE seed on boot and then schedules a setInterval at its real cadence —
 // but the process is usually recycled long before that interval elapses, so the
@@ -1161,7 +1161,7 @@ function categorizeOrefThreat(threat) {
 async function tzevaAdomFetchAlerts() {
   try {
     const resp = await fetch(TZEVA_ADOM_URL, {
-      headers: { 'User-Agent': 'WorldMonitor/1.0', Accept: 'application/json' },
+      headers: { 'User-Agent': 'MegaBrainMarket/1.0', Accept: 'application/json' },
       signal: AbortSignal.timeout(12_000),
     });
     if (!resp.ok) return null;
@@ -3686,8 +3686,8 @@ function matchCountryNamesInText(text) {
 }
 
 // v5 (2026-04-28): bumped from v4 in lockstep with
-// server/worldmonitor/intelligence/v1/_shared.ts and
-// server/worldmonitor/news/v1/list-feed-digest.ts to evict cache entries
+// server/megabrain-market/intelligence/v1/_shared.ts and
+// server/megabrain-market/news/v1/list-feed-digest.ts to evict cache entries
 // that landed under the pre-publisher-prefix-fix classifier (PR #3480).
 // Brand-prefixed retrospective titles ("CBS News Radio flashback: ...")
 // had been promoted to severity=critical via the `invasion` keyword;
@@ -3726,7 +3726,7 @@ const CLASSIFY_LLM_PROVIDERS = [
     envKey: 'OPENROUTER_API_KEY',
     apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
     model: 'deepseek/deepseek-v4-flash',
-    headers: (key) => ({ Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://worldmonitor.app', 'X-Title': 'World Monitor', 'User-Agent': CHROME_UA }),
+    headers: (key) => ({ Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://megabrain.market', 'X-Title': 'MegaBrain Market', 'User-Agent': CHROME_UA }),
     extraBody: { reasoning: { enabled: false } },
     timeout: 30000,
   },
@@ -3806,7 +3806,7 @@ async function classifyFetchLlm(titles) {
 let classifyInFlight = false;
 
 async function seedClassifyForVariant(variant, seenTitles) {
-  const digestUrl = `https://api.worldmonitor.app/api/news/v1/list-feed-digest?variant=${variant}&lang=en`;
+  const digestUrl = `https://api.megabrain.market/api/news/v1/list-feed-digest?variant=${variant}&lang=en`;
   let digest;
   try {
     const resp = await new Promise((resolve, reject) => {
@@ -4037,7 +4037,7 @@ async function startClassifySeedLoop() {
 // so service statuses are always cached (TTL is 30 min).
 // ─────────────────────────────────────────────────────────────
 const SERVICE_STATUSES_SEED_INTERVAL_MS = 15 * 60 * 1000; // 15 min (TTL/2)
-const SERVICE_STATUSES_RPC_URL = 'https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses';
+const SERVICE_STATUSES_RPC_URL = 'https://api.megabrain.market/api/infrastructure/v1/list-service-statuses';
 
 async function seedServiceStatuses() {
   try {
@@ -4048,7 +4048,7 @@ async function seedServiceStatuses() {
       signal: AbortSignal.timeout(60_000),
     });
     if (!resp.ok) {
-      console.warn(`[ServiceStatuses] Seed ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (WORLDMONITOR_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
+      console.warn(`[ServiceStatuses] Seed ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (MEGABRAIN_MARKET_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
       return;
     }
     const data = await resp.json();
@@ -4602,9 +4602,9 @@ function startTheaterPostureSeedLoop() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Warm-ping shared auth — relay → api.worldmonitor.app
+// Warm-ping shared auth — relay → api.megabrain.market
 //
-// All warm-pings call api.worldmonitor.app/api/* edge functions. These are
+// All warm-pings call api.megabrain.market/api/* edge functions. These are
 // non-premium but NOT anonymous: in normal traffic they require a browser
 // session token or an API key. Origin-trust used to satisfy them, but the
 // gateway dropped all Origin/Referer trust in the #3541 hardening — Origin
@@ -4612,35 +4612,35 @@ function startTheaterPostureSeedLoop() {
 // NO Origin-only fallback anymore: without a recognized key, every warm-ping
 // 401s (observed in prod 2026-06-06 — all three warm-pings dark).
 //
-// The relay authenticates as a trusted internal caller via X-WorldMonitor-Key =
-// WORLDMONITOR_RELAY_KEY. The gateway validates this (timing-safe) against its
-// OWN WORLDMONITOR_RELAY_KEY for the warm-ping path allowlist only
+// The relay authenticates as a trusted internal caller via X-MegaBrainMarket-Key =
+// MEGABRAIN_MARKET_RELAY_KEY. The gateway validates this (timing-safe) against its
+// OWN MEGABRAIN_MARKET_RELAY_KEY for the warm-ping path allowlist only
 // (server/gateway.ts isRelayWarmPingRequest / RELAY_WARM_PING_PATHS). It is a
 // DEDICATED relay↔gateway secret — it does NOT need to be a
-// WORLDMONITOR_VALID_KEYS enterprise key, and shouldn't be (least privilege: it
+// MEGABRAIN_MARKET_VALID_KEYS enterprise key, and shouldn't be (least privilege: it
 // unlocks only a cache-warm on these free endpoints, nothing else).
 //
 // Required env var, SAME value on BOTH sides:
-//   Railway ais-relay service  : WORLDMONITOR_RELAY_KEY=<dedicated secret>
-//   Vercel api project (gateway): WORLDMONITOR_RELAY_KEY=<same dedicated secret>
+//   Railway ais-relay service  : MEGABRAIN_MARKET_RELAY_KEY=<dedicated secret>
+//   Vercel api project (gateway): MEGABRAIN_MARKET_RELAY_KEY=<same dedicated secret>
 // ─────────────────────────────────────────────────────────────
-const RELAY_API_KEY = process.env.WORLDMONITOR_RELAY_KEY || '';
+const RELAY_API_KEY = process.env.MEGABRAIN_MARKET_RELAY_KEY || '';
 // Surface the auth-mode at boot so misconfig (env var on wrong service,
 // typo'd name, missing on a fresh Railway deploy) is visible in the first
 // log lines instead of waiting for the first 401. PR #3565 review P2.
 if (!RELAY_API_KEY) {
-  console.warn('[Relay] WORLDMONITOR_RELAY_KEY not set — warm-pings will 401 (no Origin-trust fallback since #3541). Set the same value on the Railway relay and the Vercel api project.');
+  console.warn('[Relay] MEGABRAIN_MARKET_RELAY_KEY not set — warm-pings will 401 (no Origin-trust fallback since #3541). Set the same value on the Railway relay and the Vercel api project.');
 } else {
-  console.log('[Relay] WORLDMONITOR_RELAY_KEY configured — warm-pings will send X-WorldMonitor-Key');
+  console.log('[Relay] MEGABRAIN_MARKET_RELAY_KEY configured — warm-pings will send X-MegaBrainMarket-Key');
 }
 
 function warmPingHeaders(extra = {}) {
   const h = {
     'User-Agent': CHROME_UA,
-    Origin: 'https://worldmonitor.app',
+    Origin: 'https://megabrain.market',
     ...extra,
   };
-  if (RELAY_API_KEY) h['X-WorldMonitor-Key'] = RELAY_API_KEY;
+  if (RELAY_API_KEY) h['X-MegaBrainMarket-Key'] = RELAY_API_KEY;
   return h;
 }
 
@@ -4652,7 +4652,7 @@ function warmPingHeaders(extra = {}) {
 // keeps CDN caching from hiding the handler from the warm-ping loop.
 // ─────────────────────────────────────────────────────────────
 const CII_WARM_PING_INTERVAL_MS = 8 * 60 * 1000; // 8 min (live cache TTL is 10 min)
-const CII_RPC_URL = 'https://api.worldmonitor.app/api/intelligence/v1/get-risk-scores';
+const CII_RPC_URL = 'https://api.megabrain.market/api/intelligence/v1/get-risk-scores';
 
 function ciiWarmPingUrl() {
   return `${CII_RPC_URL}?_wm_warm_ping=${Date.now()}`;
@@ -4665,7 +4665,7 @@ async function seedCiiWarmPing() {
       signal: AbortSignal.timeout(60_000),
     });
     if (!resp.ok) {
-      console.warn(`[CII] Warm-ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (WORLDMONITOR_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
+      console.warn(`[CII] Warm-ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (MEGABRAIN_MARKET_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
       return;
     }
     const data = await resp.json();
@@ -4688,7 +4688,7 @@ function startCiiWarmPingLoop() {
 // Interval matches health.js maxStaleMin (60 min) with a 2× margin.
 // ─────────────────────────────────────────────────────────────
 const CHOKEPOINT_WARM_PING_INTERVAL_MS = 30 * 60 * 1000; // 30 min
-const CHOKEPOINT_RPC_URL = 'https://api.worldmonitor.app/api/supply-chain/v1/get-chokepoint-status';
+const CHOKEPOINT_RPC_URL = 'https://api.megabrain.market/api/supply-chain/v1/get-chokepoint-status';
 
 async function seedChokepointWarmPing() {
   try {
@@ -4699,7 +4699,7 @@ async function seedChokepointWarmPing() {
       signal: AbortSignal.timeout(60_000),
     });
     if (!resp.ok) {
-      console.warn(`[Chokepoints] Warm-ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (WORLDMONITOR_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
+      console.warn(`[Chokepoints] Warm-ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (MEGABRAIN_MARKET_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
       return;
     }
     const data = await resp.json();
@@ -4723,7 +4723,7 @@ function startChokepointWarmPingLoop() {
 // seed-meta on every live fetch; we just need to call it regularly.
 // ─────────────────────────────────────────────────────────────
 const CABLE_HEALTH_WARM_PING_INTERVAL_MS = 30 * 60 * 1000; // 30 min
-const CABLE_HEALTH_RPC_URL = 'https://api.worldmonitor.app/api/infrastructure/v1/get-cable-health';
+const CABLE_HEALTH_RPC_URL = 'https://api.megabrain.market/api/infrastructure/v1/get-cable-health';
 
 async function seedCableHealthWarmPing() {
   try {
@@ -4734,7 +4734,7 @@ async function seedCableHealthWarmPing() {
       signal: AbortSignal.timeout(60_000),
     });
     if (!resp.ok) {
-      console.warn(`[CableHealth] Warm-ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (WORLDMONITOR_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
+      console.warn(`[CableHealth] Warm-ping failed: HTTP ${resp.status}${RELAY_API_KEY ? '' : ' (MEGABRAIN_MARKET_RELAY_KEY not set — 401 expected; set it on the relay AND the Vercel api project)'}`);
       return;
     }
     const data = await resp.json();
@@ -5327,7 +5327,7 @@ const WB_RENEWABLE_REGION_NAMES = {
 function wbFetchJson(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, {
-      headers: { 'User-Agent': 'WorldMonitor-Seed/1.0', Accept: 'application/json' },
+      headers: { 'User-Agent': 'MegaBrainMarket-Seed/1.0', Accept: 'application/json' },
       timeout: 30000,
     }, (resp) => {
       if (resp.statusCode < 200 || resp.statusCode >= 300) {
@@ -5832,7 +5832,7 @@ const REDDIT_OAUTH_ENABLED = !!(REDDIT_CLIENT_ID && REDDIT_CLIENT_SECRET);
 // Reddit requires a unique, descriptive UA: "<platform>:<appid>:<version> (by
 // /u/<username>)". Set REDDIT_USER_AGENT to include the developer's reddit
 // username so requests are attributable per Reddit's API rules.
-const REDDIT_USER_AGENT = process.env.REDDIT_USER_AGENT || 'server:app.worldmonitor:1.0 (by /u/worldmonitor)';
+const REDDIT_USER_AGENT = process.env.REDDIT_USER_AGENT || 'server:app.megabrain-market:1.0 (by /u/megabrain-market)';
 const REDDIT_AUTH_COOLDOWN_MS = 5 * 60 * 1000;
 
 // ScrapeCreators — third-party Reddit data vendor (same key /last30days uses).
@@ -6081,7 +6081,7 @@ async function writeSocialVelocityHealthyMeta(recordCount) {
 async function fetchRedditHot(subreddit, failures = []) {
   const { ok, status, posts, source } = await fetchRedditHotListing(subreddit, {
     limit: 25,
-    legacyUserAgent: 'WorldMonitor/1.0 (contact: info@worldmonitor.app)',
+    legacyUserAgent: 'MegaBrainMarket/1.0 (contact: info@megabrain.market)',
   });
   if (!ok) {
     const failure = `r/${subreddit} HTTP ${status} (${source})`;
@@ -6656,11 +6656,11 @@ const DODO_PRODUCT_IDS = [
 // cache hits — so drift here silently changes the /pro pricing page (#4946
 // P0, #4974). Parity enforced by tests/product-catalog-freshness.test.mjs.
 const DODO_TIER_CONFIG = {
-  free: { name: 'Free', localeKey: 'free', description: 'Get started with the essentials', features: ['Core dashboard panels', 'Global news feed', 'Earthquake & weather alerts', 'Basic map view'], cta: 'Get Started', href: 'https://worldmonitor.app/dashboard', highlighted: false },
+  free: { name: 'Free', localeKey: 'free', description: 'Get started with the essentials', features: ['Core dashboard panels', 'Global news feed', 'Earthquake & weather alerts', 'Basic map view'], cta: 'Get Started', href: 'https://megabrain.market/dashboard', highlighted: false },
   pro: { name: 'Pro', localeKey: 'pro', description: 'Full intelligence dashboard', features: ['Everything in Free', 'AI stock analysis & backtesting', 'Daily market briefs', 'Military & geopolitical tracking', 'Custom widget builder', 'MCP + SDK access for Claude Desktop & other AI clients (50 calls/day)', 'Priority data refresh'], highlighted: true },
   api_starter: { name: 'API', localeKey: 'api', description: 'Programmatic access to intelligence data', features: ['REST API + official SDKs (npm, PyPI, RubyGems, Go)', 'License / API key included', 'Real-time data streams', '60 requests/minute', '1,000 requests/day included', 'Webhook notifications', 'Custom data exports'], highlighted: false },
   api_business: { name: 'API Business', localeKey: 'apiBusiness', description: 'High-volume API for teams', features: ['Everything in API Starter', '300 requests/minute', '10,000 requests/day included', 'Priority support'], highlighted: false },
-  enterprise: { name: 'Enterprise', localeKey: 'enterprise', description: 'Custom solutions for organizations', features: ['Everything in Pro + API', 'Unlimited API requests', 'Dedicated support', 'Custom integrations', 'SLA guarantee', 'On-premise option'], cta: 'Contact Sales', href: 'mailto:enterprise@worldmonitor.app', highlighted: false },
+  enterprise: { name: 'Enterprise', localeKey: 'enterprise', description: 'Custom solutions for organizations', features: ['Everything in Pro + API', 'Unlimited API requests', 'Dedicated support', 'Custom integrations', 'SLA guarantee', 'On-premise option'], cta: 'Contact Sales', href: 'mailto:enterprise@megabrain.market', highlighted: false },
 };
 
 const DODO_PRODUCT_META = {
@@ -7837,7 +7837,7 @@ const TRANSIT_SUMMARY_INTERVAL_MS = 10 * 60 * 1000;
 
 // Threat levels for anomaly detection.
 // IMPORTANT: Must stay in sync with CHOKEPOINTS[].threatLevel in
-// server/worldmonitor/supply-chain/v1/get-chokepoint-status.ts
+// server/megabrain-market/supply-chain/v1/get-chokepoint-status.ts
 // Only war_zone and critical trigger anomaly signals.
 const CHOKEPOINT_THREAT_LEVELS = {
   suez: 'high', malacca_strait: 'normal', hormuz_strait: 'war_zone',
@@ -7859,7 +7859,7 @@ const RELAY_NAME_TO_ID = {
   'South China Sea': null, 'Black Sea': null, // area geofences, not chokepoints
 };
 
-// Duplicated from server/worldmonitor/supply-chain/v1/_scoring.mjs because
+// Duplicated from server/megabrain-market/supply-chain/v1/_scoring.mjs because
 // ais-relay.cjs is CJS and cannot import .mjs modules. Keep in sync.
 function detectTrafficAnomalyRelay(history, threatLevel) {
   if (!history || history.length < 37) return { dropPct: 0, signal: false };
@@ -8350,7 +8350,7 @@ function _attemptOpenSkyTokenFetch(clientId, clientSecret) {
   const reqHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Content-Length': Buffer.byteLength(postData),
-    'User-Agent': 'WorldMonitor/1.0',
+    'User-Agent': 'MegaBrainMarket/1.0',
   };
 
   if (OPENSKY_PROXY_ENABLED) {
@@ -8486,7 +8486,7 @@ function _openskyRawFetch(url, token) {
   const reqHeaders = {
     'Accept': 'application/json',
     'Accept-Encoding': 'gzip, deflate, br',
-    'User-Agent': 'WorldMonitor/1.0',
+    'User-Agent': 'MegaBrainMarket/1.0',
     'Authorization': `Bearer ${token}`,
   };
 
@@ -8840,7 +8840,7 @@ function handleWorldBankRequest(req, res) {
   const request = https.get(wbUrl, {
     headers: {
       'Accept': 'application/json',
-      'User-Agent': 'Mozilla/5.0 (compatible; WorldMonitor/1.0; +https://worldmonitor.app)',
+      'User-Agent': 'Mozilla/5.0 (compatible; MegaBrainMarket/1.0; +https://megabrain.market)',
     },
     timeout: 15000,
   }, (response) => {
@@ -9571,9 +9571,9 @@ function handleNotamProxyRequest(req, res) {
 
 // CORS origin allowlist — only our domains can use this relay
 const ALLOWED_ORIGINS = [
-  'https://worldmonitor.app',
-  'https://tech.worldmonitor.app',
-  'https://finance.worldmonitor.app',
+  'https://megabrain.market',
+  'https://tech.megabrain.market',
+  'https://finance.megabrain.market',
   'http://localhost:5173',   // Vite dev
   'http://localhost:5174',   // Vite dev alt port
   'http://localhost:4173',   // Vite preview
@@ -9584,10 +9584,10 @@ const ALLOWED_ORIGINS = [
 function getCorsOrigin(req) {
   const origin = req.headers.origin || '';
   if (ALLOWED_ORIGINS.includes(origin)) return origin;
-  // Wildcard: any *.worldmonitor.app subdomain (for variant subdomains)
+  // Wildcard: any *.megabrain.market subdomain (for variant subdomains)
   try {
     const url = new URL(origin);
-    if (url.hostname.endsWith('.worldmonitor.app') && url.protocol === 'https:') return origin;
+    if (url.hostname.endsWith('.megabrain.market') && url.protocol === 'https:') return origin;
   } catch { /* invalid origin — fall through */ }
   // Optional: allow Vercel preview deployments when explicitly enabled.
   if (ALLOW_VERCEL_PREVIEW_ORIGINS && origin.endsWith('.vercel.app')) return origin;
@@ -9769,7 +9769,7 @@ const server = http.createServer(async (req, res) => {
     } else {
       // Live-tanker path: bbox-filtered + tanker-included responses skip the
       // pre-gzipped cache (bbox space would explode the cache key set).
-      // Handler-side 60s cache (server/worldmonitor/maritime/v1/get-vessel-snapshot.ts)
+      // Handler-side 60s cache (server/megabrain-market/maritime/v1/get-vessel-snapshot.ts)
       // and the gateway 'live' tier absorb identical-bbox requests.
       const payload = {
         ...lastSnapshot,
@@ -10610,8 +10610,8 @@ function isWidgetInjectionAttempt(text) {
     /disregard\s+(all\s+)?(previous|prior|above)\s+(instructions?|rules?)/.test(t) ||
     /forget\s+(all\s+)?(previous|prior|above)\s+(instructions?|rules?)/.test(t) ||
     // Role hijacking
-    /you\s+are\s+now\s+(a|an)\s+(?!worldmonitor)/.test(t) ||
-    /act\s+as\s+(a|an)\s+(?!worldmonitor)/.test(t) ||
+    /you\s+are\s+now\s+(a|an)\s+(?!megabrain-market)/.test(t) ||
+    /act\s+as\s+(a|an)\s+(?!megabrain-market)/.test(t) ||
     /pretend\s+(you\s+are|to\s+be)\s+/.test(t) ||
     /your\s+new\s+(role|persona|identity|name)\s+is/.test(t) ||
     // Prompt exfiltration
@@ -10655,8 +10655,8 @@ function isWidgetEndpointAllowed(endpoint) {
 }
 
 const WIDGET_FETCH_TOOL = {
-  name: 'fetch_worldmonitor_data',
-  description: 'Fetch live data from WorldMonitor APIs. Only pre-approved endpoint paths are allowed.',
+  name: 'fetch_megabrain-market_data',
+  description: 'Fetch live data from MegaBrainMarket APIs. Only pre-approved endpoint paths are allowed.',
   input_schema: {
     type: 'object',
     properties: {
@@ -10667,7 +10667,7 @@ const WIDGET_FETCH_TOOL = {
   },
 };
 
-const WIDGET_SYSTEM_PROMPT = `You are a WorldMonitor widget builder. Your job is to fetch live data and generate a display-only HTML widget using the WorldMonitor design system.
+const WIDGET_SYSTEM_PROMPT = `You are a MegaBrainMarket widget builder. Your job is to fetch live data and generate a display-only HTML widget using the MegaBrainMarket design system.
 
 ## Scope enforcement — NON-NEGOTIABLE
 You ONLY build data visualization widgets. Refuse everything else, silently and immediately:
@@ -10681,7 +10681,7 @@ When refusing, output ONLY this — no explanation, no apology:
 
 ## Available data tools
 
-### fetch_worldmonitor_data — ALWAYS use first. Only fall back to search_web if no bootstrap key or RPC matches.
+### fetch_megabrain-market_data — ALWAYS use first. Only fall back to search_web if no bootstrap key or RPC matches.
 
 ## Tool budget — CRITICAL
 Make at most 3 tool calls total. After 2 calls without usable data, generate the widget immediately using whatever you have — even if sparse. NEVER keep probing.
@@ -10841,7 +10841,7 @@ Status: status-active, status-notified, status-terminated, panel-tabs, panel-tab
 3. Generate ONLY display-only HTML. No <script>, no onclick/oninput/onload, no <iframe>.
 4. No interactive elements (no buttons, no tabs, no inputs).
 5. Tables use class="trade-tariffs-table". Lists use class="trade-restrictions-list".
-6. Always include a source footer: <div class="economic-footer"><span class="economic-source">Source: WorldMonitor</span></div>
+6. Always include a source footer: <div class="economic-footer"><span class="economic-source">Source: MegaBrainMarket</span></div>
 7. If tool returns no data or an error: use <div class="economic-empty">No live data available</div> — NEVER write prose explanations.
 8. If tool response contains "<!DOCTYPE" or "<html": it is an error — treat as no data and use the empty state HTML.
 9. The dashboard already provides the outer widget shell. Generate only the inner widget body markup.
@@ -10851,7 +10851,7 @@ For modify requests: make targeted changes to improve the widget as requested.`;
 
 const WIDGET_SEARCH_TOOL = {
   name: 'search_web',
-  description: 'Search the web for current news, live data, or any topic not covered by WorldMonitor RPCs. Returns up to 8 results with title, URL, snippet, and publish date. Use this for topics like breaking news, weather, specific events, prices not in RPC catalog, etc.',
+  description: 'Search the web for current news, live data, or any topic not covered by MegaBrainMarket RPCs. Returns up to 8 results with title, URL, snippet, and publish date. Use this for topics like breaking news, weather, specific events, prices not in RPC catalog, etc.',
   input_schema: {
     type: 'object',
     properties: {
@@ -11193,7 +11193,7 @@ async function handleWidgetAgentRequest(req, res) {
             continue;
           }
 
-          if (block.name !== 'fetch_worldmonitor_data') continue;
+          if (block.name !== 'fetch_megabrain-market_data') continue;
           const { endpoint, params = {} } = block.input;
           sendWidgetSSE(res, 'tool_call', { endpoint });
 
@@ -11203,12 +11203,12 @@ async function handleWidgetAgentRequest(req, res) {
           }
 
           try {
-            const url = new URL(endpoint, 'https://api.worldmonitor.app');
+            const url = new URL(endpoint, 'https://api.megabrain.market');
             for (const [k, v] of Object.entries(params)) {
               url.searchParams.set(k, String(v));
             }
             const dataRes = await fetch(url.toString(), {
-              headers: { 'User-Agent': 'WorldMonitor-WidgetAgent/1.0' },
+              headers: { 'User-Agent': 'MegaBrainMarket-WidgetAgent/1.0' },
               signal: AbortSignal.timeout(15_000),
             });
             const data = await dataRes.text();
@@ -11340,7 +11340,7 @@ function classifyWidgetAgentError(err, model) {
   return safe ? `Agent error: ${safe}` : 'Agent error';
 }
 
-const WIDGET_PRO_SYSTEM_PROMPT = `You are a WorldMonitor PRO widget builder. Your job is to fetch live data and generate an interactive HTML widget body with inline JavaScript.
+const WIDGET_PRO_SYSTEM_PROMPT = `You are a MegaBrainMarket PRO widget builder. Your job is to fetch live data and generate an interactive HTML widget body with inline JavaScript.
 
 ## Scope enforcement — NON-NEGOTIABLE
 You ONLY build data visualization widgets. Refuse everything else, silently and immediately:
@@ -11354,7 +11354,7 @@ When refusing, output ONLY this — no explanation, no apology:
 
 ## Available data tools
 
-### fetch_worldmonitor_data — ALWAYS use first. Only fall back to search_web if no bootstrap key or RPC matches.
+### fetch_megabrain-market_data — ALWAYS use first. Only fall back to search_web if no bootstrap key or RPC matches.
 
 ## Tool budget — CRITICAL
 Make at most 3 tool calls total. After 2 calls without usable data, generate the widget immediately using whatever you have. NEVER keep probing.
@@ -11443,7 +11443,7 @@ CSS variables are pre-defined in the iframe: --bg, --surface, --text, --text-sec
 - Positive values: color: var(--green) | Negative values: color: var(--red)
 - Design for 400px height with overflow-y: auto for larger content
 - NEVER add a <style> block — use the pre-defined classes below and inline styles only
-- Always include a source footer: <div style="font-size:10px;color:var(--text-muted);padding:6px 8px">Source: WorldMonitor</div>
+- Always include a source footer: <div style="font-size:10px;color:var(--text-muted);padding:6px 8px">Source: MegaBrainMarket</div>
 
 ## Pre-defined CSS classes — use these, do NOT reinvent them
 

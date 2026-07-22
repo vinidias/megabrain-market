@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package worldmonitor.climate.v1;
+package megabrain-market.climate.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/climate/v1/co2_monitoring.proto";
+import "megabrain-market/climate/v1/co2_monitoring.proto";
 
 message GetCo2MonitoringRequest {}
 

@@ -3,7 +3,7 @@ import type {
   ListAirportDelaysRequest,
   ListAirportDelaysResponse,
   AirportDelayAlert,
-} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
+} from '../../../../src/generated/server/megabrain-market/aviation/v1/service_server';
 import {
   MONITORED_AIRPORTS,
   FAA_AIRPORTS,

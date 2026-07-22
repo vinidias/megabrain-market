@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package worldmonitor.maritime.v1;
+package megabrain-market.maritime.v1;
 
 import "sebuf/http/annotations.proto";
-import "worldmonitor/core/v1/pagination.proto";
-import "worldmonitor/maritime/v1/vessel_snapshot.proto";
+import "megabrain-market/core/v1/pagination.proto";
+import "megabrain-market/maritime/v1/vessel_snapshot.proto";
 
 // ListNavigationalWarningsRequest specifies filters for retrieving NGA warnings.
 message ListNavigationalWarningsRequest {
@@ -23,5 +23,5 @@ message ListNavigationalWarningsResponse {
   // The list of navigational warnings.
   repeated NavigationalWarning warnings = 1;
   // Pagination metadata.
-  worldmonitor.core.v1.PaginationResponse pagination = 2;
+  megabrain-market.core.v1.PaginationResponse pagination = 2;
 }

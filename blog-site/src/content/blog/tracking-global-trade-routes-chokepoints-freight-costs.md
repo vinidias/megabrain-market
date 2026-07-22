@@ -1,7 +1,7 @@
 ---
 title: "Track Trade Routes, Chokepoints, and Freight Costs"
 description: "Track 8 maritime chokepoints, freight indices (BDI, SCFI), trade policy, and critical mineral risks in real time. Free supply chain intelligence dashboard."
-metaTitle: "Chokepoint and Freight Index Monitoring | World Monitor"
+metaTitle: "Chokepoint and Freight Index Monitoring | MegaBrain Market"
 keywords: "chokepoint monitoring, Strait of Hormuz shipping, freight index dashboard, BDI Baltic Dry Index, SCFI container rates, supply chain disruption tracker, trade route intelligence"
 audience: "Supply chain professionals, commodity traders, logistics analysts, maritime intelligence, geopolitical risk analysts"
 heroImage: "/blog/images/blog/hormuz-chokepoint-crisis.png"
@@ -9,11 +9,11 @@ pubDate: "2026-03-15"
 modifiedDate: "2026-06-13"
 ---
 
-> **Key Takeaways:** Strait of Hormuz traffic down 94.4%. World Monitor tracks 8 corridors, 9 freight indices, WTO trade policy, and critical mineral concentration across one free dashboard. Data updates in real time.
+> **Key Takeaways:** Strait of Hormuz traffic down 94.4%. MegaBrain Market tracks 8 corridors, 9 freight indices, WTO trade policy, and critical mineral concentration across one free dashboard. Data updates in real time.
 
-The Strait of Hormuz carries 20% of the world's oil. Right now, [World Monitor's](https://www.worldmonitor.app) live chokepoint tracker shows traffic has dropped 94.4% week-over-week. Tanker transits have collapsed from 60+ daily to single digits. The disruption score is 99%.
+The Strait of Hormuz carries 20% of the world's oil. Right now, [MegaBrain Market's](https://www.megabrain.market) live chokepoint tracker shows traffic has dropped 94.4% week-over-week. Tanker transits have collapsed from 60+ daily to single digits. The disruption score is 99%.
 
-This is not a hypothetical scenario for a risk assessment deck. This is happening right now, and World Monitor is tracking it live.
+This is not a hypothetical scenario for a risk assessment deck. This is happening right now, and MegaBrain Market is tracking it live.
 
 *Data as of March 15, 2026. Values update in real time on the dashboard.*
 
@@ -21,7 +21,7 @@ This is not a hypothetical scenario for a risk assessment deck. This is happenin
 
 The Iran-Israel conflict has turned the Persian Gulf into an active confrontation zone. Iranian naval blockade risks, mines reported in shipping lanes, and 1,300+ security incidents in the past seven days have effectively shut down the world's most critical energy chokepoint.
 
-World Monitor's Supply Chain panel shows this in one view:
+MegaBrain Market's Supply Chain panel shows this in one view:
 
 - **85/100 disruption score** with red status
 - **94.4% week-over-week traffic decline**
@@ -33,7 +33,7 @@ The chart tells the story: tanker and cargo traffic that had been steady at 40-7
 
 ## Eight Maritime Chokepoints Monitored in Real Time
 
-The Hormuz crisis is the most severe, but it is not the only corridor under pressure. World Monitor tracks eight critical maritime chokepoints, each scored by disruption level, vessel traffic, and [conflict intensity](/blog/posts/track-global-conflicts-in-real-time/):
+The Hormuz crisis is the most severe, but it is not the only corridor under pressure. MegaBrain Market tracks eight critical maritime chokepoints, each scored by disruption level, vessel traffic, and [conflict intensity](/blog/posts/track-global-conflicts-in-real-time/):
 
 The following table shows the current status of all eight corridors as of mid-March 2026:
 
@@ -52,7 +52,7 @@ Each corridor shows live vessel counts, week-over-week traffic changes, disrupti
 
 ## What Makes This Different From Port Trackers
 
-Traditional maritime tracking tools show you where ships are. World Monitor shows you why they are not where they should be.
+Traditional maritime tracking tools show you where ships are. MegaBrain Market shows you why they are not where they should be.
 
 The corridor disruption table cross-references AIS vessel data with conflict events, navigational warnings, and military activity. When vessel counts drop in the Strait of Hormuz, the system does not just show a number going down. It tells you there are 1,323 security incidents in the past week, Iranian naval confrontations in the shipping lanes, and mines reported in the Persian Gulf.
 
@@ -60,7 +60,7 @@ The AI advisory goes further: it recommends specific alternative routes, estimat
 
 ## Real-Time Freight Cost Tracking
 
-When chokepoints close, freight costs spike. World Monitor tracks nine freight indices that quantify the cost impact of disruptions:
+When chokepoints close, freight costs spike. MegaBrain Market tracks nine freight indices that quantify the cost impact of disruptions:
 
 **Container Rates:**
 
@@ -86,7 +86,7 @@ When you see the Hormuz disruption score at 99% and the Capesize Index up 5.7% i
 
 Supply chain disruptions do not happen in isolation. They intersect with trade policy: tariffs, restrictions, and barriers that shape where goods can flow even when shipping lanes are open.
 
-World Monitor's Trade Policy panel tracks:
+MegaBrain Market's Trade Policy panel tracks:
 
 - **Trade Restrictions**: WTO-reported measures by country, showing which economies are tightening import/export controls
 - **Tariff Trends**: applied tariff rates between major trading partners over time
@@ -108,7 +108,7 @@ Some supply chains cannot be rerouted because the supply itself is concentrated 
 | **Rare Earths** | China | 71% | 5,327 | Critical |
 | **Lithium** | Australia | 50% | 3,529 | High |
 
-Gallium at 9,280 means the global supply is almost entirely dependent on a single country. When China announced gallium and germanium export controls in 2023, the semiconductor industry had no short-term alternative. World Monitor makes this concentration visible, so supply chain teams can assess exposure before restrictions are announced.
+Gallium at 9,280 means the global supply is almost entirely dependent on a single country. When China announced gallium and germanium export controls in 2023, the semiconductor industry had no short-term alternative. MegaBrain Market makes this concentration visible, so supply chain teams can assess exposure before restrictions are announced.
 
 ## How It All Connects
 
@@ -119,7 +119,7 @@ Consider the current Hormuz crisis through all four dimensions:
 3. **Trade Policy**: Gulf oil exports affected by the conflict, alternative suppliers face their own trade barriers
 4. **Critical Minerals**: Qatar LNG exports transit Hormuz. Disruption affects downstream petrochemical inputs for battery manufacturing
 
-No single data source shows this full picture. World Monitor puts chokepoint status, freight indices, trade policy, and mineral supply risk in one panel, updated in real time. Combined with [AI-powered forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/), you can see not just what is happening, but where the situation is heading. And if you want these signals in your own systems rather than a dashboard, the API exposes the same data: here is [how to build a supply-chain early-warning system](/blog/posts/build-supply-chain-early-warning-system-api/) with route scoring and disruption webhooks.
+No single data source shows this full picture. MegaBrain Market puts chokepoint status, freight indices, trade policy, and mineral supply risk in one panel, updated in real time. Combined with [AI-powered forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/), you can see not just what is happening, but where the situation is heading. And if you want these signals in your own systems rather than a dashboard, the API exposes the same data: here is [how to build a supply-chain early-warning system](/blog/posts/build-supply-chain-early-warning-system-api/) with route scoring and disruption webhooks.
 
 ## The Data Sources
 
@@ -148,8 +148,8 @@ Roughly 20% of the world's oil supply and 25% of global LNG passes through Hormu
 
 **What are the world's most critical shipping chokepoints?**
 
-The eight most strategically important chokepoints are: Strait of Hormuz (oil/LNG), Strait of Malacca (Asia-Europe trade), Suez Canal (Mediterranean access), Bab el-Mandeb (Red Sea entry), Panama Canal (Atlantic-Pacific), Bosporus Strait (Black Sea grain), Taiwan Strait (semiconductors), and Dover Strait (North Sea). World Monitor tracks all of these except Malacca and Panama, which are currently low-risk.
+The eight most strategically important chokepoints are: Strait of Hormuz (oil/LNG), Strait of Malacca (Asia-Europe trade), Suez Canal (Mediterranean access), Bab el-Mandeb (Red Sea entry), Panama Canal (Atlantic-Pacific), Bosporus Strait (Black Sea grain), Taiwan Strait (semiconductors), and Dover Strait (North Sea). MegaBrain Market tracks all of these except Malacca and Panama, which are currently low-risk.
 
 ---
 
-**Open the Supply Chain panel at [worldmonitor.app](https://www.worldmonitor.app) and click "Chokepoints" for live corridor disruption scores, or "Shipping Rates" to see real-time freight indices. Free for everyone.**
+**Open the Supply Chain panel at [megabrain.market](https://www.megabrain.market) and click "Chokepoints" for live corridor disruption scores, or "Shipping Rates" to see real-time freight indices. Free for everyone.**

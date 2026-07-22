@@ -1,5 +1,5 @@
 /**
- * LatestBriefPanel — dashboard surface for the WorldMonitor Brief.
+ * LatestBriefPanel — dashboard surface for the MegaBrainMarket Brief.
  *
  * Reads `/api/latest-brief` and renders one of three states:
  *
@@ -73,7 +73,7 @@ const WM_LOGO_SVG: TrustedHtml = trustedHtml(
     + '<circle cx="57" cy="32" r="1.8" fill="currentColor" stroke="none"/>'
     + '</svg>'
   ),
-  'Static WorldMonitor logo SVG defined in source',
+  'Static MegaBrainMarket logo SVG defined in source',
 );
 
 // Composing-state poll interval. 60s balances "responsive when the
@@ -285,7 +285,7 @@ export class LatestBriefPanel extends Panel {
 
   private async fetchLatest(signal: AbortSignal): Promise<LatestBriefResponse> {
     // /api/latest-brief is user-scoped and Bearer-only. premiumFetch
-    // short-circuits on desktop WORLDMONITOR_API_KEY / tester keys
+    // short-circuits on desktop MEGABRAIN_MARKET_API_KEY / tester keys
     // and never sends Clerk, producing a 401 we can't recover from.
     // Always mint a fresh Bearer here — the refresh() pre-check
     // guaranteed authState.user exists.
@@ -344,7 +344,7 @@ export class LatestBriefPanel extends Panel {
         logo,
         h('div', { className: 'latest-brief-empty-title' }, 'Sign in to view your brief.'),
         h('div', { className: 'latest-brief-empty-body' },
-          'Your personalised brief is tied to your WorldMonitor account. Sign in to see today\u2019s issue.',
+          'Your personalised brief is tied to your MegaBrainMarket account. Sign in to see today\u2019s issue.',
         ),
       ),
     );
@@ -364,7 +364,7 @@ export class LatestBriefPanel extends Panel {
         logo,
         h('div', { className: 'latest-brief-empty-title' }, 'Pro required.'),
         h('div', { className: 'latest-brief-empty-body' },
-          'The WorldMonitor Brief is included with the Pro plan. Upgrade to unlock today\u2019s issue.',
+          'The MegaBrainMarket Brief is included with the Pro plan. Upgrade to unlock today\u2019s issue.',
         ),
       ),
     );
@@ -402,7 +402,7 @@ export class LatestBriefPanel extends Panel {
         logoDiv,
         h('div', { className: 'latest-brief-empty-title' }, 'Your brief is composing.'),
         h('div', { className: 'latest-brief-empty-body' },
-          `The editorial team at WorldMonitor is writing your ${data.issueDate} brief. Check back in a moment.`,
+          `The editorial team at MegaBrainMarket is writing your ${data.issueDate} brief. Check back in a moment.`,
         ),
       ),
     );
@@ -442,7 +442,7 @@ export class LatestBriefPanel extends Panel {
       h('div', { className: 'latest-brief-cover' },
         coverLogo,
         h('div', { className: 'latest-brief-cover-issue' }, data.dateLong),
-        h('div', { className: 'latest-brief-cover-title' }, 'WorldMonitor'),
+        h('div', { className: 'latest-brief-cover-title' }, 'MegaBrainMarket'),
         h('div', { className: 'latest-brief-cover-title' }, 'Brief.'),
         h('div', { className: 'latest-brief-cover-kicker' }, threadLabel),
       ),
@@ -458,7 +458,7 @@ export class LatestBriefPanel extends Panel {
     const shareBtn = h('button', {
       type: 'button',
       className: 'latest-brief-share',
-      'aria-label': 'Share WorldMonitor — copies a referral link',
+      'aria-label': 'Share MegaBrainMarket — copies a referral link',
       disabled: true,
     }, 'Share ↗');
     const shareStatus = h('span', {
